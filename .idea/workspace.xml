@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b089e97c-aa5e-4c34-9465-a8c5eddd34ac" name="Changes" comment="New login format with token, profile and scope set." />
+    <list default="true" id="b089e97c-aa5e-4c34-9465-a8c5eddd34ac" name="Changes" comment="Working">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/AzureMethods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Changes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Changes.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/HelloController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
