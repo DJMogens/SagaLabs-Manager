@@ -5,6 +5,8 @@ import com.azure.resourcemanager.AzureResourceManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
+import java.util.Scanner;
+
 
 public class HelloController {
     @FXML
@@ -29,5 +31,9 @@ public class HelloController {
         System.out.println(azure);
 
         azMethods.listAllResourceGroups(azure);
+
+
+
+        azMethods.getLabDetails(azure);
     }
 }
