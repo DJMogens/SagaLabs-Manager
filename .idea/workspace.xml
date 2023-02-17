@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b089e97c-aa5e-4c34-9465-a8c5eddd34ac" name="Changes" comment="Add all libraries">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/AzureLogin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/AzureAuthenticator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/Browser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/ResourceManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/TokenCacheAspect.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/logback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/logback.xml" afterDir="false" />
-    </list>
+    <list default="true" id="b089e97c-aa5e-4c34-9465-a8c5eddd34ac" name="Changes" comment="New login format with token, profile and scope set." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -199,7 +190,7 @@
       <workItem from="1676490376758" duration="4207000" />
       <workItem from="1676532786684" duration="11420000" />
       <workItem from="1676624276640" duration="2578000" />
-      <workItem from="1676630303133" duration="9139000" />
+      <workItem from="1676630303133" duration="9480000" />
     </task>
     <task id="LOCAL-00001" summary="Authenticate with Azure and list resources to STOUT">
       <created>1676553276575</created>
@@ -222,7 +213,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676626647669</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="New login format with token, profile and scope set.">
+      <created>1676642240194</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1676642240194</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -232,6 +230,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Authenticate with Azure and list resources to STOUT" />
     <MESSAGE value="Add all libraries" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add all libraries" />
+    <MESSAGE value="New login format with token, profile and scope set." />
+    <option name="LAST_COMMIT_MESSAGE" value="New login format with token, profile and scope set." />
   </component>
 </project>
