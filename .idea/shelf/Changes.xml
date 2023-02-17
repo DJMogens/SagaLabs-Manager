@@ -1,0 +1,9 @@
+<changelist name="Changes" date="1676553411926" recycled="false">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Changes/shelved.patch" />
+  <option name="DESCRIPTION" value="Changes" />
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="lib/commons-net-3.9.0.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Changes/commons-net-3.9.0.jar" />
+  </binary>
+</changelist>

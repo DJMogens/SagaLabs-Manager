@@ -1,0 +1,29 @@
+<component name="libraryTable">
+  <library name="azure.resourcemanager.compute" type="repository">
+    <properties maven-id="com.azure.resourcemanager:azure-resourcemanager-compute:2.14.0" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/azure/resourcemanager/azure-resourcemanager-compute/2.14.0/azure-resourcemanager-compute-2.14.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/azure/resourcemanager/azure-resourcemanager-resources/2.14.0/azure-resourcemanager-resources-2.14.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/azure/azure-core/1.27.0/azure-core-1.27.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-annotations/2.13.2/jackson-annotations-2.13.2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-core/2.13.2/jackson-core-2.13.2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.13.2.1/jackson-databind-2.13.2.1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.13.2/jackson-datatype-jsr310-2.13.2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/dataformat/jackson-dataformat-xml/2.13.2/jackson-dataformat-xml-2.13.2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/woodstox/stax2-api/4.2.1/stax2-api-4.2.1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/fasterxml/woodstox/woodstox-core/6.2.7/woodstox-core-6.2.7.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.33/slf4j-api-1.7.33.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/projectreactor/reactor-core/3.4.14/reactor-core-3.4.14.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/reactivestreams/reactive-streams/1.0.3/reactive-streams-1.0.3.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-tcnative-boringssl-static/2.0.47.Final/netty-tcnative-boringssl-static-2.0.47.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/io/netty/netty-tcnative-classes/2.0.47.Final/netty-tcnative-classes-2.0.47.Final.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/azure/azure-core-management/1.5.4/azure-core-management-1.5.4.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/azure/resourcemanager/azure-resourcemanager-storage/2.14.0/azure-resourcemanager-storage-2.14.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/azure/resourcemanager/azure-resourcemanager-network/2.14.0/azure-resourcemanager-network-2.14.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/azure/resourcemanager/azure-resourcemanager-msi/2.14.0/azure-resourcemanager-msi-2.14.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/azure/resourcemanager/azure-resourcemanager-authorization/2.14.0/azure-resourcemanager-authorization-2.14.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
