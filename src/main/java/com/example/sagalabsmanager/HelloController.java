@@ -1,7 +1,8 @@
 package com.example.sagalabsmanager;
 
+import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.resourcemanager.AzureResourceManager;
-import com.microsoft.aad.msal4j.IAuthenticationResult;
+import com.azure.resourcemanager.resources.models.ResourceGroup;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -13,26 +14,22 @@ public class HelloController {
     @FXML
     protected void onHelloButtonClick() {
         welcomeText.setText("You are being redirected to Azure for Login");
-        try {
-            AzureAuthenticator authenticator = new AzureAuthenticator();
-            IAuthenticationResult authResult = AzureAuthenticator.authenticate();
-            // Use the authResult to make requests to Azure APIs
-        } catch (Exception ex) {
-            // Handle any exceptions that occur during authentication
-            System.out.println(ex);
-        }
-        AzureResourceManager manager = null;
-        try {
-            ResourceManager listLab = new ResourceManager();
-            ResourceManager.listLabs(manager);
-            // Use the authResult to make requests to Azure APIs
-        } catch (Exception ex) {
-            // Handle any exceptions that occur during authentication
-            System.out.println(ex);
-        }
-        ;
-        System.out.println("her1");
 
-        return;
+        System.out.println("Getting token credential and profile...");
+        AzureLogin azureLogin = new AzureLogin();
+        azureLogin.login();//husk at logge ind
+
+        System.out.println("Authenticating...");
+
+        AzureResourceManager azure = AzureResourceManager.configure() //få denne class til at authenticate med tokencredential og profile fra AzureLogin classen
+                .withLogLevel(HttpLogDetailLevel.BASIC)
+                .authenticate(azureLogin.tokenCredential, azureLogin.profile)
+                .withSubscription(azureLogin.subscriptionId);
+        System.out.println(azure);
+        System.out.println("Listing resource groups...");
+        for (ResourceGroup resourceGroup : azure.resourceGroups().list()) {//printer alle resource groups
+            System.out.printf("Resource group name: %s, location: %s%n",
+                    resourceGroup.name(), resourceGroup.regionName());
+        }
     }
 }
