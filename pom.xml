@@ -13,7 +13,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.9.1</junit.version>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -116,6 +115,7 @@
             <type>pom</type>
             <scope>import</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.microsoft.azure/msal4j -->
         <dependency>
             <groupId>com.microsoft.azure</groupId>
             <artifactId>msal4j</artifactId>
@@ -131,7 +131,6 @@
             <version>2.23.0</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
