@@ -28,4 +28,11 @@ public class AzureMethods {
         System.out.println("Region:  " + resourceGroup.regionName());
     }
 
+    public void listVMProperties(AzureResourceManager azure) {
+        System.out.println("choose resource group: ");
+        Scanner input = new Scanner(System.in);
+        String rgName = input.next();
+
+    }
+
 }

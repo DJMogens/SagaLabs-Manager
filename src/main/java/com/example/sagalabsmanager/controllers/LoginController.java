@@ -14,29 +14,26 @@ public class LoginController {
     @FXML
     private Label welcomeText;
 
+    public static AzureResourceManager azure;
+
     @FXML
     protected void onHelloButtonClick() {
         AzureMethods azMethods = new AzureMethods();
-        AzureLogin azureLogin = new AzureLogin();
+        AzureLogin azLogin = new AzureLogin();
 
         welcomeText.setText("You are being redirected to Azure for Login");
         Thread azureLoginThread = new Thread(() -> {
             System.out.println("Getting token credential and profile...");
-            azureLogin.login();//husk at logge ind
+            azLogin.login();//husk at logge ind
             System.out.println("Authenticating...");
 
 
-            AzureResourceManager azure = AzureResourceManager.configure() //få denne class til at authenticate med tokencredential og profile fra AzureLogin classen
+            azure = AzureResourceManager.configure() //få denne class til at authenticate med tokencredential og profile fra AzureLogin classen
                     .withLogLevel(HttpLogDetailLevel.BASIC)
-                    .authenticate(azureLogin.tokenCredential, azureLogin.profile)
-                    .withSubscription(azureLogin.subscriptionId);
+                    .authenticate(azLogin.tokenCredential, azLogin.profile)
+                    .withSubscription(azLogin.subscriptionId);
             System.out.println(azure);
 
-            azMethods.listAllResourceGroups(azure);
-
-
-
-            azMethods.getLabDetails(azure);
         });
         azureLoginThread.start();
 
