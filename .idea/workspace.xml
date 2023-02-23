@@ -5,10 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b089e97c-aa5e-4c34-9465-a8c5eddd34ac" name="Changes" comment="Smol change in libraries">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/SagaLogin-view.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-core-management-1.10.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-appplatform-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-appservice-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-authorization-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-cdn-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-compute-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-containerinstance-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-containerregistry-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-containerservice-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-cosmos-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-dns-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-eventhubs-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-keyvault-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-monitor-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-msi-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-network-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-privatedns-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-redis-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-resources-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-search-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-servicebus-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-sql-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-storage-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-trafficmanager-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-security-keyvault-keys-4.5.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-security-keyvault-secrets-4.5.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-storage-common-12.19.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-storage-file-share-12.16.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/commons-net-3.8.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/commons_net.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Changes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Changes.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/HelloController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +87,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/git/SagaLabs-Manager/src/main/resources/com/example/sagalabsmanager",
+    "last_opened_file_path": "C:/Users/Sofie/Documents/P2-Project/SL-cpy/SagaLabs-Manager",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -66,7 +95,7 @@
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15584415",
-    "project.structure.side.proportion": "0.3104027",
+    "project.structure.side.proportion": "0.4699074",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
