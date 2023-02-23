@@ -5,39 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b089e97c-aa5e-4c34-9465-a8c5eddd34ac" name="Changes" comment="Smol change in libraries">
-      <change afterPath="$PROJECT_DIR$/lib/azure-core-management-1.10.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-2.24.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-appplatform-2.24.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-appservice-2.24.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-authorization-2.24.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-cdn-2.24.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-compute-2.24.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-containerinstance-2.24.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-containerregistry-2.24.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-containerservice-2.24.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-cosmos-2.24.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-dns-2.24.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-eventhubs-2.24.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-keyvault-2.24.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-monitor-2.24.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-msi-2.24.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-network-2.24.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-privatedns-2.24.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-redis-2.24.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-resources-2.24.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-search-2.24.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-servicebus-2.24.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-sql-2.24.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-storage-2.24.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-trafficmanager-2.24.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-security-keyvault-keys-4.5.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-security-keyvault-secrets-4.5.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-storage-common-12.19.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/azure-storage-file-share-12.16.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/commons-net-3.8.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/commons_net.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Changes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Changes.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/View.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/ViewSwitcher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/controllers/LabsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/controllers/VMsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/labs.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/SagaLogin-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/SagaLogin-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/hello-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +30,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
@@ -140,12 +120,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AzureLogin" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.sagalabsmanager.AzureLogin" />
+    <configuration name="Application" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.sagalabsmanager.Application" />
       <module name="SagaLabs-Manager" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.sagalabsmanager.*" />
+          <option name="PATTERN" value="com.example.sagalabsmanager.controllers.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -153,12 +133,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HelloApplication" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.sagalabsmanager.HelloApplication" />
+    <configuration name="AzureLogin" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.sagalabsmanager.AzureLogin" />
       <module name="SagaLabs-Manager" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.sagalabsmanager.*" />
+          <option name="PATTERN" value="com.example.sagalabsmanager.controllers.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -296,7 +276,7 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/HelloController.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/controllers/LoginController.java</url>
           <line>26</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>

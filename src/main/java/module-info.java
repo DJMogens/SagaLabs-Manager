@@ -27,4 +27,6 @@ module com.example.sagalabsmanager {
 
     opens com.example.sagalabsmanager to javafx.fxml;
     exports com.example.sagalabsmanager;
+    exports com.example.sagalabsmanager.controllers;
+    opens com.example.sagalabsmanager.controllers to javafx.fxml;
 }

@@ -1,12 +1,16 @@
-package com.example.sagalabsmanager;
+package com.example.sagalabsmanager.controllers;
 
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.resourcemanager.AzureResourceManager;
+import com.example.sagalabsmanager.AzureLogin;
+import com.example.sagalabsmanager.AzureMethods;
+import com.example.sagalabsmanager.View;
+import com.example.sagalabsmanager.ViewSwitcher;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 
-public class HelloController {
+public class LoginController {
     @FXML
     private Label welcomeText;
 
@@ -36,5 +40,10 @@ public class HelloController {
         });
         azureLoginThread.start();
 
+    }
+
+    @FXML
+    protected void changeScene() {
+        ViewSwitcher.switchView(View.LABS);
     }
 }

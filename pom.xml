@@ -130,6 +130,11 @@
             <artifactId>azure-resourcemanager-resources</artifactId>
             <version>2.23.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>19</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -151,7 +156,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.sagalabsmanager/com.example.sagalabsmanager.HelloApplication
+                            <mainClass>com.example.sagalabsmanager/com.example.sagalabsmanager.Application
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
