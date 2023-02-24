@@ -4,12 +4,12 @@ import com.example.sagalabsmanager.AzureMethods;
 
 public class LabsController {
 
-    public void listResourceGroups() {
+    public void listResourceGroupsWithLabTag() {
         AzureMethods azureMethods = new AzureMethods();
-        azureMethods.listAllResourceGroups(LoginController.azure);
+        azureMethods.listResourceGroupsWithLabTag(LoginController.azure);
     }
     public void getLabDetails() {
         AzureMethods azureMethods = new AzureMethods();
-        azureMethods.getLabDetails(LoginController.azure);
+        azureMethods.listResourceGroupsWithLabTag(LoginController.azure);
     }
 }

@@ -15,6 +15,15 @@ public class AzureMethods {
         }
     }
 
+    public void listResourceGroupsWithLabTag(AzureResourceManager azure) {
+        System.out.println("Listing resource groups with the tag 'lab:true'...");
+        for (ResourceGroup resourceGroup : azure.resourceGroups().list()) {
+            if (resourceGroup.tags() != null && resourceGroup.tags().containsKey("lab") && resourceGroup.tags().get("lab").equalsIgnoreCase("true")) {
+                System.out.printf("Lab (resource group) name:" + resourceGroup.name());
+            }
+        }
+    }
+
     public void getLabDetails(AzureResourceManager azure) {
         System.out.println("choose resource group to get details: ");
         Scanner input = new Scanner(System.in);
@@ -27,6 +36,7 @@ public class AzureMethods {
         System.out.println("State:   " + resourceGroup.provisioningState());
         System.out.println("Region:  " + resourceGroup.regionName());
     }
+
 
     public void listVMProperties(AzureResourceManager azure) {
         System.out.println("choose resource group: ");
