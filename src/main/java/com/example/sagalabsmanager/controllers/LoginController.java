@@ -5,8 +5,17 @@ import com.azure.resourcemanager.AzureResourceManager;
 import com.example.sagalabsmanager.AzureLogin;
 import com.example.sagalabsmanager.View;
 import com.example.sagalabsmanager.ViewSwitcher;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+import java.util.Objects;
 
 
 public class LoginController {

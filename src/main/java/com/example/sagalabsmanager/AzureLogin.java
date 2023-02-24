@@ -7,8 +7,15 @@ import com.azure.core.management.AzureEnvironment;
 import com.azure.core.management.profile.AzureProfile;
 import com.azure.identity.InteractiveBrowserCredential;
 import com.azure.identity.InteractiveBrowserCredentialBuilder;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import reactor.core.publisher.Mono;
 
+import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.Collections;
 import java.util.Objects;
@@ -43,6 +50,7 @@ public class AzureLogin {
 
         profile = new AzureProfile(tenantId, clientId, AzureEnvironment.AZURE);
         loginStatus = true;
+
     }
 
 }

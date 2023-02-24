@@ -3,7 +3,8 @@ package com.example.sagalabsmanager;
 public enum View {
     LOGIN("SagaLogin-view.fxml"),
     LABS("labs.fxml"),
-    VMS("VMs.fxml");
+    VMS("VMs.fxml"),
+    MACHINES("SceneVM.fxml");
 
     private String fileName;
 
