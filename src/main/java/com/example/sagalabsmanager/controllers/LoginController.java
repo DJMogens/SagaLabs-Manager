@@ -8,8 +8,6 @@ import com.example.sagalabsmanager.ViewSwitcher;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-import static java.lang.Thread.sleep;
-
 
 public class LoginController {
     @FXML
@@ -18,7 +16,7 @@ public class LoginController {
     public static AzureResourceManager azure;
 
     @FXML
-    protected void onHelloButtonClick() throws InterruptedException {
+    protected void onHelloButtonClick() {
 
         welcomeText.setText("You are being redirected to Azure for Login");
         Thread azureLoginThread = new Thread(() -> {
@@ -34,20 +32,36 @@ public class LoginController {
             System.out.println(azure);
 
         });
-        azureLoginThread.start();
-        for (int i = 0; i < 120; i++) {
-            boolean waitLogin = azureLoginThread.isAlive();
-            System.out.println(AzureLogin.loginStatus);
-            if (!waitLogin) {
+        //
+        //tilføj kode der omskriver login til try again knap
+        //
+        //Kontroller om login er opnået på 120 sekunder
+        Thread checkLogin = new Thread(() -> {
+            long startTime = System.currentTimeMillis();
+            long duration = 0;
+            while (duration < 120_000 && azureLoginThread.isAlive()) {
+                System.out.println(AzureLogin.loginStatus);
                 if (AzureLogin.loginStatus) {
-                    System.out.println("Login successfull");
-
+                    //skal printes til bruger i vindue
+                    System.out.println("Login successful");
                     changeScene();
                     break;
                 }
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                duration = System.currentTimeMillis() - startTime;
             }
-            sleep(1000);
-        }
+            if (!AzureLogin.loginStatus){
+                //skal printes til bruger i vindue
+                System.out.println("Login not succeded. Try again");
+            }
+        });
+
+        azureLoginThread.start();
+        checkLogin.start();
     }
     @FXML
     protected void changeScene() {
