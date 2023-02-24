@@ -3,9 +3,14 @@ package com.example.sagalabsmanager;
 import com.azure.resourcemanager.AzureResourceManager;
 import com.azure.resourcemanager.resources.models.ResourceGroup;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class AzureMethods {
+
+    public static List<String> labResourceGroups = new ArrayList<>(); //string array with names of the resource groups that are labs (base on tag in azure)
+
 
     public void listAllResourceGroups(AzureResourceManager azure) {
         System.out.println("Listing resource groups...");
@@ -19,6 +24,7 @@ public class AzureMethods {
         System.out.println("Listing resource groups with the tag 'lab:true'...");
         for (ResourceGroup resourceGroup : azure.resourceGroups().list()) {
             if (resourceGroup.tags() != null && resourceGroup.tags().containsKey("lab") && resourceGroup.tags().get("lab").equalsIgnoreCase("true")) {
+                labResourceGroups.add(resourceGroup.name());
                 System.out.printf("Lab (resource group) name:" + resourceGroup.name());
             }
         }
