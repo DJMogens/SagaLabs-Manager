@@ -5,17 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b089e97c-aa5e-4c34-9465-a8c5eddd34ac" name="Changes" comment="Smol change in libraries">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/SceneVM.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/javafx_sdk_19_0_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/javafx_sdk_19_0_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Changes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Changes.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/AzureLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/AzureLogin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/controllers/LabsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/controllers/LabsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/controllers/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/labs.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/labs.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
