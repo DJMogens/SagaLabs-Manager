@@ -5,7 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b089e97c-aa5e-4c34-9465-a8c5eddd34ac" name="Changes" comment="Smol change in libraries">
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-appplatform-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-appservice-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-cdn-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-containerinstance-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-containerregistry-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-containerservice-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-cosmos-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-dns-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-eventhubs-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-monitor-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-privatedns-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-redis-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-search-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-servicebus-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-sql-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-resourcemanager-trafficmanager-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-storage-common-12.19.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/azure-storage-file-share-12.16.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/SceneSQL.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Changes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Changes.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/controllers/LabsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/controllers/LabsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/SagaLogin-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/SagaLogin-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/SceneVM.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/SceneVM.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/labs.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/labs.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,30 +79,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Sofie/Documents/P2-Project/SL-cpy/SagaLabs-Manager&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15584415&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.4699074&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Downloaded.Files.Path.Enabled": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/Sofie/Documents/P2-Project/SL-cpy/SagaLabs-Manager",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Problems",
+    "project.structure.proportion": "0.15584415",
+    "project.structure.side.proportion": "0.4699074",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -207,6 +235,8 @@
       <workItem from="1676630303133" duration="9480000" />
       <workItem from="1676877942782" duration="3959000" />
       <workItem from="1677245647411" duration="5254000" />
+      <workItem from="1677265439044" duration="4965000" />
+      <workItem from="1677368888748" duration="7307000" />
     </task>
     <task id="LOCAL-00001" summary="Authenticate with Azure and list resources to STOUT">
       <created>1676553276575</created>

@@ -5,33 +5,31 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.VBox?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sagalabsmanager.controllers.LabsController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sagalabsmanager.controllers.LabsController">
     <children>
-        <VBox prefHeight="400.0" prefWidth="131.0">
+        <AnchorPane prefHeight="480.0" prefWidth="189.0">
             <children>
-                <Region prefHeight="40.0" prefWidth="100.0" />
-                <Button mnemonicParsing="false" onAction="#home" text="Home" />
-                <Region prefHeight="18.0" prefWidth="100.0" />
-                <Button mnemonicParsing="false" onAction="#switchToMachine" prefHeight="26.0" prefWidth="49.0" text="VM's" />
-                <Region prefHeight="22.0" prefWidth="100.0" />
+                <Button layoutX="5.0" layoutY="14.0" mnemonicParsing="false" onAction="#home" prefHeight="26.0" prefWidth="110.0" text="Home" />
+                <Button layoutX="5.0" layoutY="63.0" mnemonicParsing="false" onAction="#switchToMachine" prefHeight="26.0" prefWidth="110.0" text="Machines" />
+                <Button layoutX="5.0" layoutY="107.0" mnemonicParsing="false" onAction="#switchToSQL" prefHeight="25.0" prefWidth="110.0" text="SQL Connect" />
             </children>
-        </VBox>
-        <TabPane prefHeight="400.0" prefWidth="416.0" tabClosingPolicy="UNAVAILABLE">
+        </AnchorPane>
+        <TabPane prefHeight="400.0" prefWidth="337.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="All">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="371.0" prefWidth="359.0">
                             <children>
-                                <TableView prefHeight="371.0" prefWidth="319.0">
+                                <TableView prefHeight="451.0" prefWidth="337.0">
                                     <columns>
-                                        <TableColumn prefWidth="124.0" text="ID" />
-                                        <TableColumn prefWidth="119.99999237060547" text="Machine Name" />
-                                        <TableColumn prefWidth="75.199951171875" text="OS" />
+                                        <TableColumn prefWidth="134.0" text="ID" />
+                                        <TableColumn minWidth="0.0" prefWidth="124.0" text="Machine Name" />
+                                        <TableColumn prefWidth="78.0" text="OS" />
                                     </columns>
                                 </TableView>
                             </children>
@@ -70,7 +68,14 @@
                 </Tab>
             </tabs>
         </TabPane>
-        <Region prefHeight="400.0" prefWidth="0.0" />
-        <Button mnemonicParsing="false" onAction="#logout" text="Logout" />
+      <AnchorPane prefHeight="480.0" prefWidth="246.0">
+         <children>
+              <Button layoutX="178.0" layoutY="8.0" mnemonicParsing="false" onAction="#logout" prefHeight="26.0" prefWidth="60.0" text="Logout" />
+            <TextArea layoutX="4.0" layoutY="139.0" prefHeight="221.0" prefWidth="235.0" promptText="Type command to run on selected machines:" />
+            <TextField layoutX="4.0" layoutY="93.0" prefHeight="33.0" prefWidth="169.0" promptText="Filter" />
+            <Button layoutX="96.0" layoutY="366.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="54.0" text="Run" />
+            <Button layoutX="178.0" layoutY="93.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="60.0" text="Apply" />
+         </children>
+      </AnchorPane>
     </children>
 </HBox>

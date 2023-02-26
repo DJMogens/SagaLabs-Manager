@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="348.0" prefWidth="433.0" spacing="20.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sagalabsmanager.controllers.LoginController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
+
+<AnchorPane prefHeight="480.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sagalabsmanager.controllers.LoginController">
    <children>
    
-       <Label fx:id="welcomeText" text="Welcome to SagaLabs" />
-       <Button onAction="#onHelloButtonClick" text="Login" />
-      <Button mnemonicParsing="false" text="Press to change scene" onAction="#changeScene" />
+                   <Label fx:id="welcomeText" layoutX="178.0" layoutY="149.0" text="Welcome to SagaLabs">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
+       <Button layoutX="286.0" layoutY="240.0" onAction="#onHelloButtonClick" prefHeight="60.0" prefWidth="196.0" text="Azure Login">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="300.0" layoutY="430.0" mnemonicParsing="false" onAction="#changeScene" text="Experimental Scene Switcher" />
    </children>
-</VBox>
+</AnchorPane>

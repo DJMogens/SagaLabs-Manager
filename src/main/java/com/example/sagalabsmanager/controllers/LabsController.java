@@ -4,17 +4,16 @@ import com.example.sagalabsmanager.AzureMethods;
 import com.example.sagalabsmanager.View;
 import com.example.sagalabsmanager.ViewSwitcher;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class LabsController {
+
+    public Label sqlsuccess, sqlfailed;
+    public TextField sqlUsername, sqlPassword, sqlURL;
+    public String name, password, url;
 
     public void listResourceGroupsWithLabTag() {
         AzureMethods azureMethods = new AzureMethods();
@@ -28,12 +27,29 @@ public class LabsController {
     public void logout(ActionEvent event) throws IOException {
         ViewSwitcher.switchView(View.LOGIN);
     }
-
     public void home(ActionEvent event) throws IOException {
         ViewSwitcher.switchView(View.LABS);
     }
-
     public void switchToMachine(ActionEvent event) throws IOException {
         ViewSwitcher.switchView(View.MACHINES);
+    }
+    public void switchToSQL(ActionEvent event) throws IOException {
+        ViewSwitcher.switchView(View.SQLSCENE);
+    }
+
+    public void ConnectToSQL(ActionEvent event) throws IOException {
+
+        name = sqlUsername.getText();
+        password = sqlPassword.getText();
+        url = sqlURL.getText();
+
+        if (sqlUsername.getText().isEmpty() || sqlPassword.getText().isEmpty() || sqlURL.getText().isEmpty()) {
+            sqlfailed.setVisible(true);
+            sqlsuccess.setVisible(false);
+        } else {
+            sqlfailed.setVisible(false);
+            sqlsuccess.setVisible(true);
+            sqlsuccess.setText("Successfully connected to " + name + "'s Database");
+        }
     }
 }
