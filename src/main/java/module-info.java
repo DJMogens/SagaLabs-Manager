@@ -24,6 +24,7 @@ module com.example.sagalabsmanager {
     requires com.azure.resourcemanager.appplatform;
     requires com.azure.resourcemanager.appservice;
     requires com.azure.resourcemanager;
+    requires java.sql;
 
     opens com.example.sagalabsmanager to javafx.fxml;
     exports com.example.sagalabsmanager;

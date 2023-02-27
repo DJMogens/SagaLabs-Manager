@@ -1,15 +1,15 @@
 package com.example.sagalabsmanager;
-
 import com.azure.resourcemanager.AzureResourceManager;
 import com.azure.resourcemanager.resources.models.ResourceGroup;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.sql.*;
 
 public class AzureMethods {
 
-    public static List<String> labResourceGroups = new ArrayList<>(); //string array with names of the resource groups that are labs (base on tag in azure)
+    public static List<String[]> labResourceGroups = new ArrayList<>(); //string array with names and ids of the resource groups that are labs (base on tag in azure)
 
 
     public void listAllResourceGroups(AzureResourceManager azure) {
@@ -20,13 +20,40 @@ public class AzureMethods {
         }
     }
 
+
+
     public void listResourceGroupsWithLabTag(AzureResourceManager azure) {
         System.out.println("Listing resource groups with the tag 'lab:true'...");
         for (ResourceGroup resourceGroup : azure.resourceGroups().list()) {
             if (resourceGroup.tags() != null && resourceGroup.tags().containsKey("lab") && resourceGroup.tags().get("lab").equalsIgnoreCase("true")) {
-                labResourceGroups.add(resourceGroup.name());
-                System.out.printf("Lab (resource group) name:" + resourceGroup.name());
+                String[] labResourceGroup = new String[]{resourceGroup.name(), resourceGroup.id()};
+                labResourceGroups.add(labResourceGroup);
+                System.out.printf("Lab (resource group) name: %s, id: %s%n", resourceGroup.name(), resourceGroup.id());
             }
+        }
+        insertLabResourceGroupsIntoMySQL();
+    }
+
+    private void insertLabResourceGroupsIntoMySQL() {
+        // MySQL database connection details
+        String url = "jdbc:mysql://localhost:3306/lab";
+        String username = "root";
+        String password = "IOU!H¤9pijoqwe890u19!=)";// very insecure to store in plaintext
+
+        // SQL statement to insert data into the lab table
+        String sql = "INSERT INTO lab (lab_navn, id) VALUES (?, ?)";
+
+        try (Connection conn = DriverManager.getConnection(url, username, password);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            // Iterate through the lab resource groups list and insert each string and ID into the lab table
+            for (String[] labResourceGroup : labResourceGroups) {
+                pstmt.setString(1, labResourceGroup[0]);
+                pstmt.setString(2, labResourceGroup[1]);
+                pstmt.executeUpdate();
+            }
+            System.out.println("Lab resource groups inserted into MySQL database successfully!");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 
