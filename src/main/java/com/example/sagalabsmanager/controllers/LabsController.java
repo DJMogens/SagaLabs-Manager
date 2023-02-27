@@ -5,6 +5,7 @@ import com.example.sagalabsmanager.View;
 import com.example.sagalabsmanager.ViewSwitcher;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
@@ -12,7 +13,8 @@ import java.io.IOException;
 public class LabsController {
 
     public Label sqlsuccess, sqlfailed;
-    public TextField sqlUsername, sqlPassword, sqlURL;
+    public TextField sqlUsername, sqlURL;
+    public PasswordField sqlPassword;
     public String name, password, url;
 
     public void listResourceGroupsWithLabTag() {

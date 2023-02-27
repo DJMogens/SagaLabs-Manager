@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -8,34 +9,50 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="480.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sagalabsmanager.controllers.LabsController">
+<AnchorPane prefHeight="480.0" prefWidth="768.0" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sagalabsmanager.controllers.LabsController">
    <children>
       <HBox layoutX="-1.0" layoutY="-2.0" prefHeight="480.0" prefWidth="768.0">
          <children>
-            <AnchorPane prefHeight="480.0" prefWidth="193.0">
+            <AnchorPane prefHeight="480.0" prefWidth="132.0" styleClass="root2">
                <children>
-                  <Button layoutX="6.0" layoutY="8.0" mnemonicParsing="false" onAction="#home" prefHeight="26.0" prefWidth="110.0" text="Home" />
-                  <Button layoutX="7.0" layoutY="61.0" mnemonicParsing="false" onAction="#switchToMachine" prefHeight="26.0" prefWidth="110.0" text="Machines" />
-                  <Button layoutX="5.0" layoutY="107.0" mnemonicParsing="false" onAction="#switchToSQL" prefHeight="25.0" prefWidth="110.0" text="SQL Connect" />
+                  <Button layoutX="22.0" layoutY="14.0" mnemonicParsing="false" onAction="#home" prefHeight="36.0" prefWidth="110.0" text="Home">
+                     <styleClass>
+                        <String fx:value="button" />
+                        <String fx:value="button3" />
+                     </styleClass></Button>
+                  <Button layoutX="22.0" layoutY="74.0" mnemonicParsing="false" onAction="#switchToMachine" prefHeight="36.0" prefWidth="110.0" text="Machines">
+                     <styleClass>
+                        <String fx:value="button" />
+                        <String fx:value="button3" />
+                     </styleClass></Button>
+                  <Button layoutX="22.0" layoutY="134.0" mnemonicParsing="false" onAction="#switchToSQL" prefHeight="36.0" prefWidth="110.0" text="SQL Connect">
+                     <styleClass>
+                        <String fx:value="button" />
+                        <String fx:value="button3" />
+                     </styleClass></Button>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="480.0" prefWidth="446.0">
+            <AnchorPane prefHeight="480.0" prefWidth="503.0">
                <children>
-                  <Label layoutX="71.0" layoutY="93.0" prefHeight="107.0" prefWidth="237.0" text="HOME" textAlignment="CENTER">
+                  <Label layoutX="137.0" layoutY="93.0" prefHeight="107.0" prefWidth="237.0" text="HOME" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold Italic" size="73.0" />
                      </font>
                   </Label>
-                  <Label layoutX="50.0" layoutY="200.0" text="Welcome to SagaLabs manager">
+                  <Label layoutX="105.0" layoutY="200.0" text="Welcome to SagaLabs manager">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Button layoutX="127.0" layoutY="297.0" mnemonicParsing="false" onAction="#listResourceGroupsWithLabTag" prefHeight="26.0" prefWidth="127.0" text="List Labs (terminal)" />
-                  <Button layoutX="114.0" layoutY="258.0" mnemonicParsing="false" onAction="#getLabDetails" prefHeight="26.0" prefWidth="154.0" text="Get Lab Details">
+                  <Button layoutX="182.0" layoutY="297.0" mnemonicParsing="false" onAction="#listResourceGroupsWithLabTag" prefHeight="26.0" prefWidth="127.0" styleClass="button1" text="List Labs (terminal)" />
+                  <Button layoutX="168.0" layoutY="254.0" mnemonicParsing="false" onAction="#getLabDetails" prefHeight="26.0" prefWidth="154.0" text="Get Lab Details">
                      <font>
                         <Font name="System Bold" size="15.0" />
-                     </font></Button>
+                     </font>
+                     <styleClass>
+                        <String fx:value="button" />
+                        <String fx:value="button1" />
+                     </styleClass></Button>
                   <VBox layoutX="29.0" layoutY="54.0" prefHeight="400.0" prefWidth="91.0">
                      <children>
                         <Region prefHeight="19.0" prefWidth="126.0" />
@@ -45,9 +62,9 @@
                   </VBox>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="579.0" prefWidth="131.0">
+            <AnchorPane prefHeight="480.0" prefWidth="88.0">
                <children>
-                  <Button layoutX="39.0" mnemonicParsing="false" onAction="#logout" prefHeight="29.0" prefWidth="92.0" text="Logout" />
+                  <Button layoutX="65.0" layoutY="8.0" mnemonicParsing="false" onAction="#logout" prefHeight="29.0" prefWidth="82.0" styleClass="button1" text="Logout" />
                </children>
             </AnchorPane>
          </children>
