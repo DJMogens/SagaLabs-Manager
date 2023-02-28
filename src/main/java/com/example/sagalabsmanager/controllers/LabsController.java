@@ -46,12 +46,12 @@ public class LabsController {
         url = sqlURL.getText();
 
         if (sqlUsername.getText().isEmpty() || sqlPassword.getText().isEmpty() || sqlURL.getText().isEmpty()) {
-            sqlfailed.setVisible(true);
-            sqlsuccess.setVisible(false);
+            sqlsuccess.setVisible(true);
+            sqlsuccess.setText("Connection Failed");
         } else {
-            sqlfailed.setVisible(false);
             sqlsuccess.setVisible(true);
             sqlsuccess.setText("Successfully connected to " + name + "'s Database");
         }
     }
 }
+

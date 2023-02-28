@@ -11,7 +11,7 @@ public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
         //Creates the initial scene
-        Scene scene = new Scene(new Pane(), 768, 480);
+        Scene scene = new Scene(new Pane());
 
         ViewSwitcher.setScene(scene);
         ViewSwitcher.switchView(View.LOGIN);
