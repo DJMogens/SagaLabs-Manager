@@ -1,5 +1,6 @@
 package com.example.sagalabsmanager.controllers;
 
+import com.example.sagalabsmanager.AzureLogin;
 import com.example.sagalabsmanager.AzureMethods;
 import com.example.sagalabsmanager.View;
 import com.example.sagalabsmanager.ViewSwitcher;
@@ -19,11 +20,11 @@ public class LabsController {
 
     public void listResourceGroupsWithLabTag() {
         AzureMethods azureMethods = new AzureMethods();
-        azureMethods.listResourceGroupsWithLabTag(LoginController.azure);
+        azureMethods.listResourceGroupsWithLabTag(AzureLogin.azure);
     }
     public void getLabDetails() {
         AzureMethods azureMethods = new AzureMethods();
-        azureMethods.listResourceGroupsWithLabTag(LoginController.azure);
+        azureMethods.listResourceGroupsWithLabTag(AzureLogin.azure);
     }
 
     public void logout(ActionEvent event) throws IOException {

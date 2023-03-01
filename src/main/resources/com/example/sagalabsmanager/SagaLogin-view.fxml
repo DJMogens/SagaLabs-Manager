@@ -26,10 +26,5 @@
       </VBox>
    </center>
    <bottom>
-      <Button mnemonicParsing="false" onAction="#changeScene" prefHeight="77.0" prefWidth="542.0" styleClass="button2" text="Experimental Scene Switcher" BorderPane.alignment="CENTER">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Button>
    </bottom>
 </BorderPane>
