@@ -20,7 +20,7 @@ public class LoginController {
     public static AzureResourceManager azure;
 
     @FXML
-    protected void onHelloButtonClick() {
+    protected void loginClick() {
 
         welcomeText.setText("You are being redirected to Azure for Login");
         Thread azureLoginThread = new Thread(() -> {
