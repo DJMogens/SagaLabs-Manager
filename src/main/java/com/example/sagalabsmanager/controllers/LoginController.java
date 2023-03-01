@@ -5,11 +5,15 @@ import com.azure.resourcemanager.AzureResourceManager;
 import com.example.sagalabsmanager.AzureLogin;
 import com.example.sagalabsmanager.View;
 import com.example.sagalabsmanager.ViewSwitcher;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 
 public class LoginController {
+    @FXML
+    private Button LoginButton;
     @FXML
     private Label welcomeText;
 
@@ -57,6 +61,7 @@ public class LoginController {
             if (!AzureLogin.loginStatus){
                 //skal printes til bruger i vindue
                 System.out.println("Login not succeded. Try again");
+                changeButtonTryAgain();
             }
         });
 
@@ -66,5 +71,13 @@ public class LoginController {
     @FXML
     protected void changeScene() {
         ViewSwitcher.switchView(View.LABS);
+    }
+
+    protected void changeButtonTryAgain() {
+        Platform.runLater(new Runnable() {
+            public void run() {
+                LoginButton.setText("Try again");
+            }
+        });
     }
 }

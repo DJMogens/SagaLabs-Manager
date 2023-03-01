@@ -17,7 +17,7 @@
                   <Font name="System Bold" size="72.0" />
                </font>
             </Label>
-             <Button alignment="CENTER" contentDisplay="CENTER" onAction="#onHelloButtonClick" prefHeight="137.0" prefWidth="500.0" styleClass="button1" stylesheets="@Stylesheet.css" text="Azure Login">
+             <Button alignment="CENTER" contentDisplay="CENTER" fx:id="LoginButton" onAction="#onHelloButtonClick" prefHeight="137.0" prefWidth="500.0" styleClass="button1" stylesheets="@Stylesheet.css" text="Azure Login">
                <font>
                   <Font name="System Bold" size="48.0" />
                </font>
