@@ -49,7 +49,7 @@ public class AzureLogin {
         tokenCredential = tokenRequestContext1 -> Mono.just(new AccessToken(accessTokenManagement, OffsetDateTime.now().plusHours(1)));
 
         profile = new AzureProfile(tenantId, clientId, AzureEnvironment.AZURE);
-
+        System.out.println(profile);
         //Use the new azure environment to get access tokens for other scopes:
 
         DefaultAzureCredentialBuilder credentialBuilder = new DefaultAzureCredentialBuilder();
