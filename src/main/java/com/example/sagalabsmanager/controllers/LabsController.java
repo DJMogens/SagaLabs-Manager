@@ -1,22 +1,19 @@
 package com.example.sagalabsmanager.controllers;
 
-import com.example.sagalabsmanager.AzureLogin;
-import com.example.sagalabsmanager.AzureMethods;
-import com.example.sagalabsmanager.View;
-import com.example.sagalabsmanager.ViewSwitcher;
+import com.example.sagalabsmanager.*;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class LabsController {
 
     public Label sqlsuccess, sqlfailed;
     public TextField sqlUsername, sqlURL;
     public PasswordField sqlPassword;
-    public String name, password, url;
 
     public void listResourceGroupsWithLabTag() {
         AzureMethods azureMethods = new AzureMethods();
@@ -40,19 +37,8 @@ public class LabsController {
         ViewSwitcher.switchView(View.SQLSCENE);
     }
 
-    public void ConnectToSQL(ActionEvent event) throws IOException {
-
-        name = sqlUsername.getText();
-        password = sqlPassword.getText();
-        url = sqlURL.getText();
-
-        if (sqlUsername.getText().isEmpty() || sqlPassword.getText().isEmpty() || sqlURL.getText().isEmpty()) {
-            sqlsuccess.setVisible(true);
-            sqlsuccess.setText("Connection Failed");
-        } else {
-            sqlsuccess.setVisible(true);
-            sqlsuccess.setText("Successfully connected to " + name + "'s Database");
-        }
+    public void ConnectToSQL(ActionEvent event) throws IOException, SQLException {
+        SagaDB.sqlLoginCheck();
     }
 }
 

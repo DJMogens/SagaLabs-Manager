@@ -15,7 +15,7 @@ public class Application extends javafx.application.Application {
 
         ViewSwitcher.setScene(scene);
         ViewSwitcher.switchView(View.LOGIN);
-
+        stage.setMaximized(true);
         stage.setScene(scene);
         stage.setTitle("SagaLabs-Manager");
         stage.show();

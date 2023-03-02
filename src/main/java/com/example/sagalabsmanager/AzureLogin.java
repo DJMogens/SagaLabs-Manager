@@ -6,6 +6,7 @@ import com.azure.core.credential.TokenRequestContext;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.management.AzureEnvironment;
 import com.azure.core.management.profile.AzureProfile;
+import com.azure.identity.DefaultAzureCredentialBuilder;
 import com.azure.identity.InteractiveBrowserCredential;
 import com.azure.identity.InteractiveBrowserCredentialBuilder;
 import com.azure.resourcemanager.AzureResourceManager;
@@ -19,6 +20,7 @@ import java.util.Objects;
 public class AzureLogin {
     public static AzureProfile profile;
     public static TokenCredential tokenCredential;
+    public static TokenCredential tokenCredentialKeyVault;
     public static String tenantId = "43f3cd6e-9092-45ae-b8c1-990bd8b3cdca";
     public static String clientId = "4ca9b980-3658-4847-9e7c-33d75a4ea510";
     public static String subscriptionId = "06d0a3df-f3c0-4336-927d-db8891937870";
@@ -42,11 +44,21 @@ public class AzureLogin {
         tokenRequestContext.setScopes(Collections.singletonList("https://management.azure.com/user_impersonation"));//dette scope siger at API må logge ind og bruge rettigheder på vegne af den indloggede bruger!!!
 
         // Use the credential to get an access token
-        String accessToken = Objects.requireNonNull(credential.getToken(tokenRequestContext).block()).getToken();
+        String accessTokenManagement = Objects.requireNonNull(credential.getToken(tokenRequestContext).block()).getToken();
 
-        tokenCredential = tokenRequestContext1 -> Mono.just(new AccessToken(accessToken, OffsetDateTime.now().plusHours(1)));
+        tokenCredential = tokenRequestContext1 -> Mono.just(new AccessToken(accessTokenManagement, OffsetDateTime.now().plusHours(1)));
 
         profile = new AzureProfile(tenantId, clientId, AzureEnvironment.AZURE);
+
+        //Use the new azure environment to get access tokens for other scopes:
+
+        DefaultAzureCredentialBuilder credentialBuilder = new DefaultAzureCredentialBuilder();
+        TokenCredential credentialKeyVault = credentialBuilder.build();
+        TokenRequestContext tokenRequestContextKeyVault = new TokenRequestContext().addScopes("https://vault.azure.net/.default");
+
+        String accessTokenKeyVault = Objects.requireNonNull(credentialKeyVault.getToken(tokenRequestContextKeyVault).block()).getToken();
+        tokenCredentialKeyVault = tokenRequestContext2 -> Mono.just(new AccessToken(accessTokenKeyVault, OffsetDateTime.now().plusHours(1)));
+
         loginStatus = true;
 
     }
