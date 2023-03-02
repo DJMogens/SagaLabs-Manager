@@ -6,7 +6,6 @@ import com.azure.core.credential.TokenRequestContext;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.management.AzureEnvironment;
 import com.azure.core.management.profile.AzureProfile;
-import com.azure.identity.DefaultAzureCredentialBuilder;
 import com.azure.identity.InteractiveBrowserCredential;
 import com.azure.identity.InteractiveBrowserCredentialBuilder;
 import com.azure.resourcemanager.AzureResourceManager;
@@ -49,13 +48,21 @@ public class AzureLogin {
         tokenCredential = tokenRequestContext1 -> Mono.just(new AccessToken(accessTokenManagement, OffsetDateTime.now().plusHours(1)));
 
         profile = new AzureProfile(tenantId, clientId, AzureEnvironment.AZURE);
-        System.out.println(profile);
-        //Use the new azure environment to get access tokens for other scopes:
 
-        DefaultAzureCredentialBuilder credentialBuilder = new DefaultAzureCredentialBuilder();
-        TokenCredential credentialKeyVault = credentialBuilder.build();
-        TokenRequestContext tokenRequestContextKeyVault = new TokenRequestContext().addScopes("https://vault.azure.net/.default");
 
+        //do the same to obtain rights for key vault
+        InteractiveBrowserCredential credentialKeyVault = new InteractiveBrowserCredentialBuilder()
+                .tenantId(tenantId)
+                .clientId(clientId)
+                .build();
+
+        // Set the scopes for which the access token is requested
+        TokenRequestContext tokenRequestContextKeyVault = new TokenRequestContext();
+
+        //set the scope for the credential
+        tokenRequestContextKeyVault.setScopes(Collections.singletonList("https://vault.azure.net/user_impersonation"));//dette scope siger at API må logge ind og bruge rettigheder på vegne af den indloggede bruger!!!
+
+        // Use the credential to get an access token
         String accessTokenKeyVault = Objects.requireNonNull(credentialKeyVault.getToken(tokenRequestContextKeyVault).block()).getToken();
         tokenCredentialKeyVault = tokenRequestContext2 -> Mono.just(new AccessToken(accessTokenKeyVault, OffsetDateTime.now().plusHours(1)));
 
