@@ -1,5 +1,5 @@
-#ignore artifacts
-out/*
+#ignore artifacts jars
+out/artifacts/*.jar
 
 target/
 !.mvn/wrapper/maven-wrapper.jar
