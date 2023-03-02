@@ -14,7 +14,7 @@ public class SagaDB {
     private static final String DB_URL = "jdbc:mysql://130.225.39.157:3306/sagadb";
     private static final String dbUsername = "sagalabs-manager";
 
-    public static void sqlLoginCheck() throws SQLException {
+    public static boolean sqlLoginCheck() throws SQLException {
         Connection conn = null;
             // Get the password from Azure Key Vault Secret
             String keyVaultName = "sagalabskeyvault";
@@ -30,15 +30,17 @@ public class SagaDB {
             // Open a connection
             System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL, dbUsername, dbPassword);
-            System.out.println("Database Login successful!" + conn);
         {
             try {
                 if (conn != null) {
                     conn.close();
+                    return true;
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
+
             }
+            return false;
         }
     }
 }

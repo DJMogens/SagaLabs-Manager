@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -12,29 +17,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sagalabsmanager.controllers.LabsController">
+<BorderPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sagalabsmanager.controllers.LabsController">
    <center>
       <VBox alignment="CENTER" prefHeight="1080.0" prefWidth="1448.0">
          <children>
-            <Label alignment="CENTER" prefHeight="120.0" prefWidth="928.0" text="Login below to connect to your SQL database:">
+            <Label alignment="CENTER" prefHeight="120.0" prefWidth="928.0" text="Press below to test the SQL database connection">
                <font>
                   <Font name="System Bold" size="40.0" />
                </font>
             </Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <TextField fx:id="sqlUsername" prefHeight="75.0" prefWidth="400.0" promptText="Username">
+                  <Button fx:id="sqlButtonConnect" mnemonicParsing="false" onAction="#ConnectToSQL" prefHeight="74.0" prefWidth="353.0" styleClass="button1" stylesheets="@Stylesheet.css" text="Test Connection">
                      <font>
-                        <Font size="36.0" />
+                        <Font size="33.0" />
                      </font>
-                  </TextField>
+                  </Button>
                   <Region prefHeight="100.0" prefWidth="50.0" />
-                  <PasswordField fx:id="sqlPassword" prefHeight="75.0" prefWidth="400.0" promptText="Password" styleClass="password-field">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </PasswordField>
                </children>
             </HBox>
             <Region prefHeight="20.0" prefWidth="1448.0" />
@@ -42,24 +41,12 @@
                <VBox.margin>
                   <Insets />
                </VBox.margin>
-               <children>
-                  <TextField fx:id="sqlURL" prefHeight="75.0" prefWidth="850.0" promptText="URL to SQL database" styleClass="text-field">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </TextField>
-               </children>
             </HBox>
-            <Label fx:id="sqlsuccess" alignment="CENTER" prefHeight="85.0" prefWidth="1005.0" textAlignment="CENTER" textFill="#48d700" visible="false">
+            <Label fx:id="sqlstatus" alignment="CENTER" prefHeight="120.0" prefWidth="928.0" text="SQL connection: ">
                <font>
-                  <Font name="System Italic" size="36.0" />
+                  <Font name="System Bold" size="40.0" />
                </font>
             </Label>
-            <Button fx:id="sqlButtonConnect" mnemonicParsing="false" onAction="#ConnectToSQL" prefHeight="71.0" prefWidth="200.0" styleClass="button1" stylesheets="@Stylesheet.css" text="Connect">
-               <font>
-                  <Font size="33.0" />
-               </font>
-            </Button>
          </children>
       </VBox>
    </center>
