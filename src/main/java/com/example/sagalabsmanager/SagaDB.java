@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class SagaDB {
 
     // Database credentials
-    private static final String DB_URL = "jdbc:mysql://130.225.39.157:3306/sagadb";
+    private static final String DB_URL = "jdbc:mysql://130.225.39.157:42069/sagadb";
     private static final String dbUsername = "sagalabs-manager";
 
     public static boolean sqlLoginCheck() throws SQLException {
