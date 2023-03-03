@@ -8,7 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class SagaDB {
+public class Database {
 
     // Database credentials
     private static final String DB_URL = "jdbc:mysql://130.225.39.157:42069/sagadb";
