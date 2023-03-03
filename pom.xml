@@ -173,8 +173,11 @@
                     <archive>
                         <manifest>
                             <mainClass>com.example.sagalabsmanager.Application</mainClass>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>libs/</classpathPrefix>
                         </manifest>
                     </archive>
+                    <outputDirectory>${project.build.directory}/jar</outputDirectory>
                 </configuration>
             </plugin>
             <plugin>

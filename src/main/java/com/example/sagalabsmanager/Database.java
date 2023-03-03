@@ -14,18 +14,20 @@ public class Database {
     private static final String DB_URL = "jdbc:mysql://130.225.39.157:42069/sagadb";
     private static final String dbUsername = "sagalabs-manager";
 
+    // Get the password from Azure Key Vault Secret
+    static String keyVaultName = "sagalabskeyvault";
+    static String secretName = "sagalabs-manager-SQL-pw";
+    static String keyVaultUrl = "https://" + keyVaultName + ".vault.azure.net";
+    static SecretClient secretClient = new SecretClientBuilder()
+            .vaultUrl(keyVaultUrl)
+            .credential(AzureLogin.tokenCredentialKeyVault)
+            .buildClient();
+    static KeyVaultSecret secret = secretClient.getSecret(secretName);
+    static String dbPassword = secret.getValue();
     public static boolean sqlLoginCheck() throws SQLException {
         Connection conn = null;
-            // Get the password from Azure Key Vault Secret
-            String keyVaultName = "sagalabskeyvault";
-            String secretName = "sagalabs-manager-SQL-pw";
-            String keyVaultUrl = "https://" + keyVaultName + ".vault.azure.net";
-            SecretClient secretClient = new SecretClientBuilder()
-                    .vaultUrl(keyVaultUrl)
-                    .credential(AzureLogin.tokenCredentialKeyVault)
-                    .buildClient();
-            KeyVaultSecret secret = secretClient.getSecret(secretName);
-            String dbPassword = secret.getValue();
+
+
 
             // Open a connection
             System.out.println("Connecting to database...");
