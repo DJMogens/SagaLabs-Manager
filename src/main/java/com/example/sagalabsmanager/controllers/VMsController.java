@@ -1,4 +1,5 @@
 package com.example.sagalabsmanager.controllers;
 
-public class VMsController {
+public class VMsController extends MenuController {
+
 }
