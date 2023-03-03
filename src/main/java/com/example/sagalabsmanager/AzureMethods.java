@@ -22,7 +22,7 @@ public class AzureMethods {
 
 
 
-    public void listResourceGroupsWithLabTag(AzureResourceManager azure) {
+    public static void listResourceGroupsWithLabTag(AzureResourceManager azure) {
         System.out.println("Listing resource groups with the tag 'lab:true'...");
         for (ResourceGroup resourceGroup : azure.resourceGroups().list()) {
             if (resourceGroup.tags() != null && resourceGroup.tags().containsKey("lab") && resourceGroup.tags().get("lab").equalsIgnoreCase("true")) {
@@ -34,7 +34,7 @@ public class AzureMethods {
         insertLabResourceGroupsIntoMySQL();
     }
 
-    private void insertLabResourceGroupsIntoMySQL() {
+    private static void insertLabResourceGroupsIntoMySQL() {
         // MySQL database connection details
         String url = "jdbc:mysql://localhost:3306/lab";
         String username = "root";
