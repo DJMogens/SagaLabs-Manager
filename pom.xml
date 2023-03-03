@@ -182,6 +182,10 @@
                             <noManPages>true</noManPages>
                             <stripDebug>true</stripDebug>
                             <noHeaderFiles>true</noHeaderFiles>
+                            <excludeFiles>
+                                <excludeFile>META-INF/*.sf</excludeFile>
+                                <excludeFile>META-INF/*.rsa</excludeFile>
+                            </excludeFiles>
                         </configuration>
                     </execution>
                 </executions>
