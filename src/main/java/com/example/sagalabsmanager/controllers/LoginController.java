@@ -1,6 +1,5 @@
 package com.example.sagalabsmanager.controllers;
 
-import com.azure.resourcemanager.AzureResourceManager;
 import com.example.sagalabsmanager.AzureLogin;
 import com.example.sagalabsmanager.View;
 import com.example.sagalabsmanager.ViewSwitcher;
@@ -16,12 +15,10 @@ public class LoginController {
     @FXML
     private Label welcomeText;
 
-    public static AzureResourceManager azure;
-
     @FXML
     protected void loginClick() {
         welcomeText.setText("You are being redirected to Azure for Login");
-        AzureLogin.startLogin();
+        AzureLogin.login();
     }
     @FXML
     public static void changeScene() {

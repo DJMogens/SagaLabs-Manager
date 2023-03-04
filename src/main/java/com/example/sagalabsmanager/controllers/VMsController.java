@@ -14,8 +14,8 @@ import java.util.ArrayList;
 
 public class VMsController extends MenuController {
     @FXML public TabPane tabPane;
-    ArrayList<ResourceGroup> allLabs;
-    ArrayList<Tab> tabs = new ArrayList<Tab>();
+    static ArrayList<ResourceGroup> allLabs; // Dynamically expanding list of tabs
+    static ArrayList<Tab> tabs = new ArrayList<Tab>(); // Dynamically expanding list of tabs
 
     public void initialize() {
         initializeTabs();
@@ -24,14 +24,15 @@ public class VMsController extends MenuController {
     private void initializeTabs() {
         allLabs = AzureMethods.getAllLabs(AzureLogin.azure);
         for(ResourceGroup lab: allLabs) {
+            // Creates tab
             Tab tab = new Tab();
             tab.setText(lab.name().substring(0, 10));
-
+            // Creates tableview under tab
             TableView<VM> tableView = new TableView<VM>();
             tab.setContent(tableView);
-
+            // Creates columns in tableview
             initializeColumns(tableView);
-
+            // Adds tab to pane and tabs array
             tabPane.getTabs().add(tab);
             tabs.add(tab);
         }

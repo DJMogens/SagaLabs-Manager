@@ -20,16 +20,15 @@ public class AzureLogin {
     public static AzureProfile profile;
     public static TokenCredential tokenCredential;
     public static TokenCredential tokenCredentialKeyVault;
-    public static String tenantId = "43f3cd6e-9092-45ae-b8c1-990bd8b3cdca";
-    public static String clientId = "4ca9b980-3658-4847-9e7c-33d75a4ea510";
-    public static String subscriptionId = "06d0a3df-f3c0-4336-927d-db8891937870";
+    final public static String tenantId = "43f3cd6e-9092-45ae-b8c1-990bd8b3cdca";
+    final public static String clientId = "4ca9b980-3658-4847-9e7c-33d75a4ea510";
+    final public static String subscriptionId = "06d0a3df-f3c0-4336-927d-db8891937870";
     public static boolean loginStatus = false;
 
     public static AzureResourceManager azure;
 
-    public static void login() {
+    public static void buildCredentials() {
         // Set the Azure tenant ID and client ID
-        loginStatus = false;
         // Build the interactive browser credential
         InteractiveBrowserCredential credential = new InteractiveBrowserCredentialBuilder()
                 .tenantId(tenantId)
@@ -70,51 +69,57 @@ public class AzureLogin {
 
     }
 
-    public static void startLogin() {
-        Thread azureLoginThread = new Thread(() -> {
-            System.out.println("Getting token credential and profile...");
-            AzureLogin.login();//husk at logge ind
-            System.out.println("Authenticating...");
-
-
-            azure = AzureResourceManager.configure() //få denne class til at authenticate med tokencredential og profile fra AzureLogin classen
-                    .withLogLevel(HttpLogDetailLevel.BASIC)
-                    .authenticate(AzureLogin.tokenCredential, AzureLogin.profile)
-                    .withSubscription(AzureLogin.subscriptionId);
-            System.out.println(azure);
-
-        });
+    public static void login() {
+        Thread azureLoginThread = new Thread(AzureLogin::startLogin);
         //
         //tilføj kode der omskriver login til try again knap
         //
         //Kontroller om login er opnået på 120 sekunder
-        Thread checkLogin = new Thread(() -> {
-            long startTime = System.currentTimeMillis();
-            long duration = 0;
-            while (duration < 120_000 && azureLoginThread.isAlive()) {
-                System.out.println(AzureLogin.loginStatus);
-                if (AzureLogin.loginStatus) {
-                    //skal printes til bruger i vindue
-                    System.out.println("Login successful");
-                    LoginController.changeScene();
-                    break;
-                }
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                duration = System.currentTimeMillis() - startTime;
-            }
-            if (!AzureLogin.loginStatus){
-                //skal printes til bruger i vindue
-                System.out.println("Login not succeded. Try again");
-                LoginController.changeButtonTryAgain();
-            }
+        Thread checkLoginThread = new Thread(() -> {
+            checkLogin(azureLoginThread);
         });
 
         azureLoginThread.start();
-        checkLogin.start();
+        System.out.println("Starting check login thread");
+        checkLoginThread.start();
+    }
+
+    public static void startLogin() {
+        System.out.println("Getting token credential and profile...");
+        buildCredentials();//husk at logge ind
+        System.out.println("Authenticating...");
+        azure = AzureResourceManager.configure() //få denne class til at authenticate med tokencredential og profile fra AzureLogin classen
+                .withLogLevel(HttpLogDetailLevel.BASIC)
+                .authenticate(tokenCredential, profile)
+                .withSubscription(subscriptionId);
+        System.out.println(azure);
+    }
+
+    public static void checkLogin(Thread azureLoginThread) {
+        long startTime = System.currentTimeMillis();
+        long duration = 0;
+        while (duration < 120_000 && azureLoginThread.isAlive()) {
+            System.out.println(AzureLogin.loginStatus);
+            if (loginStatus) {
+                break;
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            duration = System.currentTimeMillis() - startTime;
+        }
+        if (loginStatus) {
+            //skal printes til bruger i vindue
+            System.out.println("Login successful");
+            LoginController.changeScene();
+        }
+        else {
+            //skal printes til bruger i vindue
+            System.out.println("Login not succeded. Try again");
+            LoginController.changeButtonTryAgain();
+        }
     }
 
 }
