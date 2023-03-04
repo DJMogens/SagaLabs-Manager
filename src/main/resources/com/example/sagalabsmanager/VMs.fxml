@@ -17,43 +17,41 @@
 
 <BorderPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sagalabsmanager.controllers.VMsController">
    <center>
-        <TabPane prefHeight="1080.0" prefWidth="1100.0" stylesheets="@Stylesheet.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-            <tabs>
-                <Tab text="All">
-                    <content>
-                          <TableView prefHeight="451.0" prefWidth="397.0">
-                              <columns>
-                                  <TableColumn prefWidth="450.0" text="ID" />
-                                  <TableColumn minWidth="0.0" prefWidth="450.0" text="Machine Name" />
-                                  <TableColumn prefWidth="199.0" text="OS" />
-                              </columns>
-                          </TableView>
-                    </content>
-                </Tab>
-                <Tab text="Lab 1">
-                    <content>
-                          <TableView fx:id="lab1" prefHeight="452.0" prefWidth="397.0">
-                              <columns>
-                                  <TableColumn prefWidth="450.0" text="ID" />
-                                  <TableColumn fx:id="lab1name" prefWidth="450.0" text="Machine Name" />
-                                  <TableColumn fx:id="lab1os" prefWidth="199.0" text="OS" />
-                              </columns>
-                          </TableView>
-                    </content>
-                </Tab>
-                <Tab text="Lab 2">
-                    <content>
-                          <TableView fx:id="lab2" prefHeight="453.0" prefWidth="397.0" stylesheets="@Stylesheet.css">
-                              <columns>
-                                  <TableColumn prefWidth="450.0" text="ID" />
-                                  <TableColumn fx:id="lab2name" prefWidth="450.0" text="Machine Name" />
-                                  <TableColumn fx:id="lab2os" prefWidth="199.0" text="OS" />
-                              </columns>
-                          </TableView>
-                    </content>
-                </Tab>
-            </tabs>
-        </TabPane>
+       <TabPane prefHeight="1080.0" prefWidth="1100.0" stylesheets="@Stylesheet.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+               <Tab fx:id = "all" text="All">
+                   <content>
+                       <TableView prefHeight="451.0" prefWidth="397.0">
+                           <columns>
+                               <TableColumn prefWidth="450.0" text="ID" />
+                               <TableColumn minWidth="0.0" prefWidth="450.0" text="Machine Name" />
+                               <TableColumn prefWidth="199.0" text="OS" />
+                           </columns>
+                       </TableView>
+                   </content>
+               </Tab>
+               <Tab  fx:id="Lab1" text="Lab 1">
+                   <content>
+                       <TableView fx:id="lab1View" prefHeight="452.0" prefWidth="397.0">
+                           <columns>
+                               <TableColumn prefWidth="450.0" text="ID" />
+                               <TableColumn fx:id="lab1name" prefWidth="450.0" text="Machine Name" />
+                               <TableColumn fx:id="lab1os" prefWidth="199.0" text="OS" />
+                           </columns>
+                       </TableView>
+                   </content>
+               </Tab>
+               <Tab fx:id="Lab2" text="Lab 2" >
+                   <content>
+                       <TableView fx:id="lab2View" prefHeight="453.0" prefWidth="397.0" stylesheets="@Stylesheet.css">
+                           <columns>
+                               <TableColumn prefWidth="450.0" text="ID" />
+                               <TableColumn fx:id="lab2name" prefWidth="450.0" text="Machine Name" />
+                               <TableColumn fx:id="lab2os" prefWidth="199.0" text="OS" />
+                           </columns>
+                       </TableView>
+                   </content>
+               </Tab>
+       </TabPane>
    </center>
    <left>
       <VBox alignment="TOP_RIGHT" prefHeight="1080.0" prefWidth="280.0" styleClass="root2" BorderPane.alignment="CENTER">
