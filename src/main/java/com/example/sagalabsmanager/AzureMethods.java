@@ -11,7 +11,7 @@ public class AzureMethods {
 
     public static List<String[]> labResourceGroups = new ArrayList<>(); //string array with names and ids of the resource groups that are labs (base on tag in azure)
 
-
+    /*DEPRECATED, new is listResourceGroupsWithLabTag
     public void listAllResourceGroups(AzureResourceManager azure) {
         System.out.println("Listing resource groups...");
         for (com.azure.resourcemanager.resources.models.ResourceGroup resourceGroup : azure.resourceGroups().list()) {//printer alle resource groups
@@ -19,8 +19,7 @@ public class AzureMethods {
                     resourceGroup.name(), resourceGroup.regionName());
         }
     }
-
-
+    */
 
     public static void listResourceGroupsWithLabTag(AzureResourceManager azure) {
         System.out.println("Listing resource groups with the tag 'lab:true'...");

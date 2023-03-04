@@ -3,8 +3,7 @@ package com.example.sagalabsmanager.controllers;
 import com.example.sagalabsmanager.AzureLogin;
 import com.example.sagalabsmanager.AzureMethods;
 
-public class LabsController extends MenuController {
-
+public class HomeController extends MenuController {
     public void listResourceGroupsWithLabTag() {
         AzureMethods.listResourceGroupsWithLabTag(AzureLogin.azure);
     }

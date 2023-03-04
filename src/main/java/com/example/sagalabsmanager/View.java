@@ -3,7 +3,7 @@ package com.example.sagalabsmanager;
 public enum View {
     //ENUM types for opening fxml files with the ViewSwitcher function
     LOGIN("Login.fxml"),
-    LABS("Labs.fxml"),
+    HOME("Home.fxml"),
     SQLSCENE("SQL.fxml"),
     MACHINES("VMs.fxml");
 

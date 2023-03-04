@@ -11,7 +11,7 @@ public class MenuController {
         ViewSwitcher.switchView(View.LOGIN);
     }
     public void home(ActionEvent event) throws IOException {
-        ViewSwitcher.switchView(View.LABS);
+        ViewSwitcher.switchView(View.HOME);
     }
     public void switchToMachine(ActionEvent event) throws IOException {
         ViewSwitcher.switchView(View.MACHINES);

@@ -25,7 +25,7 @@ public class LoginController {
     }
     @FXML
     public static void changeScene() {
-        ViewSwitcher.switchView(View.LABS);
+        ViewSwitcher.switchView(View.HOME);
     }
 
     public static void changeButtonTryAgain() {
