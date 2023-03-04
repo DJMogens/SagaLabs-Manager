@@ -33,21 +33,24 @@ public class AzureMethods {
         insertLabResourceGroupsIntoMySQL();
     }
 
-    public static ResourceGroup[] getAllLabs(AzureResourceManager azure) {
-        ResourceGroup[] resourceGroupArray = new ResourceGroup[10]; // WILL MAX CONTAIN 10 LABS
+    public static ArrayList<ResourceGroup> getAllLabs(AzureResourceManager azure) {
+        ArrayList<ResourceGroup> resourceGroups = new ArrayList<ResourceGroup>();
         System.out.println("Listing resource groups with the tag 'lab:true'...");
-        int i = 0;
         for (ResourceGroup resourceGroup : azure.resourceGroups().list()) {
             if (resourceGroup.tags() != null && resourceGroup.tags().containsKey("lab") && resourceGroup.tags().get("lab").equalsIgnoreCase("true")) {
                 String[] labResourceGroup = new String[]{resourceGroup.name(), resourceGroup.id()};
                 labResourceGroups.add(labResourceGroup);
                 System.out.printf("Lab (resource group) name: %s, id: %s%n", resourceGroup.name(), resourceGroup.id());
-                resourceGroupArray[i] = resourceGroup;
-                i++;
+                resourceGroups.add(resourceGroup);
             }
         }
         insertLabResourceGroupsIntoMySQL();
-        return resourceGroupArray;
+        return resourceGroups;
+    }
+    private static ResourceGroup[] expandArray(ResourceGroup[] resourceGroups) {
+        int length = resourceGroups.length;
+        ResourceGroup[] newArray = new ResourceGroup[length + 1];
+        return newArray;
     }
 
     private static void insertLabResourceGroupsIntoMySQL() {

@@ -6,6 +6,8 @@ import com.example.sagalabsmanager.AzureMethods;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 
+import java.util.ArrayList;
+
 public class VMsController extends MenuController {
 
     @FXML public Tab Lab1;
@@ -13,8 +15,10 @@ public class VMsController extends MenuController {
 
     @FXML
     public void initialize() {
-        ResourceGroup[] allLabs = AzureMethods.getAllLabs(AzureLogin.azure);
-        Lab1.setText(allLabs[0].name().substring(0,10));
-        Lab2.setText(allLabs[1].name().substring(0,10));
+        ArrayList<ResourceGroup> allLabs = AzureMethods.getAllLabs(AzureLogin.azure);
+        for(ResourceGroup lab: allLabs) {
+            Lab1.setText(lab.name().substring(0, 10));
+            Lab2.setText(lab.name().substring(0, 10));
+        }
     }
 }
