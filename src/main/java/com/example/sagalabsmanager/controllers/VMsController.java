@@ -13,12 +13,14 @@ public class VMsController extends MenuController {
     @FXML public Tab Lab1;
     @FXML public Tab Lab2;
 
-    @FXML
     public void initialize() {
+        initializeTabNames();
+    }
+    private void initializeTabNames() {
         ArrayList<ResourceGroup> allLabs = AzureMethods.getAllLabs(AzureLogin.azure);
-        for(ResourceGroup lab: allLabs) {
-            Lab1.setText(lab.name().substring(0, 10));
-            Lab2.setText(lab.name().substring(0, 10));
+        Tab[] tabs = {Lab1, Lab2};
+        for(int i = 0; i < tabs.length; i++) {
+            tabs[i].setText(allLabs.get(i).name().substring(0, 10)); // Sets text of tabs to first 10 characters of lab names
         }
     }
 }
