@@ -27,7 +27,7 @@ public class AzureLogin {
 
     public static AzureResourceManager azure;
 
-    public static void buildCredentials() {
+    private static void buildCredentials() {
         // Set the Azure tenant ID and client ID
         // Build the interactive browser credential
         InteractiveBrowserCredential credential = new InteractiveBrowserCredentialBuilder()
@@ -84,7 +84,7 @@ public class AzureLogin {
         checkLoginThread.start();
     }
 
-    public static void startLogin() {
+    private static void startLogin() {
         System.out.println("Getting token credential and profile...");
         buildCredentials();//husk at logge ind
         System.out.println("Authenticating...");
@@ -95,7 +95,7 @@ public class AzureLogin {
         System.out.println(azure);
     }
 
-    public static void checkLogin(Thread azureLoginThread) {
+    private static void checkLogin(Thread azureLoginThread) {
         long startTime = System.currentTimeMillis();
         long duration = 0;
         while (duration < 120_000 && azureLoginThread.isAlive()) {

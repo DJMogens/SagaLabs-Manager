@@ -47,11 +47,6 @@ public class AzureMethods {
         insertLabResourceGroupsIntoMySQL();
         return resourceGroups;
     }
-    private static ResourceGroup[] expandArray(ResourceGroup[] resourceGroups) {
-        int length = resourceGroups.length;
-        ResourceGroup[] newArray = new ResourceGroup[length + 1];
-        return newArray;
-    }
 
     private static void insertLabResourceGroupsIntoMySQL() {
         // MySQL database connection details
