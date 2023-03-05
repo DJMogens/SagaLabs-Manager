@@ -18,9 +18,9 @@
 <BorderPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sagalabsmanager.controllers.VMsController">
    <center>
        <TabPane fx:id="tabPane" prefHeight="1080.0" prefWidth="1100.0" stylesheets="@Stylesheet.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-           <Tab fx:id="all" text="All">
+           <Tab fx:id="allTab" text="All">
                <content>
-                   <TableView prefHeight="451.0" prefWidth="397.0">
+                   <TableView fx:id="allTableView" prefHeight="451.0" prefWidth="397.0">
                        <columns>
                            <TableColumn prefWidth="450.0" text="ID" />
                            <TableColumn minWidth="0.0" prefWidth="450.0" text="Machine Name" />

@@ -1,5 +1,7 @@
 package com.example.sagalabsmanager;
+import com.azure.core.http.rest.PagedIterable;
 import com.azure.resourcemanager.AzureResourceManager;
+import com.azure.resourcemanager.compute.models.VirtualMachine;
 import com.azure.resourcemanager.resources.models.ResourceGroup;
 
 import java.util.ArrayList;
@@ -90,6 +92,11 @@ public class AzureMethods {
         Scanner input = new Scanner(System.in);
         String rgName = input.next();
 
+    }
+
+    public static PagedIterable<VirtualMachine> getVMsInLab(ResourceGroup resourceGroup) {
+        PagedIterable<VirtualMachine> vms = AzureLogin.azure.virtualMachines().listByResourceGroup(String.valueOf(resourceGroup.name()));
+        return vms;
     }
 
 }
