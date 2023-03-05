@@ -7,7 +7,6 @@ public class MachinesVM {
     private String vmName;
     private String os;
 
-
     public MachinesVM(String id, String vmName, OperatingSystemTypes os) {
         this.id = id;
         this.vmName = vmName;

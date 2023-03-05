@@ -5,7 +5,7 @@ import com.azure.resourcemanager.containerservice.models.OSType;
 import com.azure.resourcemanager.resources.models.ResourceGroup;
 import com.example.sagalabsmanager.AzureLogin;
 import com.example.sagalabsmanager.AzureMethods;
-import com.example.sagalabsmanager.MachinesLabTab;
+import com.example.sagalabsmanager.MachinesTab;
 import com.example.sagalabsmanager.MachinesVM;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
@@ -21,21 +21,19 @@ public class VMsController extends MenuController {
     @FXML protected Tab allTab;
     @FXML protected TableView<MachinesVM> allTableView;
 
-    public static ArrayList<MachinesLabTab> labTabs = new ArrayList<MachinesLabTab>();
+    public static ArrayList<MachinesTab> machinesTabs = new ArrayList<MachinesTab>();
 
     public void initialize() {
+        System.out.println("Initializing tabs");
         initializeTabs();
     }
 
     private void initializeTabs() {
-        // Gets all labs
-        ArrayList<ResourceGroup> allLabs = AzureMethods.getAllLabs(AzureLogin.azure);
-        MachinesLabTab allLabsTab = new MachinesLabTab(allTab, allTableView);
-        labTabs.add(allLabsTab);
+        // Creates tab for all
+        machinesTabs.add(new MachinesTab(allTab, allTableView));
+        showAllMachines();
 
-        showAllLabs(allLabs);
-
-        for(ResourceGroup lab: allLabs) {
+        for(ResourceGroup lab: AzureMethods.getAllLabs(AzureLogin.azure)) {
             // Creates tab
             Tab tab = new Tab();
             tab.setText(lab.name().substring(0, 10));
@@ -47,15 +45,15 @@ public class VMsController extends MenuController {
             initializeColumns(tableView);
             // Adds tab to pane and tabs array
             tabPane.getTabs().add(tab);
-            MachinesLabTab labTab = new MachinesLabTab(lab, tab, tableView);
-            labTabs.add(labTab);
+            MachinesTab machinesTab = new MachinesTab(lab, tab, tableView);
+            machinesTabs.add(machinesTab);
         }
         setTabSelectionAction();
     }
 
     private void setTabSelectionAction() {
-        for(MachinesLabTab labTab: labTabs) {
-           labTab.getTab().setOnSelectionChanged(e -> selectTab());
+        for(MachinesTab tab: machinesTabs) {
+           tab.getTab().setOnSelectionChanged(e -> selectTab());
         }
     }
 
@@ -78,32 +76,25 @@ public class VMsController extends MenuController {
     }
 
     private void selectTab() {
-        for(MachinesLabTab labTab: labTabs) {
-            if(labTab.getTab().isSelected()) {
-                labTab.getTableView().getItems().clear();
+        for(MachinesTab machinesTab: machinesTabs) {
+            if(machinesTab.getTab().isSelected()) {
                 // For lab, when selected
-                if(labTab.getResourceGroup() != null) {
-                    for(VirtualMachine vm: AzureMethods.getVMsInLab(labTab.resourceGroup)) {
-                        labTab.getTableView().getItems().add(new MachinesVM(vm.vmId(), vm.name(), vm.osType()));
+                if(machinesTab.getResourceGroup() != null && machinesTab.getTableView().getItems().isEmpty()) {
+                    for(VirtualMachine vm: AzureMethods.getVMsInLab(machinesTab.resourceGroup)) {
+                        machinesTab.getTableView().getItems().add(new MachinesVM(vm.vmId(), vm.name(), vm.osType()));
                     }
                 }
                 // For 'ALL' tab
-                else {
-                    ArrayList<ResourceGroup> allLabs = new ArrayList<ResourceGroup>();
-                    for(MachinesLabTab lab: labTabs) {
-                        if(lab.getResourceGroup() != null) {
-                            allLabs.add(lab.getResourceGroup());
-                        }
-                    }
-                    showAllLabs(allLabs);
+                else if (allTableView.getItems().isEmpty()) {
+                    showAllMachines();
                 }
             }
         }
     }
-    private void showAllLabs(ArrayList<ResourceGroup> resourceGroups) {
-        allTableView.getItems().clear();
-        for(ResourceGroup resourceGroup: resourceGroups) {
+    private void showAllMachines() {
+        for(ResourceGroup resourceGroup: AzureMethods.getAllLabs(AzureLogin.azure)) {
             for(VirtualMachine vm: AzureMethods.getVMsInLab(resourceGroup)) {
+                System.out.println(vm.name());
                 allTableView.getItems().add(new MachinesVM(vm.vmId(), vm.name(), vm.osType()));
             }
         }
