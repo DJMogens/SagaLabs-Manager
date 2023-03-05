@@ -28,9 +28,13 @@ public class VMsController extends MenuController {
     }
 
     private void initializeTabs() {
+        // Gets all labs
         ArrayList<ResourceGroup> allLabs = AzureMethods.getAllLabs(AzureLogin.azure);
         MachinesLabTab allLabsTab = new MachinesLabTab(allTab, allTableView);
         labTabs.add(allLabsTab);
+
+        showAllLabs(allLabs);
+
         for(ResourceGroup lab: allLabs) {
             // Creates tab
             Tab tab = new Tab();
@@ -83,12 +87,25 @@ public class VMsController extends MenuController {
                         labTab.getTableView().getItems().add(new MachinesVM(vm.vmId(), vm.name(), vm.osType()));
                     }
                 }
-                //
+                // For 'ALL' tab
                 else {
-                    // INSERT MACHINES IN ALL
+                    ArrayList<ResourceGroup> allLabs = new ArrayList<ResourceGroup>();
+                    for(MachinesLabTab lab: labTabs) {
+                        if(lab.getResourceGroup() != null) {
+                            allLabs.add(lab.getResourceGroup());
+                        }
+                    }
+                    showAllLabs(allLabs);
                 }
             }
         }
     }
-
+    private void showAllLabs(ArrayList<ResourceGroup> resourceGroups) {
+        allTableView.getItems().clear();
+        for(ResourceGroup resourceGroup: resourceGroups) {
+            for(VirtualMachine vm: AzureMethods.getVMsInLab(resourceGroup)) {
+                allTableView.getItems().add(new MachinesVM(vm.vmId(), vm.name(), vm.osType()));
+            }
+        }
+    }
 }
