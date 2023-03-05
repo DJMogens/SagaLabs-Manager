@@ -59,12 +59,15 @@ public class VMsController extends MenuController {
         TableColumn<MachinesVM, String> idColumn = new TableColumn<MachinesVM, String>("ID");
         idColumn.setPrefWidth(450.0);
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+
         TableColumn<MachinesVM, String> vmColumn = new TableColumn<MachinesVM, String>("Machine Name");
         vmColumn.setPrefWidth(450.0);
         vmColumn.setCellValueFactory(new PropertyValueFactory<>("vmName"));
+
         TableColumn<MachinesVM, OSType> osColumn = new TableColumn<MachinesVM, OSType>("OS");
         osColumn.setPrefWidth(199.0);
         osColumn.setCellValueFactory(new PropertyValueFactory<>("os"));
+
         tableView.getColumns().add(idColumn);
         tableView.getColumns().add(vmColumn);
         tableView.getColumns().add(osColumn);
@@ -73,11 +76,16 @@ public class VMsController extends MenuController {
     private void selectTab() {
         for(MachinesLabTab labTab: labTabs) {
             if(labTab.getTab().isSelected()) {
-                // just for testing
+                labTab.getTableView().getItems().clear();
+                // For lab, when selected
                 if(labTab.getResourceGroup() != null) {
                     for(VirtualMachine vm: AzureMethods.getVMsInLab(labTab.resourceGroup)) {
                         labTab.getTableView().getItems().add(new MachinesVM(vm.vmId(), vm.name(), vm.osType()));
                     }
+                }
+                //
+                else {
+                    // INSERT MACHINES IN ALL
                 }
             }
         }
