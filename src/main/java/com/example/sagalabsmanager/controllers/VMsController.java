@@ -24,7 +24,6 @@ public class VMsController extends MenuController {
     public static ArrayList<MachinesTab> machinesTabs = new ArrayList<MachinesTab>();
 
     public void initialize() {
-        System.out.println("Initializing tabs");
         initializeTabs();
     }
 
@@ -94,7 +93,6 @@ public class VMsController extends MenuController {
     private void showAllMachines() {
         for(ResourceGroup resourceGroup: AzureMethods.getAllLabs(AzureLogin.azure)) {
             for(VirtualMachine vm: AzureMethods.getVMsInLab(resourceGroup)) {
-                System.out.println(vm.name());
                 allTableView.getItems().add(new MachinesVM(vm.vmId(), vm.name(), vm.osType()));
             }
         }
