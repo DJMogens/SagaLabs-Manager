@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class Database {
 
     // Database credentials
-    private static final String DB_URL = "jdbc:mysql://130.225.39.157:42069/sagadb";
+    private static final String DB_URL = "jdbc:mysql://sagadb.sagalabs.dk:42069/sagadb";
     private static final String dbUsername = "sagalabs-manager";
 
     // Get the password from Azure Key Vault Secret
