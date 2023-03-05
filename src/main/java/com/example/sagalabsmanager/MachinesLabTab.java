@@ -6,12 +6,6 @@ import javafx.scene.control.TableView;
 
 public class MachinesLabTab {
 
-    /*static ArrayList<ResourceGroup> allLabs; // Dynamically expanding list of tabs
-    static ArrayList<Tab> tabs = new ArrayList<Tab>(); // Dynamically expanding list of tabs
-
-    static ArrayList<TableView<VM>> tableViews = new ArrayList<TableView<VM>>();
-
-    */
     public ResourceGroup resourceGroup;
     public Tab tab;
     public TableView<MachinesVM> tableView;
