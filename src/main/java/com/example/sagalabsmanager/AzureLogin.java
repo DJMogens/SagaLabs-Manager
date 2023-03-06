@@ -59,7 +59,7 @@ public class AzureLogin {
             .clientId(clientId)
             .build();
 
-    // Set the scopes for which the access token is requested
+        // Set the scopes for which the access token is requested
     TokenRequestContext tokenRequestContextKeyVault = new TokenRequestContext();
 
     //set the scope for the credential
@@ -75,6 +75,13 @@ public class AzureLogin {
 
     setLoginStatusTrue();
 }
+
+public static void setLoginEnvironmentVariables(){
+    System.setProperty("AZURE_CLIENT_ID", clientId);
+    System.setProperty("AZURE_CLIENT_SECRET", "value2");
+    System.setProperty("AZURE_TENANT_ID", tenantId);
+}
+
 
 public static void setLoginStatusTrue (){
     loginStatus = true;
