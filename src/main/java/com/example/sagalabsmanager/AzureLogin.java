@@ -43,31 +43,42 @@ public class AzureLogin {
 
         // Use the credential to get an access token
         String accessTokenManagement = Objects.requireNonNull(credential.getToken(tokenRequestContext).block()).getToken();
-
         tokenCredential = tokenRequestContext1 -> Mono.just(new AccessToken(accessTokenManagement, OffsetDateTime.now().plusHours(1)));
 
-        profile = new AzureProfile(tenantId, clientId, AzureEnvironment.AZURE);
+        profile =new AzureProfile(tenantId, clientId, AzureEnvironment.AZURE);
 
-
-        //do the same to obtain rights for key vault
-        InteractiveBrowserCredential credentialKeyVault = new InteractiveBrowserCredentialBuilder()
-                .tenantId(tenantId)
-                .clientId(clientId)
-                .build();
-
-        // Set the scopes for which the access token is requested
-        TokenRequestContext tokenRequestContextKeyVault = new TokenRequestContext();
-
-        //set the scope for the credential
-        tokenRequestContextKeyVault.setScopes(Collections.singletonList("https://vault.azure.net/user_impersonation"));//dette scope siger at API må logge ind og bruge rettigheder på vegne af den indloggede bruger!!!
-
-        // Use the credential to get an access token
-        String accessTokenKeyVault = Objects.requireNonNull(credentialKeyVault.getToken(tokenRequestContextKeyVault).block()).getToken();
-        tokenCredentialKeyVault = tokenRequestContext2 -> Mono.just(new AccessToken(accessTokenKeyVault, OffsetDateTime.now().plusHours(1)));
-
-        loginStatus = true;
+        buildCredentialsKeyVault();
 
     }
+
+    public static void buildCredentialsKeyVault() {
+
+    //do the same to obtain rights for key vault
+    InteractiveBrowserCredential credentialKeyVault = new InteractiveBrowserCredentialBuilder()
+            .tenantId(tenantId)
+            .clientId(clientId)
+            .build();
+
+    // Set the scopes for which the access token is requested
+    TokenRequestContext tokenRequestContextKeyVault = new TokenRequestContext();
+
+    //set the scope for the credential
+        tokenRequestContextKeyVault.setScopes(Collections.singletonList("https://vault.azure.net/user_impersonation"));//dette scope siger at API må logge ind og bruge rettigheder på vegne af den indloggede bruger!!!
+
+    // Use the credential to get an access token
+    String accessTokenKeyVault = Objects.requireNonNull(credentialKeyVault.getToken(tokenRequestContextKeyVault).block()).getToken();
+    tokenCredentialKeyVault =tokenRequestContext2 ->Mono.just(new
+
+    AccessToken(accessTokenKeyVault, OffsetDateTime.now().
+
+    plusHours(1)));
+
+    setLoginStatusTrue();
+}
+
+public static void setLoginStatusTrue (){
+    loginStatus = true;
+}
 
     public static void login() {
         Thread azureLoginThread = new Thread(AzureLogin::startLogin);
