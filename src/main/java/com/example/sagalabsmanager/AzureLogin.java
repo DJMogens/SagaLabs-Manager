@@ -6,6 +6,8 @@ import com.azure.core.credential.TokenRequestContext;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.management.AzureEnvironment;
 import com.azure.core.management.profile.AzureProfile;
+import com.azure.identity.ClientSecretCredential;
+import com.azure.identity.ClientSecretCredentialBuilder;
 import com.azure.identity.InteractiveBrowserCredential;
 import com.azure.identity.InteractiveBrowserCredentialBuilder;
 import com.azure.resourcemanager.AzureResourceManager;
@@ -27,19 +29,44 @@ public class AzureLogin {
 
     public static AzureResourceManager azure;
 
-    private static void buildCredentials() {
-        // Set the Azure tenant ID and client ID
-        // Build the interactive browser credential
-        InteractiveBrowserCredential credential = new InteractiveBrowserCredentialBuilder()
+
+    public static void buildCredentialsKeyVault() {
+
+        //do the same to obtain rights for key vault
+        InteractiveBrowserCredential credentialKeyVault = new InteractiveBrowserCredentialBuilder()
                 .tenantId(tenantId)
                 .clientId(clientId)
+                .build();
+
+        // Set the scopes for which the access token is requested
+        TokenRequestContext tokenRequestContextKeyVault = new TokenRequestContext();
+
+        //set the scope for the credential
+        tokenRequestContextKeyVault.setScopes(Collections.singletonList("https://vault.azure.net/user_impersonation"));//dette scope siger at API må logge ind og bruge rettigheder på vegne af den indloggede bruger!!!
+
+        // Use the credential to get an access token
+        String accessTokenKeyVault = Objects.requireNonNull(credentialKeyVault.getToken(tokenRequestContextKeyVault).block()).getToken();
+        tokenCredentialKeyVault =tokenRequestContext2 ->Mono.just(new
+
+                AccessToken(accessTokenKeyVault, OffsetDateTime.now().
+
+                plusHours(1)));
+    }
+
+    private static void buildCredentialsResourceManagement() {
+        // Set the Azure tenant ID and client ID
+        // Build the interactive browser credential
+        ClientSecretCredential credential = new ClientSecretCredentialBuilder()
+                .tenantId(tenantId)
+                .clientId(clientId)
+                .clientSecret(AzureMethods.getKeyVaultSecret("sagalabs-manager-client-secret"))
                 .build();
 
         // Set the scopes for which the access token is requested
         TokenRequestContext tokenRequestContext = new TokenRequestContext();
 
         //set the scope for the credential
-        tokenRequestContext.setScopes(Collections.singletonList("https://management.azure.com/user_impersonation"));//dette scope siger at API må logge ind og bruge rettigheder på vegne af den indloggede bruger!!!
+        tokenRequestContext.setScopes(Collections.singletonList("https://management.azure.com/.default"));//dette scope siger at API må logge ind og bruge rettigheder på vegne af den indloggede bruger!!!
 
         // Use the credential to get an access token
         String accessTokenManagement = Objects.requireNonNull(credential.getToken(tokenRequestContext).block()).getToken();
@@ -47,41 +74,9 @@ public class AzureLogin {
 
         profile =new AzureProfile(tenantId, clientId, AzureEnvironment.AZURE);
 
-        buildCredentialsKeyVault();
+        setLoginStatusTrue();
 
     }
-
-    public static void buildCredentialsKeyVault() {
-
-    //do the same to obtain rights for key vault
-    InteractiveBrowserCredential credentialKeyVault = new InteractiveBrowserCredentialBuilder()
-            .tenantId(tenantId)
-            .clientId(clientId)
-            .build();
-
-        // Set the scopes for which the access token is requested
-    TokenRequestContext tokenRequestContextKeyVault = new TokenRequestContext();
-
-    //set the scope for the credential
-        tokenRequestContextKeyVault.setScopes(Collections.singletonList("https://vault.azure.net/user_impersonation"));//dette scope siger at API må logge ind og bruge rettigheder på vegne af den indloggede bruger!!!
-
-    // Use the credential to get an access token
-    String accessTokenKeyVault = Objects.requireNonNull(credentialKeyVault.getToken(tokenRequestContextKeyVault).block()).getToken();
-    tokenCredentialKeyVault =tokenRequestContext2 ->Mono.just(new
-
-    AccessToken(accessTokenKeyVault, OffsetDateTime.now().
-
-    plusHours(1)));
-
-    setLoginStatusTrue();
-}
-
-public static void setLoginEnvironmentVariables(){
-    System.setProperty("AZURE_CLIENT_ID", clientId);
-    System.setProperty("AZURE_CLIENT_SECRET", "value2");
-    System.setProperty("AZURE_TENANT_ID", tenantId);
-}
-
 
 public static void setLoginStatusTrue (){
     loginStatus = true;
@@ -104,7 +99,10 @@ public static void setLoginStatusTrue (){
 
     private static void startLogin() {
         System.out.println("Getting token credential and profile...");
-        buildCredentials();//husk at logge ind
+        buildCredentialsKeyVault();//husk at logge ind til keyVault først
+        //after this we should build Credentials for resourcemanagement
+        buildCredentialsResourceManagement();
+
         System.out.println("Authenticating...");
         azure = AzureResourceManager.configure() //få denne class til at authenticate med tokencredential og profile fra AzureLogin classen
                 .withLogLevel(HttpLogDetailLevel.BASIC)
