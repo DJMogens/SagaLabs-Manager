@@ -15,7 +15,7 @@ public class SQLController extends MenuController{
     public Label sqlstatus;
 
     public void ConnectToSQL(ActionEvent event) throws IOException, SQLException {
-        if (Database.sqlLoginCheck()){
+        if (Database.sqlLogin()){
             sqlstatus.setText("SQL connection: Working");
             sqlstatus.setTextFill(Color.GREEN);
         }

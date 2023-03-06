@@ -3,14 +3,12 @@ package com.example.sagalabsmanager.controllers;
 import com.azure.resourcemanager.compute.models.VirtualMachine;
 import com.azure.resourcemanager.containerservice.models.OSType;
 import com.azure.resourcemanager.resources.models.ResourceGroup;
-import com.example.sagalabsmanager.AzureLogin;
-import com.example.sagalabsmanager.AzureMethods;
-import com.example.sagalabsmanager.MachinesTab;
-import com.example.sagalabsmanager.MachinesVM;
+import com.example.sagalabsmanager.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class VMsController extends MenuController {
@@ -20,14 +18,15 @@ public class VMsController extends MenuController {
 
     public static ArrayList<MachinesTab> machinesTabs = new ArrayList<MachinesTab>();
 
-    public void initialize() {
+    public void initialize() throws SQLException {
         initializeTabs();
     }
 
-    private void initializeTabs() {
+    private void initializeTabs() throws SQLException {
         // Creates tab for all
         machinesTabs.add(new MachinesTab(allTab, allTableView));
         showAllMachines();
+        Database.syncLabs();
 
         for(ResourceGroup lab: AzureMethods.getAllLabs(AzureLogin.azure)) {
             // Creates tab
