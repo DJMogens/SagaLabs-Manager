@@ -16,32 +16,11 @@ public class Database {
     private static final String DB_URL = "jdbc:mysql://sagadb.sagalabs.dk:42069/sagadb";
     private static final String dbUsername = "sagalabs-manager";
     static String dbPassword = AzureMethods.getKeyVaultSecret("sagalabs-manager-SQL-pw");
-    public static boolean sqlLogin() throws SQLException {
-        Connection conn = null;
-        // Open a connection
-        System.out.println("Connecting to database...");
-        conn = DriverManager.getConnection(DB_URL, dbUsername, dbPassword);
-        {
-            try {
-                if (conn != null) {
-                    conn.close();
-                    return true;
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return false;
-        }
-    }
 
     public static void syncLabs() throws SQLException {
         Connection conn = DriverManager.getConnection(DB_URL, dbUsername, dbPassword);
         List<ResourceGroup> labs = AzureLogin.azure.resourceGroups().listByTag("lab", "true").stream().toList();
 
-        String truncateSql = "TRUNCATE TABLE Labs";
-        PreparedStatement truncateStmt = conn.prepareStatement(truncateSql);
-        truncateStmt.executeUpdate();
-        int id = 0;
         for (ResourceGroup lab : labs) {
             String labName = lab.name();
             String labID = lab.id();
@@ -56,40 +35,34 @@ public class Database {
                     break;
                 }
             }
-
-            String sql = "INSERT INTO Labs (LabName,LabID,id,VmCount,LabVPN) VALUES (?,?,?,?,?)";
+            //insert vars into database, or update if a key is duplicated
+            String sql = "INSERT INTO Labs (LabName,LabID,VmCount,LabVPN) VALUES (?,?,?,?)"+
+                    "ON DUPLICATE KEY UPDATE LabName=VALUES(LabName), LabVPN=VALUES(LabVPN), VmCount=VALUES(VmCount)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, labName);
             stmt.setString(2, labID);
-            stmt.setInt(3, id);
-            stmt.setInt(4, vmCount);
-            stmt.setString(5, vpnPublicIp);
+            stmt.setInt(3, vmCount);
+            stmt.setString(4, vpnPublicIp);
             stmt.executeUpdate();
-            id++;
         }
     }
 
     public static void syncVM() throws SQLException {
         Connection conn = DriverManager.getConnection(DB_URL, dbUsername, dbPassword);
 
-        List<ResourceGroup> labs = AzureLogin.azure.resourceGroups().listByTag("lab", "true").stream().toList();
-
-        //refresh database
-        String truncateSql = "TRUNCATE TABLE vm";
-        PreparedStatement truncateStmt = conn.prepareStatement(truncateSql);
-        truncateStmt.executeUpdate();
-
         //for each resourcegroup that it a lab; for each virtual machine
         for (ResourceGroup rg : AzureLogin.azure.resourceGroups().listByTag("lab", "true")) {
 
             // Get all virtual machines in the resource group
             for (VirtualMachine vm : AzureLogin.azure.virtualMachines().listByResourceGroup(rg.name())) {
-                String sql = "INSERT INTO vm (vm_name, powerstate, internal_ip, ostype) VALUES (?,?,?,?)";
+                //insert vars into database, or update if a key is duplicated
+                String sql = "INSERT INTO vm (vm_name, powerstate, internal_ip, ostype) VALUES (?,?,?,?) " +
+                        "ON DUPLICATE KEY UPDATE powerstate=VALUES(powerstate), internal_ip=VALUES(internal_ip), ostype=VALUES(ostype)";
                 PreparedStatement stmt = conn.prepareStatement(sql);
                 stmt.setString(1, vm.name());
                 stmt.setString(2, vm.powerState().toString());
-                stmt.setString(3, vm.osType().toString());
-                stmt.setString(4, vm.getPrimaryNetworkInterface().primaryPrivateIP());
+                stmt.setString(3, vm.getPrimaryNetworkInterface().primaryPrivateIP());
+                stmt.setString(4, vm.osType().toString());
                 stmt.executeUpdate();
             }
         }
