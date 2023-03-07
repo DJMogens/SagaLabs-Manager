@@ -1,0 +1,26 @@
+<component name="libraryTable">
+  <library name="com.azure:azure-sdk-bom" type="repository">
+    <properties maven-id="com.azure.resourcemanager:azure-resourcemanager-keyvault:2.21.0" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/azure-resourcemanager-keyvault-2.21.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/azure-resourcemanager-resources-2.21.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/azure-core-1.34.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-annotations-2.13.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-core-2.13.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-databind-2.13.4.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-datatype-jsr310-2.13.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jackson-dataformat-xml-2.13.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/stax2-api-4.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/woodstox-core-6.4.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.7.36.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/reactor-core-3.4.23.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/reactive-streams-1.0.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/azure-core-management-1.9.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/azure-resourcemanager-authorization-2.21.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/azure-security-keyvault-keys-4.5.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/azure-security-keyvault-secrets-4.5.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<BorderPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sagalabsmanagerclient.controllers.VMsController">
+   <center>
+       <TabPane fx:id="tabPane" prefHeight="1080.0" prefWidth="1100.0" stylesheets="@Stylesheet.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+           <Tab fx:id="allTab" text="All">
+               <content>
+                   <TableView fx:id="allTableView" prefHeight="450.0" prefWidth="397.0">
+                       <columns>
+                           <TableColumn fx:id="selectColumn" prefWidth="50">
+                               <cellValueFactory >
+                                   <PropertyValueFactory property="select"/>
+                               </cellValueFactory>
+                           </TableColumn>
+                           <TableColumn fx:id="idColumn" prefWidth="400.0" text="ID">
+                               <cellValueFactory>
+                                   <PropertyValueFactory property="id"/>
+                               </cellValueFactory>
+                           </TableColumn>
+                           <TableColumn fx:id="vmColumn" prefWidth="450.0" text="Machine Name">
+                               <cellValueFactory>
+                                   <PropertyValueFactory property="vmName"/>
+                               </cellValueFactory>
+                           </TableColumn>
+                           <TableColumn fx:id="osColumn" prefWidth="100.0" text="OS">
+                               <cellValueFactory>
+                                   <PropertyValueFactory property="os"/>
+                               </cellValueFactory>
+                           </TableColumn>
+                           <TableColumn fx:id="stateColumn" prefWidth="99.0" text="State">
+                               <cellValueFactory>
+                                   <PropertyValueFactory property="state"/>
+                               </cellValueFactory>
+                           </TableColumn>
+                       </columns>
+                   </TableView>
+               </content>
+           </Tab>
+       </TabPane>
+   </center>
+   <left>
+      <VBox alignment="TOP_RIGHT" prefHeight="1080.0" prefWidth="280.0" styleClass="root2" BorderPane.alignment="CENTER">
+         <children>
+            <Region prefHeight="100.0" prefWidth="280.0" />
+                <Button mnemonicParsing="false" onAction="#home" prefHeight="100.0" prefWidth="240.0" styleClass="button3" text="Home">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Button>
+            <Region prefHeight="50.0" prefWidth="280.0" />
+                <Button mnemonicParsing="false" onAction="#switchToMachine" prefHeight="100.0" prefWidth="240.0" styleClass="button3" text="Machines">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Button>
+            <Region prefHeight="50.0" prefWidth="280.0" />
+                <Button mnemonicParsing="false" onAction="#switchToSQL" prefHeight="100.0" prefWidth="240.0" styleClass="button3" text="SQL Connect">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+   </left>
+   <right>
+      <VBox alignment="TOP_CENTER" prefHeight="1080.0" prefWidth="540.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="TOP_RIGHT">
+               <children>
+                    <Button mnemonicParsing="false" onAction="#logout" prefHeight="73.0" prefWidth="174.0" styleClass="button1" text="Logout">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <Region prefHeight="106.0" prefWidth="540.0" />
+            <HBox alignment="CENTER" prefHeight="123.0" prefWidth="384.0">
+               <children>
+                  <TextField prefHeight="75.0" prefWidth="369.0" promptText="Filter">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </TextField>
+                  <Region prefHeight="200.0" prefWidth="20.0" />
+                  <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="120.0" text="Apply">
+                     <styleClass>
+                        <String fx:value="button" />
+                        <String fx:value="button1" />
+                     </styleClass>
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <TextArea prefHeight="480.0" prefWidth="519.0" promptText="Type command to run on selected machines:" style="-fx-background-color: 55;" styleClass="text-area" stylesheets="@Stylesheet.css">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </TextArea>
+            <Region prefHeight="30.0" prefWidth="540.0" />
+            <Button mnemonicParsing="false" prefHeight="65.0" prefWidth="134.0" styleClass="button1" text="Run">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+   </right>
+</BorderPane>

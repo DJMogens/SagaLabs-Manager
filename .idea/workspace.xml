@@ -4,253 +4,234 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84f66384-4295-4a51-8bf3-97a943c2f250" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Server/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Server/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/SagaLabs_Manager.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/apache_logging_log4j_slf4j_impl.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/azure_identity.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/azure_resourcemanager.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/azure_resourcemanager_compute.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/ch_qos_logback_classic.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/com_azure_azure_sdk_bom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/javafx_sdk_19_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/slf4j_api.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Changes.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Changes/commons-net-3.9.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Changes/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/AzureLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/AzureLogin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/AzureMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/AzureMethods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/MachinesTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/MachinesTab.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/MachinesVM.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/MachinesVM.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/ViewSwitcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/ViewSwitcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/HomeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/SQLController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/SQLController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/VMsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/VMsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Home.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/SQL.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/SQL.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/VMs.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/VMs.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/accessors-smart-2.4.8.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/asm-9.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-core-1.34.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-core-1.35.01.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-core-1.36.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-core-http-netty-1.12.81.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-core-http-netty-1.13.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-core-management-1.10.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-core-management-1.9.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-identity-1.8.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-2.21.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-2.24.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-appplatform-2.21.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-appplatform-2.24.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-appservice-2.21.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-appservice-2.24.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-authorization-2.21.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-authorization-2.24.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-cdn-2.21.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-cdn-2.24.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-compute-2.21.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-compute-2.24.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-containerinstance-2.21.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-containerinstance-2.24.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-containerregistry-2.21.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-containerregistry-2.24.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-containerservice-2.21.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-containerservice-2.24.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-cosmos-2.21.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-cosmos-2.24.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-dns-2.21.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-dns-2.24.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-eventhubs-2.21.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-eventhubs-2.24.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-keyvault-2.21.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-keyvault-2.24.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-monitor-2.21.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-monitor-2.24.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-msi-2.21.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-msi-2.24.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-network-2.21.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-network-2.24.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-privatedns-2.21.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-privatedns-2.24.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-redis-2.21.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-redis-2.24.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-resources-2.21.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-resources-2.24.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-search-2.21.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-search-2.24.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-servicebus-2.21.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-servicebus-2.24.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-sql-2.21.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-sql-2.24.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-storage-2.21.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-storage-2.24.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-trafficmanager-2.21.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-trafficmanager-2.24.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-security-keyvault-keys-4.5.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-security-keyvault-keys-4.5.3.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-security-keyvault-secrets-4.5.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-security-keyvault-secrets-4.5.3.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-security-keyvault-secrets-4.5.31.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-storage-common-12.19.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-storage-common-12.19.3.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-storage-file-share-12.16.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/azure-storage-file-share-12.16.3.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/commons-net-3.8.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/commons-net-3.9.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/content-type-2.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/http-20070405.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/izpack-dist-5.1.3.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jackson-annotations-2.13.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jackson-annotations-2.13.41.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jackson-core-2.13.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jackson-core-2.13.41.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jackson-databind-2.13.4.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jackson-databind-2.13.4.21.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jackson-dataformat-xml-2.13.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jackson-dataformat-xml-2.13.41.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jackson-datatype-jsr310-2.13.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jackson-datatype-jsr310-2.13.41.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jcip-annotations-1.0-1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jna-5.5.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/jna-platform-5.6.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/json-smart-2.4.8.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/lang-tag-1.6.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/log4j-1.2-api-2.19.01.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/log4j-1.2-api-2.19.011.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/log4j-api-2.19.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/log4j-api-2.19.01.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/log4j-api-2.19.011.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/log4j-core-2.19.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/log4j-core-2.19.01.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/log4j-core-2.19.011.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/log4j-slf4j-impl-2.19.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/log4j-to-slf4j-2.19.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/logback-classic-1.4.5.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/logback-core-1.4.5.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/msal4j-1.13.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/msal4j-1.13.5.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/msal4j-persistence-extension-1.1.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/mysql-connector-j-8.0.32.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/mysql-connector-java-8.0.30.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-buffer-4.1.86.Final1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-buffer-4.1.87.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-codec-4.1.86.Final1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-codec-4.1.87.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-codec-dns-4.1.86.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-codec-dns-4.1.86.Final1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-codec-http-4.1.86.Final1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-codec-http-4.1.87.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-codec-http2-4.1.86.Final1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-codec-http2-4.1.87.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-codec-socks-4.1.86.Final1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-codec-socks-4.1.87.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-common-4.1.86.Final1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-common-4.1.87.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-handler-4.1.86.Final1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-handler-4.1.87.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-handler-proxy-4.1.86.Final1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-handler-proxy-4.1.87.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-resolver-4.1.86.Final1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-resolver-4.1.87.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-resolver-dns-4.1.86.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-resolver-dns-4.1.86.Final1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-resolver-dns-classes-macos-4.1.86.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-resolver-dns-classes-macos-4.1.86.Final1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-resolver-dns-native-macos-4.1.86.Final-osx-x86_64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-resolver-dns-native-macos-4.1.86.Final-osx-x86_641.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-boringssl-static-2.0.54.Final-linux-aarch_641.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-boringssl-static-2.0.54.Final-linux-x86_641.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-boringssl-static-2.0.54.Final-osx-aarch_641.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-boringssl-static-2.0.54.Final-osx-x86_641.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-boringssl-static-2.0.54.Final-windows-x86_641.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-boringssl-static-2.0.54.Final1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-boringssl-static-2.0.56.Final-linux-aarch_64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-boringssl-static-2.0.56.Final-linux-x86_64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-boringssl-static-2.0.56.Final-osx-aarch_64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-boringssl-static-2.0.56.Final-osx-x86_64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-boringssl-static-2.0.56.Final-windows-x86_64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-boringssl-static-2.0.56.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-classes-2.0.54.Final1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-classes-2.0.56.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-transport-4.1.86.Final1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-transport-4.1.87.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-transport-classes-epoll-4.1.86.Final1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-transport-classes-epoll-4.1.87.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-transport-classes-kqueue-4.1.86.Final1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-transport-classes-kqueue-4.1.87.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-transport-native-epoll-4.1.86.Final-linux-x86_641.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-transport-native-epoll-4.1.87.Final-linux-x86_64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-transport-native-kqueue-4.1.86.Final-osx-x86_641.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-transport-native-kqueue-4.1.87.Final-osx-x86_64.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-transport-native-unix-common-4.1.86.Final1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/netty-transport-native-unix-common-4.1.87.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/nimbus-jose-jwt-9.22.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/oauth2-oidc-sdk-9.35.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/org.liveSense.fragment.sun.misc-1.0.5.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/protobuf-java-3.19.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/protobuf-java-3.21.9.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/reactive-streams-1.0.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/reactive-streams-1.0.41.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/reactor-core-3.4.23.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/reactor-core-3.4.26.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/reactor-core-3.4.261.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/reactor-netty-core-1.0.261.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/reactor-netty-core-1.0.27.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/reactor-netty-http-1.0.261.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/reactor-netty-http-1.0.27.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/slf4j-api-1.7.25.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/slf4j-api-1.7.36.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/slf4j-api-1.7.361.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/slf4j-api-2.0.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/stax2-api-4.2.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/stax2-api-4.2.11.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/woodstox-core-6.4.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/woodstox-core-6.4.01.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/SagaLabs_Manager_jar/SagaLabs-Manager.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/Application.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/AzureLogin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/AzureMethods.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/Database.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/MachinesTab.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/MachinesVM.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/View.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/ViewSwitcher.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/controllers/HomeController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/controllers/LoginController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/controllers/MenuController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/controllers/SQLController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/controllers/VMsController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/Home.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/Login.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/SQL.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/Stylesheet.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/VMs.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/log4j2.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/logback.xml" beforeDir="false" />
+    <list default="true" id="84f66384-4295-4a51-8bf3-97a943c2f250" name="Changes" comment="Refactor code">
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/.idea/artifacts/SagaLabs_Manager.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/.idea/libraries/apache_logging_log4j_slf4j_impl.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/.idea/libraries/azure_identity.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/.idea/libraries/azure_resourcemanager.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/.idea/libraries/azure_resourcemanager_compute.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/.idea/libraries/ch_qos_logback_classic.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/.idea/libraries/com_azure_azure_sdk_bom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/.idea/libraries/javafx_sdk_19_0_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/.idea/libraries/slf4j_api.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/.idea/shelf/Changes.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/.idea/shelf/Changes/commons-net-3.9.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/.idea/shelf/Changes/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/accessors-smart-2.4.8.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/asm-9.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-core-1.34.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-core-1.35.01.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-core-1.36.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-core-http-netty-1.12.81.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-core-http-netty-1.13.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-core-management-1.10.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-core-management-1.9.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-identity-1.8.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-appplatform-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-appplatform-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-appservice-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-appservice-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-authorization-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-authorization-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-cdn-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-cdn-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-compute-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-compute-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-containerinstance-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-containerinstance-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-containerregistry-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-containerregistry-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-containerservice-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-containerservice-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-cosmos-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-cosmos-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-dns-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-dns-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-eventhubs-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-eventhubs-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-keyvault-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-keyvault-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-monitor-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-monitor-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-msi-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-msi-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-network-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-network-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-privatedns-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-privatedns-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-redis-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-redis-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-resources-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-resources-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-search-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-search-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-servicebus-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-servicebus-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-sql-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-sql-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-storage-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-storage-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-trafficmanager-2.21.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-resourcemanager-trafficmanager-2.24.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-security-keyvault-keys-4.5.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-security-keyvault-keys-4.5.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-security-keyvault-secrets-4.5.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-security-keyvault-secrets-4.5.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-security-keyvault-secrets-4.5.31.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-storage-common-12.19.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-storage-common-12.19.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-storage-file-share-12.16.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/azure-storage-file-share-12.16.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/commons-net-3.8.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/commons-net-3.9.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/content-type-2.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/http-20070405.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/izpack-dist-5.1.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/jackson-annotations-2.13.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/jackson-annotations-2.13.41.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/jackson-core-2.13.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/jackson-core-2.13.41.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/jackson-databind-2.13.4.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/jackson-databind-2.13.4.21.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/jackson-dataformat-xml-2.13.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/jackson-dataformat-xml-2.13.41.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/jackson-datatype-jsr310-2.13.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/jackson-datatype-jsr310-2.13.41.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/jcip-annotations-1.0-1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/jna-5.5.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/jna-platform-5.6.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/json-smart-2.4.8.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/lang-tag-1.6.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/log4j-1.2-api-2.19.01.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/log4j-1.2-api-2.19.011.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/log4j-api-2.19.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/log4j-api-2.19.01.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/log4j-api-2.19.011.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/log4j-core-2.19.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/log4j-core-2.19.01.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/log4j-core-2.19.011.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/log4j-slf4j-impl-2.19.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/log4j-to-slf4j-2.19.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/logback-classic-1.4.5.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/logback-core-1.4.5.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/msal4j-1.13.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/msal4j-1.13.5.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/msal4j-persistence-extension-1.1.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/mysql-connector-j-8.0.32.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/mysql-connector-java-8.0.30.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-buffer-4.1.86.Final1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-buffer-4.1.87.Final.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-codec-4.1.86.Final1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-codec-4.1.87.Final.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-codec-dns-4.1.86.Final.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-codec-dns-4.1.86.Final1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-codec-http-4.1.86.Final1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-codec-http-4.1.87.Final.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-codec-http2-4.1.86.Final1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-codec-http2-4.1.87.Final.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-codec-socks-4.1.86.Final1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-codec-socks-4.1.87.Final.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-common-4.1.86.Final1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-common-4.1.87.Final.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-handler-4.1.86.Final1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-handler-4.1.87.Final.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-handler-proxy-4.1.86.Final1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-handler-proxy-4.1.87.Final.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-resolver-4.1.86.Final1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-resolver-4.1.87.Final.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-resolver-dns-4.1.86.Final.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-resolver-dns-4.1.86.Final1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-resolver-dns-classes-macos-4.1.86.Final.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-resolver-dns-classes-macos-4.1.86.Final1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-resolver-dns-native-macos-4.1.86.Final-osx-x86_64.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-resolver-dns-native-macos-4.1.86.Final-osx-x86_641.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-tcnative-boringssl-static-2.0.54.Final-linux-aarch_641.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-tcnative-boringssl-static-2.0.54.Final-linux-x86_641.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-tcnative-boringssl-static-2.0.54.Final-osx-aarch_641.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-tcnative-boringssl-static-2.0.54.Final-osx-x86_641.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-tcnative-boringssl-static-2.0.54.Final-windows-x86_641.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-tcnative-boringssl-static-2.0.54.Final1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-tcnative-boringssl-static-2.0.56.Final-linux-aarch_64.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-tcnative-boringssl-static-2.0.56.Final-linux-x86_64.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-tcnative-boringssl-static-2.0.56.Final-osx-aarch_64.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-tcnative-boringssl-static-2.0.56.Final-osx-x86_64.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-tcnative-boringssl-static-2.0.56.Final-windows-x86_64.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-tcnative-boringssl-static-2.0.56.Final.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-tcnative-classes-2.0.54.Final1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-tcnative-classes-2.0.56.Final.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-transport-4.1.86.Final1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-transport-4.1.87.Final.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-transport-classes-epoll-4.1.86.Final1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-transport-classes-epoll-4.1.87.Final.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-transport-classes-kqueue-4.1.86.Final1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-transport-classes-kqueue-4.1.87.Final.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-transport-native-epoll-4.1.86.Final-linux-x86_641.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-transport-native-epoll-4.1.87.Final-linux-x86_64.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-transport-native-kqueue-4.1.86.Final-osx-x86_641.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-transport-native-kqueue-4.1.87.Final-osx-x86_64.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-transport-native-unix-common-4.1.86.Final1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/netty-transport-native-unix-common-4.1.87.Final.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/nimbus-jose-jwt-9.22.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/oauth2-oidc-sdk-9.35.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/org.liveSense.fragment.sun.misc-1.0.5.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/protobuf-java-3.19.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/protobuf-java-3.21.9.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/reactive-streams-1.0.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/reactive-streams-1.0.41.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/reactor-core-3.4.23.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/reactor-core-3.4.26.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/reactor-core-3.4.261.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/reactor-netty-core-1.0.261.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/reactor-netty-core-1.0.27.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/reactor-netty-http-1.0.261.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/reactor-netty-http-1.0.27.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/slf4j-api-1.7.25.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/slf4j-api-1.7.36.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/slf4j-api-1.7.361.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/slf4j-api-2.0.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/stax2-api-4.2.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/stax2-api-4.2.11.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/woodstox-core-6.4.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/lib/woodstox-core-6.4.01.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/out/artifacts/SagaLabs_Manager_jar/SagaLabs-Manager.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/module-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/Application.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/AzureLogin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/AzureMethods.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/Database.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/MachinesTab.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/MachinesVM.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/View.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/ViewSwitcher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/HomeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/LoginController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/MenuController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/SQLController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/VMsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Home.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Login.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/SQL.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Stylesheet.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/VMs.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/log4j2.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/logback.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -292,6 +273,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "run.code.analysis.last.selected.profile": "pProject Default",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -366,11 +348,23 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1678196865792</updated>
-      <workItem from="1678196868516" duration="326000" />
+      <workItem from="1678196868516" duration="435000" />
     </task>
+    <task id="LOCAL-00001" summary="Refactor code">
+      <created>1678197258021</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1678197258021</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Refactor code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor code" />
   </component>
 </project>
