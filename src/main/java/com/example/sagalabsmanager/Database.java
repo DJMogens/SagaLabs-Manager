@@ -1,5 +1,6 @@
 package com.example.sagalabsmanager;
 
+import com.azure.resourcemanager.compute.models.VirtualMachine;
 import com.azure.resourcemanager.network.models.PublicIpAddress;
 import com.azure.resourcemanager.resources.models.ResourceGroup;
 
@@ -69,7 +70,33 @@ public class Database {
             stmt.executeUpdate();
             id++;
         }
+        syncVM();
 
-        System.out.println(labs);
+    }
+
+    public static void syncVM() throws SQLException {
+        Connection conn = DriverManager.getConnection(DB_URL, dbUsername, dbPassword);
+
+        List<ResourceGroup> labs = azure.resourceGroups().listByTag("lab", "true").stream().toList();
+
+        //refresh database
+        String truncateSql = "TRUNCATE TABLE vm";
+        PreparedStatement truncateStmt = conn.prepareStatement(truncateSql);
+        truncateStmt.executeUpdate();
+
+        //for each resourcegroup that it a lab; for each virtual machine
+        for (ResourceGroup rg : azure.resourceGroups().listByTag("lab", "true")) {
+
+            // Get all virtual machines in the resource group
+            for (VirtualMachine vm : azure.virtualMachines().listByResourceGroup(rg.name())) {
+                String sql = "INSERT INTO vm (vm_name, powerstate, internal_ip, ostype) VALUES (?,?,?,?)";
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                stmt.setString(1, vm.name());
+                stmt.setString(2, vm.powerState().toString());
+                stmt.setString(3, vm.osType().toString());
+                stmt.setString(4, vm.getPrimaryNetworkInterface().primaryPrivateIP());
+                stmt.executeUpdate();
+            }
+        }
     }
 }
