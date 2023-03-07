@@ -66,12 +66,17 @@ public class VMsController extends MenuController {
         vmColumn.setCellValueFactory(new PropertyValueFactory<>("vmName"));
 
         TableColumn<MachinesVM, OSType> osColumn = new TableColumn<MachinesVM, OSType>("OS");
-        osColumn.setPrefWidth(199.0);
+        osColumn.setPrefWidth(100.0);
         osColumn.setCellValueFactory(new PropertyValueFactory<>("os"));
+
+        TableColumn<MachinesVM, String> stateColumn = new TableColumn<MachinesVM, String>("State");
+        stateColumn.setPrefWidth(99.0);
+        stateColumn.setCellValueFactory(new PropertyValueFactory<>("state"));
 
         tableView.getColumns().add(idColumn);
         tableView.getColumns().add(vmColumn);
         tableView.getColumns().add(osColumn);
+        tableView.getColumns().add(stateColumn);
     }
 
     private void selectTab() {
@@ -80,7 +85,14 @@ public class VMsController extends MenuController {
                 // For lab, when selected
                 if(machinesTab.getResourceGroup() != null && machinesTab.getTableView().getItems().isEmpty()) {
                     for(VirtualMachine vm: AzureMethods.getVMsInLab(machinesTab.resourceGroup)) {
-                        machinesTab.getTableView().getItems().add(new MachinesVM(vm.vmId(), vm.name(), vm.osType()));
+                        String powerState;
+                        if(vm.powerState().toString() == "PowerState/deallocated") {
+                            powerState = "OFF";
+                        }
+                        else {
+                            powerState = "ON";
+                        }
+                        machinesTab.getTableView().getItems().add(new MachinesVM(vm.vmId(), vm.name(), vm.osType(), powerState));
                     }
                 }
                 // For 'ALL' tab
@@ -93,7 +105,14 @@ public class VMsController extends MenuController {
     private void showAllMachines() {
         for(ResourceGroup resourceGroup: AzureMethods.getAllLabs(AzureLogin.azure)) {
             for(VirtualMachine vm: AzureMethods.getVMsInLab(resourceGroup)) {
-                allTableView.getItems().add(new MachinesVM(vm.vmId(), vm.name(), vm.osType()));
+                String powerState;
+                if(vm.powerState().toString() == "PowerState/deallocated") {
+                    powerState = "OFF";
+                }
+                else {
+                    powerState = "ON";
+                }
+                allTableView.getItems().add(new MachinesVM(vm.vmId(), vm.name(), vm.osType(), powerState));
             }
         }
     }
