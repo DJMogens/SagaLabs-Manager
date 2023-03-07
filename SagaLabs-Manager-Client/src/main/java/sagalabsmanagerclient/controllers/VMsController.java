@@ -26,7 +26,6 @@ public class VMsController extends MenuController {
         // Creates tab for all
         machinesTabs.add(new MachinesTab(allTab, allTableView));
         showAllMachines();
-        Database.syncLabs();
 
         for(ResourceGroup lab: AzureMethods.getAllLabs(AzureLogin.azure)) {
             // Creates tab
