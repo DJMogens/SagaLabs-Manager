@@ -82,26 +82,29 @@ public class VMsController extends MenuController {
     }
 
     private void selectTab() {
-        for(MachinesTab machinesTab: machinesTabs) {
-            if(machinesTab.getTab().isSelected()) {
-                // For lab, when selected
-                if(machinesTab.getResourceGroup() != null && machinesTab.getTableView().getItems().isEmpty()) {
-                    for(VirtualMachine vm: AzureMethods.getVMsInLab(machinesTab.resourceGroup)) {
-                        String powerState;
-                        if(vm.powerState().toString() == "PowerState/deallocated") {
-                            powerState = "OFF";
-                        }
-                        else {
-                            powerState = "ON";
-                        }
-                        machinesTab.getTableView().getItems().add(new MachinesVM(vm.vmId(), vm.name(), vm.osType(), powerState));
-                    }
-                }
-                // For 'ALL' tab
-                else if (allTableView.getItems().isEmpty()) {
-                    showAllMachines();
-                }
+        MachinesTab machinesTab = machinesTabs.get(0);
+        for(MachinesTab tab: machinesTabs) {
+            if(tab.getTab().isSelected()) {
+                machinesTab = tab;
+                break;
             }
+        }
+        // For lab, when selected
+        if(machinesTab.getResourceGroup() != null && machinesTab.getTableView().getItems().isEmpty()) {
+            for(VirtualMachine vm: AzureMethods.getVMsInLab(machinesTab.resourceGroup)) {
+                String powerState;
+                if(vm.powerState().toString() == "PowerState/deallocated") {
+                    powerState = "OFF";
+                }
+                else {
+                    powerState = "ON";
+                }
+                machinesTab.getTableView().getItems().add(new MachinesVM(vm.vmId(), vm.name(), vm.osType(), powerState));
+            }
+        }
+        // For 'ALL' tab
+        else if (allTableView.getItems().isEmpty()) {
+            showAllMachines();
         }
     }
     private void showAllMachines() {
@@ -118,4 +121,23 @@ public class VMsController extends MenuController {
             }
         }
     }
+
+    // METHOD TO RETURN VMs WITH CHECKMARK. Currently returns MachinesVM objects.
+    private ArrayList<MachinesVM> getSelectedVMs() {
+        MachinesTab machinesTab = machinesTabs.get(0); // By default all tab
+        ArrayList<MachinesVM> machineList = new ArrayList<MachinesVM>();
+        for(MachinesTab tab: machinesTabs) {
+            if(tab.getTab().isSelected()) {
+                machinesTab = tab;
+                break;
+            }
+        }
+        for (MachinesVM vm :machinesTab.getTableView().getItems()) {
+            if(vm.getSelected()) {
+                machineList.add(vm);
+            }
+        }
+        return machineList;
+    }
+
 }
