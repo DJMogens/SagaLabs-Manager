@@ -4,102 +4,309 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b089e97c-aa5e-4c34-9465-a8c5eddd34ac" name="Changes" comment="Exclude signatures attempt">
+    <list default="true" id="84f66384-4295-4a51-8bf3-97a943c2f250" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Server/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Server/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/SagaLabs_Manager.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/apache_logging_log4j_slf4j_impl.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/azure_identity.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/azure_resourcemanager.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/azure_resourcemanager_compute.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/ch_qos_logback_classic.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/com_azure_azure_sdk_bom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/javafx_sdk_19_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/slf4j_api.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Changes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Changes/commons-net-3.9.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Changes/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/MachinesLabTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/MachinesTab.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/MachinesVM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/MachinesVM.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/controllers/VMsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/controllers/VMsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/AzureLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/AzureLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/AzureMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/AzureMethods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/MachinesTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/MachinesTab.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/MachinesVM.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/MachinesVM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/ViewSwitcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/ViewSwitcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/HomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/HomeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/SQLController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/SQLController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/VMsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/VMsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Home.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/SQL.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/SQL.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/VMs.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/VMs.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/accessors-smart-2.4.8.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/asm-9.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-core-1.34.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-core-1.35.01.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-core-1.36.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-core-http-netty-1.12.81.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-core-http-netty-1.13.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-core-management-1.10.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-core-management-1.9.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-identity-1.8.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-2.21.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-2.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-appplatform-2.21.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-appplatform-2.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-appservice-2.21.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-appservice-2.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-authorization-2.21.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-authorization-2.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-cdn-2.21.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-cdn-2.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-compute-2.21.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-compute-2.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-containerinstance-2.21.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-containerinstance-2.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-containerregistry-2.21.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-containerregistry-2.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-containerservice-2.21.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-containerservice-2.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-cosmos-2.21.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-cosmos-2.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-dns-2.21.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-dns-2.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-eventhubs-2.21.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-eventhubs-2.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-keyvault-2.21.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-keyvault-2.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-monitor-2.21.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-monitor-2.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-msi-2.21.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-msi-2.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-network-2.21.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-network-2.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-privatedns-2.21.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-privatedns-2.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-redis-2.21.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-redis-2.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-resources-2.21.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-resources-2.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-search-2.21.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-search-2.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-servicebus-2.21.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-servicebus-2.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-sql-2.21.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-sql-2.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-storage-2.21.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-storage-2.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-trafficmanager-2.21.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-resourcemanager-trafficmanager-2.24.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-security-keyvault-keys-4.5.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-security-keyvault-keys-4.5.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-security-keyvault-secrets-4.5.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-security-keyvault-secrets-4.5.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-security-keyvault-secrets-4.5.31.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-storage-common-12.19.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-storage-common-12.19.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-storage-file-share-12.16.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/azure-storage-file-share-12.16.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/commons-net-3.8.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/commons-net-3.9.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/content-type-2.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/http-20070405.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/izpack-dist-5.1.3.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jackson-annotations-2.13.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jackson-annotations-2.13.41.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jackson-core-2.13.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jackson-core-2.13.41.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jackson-databind-2.13.4.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jackson-databind-2.13.4.21.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jackson-dataformat-xml-2.13.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jackson-dataformat-xml-2.13.41.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jackson-datatype-jsr310-2.13.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jackson-datatype-jsr310-2.13.41.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jcip-annotations-1.0-1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jna-5.5.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/jna-platform-5.6.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/json-smart-2.4.8.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/lang-tag-1.6.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/log4j-1.2-api-2.19.01.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/log4j-1.2-api-2.19.011.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/log4j-api-2.19.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/log4j-api-2.19.01.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/log4j-api-2.19.011.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/log4j-core-2.19.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/log4j-core-2.19.01.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/log4j-core-2.19.011.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/log4j-slf4j-impl-2.19.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/log4j-to-slf4j-2.19.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/logback-classic-1.4.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/logback-core-1.4.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/msal4j-1.13.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/msal4j-1.13.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/msal4j-persistence-extension-1.1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/mysql-connector-j-8.0.32.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/mysql-connector-java-8.0.30.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-buffer-4.1.86.Final1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-buffer-4.1.87.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-codec-4.1.86.Final1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-codec-4.1.87.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-codec-dns-4.1.86.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-codec-dns-4.1.86.Final1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-codec-http-4.1.86.Final1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-codec-http-4.1.87.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-codec-http2-4.1.86.Final1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-codec-http2-4.1.87.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-codec-socks-4.1.86.Final1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-codec-socks-4.1.87.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-common-4.1.86.Final1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-common-4.1.87.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-handler-4.1.86.Final1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-handler-4.1.87.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-handler-proxy-4.1.86.Final1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-handler-proxy-4.1.87.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-resolver-4.1.86.Final1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-resolver-4.1.87.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-resolver-dns-4.1.86.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-resolver-dns-4.1.86.Final1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-resolver-dns-classes-macos-4.1.86.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-resolver-dns-classes-macos-4.1.86.Final1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-resolver-dns-native-macos-4.1.86.Final-osx-x86_64.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-resolver-dns-native-macos-4.1.86.Final-osx-x86_641.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-boringssl-static-2.0.54.Final-linux-aarch_641.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-boringssl-static-2.0.54.Final-linux-x86_641.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-boringssl-static-2.0.54.Final-osx-aarch_641.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-boringssl-static-2.0.54.Final-osx-x86_641.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-boringssl-static-2.0.54.Final-windows-x86_641.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-boringssl-static-2.0.54.Final1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-boringssl-static-2.0.56.Final-linux-aarch_64.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-boringssl-static-2.0.56.Final-linux-x86_64.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-boringssl-static-2.0.56.Final-osx-aarch_64.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-boringssl-static-2.0.56.Final-osx-x86_64.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-boringssl-static-2.0.56.Final-windows-x86_64.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-boringssl-static-2.0.56.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-classes-2.0.54.Final1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-tcnative-classes-2.0.56.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-transport-4.1.86.Final1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-transport-4.1.87.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-transport-classes-epoll-4.1.86.Final1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-transport-classes-epoll-4.1.87.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-transport-classes-kqueue-4.1.86.Final1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-transport-classes-kqueue-4.1.87.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-transport-native-epoll-4.1.86.Final-linux-x86_641.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-transport-native-epoll-4.1.87.Final-linux-x86_64.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-transport-native-kqueue-4.1.86.Final-osx-x86_641.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-transport-native-kqueue-4.1.87.Final-osx-x86_64.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-transport-native-unix-common-4.1.86.Final1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/netty-transport-native-unix-common-4.1.87.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/nimbus-jose-jwt-9.22.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/oauth2-oidc-sdk-9.35.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/org.liveSense.fragment.sun.misc-1.0.5.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/protobuf-java-3.19.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/protobuf-java-3.21.9.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/reactive-streams-1.0.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/reactive-streams-1.0.41.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/reactor-core-3.4.23.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/reactor-core-3.4.26.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/reactor-core-3.4.261.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/reactor-netty-core-1.0.261.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/reactor-netty-core-1.0.27.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/reactor-netty-http-1.0.261.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/reactor-netty-http-1.0.27.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/slf4j-api-1.7.25.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/slf4j-api-1.7.36.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/slf4j-api-1.7.361.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/slf4j-api-2.0.4.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/stax2-api-4.2.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/stax2-api-4.2.11.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/woodstox-core-6.4.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/woodstox-core-6.4.01.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/SagaLabs_Manager_jar/SagaLabs-Manager.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/AzureLogin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/AzureMethods.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/Database.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/MachinesTab.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/MachinesVM.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/View.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/ViewSwitcher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/controllers/HomeController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/controllers/LoginController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/controllers/MenuController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/controllers/SQLController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/sagalabsmanager/controllers/VMsController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/Home.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/Login.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/SQL.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/Stylesheet.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/VMs.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/log4j2.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/sagalabsmanager/logback.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="CodeInsightWorkspaceSettings">
-    <option name="optimizeImportsOnTheFly" value="true" />
-  </component>
-  <component name="CodeStyleSettingsInfer">
-    <option name="done" value="true" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="FxmlFile" />
-        <option value="JavaFXApplication" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
     <option name="importingSettings">
       <MavenImportingSettings>
         <option name="workspaceImportEnabled" value="true" />
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectCodeStyleSettingsMigration">
-    <option name="version" value="2" />
-  </component>
-  <component name="ProjectId" id="2LltxtvS8SHcl0vDVARS1fGqY2y" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="2MgkyEOY23X32vrQuo8QUX6Z76T" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+    <option name="showVisibilityIcons" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Downloaded.Files.Path.Enabled": "true",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Sofie/IdeaProjects/test",
+    "jdk.selected.JAVA_MODULE": "openjdk-19",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15584415",
-    "project.structure.side.proportion": "0.4699074",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="ReactorSettings">
-    <option name="notificationShown" value="true" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\git\SagaLabs-Manager\src\main\resources\com\example\sagalabsmanager" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Application.Application">
+  <component name="RunManager">
     <configuration default="true" type="AZURE_FUNCTION_SUPPORT" factoryName="Run Functions">
       <option name="appName" />
       <option name="appServicePlanName" />
       <option name="appServicePlanResourceGroup" />
-      <option name="appSettingsKey" value="d0be5b10-248e-461f-b525-60c1b786b552" />
+      <option name="appSettingsKey" value="0dda8fb1-cb31-48bf-93ac-fa4064df5e74" />
       <option name="artifact" />
-      <option name="autoPort" value="true" />
       <option name="debugOptions" />
       <option name="deployment" />
       <option name="deploymentStagingDirectoryPath" />
       <option name="funcPath" />
-      <option name="funcPort" value="0" />
+      <option name="functionHostArguments" />
       <option name="hostJsonPath" />
       <option name="insightsName" />
       <option name="instrumentationKey" />
@@ -119,25 +326,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Application" type="Application" factoryName="Application" nameIsGenerated="true">
+    <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.sagalabsmanager.Application" />
-      <module name="SagaLabs-Manager" />
+      <module name="SagaLabs-Manager-Client" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.sagalabsmanager.controllers.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AzureLogin" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.sagalabsmanager.AzureLogin" />
-      <module name="SagaLabs-Manager" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.sagalabsmanager.controllers.*" />
+          <option name="PATTERN" value="com.example.sagalabsmanager.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -146,130 +340,37 @@
       </method>
     </configuration>
     <configuration default="true" type="JetRunConfigurationType">
-      <module name="Sagalabs Manager" />
+      <module name="SagaLabs-Manager-Client" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="Sagalabs Manager" />
+      <module name="SagaLabs-Manager-Client" />
       <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SagaLabs-Manager [clean]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
-      <MavenSettings>
-        <option name="myGeneralSettings" />
-        <option name="myRunnerSettings" />
-        <option name="myRunnerParameters">
-          <MavenRunnerParameters>
-            <option name="profiles">
-              <set />
-            </option>
-            <option name="goals">
-              <list>
-                <option value="clean" />
-              </list>
-            </option>
-            <option name="pomFileName" />
-            <option name="profilesMap">
-              <map />
-            </option>
-            <option name="resolveToWorkspace" value="false" />
-            <option name="workingDirPath" value="$PROJECT_DIR$" />
-          </MavenRunnerParameters>
-        </option>
-      </MavenSettings>
-      <method v="2" />
-    </configuration>
-    <list>
-      <item itemvalue="Application.Application" />
-      <item itemvalue="Application.AzureLogin" />
-      <item itemvalue="Maven.SagaLabs-Manager [clean]" />
-    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.AzureLogin" />
+        <item itemvalue="Application.Application" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b089e97c-aa5e-4c34-9465-a8c5eddd34ac" name="Changes" comment="" />
-      <created>1676457751239</created>
+      <changelist id="84f66384-4295-4a51-8bf3-97a943c2f250" name="Changes" comment="" />
+      <created>1678196865792</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1676457751239</updated>
-      <workItem from="1676457752412" duration="4120000" />
-      <workItem from="1676463361710" duration="5834000" />
-      <workItem from="1676479076165" duration="9945000" />
-      <workItem from="1676490376758" duration="4207000" />
-      <workItem from="1676532786684" duration="11420000" />
-      <workItem from="1676624276640" duration="2578000" />
-      <workItem from="1676630303133" duration="9480000" />
-      <workItem from="1676877942782" duration="3959000" />
-      <workItem from="1677245647411" duration="5254000" />
+      <updated>1678196865792</updated>
+      <workItem from="1678196868516" duration="326000" />
     </task>
-    <task id="LOCAL-00001" summary="Authenticate with Azure and list resources to STOUT">
-      <created>1676553276575</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1676553276575</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Authenticate with Azure and list resources to STOUT">
-      <created>1676553502484</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1676553502484</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Add all libraries">
-      <created>1676626647669</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1676626647669</updated>
-    </task>
-    <task id="LOCAL-00004" summary="New login format with token, profile and scope set.">
-      <created>1676642240194</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1676642240194</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Smol change in libraries">
-      <created>1676879690837</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1676879690837</updated>
-    </task>
-    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Authenticate with Azure and list resources to STOUT" />
-    <MESSAGE value="Add all libraries" />
-    <MESSAGE value="New login format with token, profile and scope set." />
-    <MESSAGE value="Smol change in libraries" />
-    <option name="LAST_COMMIT_MESSAGE" value="Smol change in libraries" />
   </component>
 </project>
