@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84f66384-4295-4a51-8bf3-97a943c2f250" name="Changes" comment="Refactor code">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Server/src/main/java/sagalabsmanagerserver/AzureLogin.java" afterDir="false" />
+    <list default="true" id="84f66384-4295-4a51-8bf3-97a943c2f250" name="Changes" comment="Added Login to server application">
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Server/src/main/java/sagalabsmanagerserver/AzureMethods.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Server/src/main/java/sagalabsmanagerserver/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Server/src/main/java/sagalabsmanagerserver/AzureLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Server/src/main/java/sagalabsmanagerserver/AzureLogin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Server/src/main/java/sagalabsmanagerserver/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Server/src/main/java/sagalabsmanagerserver/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,6 +73,11 @@
     ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="sagalabsmanagerserver" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.Main">
     <configuration default="true" type="AZURE_FUNCTION_SUPPORT" factoryName="Run Functions">
       <option name="appName" />
@@ -165,7 +170,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1678196865792</updated>
-      <workItem from="1678196868516" duration="3147000" />
+      <workItem from="1678196868516" duration="5280000" />
     </task>
     <task id="LOCAL-00001" summary="Refactor code">
       <created>1678197258021</created>
@@ -181,7 +186,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678197393344</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added Login to server application">
+      <created>1678200291035</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1678200291035</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,6 +201,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Refactor code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor code" />
+    <MESSAGE value="Added Login to server application" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Login to server application" />
   </component>
 </project>

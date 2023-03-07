@@ -30,7 +30,7 @@ public class AzureLogin {
 
 
         public static void buildCredentialsFromEnvironment() {
-
+            System.out.println("Authenticating...");
             //makes sure that non-secret environment variables is set
             System.setProperty("AZURE_CLIENT_ID", clientId);
             System.setProperty("AZURE_TENANT_ID", tenantId);
@@ -47,6 +47,7 @@ public class AzureLogin {
             ResourceManager azure = ResourceManager
                     .authenticate(tokenCredential, profile)
                     .withSubscription(subscriptionId);
+            System.out.println("Authenticated successfully");
         }
 
 
@@ -54,8 +55,7 @@ public class AzureLogin {
             System.out.println("Getting token credential and profile...");
             buildCredentialsFromEnvironment();//husk at logge ind
             //after this we should build Credentials for resourcemanagement
-            System.out.println("Authenticating...");
-            azure = AzureResourceManager.configure() //få denne class til at authenticate med tokencredential og profile fra AzureLogin classen
+            azure = AzureResourceManager.configure() //få denne class til at authenticate med token credential og profile fra AzureLogin classen
                     .withLogLevel(HttpLogDetailLevel.BASIC)
                     .authenticate(tokenCredential, profile)
                     .withSubscription(subscriptionId);
