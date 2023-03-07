@@ -1,5 +1,6 @@
 package com.example.sagalabsmanager;
 
+import com.azure.resourcemanager.network.models.PublicIpAddress;
 import com.azure.resourcemanager.resources.models.ResourceGroup;
 
 import java.sql.Connection;
@@ -46,11 +47,25 @@ public class Database {
         for (ResourceGroup lab : labs) {
             String labName = lab.name();
             String labID = lab.id();
-            String sql = "INSERT INTO Labs (LabName,LabID,id) VALUES (?,?,?)";
+            int vmCount = azure.virtualMachines().listByResourceGroup(labName).stream().toList().size();
+            List<PublicIpAddress> publicIps = azure.publicIpAddresses().listByResourceGroup(labName).stream().toList();
+            //iterate over all public ip's in each lab, and find the ip that is contains VPN in the name
+            String vpnPublicIp = "No public IP";
+            for (PublicIpAddress publicIp : publicIps) {
+                String publicIpName = publicIp.name();
+                if (publicIpName.contains("VPN")) {
+                    vpnPublicIp = publicIp.ipAddress();
+                    break;
+                }
+            }
+
+            String sql = "INSERT INTO Labs (LabName,LabID,id,VmCount,LabVPN) VALUES (?,?,?,?,?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, labName);
             stmt.setString(2, labID);
             stmt.setInt(3, id);
+            stmt.setInt(4, vmCount);
+            stmt.setString(5, vpnPublicIp);
             stmt.executeUpdate();
             id++;
         }

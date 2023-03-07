@@ -53,7 +53,7 @@ public class AzureLogin {
                 plusHours(1)));
     }
 
-    private static void buildCredentialsResourceManagement() {
+    public static void buildCredentialsResourceManagement() {
         // Set the Azure tenant ID and client ID
         // Build the interactive browser credential
         ClientSecretCredential credential = new ClientSecretCredentialBuilder()
@@ -75,7 +75,6 @@ public class AzureLogin {
         profile =new AzureProfile(tenantId, clientId, AzureEnvironment.AZURE);
 
         setLoginStatusTrue();
-
     }
 
 public static void setLoginStatusTrue (){
@@ -108,7 +107,8 @@ public static void setLoginStatusTrue (){
                 .withLogLevel(HttpLogDetailLevel.BASIC)
                 .authenticate(tokenCredential, profile)
                 .withSubscription(subscriptionId);
-        System.out.println(azure);
+
+
     }
 
     private static void checkLogin(Thread azureLoginThread) {
