@@ -67,8 +67,6 @@ public class Database {
             stmt.executeUpdate();
             id++;
         }
-        syncVM();
-
     }
 
     public static void syncVM() throws SQLException {
