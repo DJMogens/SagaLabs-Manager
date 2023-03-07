@@ -26,7 +26,7 @@ public class Main {
                     }
                     System.out.println("Synced Labs table");
                     try {
-                        Thread.sleep(30000);
+                        Thread.sleep(5000);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
@@ -49,7 +49,7 @@ public class Main {
                     }
                     System.out.println("Synced vm table");
                     try {
-                        Thread.sleep(30000);
+                        Thread.sleep(5000);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
