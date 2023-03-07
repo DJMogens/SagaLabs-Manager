@@ -1,5 +1,6 @@
 package sagalabsmanagerserver;
 
+import com.azure.resourcemanager.compute.models.PowerState;
 import com.azure.resourcemanager.compute.models.VirtualMachine;
 import com.azure.resourcemanager.network.models.PublicIpAddress;
 import com.azure.resourcemanager.resources.models.ResourceGroup;
@@ -60,6 +61,12 @@ public class Database {
                         "ON DUPLICATE KEY UPDATE powerstate=VALUES(powerstate), internal_ip=VALUES(internal_ip), ostype=VALUES(ostype)";
                 PreparedStatement stmt = conn.prepareStatement(sql);
                 stmt.setString(1, vm.name());
+                PowerState powerState = vm.powerState();
+                if (powerState != null) {
+                    stmt.setString(2, powerState.toString());
+                } else {
+                    stmt.setString(2, "");
+                }
                 stmt.setString(2, vm.powerState().toString());
                 stmt.setString(3, vm.getPrimaryNetworkInterface().primaryPrivateIP());
                 stmt.setString(4, vm.osType().toString());
