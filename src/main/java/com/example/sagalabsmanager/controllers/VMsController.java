@@ -8,10 +8,7 @@ import com.example.sagalabsmanager.AzureMethods;
 import com.example.sagalabsmanager.MachinesTab;
 import com.example.sagalabsmanager.MachinesVM;
 import javafx.fxml.FXML;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.ArrayList;
@@ -57,8 +54,12 @@ public class VMsController extends MenuController {
     }
 
     private void initializeColumns(TableView<MachinesVM> tableView) {
+        TableColumn<MachinesVM, CheckBox> selectColumn = new TableColumn<MachinesVM, CheckBox>();
+        selectColumn.setPrefWidth(50.0);
+        selectColumn.setCellValueFactory(new PropertyValueFactory<>("select"));
+
         TableColumn<MachinesVM, String> idColumn = new TableColumn<MachinesVM, String>("ID");
-        idColumn.setPrefWidth(450.0);
+        idColumn.setPrefWidth(400.0);
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
 
         TableColumn<MachinesVM, String> vmColumn = new TableColumn<MachinesVM, String>("Machine Name");
@@ -73,6 +74,7 @@ public class VMsController extends MenuController {
         stateColumn.setPrefWidth(99.0);
         stateColumn.setCellValueFactory(new PropertyValueFactory<>("state"));
 
+        tableView.getColumns().add(selectColumn);
         tableView.getColumns().add(idColumn);
         tableView.getColumns().add(vmColumn);
         tableView.getColumns().add(osColumn);

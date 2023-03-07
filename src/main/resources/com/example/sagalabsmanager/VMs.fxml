@@ -2,7 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.String?>
@@ -13,7 +13,12 @@
                <content>
                    <TableView fx:id="allTableView" prefHeight="450.0" prefWidth="397.0">
                        <columns>
-                           <TableColumn fx:id="idColumn" prefWidth="450.0" text="ID">
+                           <TableColumn fx:id="selectColumn" prefWidth="50">
+                               <cellValueFactory >
+                                   <PropertyValueFactory property="select"/>
+                               </cellValueFactory>
+                           </TableColumn>
+                           <TableColumn fx:id="idColumn" prefWidth="400.0" text="ID">
                                <cellValueFactory>
                                    <PropertyValueFactory property="id"/>
                                </cellValueFactory>
