@@ -47,7 +47,7 @@ public class VMsController extends MenuController {
 
     private void setTabSelectionAction() {
         for(MachinesTab tab: machinesTabs) {
-           tab.getTab().setOnSelectionChanged(e -> selectTab());
+           tab.getTab().setOnSelectionChanged(e -> selectTab(tab));
         }
     }
 
@@ -79,14 +79,7 @@ public class VMsController extends MenuController {
         tableView.getColumns().add(stateColumn);
     }
 
-    private void selectTab() {
-        MachinesTab machinesTab = machinesTabs.get(0);
-        for(MachinesTab tab: machinesTabs) {
-            if(tab.getTab().isSelected()) {
-                machinesTab = tab;
-                break;
-            }
-        }
+    private void selectTab(MachinesTab machinesTab) {
         // For lab, when selected
         if(machinesTab.getResourceGroup() != null && machinesTab.getTableView().getItems().isEmpty()) {
             for(VirtualMachine vm: AzureMethods.getVMsInLab(machinesTab.resourceGroup)) {
@@ -102,6 +95,7 @@ public class VMsController extends MenuController {
         }
         // For 'ALL' tab
         else if (allTableView.getItems().isEmpty()) {
+            System.out.println("Showing for ALL");
             showAllMachines();
         }
     }
