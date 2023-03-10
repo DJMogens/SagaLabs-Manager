@@ -17,9 +17,19 @@ public class Database {
     private static final String DB_URL = "jdbc:mysql://sagadb.sagalabs.dk:42069/sagadb";
     private static final String dbUsername = "sagalabs-manager";
     static String dbPassword = AzureMethods.getKeyVaultSecret("sagalabs-manager-SQL-pw");
+    static Connection conn;
+
+    static {
+        try {
+            conn = DriverManager.getConnection(DB_URL, dbUsername, dbPassword);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static void syncLabs() throws SQLException {
-        Connection conn = DriverManager.getConnection(DB_URL, dbUsername, dbPassword);
+        String tableName = "Labs";
+
         List<ResourceGroup> labs = AzureLogin.azure.resourceGroups().listByTag("lab", "true").stream().toList();
 
         for (ResourceGroup lab : labs) {
@@ -46,11 +56,11 @@ public class Database {
             stmt.setString(4, vpnPublicIp);
             stmt.executeUpdate();
         }
+        updateLastUpdate(tableName);
     }
 
     public static void syncVM() throws SQLException {
-        Connection conn = DriverManager.getConnection(DB_URL, dbUsername, dbPassword);
-
+        String tableName = "vm"; // replace with the actual table name
         //for each resourcegroup that it a lab; for each virtual machine
         for (ResourceGroup rg : AzureLogin.azure.resourceGroups().listByTag("lab", "true")) {
 
@@ -59,6 +69,7 @@ public class Database {
                 //insert vars into database, or update if a key is duplicated
                 String sql = "INSERT INTO vm (vm_name, powerstate, internal_ip, ostype) VALUES (?,?,?,?) " +
                         "ON DUPLICATE KEY UPDATE powerstate=VALUES(powerstate), internal_ip=VALUES(internal_ip), ostype=VALUES(ostype)";
+
                 PreparedStatement stmt = conn.prepareStatement(sql);
                 stmt.setString(1, vm.name());
                 PowerState powerState = vm.powerState();
@@ -72,6 +83,17 @@ public class Database {
                 stmt.setString(4, vm.osType().toString());
                 stmt.executeUpdate();
             }
+            updateLastUpdate(tableName);
         }
+
     }
+    public static void updateLastUpdate(String tableName) throws SQLException {
+        String sql = "INSERT INTO last_updated (table_name, last_update) VALUES (?, NOW()) " +
+                "ON DUPLICATE KEY UPDATE last_update=NOW()";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, tableName);
+        stmt.executeUpdate();
+    }
+
+
 }
