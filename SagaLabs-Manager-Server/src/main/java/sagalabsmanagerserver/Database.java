@@ -83,6 +83,7 @@ public class Database {
                 stmt.setString(4, vm.osType().toString());
                 stmt.setString(5, vm.resourceGroupName());
                 stmt.executeUpdate();
+                System.out.println(vm.resourceGroupName());
             }
             updateLastUpdate(tableName);
         }
