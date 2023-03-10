@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.control.cell.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
 <BorderPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sagalabsmanagerclient.controllers.VMsController">
    <center>
        <TabPane fx:id="tabPane" prefHeight="1080.0" prefWidth="1100.0" stylesheets="@Stylesheet.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
@@ -14,28 +24,28 @@
                    <TableView fx:id="allTableView" prefHeight="450.0" prefWidth="397.0">
                        <columns>
                            <TableColumn fx:id="selectColumn" prefWidth="50">
-                               <cellValueFactory >
-                                   <PropertyValueFactory property="select"/>
+                               <cellValueFactory>
+                                   <PropertyValueFactory property="select" />
                                </cellValueFactory>
                            </TableColumn>
                            <TableColumn fx:id="idColumn" prefWidth="400.0" text="ID">
                                <cellValueFactory>
-                                   <PropertyValueFactory property="id"/>
+                                   <PropertyValueFactory property="id" />
                                </cellValueFactory>
                            </TableColumn>
                            <TableColumn fx:id="vmColumn" prefWidth="450.0" text="Machine Name">
                                <cellValueFactory>
-                                   <PropertyValueFactory property="vmName"/>
+                                   <PropertyValueFactory property="vmName" />
                                </cellValueFactory>
                            </TableColumn>
                            <TableColumn fx:id="osColumn" prefWidth="100.0" text="OS">
                                <cellValueFactory>
-                                   <PropertyValueFactory property="os"/>
+                                   <PropertyValueFactory property="os" />
                                </cellValueFactory>
                            </TableColumn>
                            <TableColumn fx:id="stateColumn" prefWidth="99.0" text="State">
                                <cellValueFactory>
-                                   <PropertyValueFactory property="state"/>
+                                   <PropertyValueFactory property="state" />
                                </cellValueFactory>
                            </TableColumn>
                        </columns>
@@ -61,6 +71,12 @@
             </Button>
             <Region prefHeight="50.0" prefWidth="280.0" />
                 <Button mnemonicParsing="false" onAction="#switchToSQL" prefHeight="100.0" prefWidth="240.0" styleClass="button3" text="SQL Connect">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Button>
+            <Region layoutX="10.0" layoutY="360.0" prefHeight="50.0" prefWidth="280.0" />
+            <Button layoutX="50.0" layoutY="411.0" mnemonicParsing="false" onAction="#switchToVPN" prefHeight="100.0" prefWidth="240.0" styleClass="button3" text="VPN">
                <font>
                   <Font size="33.0" />
                </font>

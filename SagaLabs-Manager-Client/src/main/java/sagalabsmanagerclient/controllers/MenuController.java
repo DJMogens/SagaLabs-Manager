@@ -24,4 +24,7 @@ public class MenuController {
     public void switchToSQL(ActionEvent event) throws IOException {
         ViewSwitcher.switchView(View.SQLSCENE);
     }
+    public void switchToVPN(ActionEvent event) throws IOException {
+        ViewSwitcher.switchView(View.VPN);
+    }
 }

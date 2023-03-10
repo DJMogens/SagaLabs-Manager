@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sagalabsmanagerclient.controllers.VPNController">
+   <center>
+      <TabPane fx:id="tabPane" prefHeight="1080.0" prefWidth="1100.0" stylesheets="@Stylesheet.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+         <tabs>
+            <Tab fx:id="overviewTab" text="Overview">
+               <content>
+                  <TableView fx:id="overviewTableView" prefHeight="450.0" prefWidth="397.0">
+                     <columns>
+                        <TableColumn fx:id="selectColumn" prefWidth="50">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="select" />
+                           </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="idColumn" prefWidth="400.0" text="Name">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="id" />
+                           </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="accountStatusColumn" prefWidth="450.0" text="Account Status">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="vmName" />
+                           </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="connectionsColumn" prefWidth="195.2000732421875" text="Connections">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="state" />
+                           </cellValueFactory>
+                        </TableColumn>
+                     </columns>
+                  </TableView>
+               </content>
+            </Tab>
+            <Tab fx:id="adminTab" text="Admin">
+               <content>
+                  <TableView fx:id="adminTableview" prefHeight="450.0" prefWidth="397.0">
+                     <columns>
+                        <TableColumn fx:id="selectColumn1" prefWidth="50">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="select" />
+                           </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="idColumnAdmin" prefWidth="400.0" text="Name">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="id" />
+                           </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="adminStateColumn1" prefWidth="100.0" text="State">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="os" />
+                           </cellValueFactory>
+                        </TableColumn>
+                        <TableColumn fx:id="activateDeactivateColumn" prefWidth="546.3999633789062" text="Activate / Deactivate">
+                           <cellValueFactory>
+                              <PropertyValueFactory property="state" />
+                           </cellValueFactory>
+                        </TableColumn>
+                     </columns>
+                  </TableView>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </center>
+   <left>
+      <VBox alignment="TOP_RIGHT" prefHeight="1080.0" prefWidth="280.0" styleClass="root2" BorderPane.alignment="CENTER">
+         <children>
+            <Region prefHeight="100.0" prefWidth="280.0" />
+            <Button mnemonicParsing="false" onAction="#home" prefHeight="100.0" prefWidth="240.0" styleClass="button3" text="Home">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Button>
+            <Region prefHeight="50.0" prefWidth="280.0" />
+            <Button mnemonicParsing="false" onAction="#switchToMachine" prefHeight="100.0" prefWidth="240.0" styleClass="button3" text="Machines">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Button>
+            <Region prefHeight="50.0" prefWidth="280.0" />
+            <Button mnemonicParsing="false" onAction="#switchToSQL" prefHeight="100.0" prefWidth="240.0" styleClass="button3" text="SQL Connect">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Button>
+            <Region layoutX="10.0" layoutY="360.0" prefHeight="50.0" prefWidth="280.0" />
+            <Button layoutX="50.0" layoutY="411.0" mnemonicParsing="false" onAction="#switchToVPN" prefHeight="100.0" prefWidth="240.0" styleClass="button3" text="VPN">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+   </left>
+   <right>
+      <VBox alignment="TOP_CENTER" prefHeight="1080.0" prefWidth="540.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="TOP_RIGHT">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#logout" prefHeight="73.0" prefWidth="174.0" styleClass="button1" text="Logout">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="123.0" prefWidth="384.0">
+               <children>
+                  <TextField prefHeight="75.0" prefWidth="369.0" promptText="New User Name">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </TextField>
+                  <Region prefHeight="200.0" prefWidth="20.0" />
+                  <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="120.0" text="Create">
+                     <styleClass>
+                        <String fx:value="button" />
+                        <String fx:value="button1" />
+                     </styleClass>
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <Region prefHeight="136.0" prefWidth="540.0" />
+            <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="120.0" text="Lab 1">
+               <styleClass>
+                  <String fx:value="button" />
+                  <String fx:value="button1" />
+               </styleClass>
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Button>
+            <Region prefHeight="50.0" prefWidth="280.0" />
+            <Button layoutX="220.0" layoutY="248.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="120.0" text="Lab 2">
+               <styleClass>
+                  <String fx:value="button" />
+                  <String fx:value="button1" />
+               </styleClass>
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Button>
+            <Region layoutX="10.0" layoutY="323.0" prefHeight="50.0" prefWidth="280.0" />
+            <Button layoutX="220.0" layoutY="323.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="120.0" text="Lab 3">
+               <styleClass>
+                  <String fx:value="button" />
+                  <String fx:value="button1" />
+               </styleClass>
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Button>
+            <Region layoutX="10.0" layoutY="448.0" prefHeight="50.0" prefWidth="280.0" />
+         </children>
+      </VBox>
+   </right>
+</BorderPane>
