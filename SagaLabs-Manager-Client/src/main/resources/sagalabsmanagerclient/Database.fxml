@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sagalabsmanagerclient.controllers.SQLController">
+<BorderPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sagalabsmanagerclient.controllers.DatabaseController">
    <center>
       <VBox alignment="CENTER" prefHeight="1080.0" prefWidth="1448.0">
          <children>
@@ -28,7 +28,7 @@
             </Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="sqlButtonConnect" mnemonicParsing="false" onAction="#ConnectToSQL" prefHeight="74.0" prefWidth="353.0" styleClass="button1" stylesheets="@Stylesheet.css" text="Test Connection">
+                  <Button fx:id="sqlButtonConnect" mnemonicParsing="false" onAction="#ConnectToDatabase" prefHeight="74.0" prefWidth="353.0" styleClass="button1" stylesheets="@Stylesheet.css" text="Test Connection">
                      <font>
                         <Font size="33.0" />
                      </font>

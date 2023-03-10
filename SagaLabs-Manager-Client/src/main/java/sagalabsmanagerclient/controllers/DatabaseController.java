@@ -9,12 +9,12 @@ import javafx.scene.paint.Color;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class SQLController extends MenuController{
+public class DatabaseController extends MenuController{
 
     @FXML
     public Label sqlstatus;
 
-    public void ConnectToSQL(ActionEvent event) throws IOException, SQLException {
+    public void ConnectToDatabase(ActionEvent event) throws IOException, SQLException {
         if (Database.sqlLogin()){
             sqlstatus.setText("SQL connection: Working");
             sqlstatus.setTextFill(Color.GREEN);
