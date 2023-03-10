@@ -4,9 +4,9 @@ public enum View {
     //ENUM types for opening fxml files with the ViewSwitcher function
     LOGIN("Login.fxml"),
     HOME("Home.fxml"),
-    SQLSCENE("SQL.fxml"),
+    SQLSCENE("Database.fxml"),
     VPN("Vpn.fxml"),
-    MACHINES("VMs.fxml");
+    MACHINES("Machines.fxml");
 
 
     private String fileName;
