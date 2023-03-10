@@ -1,6 +1,7 @@
 package sagalabsmanagerclient;
 
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -15,13 +16,13 @@ public class Application extends javafx.application.Application {
 
         ViewSwitcher.setScene(scene);
         ViewSwitcher.switchView(View.LOGIN);
+        Image icon = new Image(getClass().getResource("Images/FDCA_icon.png").openStream());
+        stage.getIcons().add(icon);
         stage.setMaximized(true);
         stage.setScene(scene);
         stage.setTitle("SagaLabs-Manager");
         stage.show();
     }
-
-
 
     public static void main(String[] args) {
         launch();
