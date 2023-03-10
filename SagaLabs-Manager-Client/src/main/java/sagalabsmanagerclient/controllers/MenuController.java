@@ -1,6 +1,7 @@
 package sagalabsmanagerclient.controllers;
 
 import sagalabsmanagerclient.AzureLogin;
+import sagalabsmanagerclient.VPNAdmin;
 import sagalabsmanagerclient.View;
 import sagalabsmanagerclient.ViewSwitcher;
 import javafx.event.ActionEvent;
@@ -26,5 +27,6 @@ public class MenuController {
     }
     public void switchToVPN(ActionEvent event) throws IOException {
         ViewSwitcher.switchView(View.VPN);
+        VPNAdmin.listUsers();
     }
 }
