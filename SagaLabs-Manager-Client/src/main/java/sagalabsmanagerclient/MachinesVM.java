@@ -10,7 +10,7 @@ public class MachinesVM {
     private String os;
     private String state;
 
-    public MachinesVM(String id, String vmName, OperatingSystemTypes os, String state) {
+    public MachinesVM(String id, String vmName, String os, String state) {
         this.select = new CheckBox("");
         this.id = id;
         this.vmName = vmName;

@@ -19,13 +19,15 @@ public class VMsController extends MenuController {
     public static ArrayList<MachinesTab> machinesTabs = new ArrayList<MachinesTab>();
 
     public void initialize() throws SQLException {
+        Database.login();
         initializeTabs();
     }
 
     private void initializeTabs() throws SQLException {
         // Creates tab for all
         machinesTabs.add(new MachinesTab(allTab, allTableView));
-        showAllMachines();
+        System.out.println("HERE");
+        selectTab(machinesTabs.get(0));
 
         for(ResourceGroup lab: AzureMethods.getAllLabs(AzureLogin.azure)) {
             // Creates tab
@@ -47,7 +49,13 @@ public class VMsController extends MenuController {
 
     private void setTabSelectionAction() {
         for(MachinesTab tab: machinesTabs) {
-           tab.getTab().setOnSelectionChanged(e -> selectTab(tab));
+            tab.getTab().setOnSelectionChanged(e -> {
+                try {
+                    selectTab(tab);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
         }
     }
 
@@ -79,24 +87,18 @@ public class VMsController extends MenuController {
         tableView.getColumns().add(stateColumn);
     }
 
-    private void selectTab(MachinesTab machinesTab) {
-        // For lab, when selected
-        if(machinesTab.getResourceGroup() != null && machinesTab.getTableView().getItems().isEmpty()) {
-            for(VirtualMachine vm: AzureMethods.getVMsInLab(machinesTab.resourceGroup)) {
-                String powerState;
-                if(vm.powerState().toString() == "PowerState/deallocated") {
-                    powerState = "OFF";
-                }
-                else {
-                    powerState = "ON";
-                }
-                machinesTab.getTableView().getItems().add(new MachinesVM(vm.vmId(), vm.name(), vm.osType(), powerState));
+    private void selectTab(MachinesTab machinesTab) throws SQLException {
+        if(machinesTab.getTableView().getItems().isEmpty()) {
+            String resourceGroupName;
+            try {
+                resourceGroupName = machinesTab.resourceGroup.name();
             }
-        }
-        // For 'ALL' tab
-        else if (allTableView.getItems().isEmpty()) {
-            System.out.println("Showing for ALL");
-            showAllMachines();
+            catch (NullPointerException e) {
+                resourceGroupName = "ALL";
+            }
+            for (MachinesVM machinesVM : Database.getMachines(resourceGroupName)) {
+                machinesTab.getTableView().getItems().add(machinesVM);
+            }
         }
     }
     private void showAllMachines() {
@@ -109,7 +111,7 @@ public class VMsController extends MenuController {
                 else {
                     powerState = "ON";
                 }
-                allTableView.getItems().add(new MachinesVM(vm.vmId(), vm.name(), vm.osType(), powerState));
+                allTableView.getItems().add(new MachinesVM(vm.vmId(), vm.name(), vm.osType().toString(), powerState.substring(0, 10)));
             }
         }
     }

@@ -6,6 +6,7 @@ import com.azure.resourcemanager.resources.models.ResourceGroup;
 
 import javax.xml.transform.Result;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Database {
@@ -25,10 +26,17 @@ public class Database {
             }
             return false;
     }
-    public static void getMachines() throws SQLException {
+    public static ArrayList<MachinesVM> getMachines(String resourceGroup) throws SQLException {
+        ArrayList<MachinesVM> machinesVMs = new ArrayList<MachinesVM>();
         System.out.println("GETTING MACHINES FROM DATABASE");
         Statement statement = conn.createStatement();
-        String sql = "SELECT * FROM sagadb.vm";
+        String sql;
+        if(resourceGroup == "ALL") {
+            sql = "SELECT * FROM sagadb.vm";
+        }
+        else {
+            sql = "SELECT * FROM sagadb.vm WHERE vm_name LIKE '"+resourceGroup+"%'" ;
+        }
         ResultSet resultSet = statement.executeQuery(sql);
 
         ResultSetMetaData metaData = resultSet.getMetaData();
@@ -40,11 +48,18 @@ public class Database {
         }
         System.out.print("\n");
         while (resultSet.next()) {
+            machinesVMs.add(new MachinesVM(
+                    resultSet.getObject("id").toString(),
+                    resultSet.getObject("vm_name").toString(),
+                    resultSet.getObject("ostype").toString(),
+                    resultSet.getObject("powerstate").toString().substring(11)));
+            /*
             for (int i = 1; i < columns + 1; i++) {
                 System.out.print(resultSet.getObject(i) + "  ");
             }
-            System.out.print("\n");
+            System.out.print("\n");*/
         }
         conn.close();
+        return machinesVMs;
     }
 }
