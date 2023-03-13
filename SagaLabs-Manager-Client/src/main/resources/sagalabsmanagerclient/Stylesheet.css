@@ -23,11 +23,16 @@
     -fx-background-radius: 55 0 0 55;
     -fx-border-radius: 55 0 0 55;
 }
+.button4 {
+    -fx-background-radius: 55 0 0 55;
+    -fx-border-radius: 55 0 0 55;
+    -fx-border-color: #b500ff;
+}
 
 .button:hover{-fx-background-color: #737373;}
 .button:pressed{
     -fx-background-color: #b3b3b3;
-    -fx-border-color: #ffffff;
+    -fx-border-color: #b500ff;
 }
 
 .label {
@@ -167,4 +172,155 @@
 }
 .table-view > .column-header-background .nested-column-header > .column-header > GridPane {
     -fx-background-color: transparent;
+}
+
+/********************************** Table View "body"  *************************************/
+
+.table-cell {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 1em;  /* 12 */
+    -fx-alignment: center-left;
+
+    -fx-border-width: 0;
+}
+
+.table-row-cell:even{
+    -fx-background-color: rgba(24, 24, 24, 0.4);
+}
+.table-row-cell:odd{
+    -fx-background-color: rgba(17, 17, 17, 0.22);
+}
+
+.table-cell:filled:hover {
+    -fx-background-color: #454545;
+}
+
+.table-cell .text {
+    -fx-fill: #919191;
+}
+
+.table-cell:hover .text {
+    -fx-fill: #c7c7c7;
+}
+
+/* hover row (row selection mode) */
+.table-view:row-selection > .virtual-flow > .clipped-container > .sheet > .table-row-cell:filled:hover {
+    -fx-background-color: cell_hover_color;
+}
+
+/* Selected cells and rows */
+.table-view > .virtual-flow > .clipped-container > .sheet > .table-row-cell .table-cell:selected .text,
+.table-view > .virtual-flow > .clipped-container > .sheet > .table-row-cell:selected .table-cell .text {
+    -fx-fill: #FE00FF;
+}
+
+/* - when focused (with cell selection mode) */
+.table-view:focused > .virtual-flow > .clipped-container > .sheet > .table-row-cell .table-cell:selected,
+.table-view:focused > .virtual-flow > .clipped-container > .sheet > .table-row-cell:selected .table-cell {
+    -fx-background-color: cell_selected_color;
+    -fx-border-width: 0;
+}
+
+.table-view:focused > .virtual-flow > .clipped-container > .sheet > .table-row-cell .table-cell:selected:hover,
+.table-view:focused > .virtual-flow > .clipped-container > .sheet > .table-row-cell:selected:hover .table-cell {
+    -fx-background-color: cell_selected_hover_color;
+}
+
+.table-view:focused > .virtual-flow > .clipped-container > .sheet > .table-row-cell .table-cell:selected > .text,
+.table-view:focused > .virtual-flow > .clipped-container > .sheet > .table-row-cell:selected .table-cell > .text {
+    -fx-fill: #FE00FF;
+}
+
+.table-view:focused > .virtual-flow > .clipped-container > .sheet > .table-row-cell .table-cell:selected:hover:pressed {
+    -fx-background-color: cell_selected_pressed_color;
+}
+
+/* -- when row selection mode */
+
+.table-view:focused:row-selection > .virtual-flow > .clipped-container > .sheet > .table-row-cell:selected {
+    -fx-background-color: cell_selected_color;
+}
+
+.table-view:focused:row-selection > .virtual-flow > .clipped-container > .sheet > .table-row-cell:selected:hover {
+    -fx-background-color: cell_selected_hover_color;
+}
+
+/* - when not focused */
+.table-view > .virtual-flow > .clipped-container > .sheet > .table-row-cell .table-cell:selected,
+.table-view > .virtual-flow > .clipped-container > .sheet > .table-row-cell:selected .table-cell {
+    -fx-background-color: cell_selected_unfocused_color;
+}
+
+.table-view > .virtual-flow > .clipped-container > .sheet > .table-row-cell .table-cell:selected > .text,
+.table-view > .virtual-flow > .clipped-container > .sheet > .table-row-cell:selected .table-cell > .text {
+    -fx-fill: #6800ad;
+}
+
+/* -- when row selection mode */
+
+.table-view:row-selection > .virtual-flow > .clipped-container > .sheet > .table-row-cell:selected {
+    -fx-background-color: cell_selected_unfocused_color;
+}
+
+.table-view:row-selection > .virtual-flow > .clipped-container > .sheet > .table-row-cell:selected:hover:pressed {
+    -fx-background-color: cell_selected_pressed_color;
+}
+
+.table-view:focused > .virtual-flow > .clipped-container > .sheet > .table-row-cell:selected:hover:pressed .table-cell {
+    -fx-background-color: cell_selected_pressed_color;
+}
+
+.table-row-cell {
+    -fx-background-color: table_background_color;
+    -fx-background-insets: 0;
+}
+
+/*********************** Check box *****************************/
+
+.check-box {
+    -fx-opacity: 1;
+}
+.check-box > .box > .mark {
+    -fx-shape: "M17.939,5.439L7.5,15.889l-5.439-5.449l0.879-0.879L7.5,14.111 l9.561-9.551L17.939,5.439z";
+
+    -fx-pref-width: 16px;
+    -fx-pref-height: 12px;
+
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+}
+
+/* unselected */
+.check-box > .box {
+    -fx-background-color: box_background_color;
+    -fx-background-insets: 0;
+    -fx-background-radius: 7 7 7 7;
+
+    -fx-border-color: #979797;
+    -fx-border-width: 2px;
+    -fx-border-radius: 7 7 7 7;
+
+    -fx-padding: 3 2 3 2;     /* 2 0 2 0 */
+}
+
+/* hover */
+.check-box:hover > .box, .check-box:selected:hover > .box  {
+    -fx-border-color: rgba(247, 0, 255, 0.4);
+}
+
+/* selected */
+.check-box:selected > .box{
+    -fx-background-color: accent_color;
+    -fx-border-color: #585858;
+}
+
+.check-box:selected > .box > .mark{
+    -fx-background-color: #FE00FF;
+}
+
+/* pressed */
+.check-box:pressed > .box, .check-box:selected:pressed > .box
+{
+    -fx-background-color: rgba(93, 28, 186, 0.27);
+    -fx-border-color: #585858;
 }

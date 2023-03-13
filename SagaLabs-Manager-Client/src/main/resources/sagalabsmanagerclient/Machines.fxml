@@ -64,10 +64,14 @@
                </font>
             </Button>
             <Region prefHeight="50.0" prefWidth="280.0" />
-                <Button mnemonicParsing="false" onAction="#switchToMachine" prefHeight="100.0" prefWidth="240.0" styleClass="button3" text="Machines">
+                <Button mnemonicParsing="false" onAction="#switchToMachine" prefHeight="100.0" prefWidth="240.0" text="Machines">
                <font>
                   <Font size="33.0" />
                </font>
+               <styleClass>
+                  <String fx:value="button3" />
+                  <String fx:value="button4" />
+               </styleClass>
             </Button>
             <Region prefHeight="50.0" prefWidth="280.0" />
                 <Button mnemonicParsing="false" onAction="#switchToSQL" prefHeight="100.0" prefWidth="240.0" styleClass="button3" text="SQL Connect">

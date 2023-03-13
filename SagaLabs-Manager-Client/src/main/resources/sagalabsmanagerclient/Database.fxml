@@ -71,6 +71,7 @@
                <styleClass>
                   <String fx:value="button1" />
                   <String fx:value="button3" />
+                  <String fx:value="button4" />
                </styleClass>
                <font>
                   <Font size="33.0" />

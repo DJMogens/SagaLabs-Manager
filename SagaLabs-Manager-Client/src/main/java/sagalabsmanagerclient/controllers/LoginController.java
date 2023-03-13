@@ -1,12 +1,15 @@
 package sagalabsmanagerclient.controllers;
 
 import sagalabsmanagerclient.AzureLogin;
+import sagalabsmanagerclient.Database;
 import sagalabsmanagerclient.View;
 import sagalabsmanagerclient.ViewSwitcher;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+
+import java.sql.SQLException;
 
 
 public class LoginController {
@@ -21,8 +24,19 @@ public class LoginController {
         AzureLogin.login();
     }
     @FXML
-    public static void changeScene() {
-        ViewSwitcher.switchView(View.HOME);
+    public static void changeScene() throws SQLException {
+        Thread databaseThread = new Thread(() -> {
+            try {
+                Database.login();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        Thread switchView = new Thread(() -> {
+            ViewSwitcher.switchView(View.HOME);
+        });
+        databaseThread.start();
+        switchView.start();
     }
 
     public static void changeButtonTryAgain() {

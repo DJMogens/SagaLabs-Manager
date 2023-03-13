@@ -50,7 +50,7 @@
             <Button mnemonicParsing="false" onAction="#home" prefHeight="100.0" prefWidth="240.0" text="Home">
                <styleClass>
                   <String fx:value="button" />
-                  <String fx:value="button3" />
+                  <String fx:value="button4" />
                </styleClass>
                <font>
                   <Font size="33.0" />
