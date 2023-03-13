@@ -55,4 +55,9 @@ public class Database {
         }
         return machinesVMs;
     }
+    public static ResultSet executeSql(String sql) throws SQLException {
+        login();
+        Statement statement = conn.createStatement();
+        return statement.executeQuery(sql);
+    }
 }
