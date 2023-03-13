@@ -37,7 +37,7 @@ public class Database {
     public static ArrayList<MachinesVM> getMachines(String resourceGroup) throws SQLException {
         ArrayList<MachinesVM> machinesVMs = new ArrayList<MachinesVM>();
         String sql;
-        if(resourceGroup.equals("ALL")) {
+        if(resourceGroup == null) {
             sql = "SELECT * FROM sagadb.vm";
         }
         else {
@@ -45,7 +45,6 @@ public class Database {
         }
         ResultSet resultSet = executeSql(sql);
 
-        ResultSetMetaData metaData = resultSet.getMetaData();
         while (resultSet.next()) {
             machinesVMs.add(new MachinesVM(
                     resultSet.getObject("id").toString(),
@@ -54,6 +53,15 @@ public class Database {
                     resultSet.getObject("powerstate").toString().substring(11)));
         }
         return machinesVMs;
+    }
+
+    public static ArrayList<String> getResourceGroups() throws SQLException {
+        ArrayList<String> resourceGroups = new ArrayList<String>();
+        ResultSet resultSet = executeSql("select distinct resource_group from vm");
+        while(resultSet.next()) {
+            resourceGroups.add(resultSet.getObject("resource_group").toString());
+        }
+        return resourceGroups;
     }
     public static ResultSet executeSql(String sql) throws SQLException {
         Statement statement = conn.createStatement();

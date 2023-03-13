@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -25,13 +26,11 @@ public class MachinesController extends MenuController {
     private void initializeTabs() throws SQLException {
         // Creates tab for all
         machinesTabs.add(new MachinesTab(allTab, allTableView));
-        System.out.println("HERE");
         selectTab(machinesTabs.get(0));
 
-        for(ResourceGroup lab: AzureMethods.getAllLabs(AzureLogin.azure)) {
-            // Creates tab
+        for(String resourceGroup: Database.getResourceGroups()) {
             Tab tab = new Tab();
-            tab.setText(lab.name().substring(0, 10));
+            tab.setText(resourceGroup.substring(0, 10));
             // Creates tableview under tab
             TableView<MachinesVM> tableView = new TableView<MachinesVM>();
             tab.setContent(tableView);
@@ -40,7 +39,7 @@ public class MachinesController extends MenuController {
             initializeColumns(tableView);
             // Adds tab to pane and tabs array
             tabPane.getTabs().add(tab);
-            MachinesTab machinesTab = new MachinesTab(lab, tab, tableView);
+            MachinesTab machinesTab = new MachinesTab(resourceGroup, tab, tableView);
             machinesTabs.add(machinesTab);
         }
         setTabSelectionAction();
@@ -89,28 +88,10 @@ public class MachinesController extends MenuController {
     private void selectTab(MachinesTab machinesTab) throws SQLException {
         if(machinesTab.getTableView().getItems().isEmpty()) {
             String resourceGroupName;
-            try {
-                resourceGroupName = machinesTab.resourceGroup.name();
-            }
-            catch (NullPointerException e) {
-                resourceGroupName = "ALL";
-            }
+            resourceGroupName = machinesTab.resourceGroup;
+
             for (MachinesVM machinesVM : Database.getMachines(resourceGroupName)) {
                 machinesTab.getTableView().getItems().add(machinesVM);
-            }
-        }
-    }
-    private void showAllMachines() {
-        for(ResourceGroup resourceGroup: AzureMethods.getAllLabs(AzureLogin.azure)) {
-            for(VirtualMachine vm: AzureMethods.getVMsInLab(resourceGroup)) {
-                String powerState;
-                if(vm.powerState().toString() == "PowerState/deallocated") {
-                    powerState = "OFF";
-                }
-                else {
-                    powerState = "ON";
-                }
-                allTableView.getItems().add(new MachinesVM(vm.vmId(), vm.name(), vm.osType().toString(), powerState.substring(0, 10)));
             }
         }
     }
