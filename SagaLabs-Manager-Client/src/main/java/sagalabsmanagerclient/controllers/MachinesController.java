@@ -137,12 +137,12 @@ public class MachinesController extends MenuController {
 
         String osFilter = osFilterText.getText();
         String finalOsFilter = osFilter.replaceAll("\\s", "");
-        Predicate<MachinesVM> test = e -> e.getOs().equals(finalOsFilter);
+        Predicate<MachinesVM> test = e -> e.getOs().equalsIgnoreCase(finalOsFilter);
         FilteredList<MachinesVM> VMs = new FilteredList<MachinesVM>(tab.getTableView().getItems(), test);
 
         String stateFilter = stateFilterText.getText();
         String finalStateFilter = stateFilter.replaceAll("\\s", "");
-        Predicate<MachinesVM> test2 = e -> e.getState().equals(finalStateFilter);
+        Predicate<MachinesVM> test2 = e -> e.getState().equalsIgnoreCase(finalStateFilter);
         VMs = new FilteredList<MachinesVM>(VMs, test2);
 
         System.out.println("filtered list made");
