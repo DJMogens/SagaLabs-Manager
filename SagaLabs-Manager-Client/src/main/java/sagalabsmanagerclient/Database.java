@@ -53,11 +53,6 @@ public class Database {
                     resultSet.getObject("vm_name").toString(),
                     resultSet.getObject("ostype").toString(),
                     resultSet.getObject("powerstate").toString().substring(11)));
-            /*
-            for (int i = 1; i < columns + 1; i++) {
-                System.out.print(resultSet.getObject(i) + "  ");
-            }
-            System.out.print("\n");*/
         }
         conn.close();
         return machinesVMs;
