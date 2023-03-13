@@ -11,7 +11,7 @@ target/
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
-.idea/workspace.xml
+workspace.xml
 .idea/tasks.xml
 *.iws
 *.iml
