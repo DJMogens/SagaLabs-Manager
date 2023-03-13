@@ -23,8 +23,7 @@ public class ViewSwitcher {
 
             Platform.runLater(() -> {
                 // Check if the scene is attached to a stage
-                if (scene.getWindow() instanceof Stage) {
-                    Stage stage = (Stage) scene.getWindow();
+                if (scene.getWindow() instanceof Stage stage) {
                     stage.setAlwaysOnTop(true);
                     stage.requestFocus(); // Bring the window to front
                     stage.setAlwaysOnTop(false);
@@ -34,6 +33,4 @@ public class ViewSwitcher {
             throw new RuntimeException(e);
         }
     }
-
-
 }
