@@ -7,10 +7,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class MenuController {
-    public void logout(ActionEvent event) throws IOException {
+    public void logout(ActionEvent event) throws IOException, SQLException {
         AzureLogin.loginStatus = false;
         AzureLogin.azure = null;
         AzureLogin.tokenCredentialKeyVault = null;
+        Database.conn.close();
         ViewSwitcher.switchView(View.LOGIN);
     }
     public void home(ActionEvent event) throws IOException {
@@ -19,12 +20,10 @@ public class MenuController {
     public void switchToMachine(ActionEvent event) throws IOException {
         ViewSwitcher.switchView(View.MACHINES);
     }
-    public void switchToSQL(ActionEvent event) throws IOException, SQLException {
+    public void switchToSQL(ActionEvent event) throws IOException {
         ViewSwitcher.switchView(View.SQLSCENE);
-        Database.conn.close();
     }
-    public void switchToVPN(ActionEvent event) throws IOException, SQLException {
+    public void switchToVPN(ActionEvent event) throws IOException {
         ViewSwitcher.switchView(View.VPN);
-        Database.conn.close();
     }
 }

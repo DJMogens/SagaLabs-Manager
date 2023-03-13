@@ -25,8 +25,9 @@ public class MachinesController extends MenuController {
 
     private void initializeTabs() throws SQLException {
         // Creates tab for all
-        machinesTabs.add(new MachinesTab(allTab, allTableView));
-        selectTab(machinesTabs.get(0));
+        MachinesTab machinesAllTab = new MachinesTab(allTab, allTableView);
+        machinesTabs.add(machinesAllTab);
+        selectTab(machinesAllTab);
 
         for(String resourceGroup: Database.getResourceGroups()) {
             Tab tab = new Tab();
