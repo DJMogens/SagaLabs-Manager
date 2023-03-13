@@ -12,6 +12,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -128,13 +129,17 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="123.0" prefWidth="384.0">
                <children>
-                  <TextField prefHeight="75.0" prefWidth="369.0" promptText="New User Name">
+                  <Region prefHeight="200.0" prefWidth="20.0" />
+               </children>
+            </HBox>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="322.0" prefWidth="538.0">
+               <children>
+                  <TextField layoutX="9.0" layoutY="14.0" prefHeight="75.0" prefWidth="369.0" promptText="New User Name">
                      <font>
                         <Font size="28.0" />
                      </font>
                   </TextField>
-                  <Region prefHeight="200.0" prefWidth="20.0" />
-                  <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="120.0" text="Create">
+                  <Button layoutX="391.0" layoutY="169.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="120.0" text="Create">
                      <styleClass>
                         <String fx:value="button" />
                         <String fx:value="button1" />
@@ -143,29 +148,26 @@
                         <Font size="28.0" />
                      </font>
                   </Button>
+                  <ChoiceBox fx:id="vpnServerChoiceBox" layoutX="84.0" layoutY="115.0" prefWidth="220.0">
+                     <items>
+                        <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="Lab 1" />
+                           <String fx:value="Lab 2" />
+                           <String fx:value="Lab 3" />
+                           <String fx:value="Lab 4" />
+                           <String fx:value="Lab 5" />
+                        </FXCollections>
+                     </items>
+                  </ChoiceBox>
+                  <Label layoutX="25.0" layoutY="112.0" text="Lab">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
                </children>
-            </HBox>
-            <Label text="Lab">
-               <font>
-                  <Font size="30.0" />
-               </font>
-            </Label>
-            <ChoiceBox fx:id="vpnServerChoiceBox" prefWidth="220.0" VBox.vgrow="NEVER">
-               <items>
-                  <FXCollections fx:factory="observableArrayList">
-                     <String fx:value="Lab 1" />
-                     <String fx:value="Lab 2" />
-                     <String fx:value="Lab 3" />
-                     <String fx:value="Lab 4" />
-                     <String fx:value="Lab 5" />
-                  </FXCollections>
-               </items>
-            </ChoiceBox>
-            <Region prefHeight="136.0" prefWidth="540.0" />
-            <TextField prefHeight="93.0" prefWidth="540.0" text="                               Brugere oprettet: &quot;variable&quot;             Brugere Online: &quot;variable&quot;" />
-            <Region prefHeight="50.0" prefWidth="280.0" />
-            <Region layoutX="10.0" layoutY="323.0" prefHeight="50.0" prefWidth="280.0" />
-            <Region layoutX="10.0" layoutY="448.0" prefHeight="50.0" prefWidth="280.0" />
+            </AnchorPane>
+            <Region prefHeight="365.0" prefWidth="540.0" />
+            <TextField prefHeight="53.0" prefWidth="540.0" text="                               Brugere oprettet: &quot;variable&quot;             Brugere Online: &quot;variable&quot;" />
          </children>
       </VBox>
    </right>
