@@ -15,7 +15,15 @@ public class Database {
     private static final String DB_URL = "jdbc:mysql://sagadb.sagalabs.dk:42069/sagadb";
     private static final String dbUsername = "sagalabs-manager";
     static String dbPassword = AzureMethods.getKeyVaultSecret("sagalabs-manager-SQL-pw");
-    public static Connection conn = null;
+    public static Connection conn;
+
+    static {
+        try {
+            conn = DriverManager.getConnection(DB_URL, dbUsername, dbPassword);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static boolean login() throws SQLException {
             // Open a connection
@@ -49,7 +57,6 @@ public class Database {
         return machinesVMs;
     }
     public static ResultSet executeSql(String sql) throws SQLException {
-        login();
         Statement statement = conn.createStatement();
         return statement.executeQuery(sql);
     }
