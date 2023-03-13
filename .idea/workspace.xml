@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84f66384-4295-4a51-8bf3-97a943c2f250" name="Changes" comment="Copy from client to server database and AzureMethods">
-      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/VPNController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Vpn.fxml" afterDir="false" />
+    <list default="true" id="84f66384-4295-4a51-8bf3-97a943c2f250" name="Changes" comment="Har integreret ny VPN tab, nu virker Machine og SQL tabs'ne i appen ikke, sorry :DD">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Database.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Database.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Home.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Home.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Machines.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Machines.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/VPNController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/VPNController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Vpn.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Vpn.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,7 +188,7 @@
       <option name="presentableId" value="Default" />
       <updated>1678196865792</updated>
       <workItem from="1678196868516" duration="7161000" />
-      <workItem from="1678450525057" duration="2732000" />
+      <workItem from="1678450525057" duration="12150000" />
     </task>
     <task id="LOCAL-00001" summary="Refactor code">
       <created>1678197258021</created>
@@ -223,7 +218,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678212607009</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Har integreret ny VPN tab, nu virker Machine og SQL tabs'ne i appen ikke, sorry :DD">
+      <created>1678453602992</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1678453602992</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -239,6 +241,7 @@
     <MESSAGE value="Refactor code" />
     <MESSAGE value="Added Login to server application" />
     <MESSAGE value="Copy from client to server database and AzureMethods" />
-    <option name="LAST_COMMIT_MESSAGE" value="Copy from client to server database and AzureMethods" />
+    <MESSAGE value="Har integreret ny VPN tab, nu virker Machine og SQL tabs'ne i appen ikke, sorry :DD" />
+    <option name="LAST_COMMIT_MESSAGE" value="Har integreret ny VPN tab, nu virker Machine og SQL tabs'ne i appen ikke, sorry :DD" />
   </component>
 </project>

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -142,36 +145,26 @@
                   </Button>
                </children>
             </HBox>
+            <Label text="Lab">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="vpnServerChoiceBox" prefWidth="220.0" VBox.vgrow="NEVER">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="Lab 1" />
+                     <String fx:value="Lab 2" />
+                     <String fx:value="Lab 3" />
+                     <String fx:value="Lab 4" />
+                     <String fx:value="Lab 5" />
+                  </FXCollections>
+               </items>
+            </ChoiceBox>
             <Region prefHeight="136.0" prefWidth="540.0" />
-            <Button mnemonicParsing="false" prefHeight="75.0" prefWidth="120.0" text="Lab 1">
-               <styleClass>
-                  <String fx:value="button" />
-                  <String fx:value="button1" />
-               </styleClass>
-               <font>
-                  <Font size="28.0" />
-               </font>
-            </Button>
+            <TextField prefHeight="93.0" prefWidth="540.0" text="                               Brugere oprettet: &quot;variable&quot;             Brugere Online: &quot;variable&quot;" />
             <Region prefHeight="50.0" prefWidth="280.0" />
-            <Button layoutX="220.0" layoutY="248.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="120.0" text="Lab 2">
-               <styleClass>
-                  <String fx:value="button" />
-                  <String fx:value="button1" />
-               </styleClass>
-               <font>
-                  <Font size="28.0" />
-               </font>
-            </Button>
             <Region layoutX="10.0" layoutY="323.0" prefHeight="50.0" prefWidth="280.0" />
-            <Button layoutX="220.0" layoutY="323.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="120.0" text="Lab 3">
-               <styleClass>
-                  <String fx:value="button" />
-                  <String fx:value="button1" />
-               </styleClass>
-               <font>
-                  <Font size="28.0" />
-               </font>
-            </Button>
             <Region layoutX="10.0" layoutY="448.0" prefHeight="50.0" prefWidth="280.0" />
          </children>
       </VBox>

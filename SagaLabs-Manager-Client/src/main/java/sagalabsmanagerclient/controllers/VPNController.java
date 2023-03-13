@@ -10,3 +10,4 @@ public class VPNController extends MenuController {
         ViewSwitcher.switchView(View.VPN);
     }
 }
+    
