@@ -19,7 +19,6 @@ public class MachinesController extends MenuController {
     public static ArrayList<MachinesTab> machinesTabs = new ArrayList<MachinesTab>();
 
     public void initialize() throws SQLException {
-        Database.login();
         initializeTabs();
     }
 

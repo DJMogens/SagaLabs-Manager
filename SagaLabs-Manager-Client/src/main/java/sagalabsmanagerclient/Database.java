@@ -36,15 +36,14 @@ public class Database {
     }
     public static ArrayList<MachinesVM> getMachines(String resourceGroup) throws SQLException {
         ArrayList<MachinesVM> machinesVMs = new ArrayList<MachinesVM>();
-        Statement statement = conn.createStatement();
         String sql;
-        if(resourceGroup == "ALL") {
+        if(resourceGroup.equals("ALL")) {
             sql = "SELECT * FROM sagadb.vm";
         }
         else {
             sql = "SELECT * FROM sagadb.vm WHERE resource_group = '"+ resourceGroup + "'";
         }
-        ResultSet resultSet = statement.executeQuery(sql);
+        ResultSet resultSet = executeSql(sql);
 
         ResultSetMetaData metaData = resultSet.getMetaData();
         while (resultSet.next()) {

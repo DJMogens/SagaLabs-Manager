@@ -14,6 +14,7 @@ import com.azure.resourcemanager.AzureResourceManager;
 import sagalabsmanagerclient.controllers.LoginController;
 import reactor.core.publisher.Mono;
 
+import java.sql.SQLException;
 import java.time.OffsetDateTime;
 import java.util.Collections;
 import java.util.Objects;
@@ -88,7 +89,11 @@ public static void setLoginStatusTrue (){
         //
         //Kontroller om login er opnået på 120 sekunder
         Thread checkLoginThread = new Thread(() -> {
-            checkLogin(azureLoginThread);
+            try {
+                checkLogin(azureLoginThread);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         });
 
         azureLoginThread.start();
@@ -111,7 +116,7 @@ public static void setLoginStatusTrue (){
 
     }
 
-    private static void checkLogin(Thread azureLoginThread) {
+    private static void checkLogin(Thread azureLoginThread) throws SQLException {
         long startTime = System.currentTimeMillis();
         long duration = 0;
         while (duration < 120_000 && azureLoginThread.isAlive()) {
