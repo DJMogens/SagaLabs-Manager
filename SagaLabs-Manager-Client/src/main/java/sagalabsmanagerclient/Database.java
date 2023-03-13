@@ -15,7 +15,7 @@ public class Database {
     private static final String DB_URL = "jdbc:mysql://sagadb.sagalabs.dk:42069/sagadb";
     private static final String dbUsername = "sagalabs-manager";
     static String dbPassword = AzureMethods.getKeyVaultSecret("sagalabs-manager-SQL-pw");
-    private static Connection conn = null;
+    public static Connection conn = null;
 
     public static boolean login() throws SQLException {
             // Open a connection
@@ -28,14 +28,13 @@ public class Database {
     }
     public static ArrayList<MachinesVM> getMachines(String resourceGroup) throws SQLException {
         ArrayList<MachinesVM> machinesVMs = new ArrayList<MachinesVM>();
-        System.out.println("GETTING MACHINES FROM DATABASE");
         Statement statement = conn.createStatement();
         String sql;
         if(resourceGroup == "ALL") {
             sql = "SELECT * FROM sagadb.vm";
         }
         else {
-            sql = "SELECT * FROM sagadb.vm WHERE vm_name LIKE '"+resourceGroup+"%'" ;
+            sql = "SELECT * FROM sagadb.vm WHERE resource_group = '"+ resourceGroup + "'";
         }
         ResultSet resultSet = statement.executeQuery(sql);
 
@@ -54,7 +53,6 @@ public class Database {
                     resultSet.getObject("ostype").toString(),
                     resultSet.getObject("powerstate").toString().substring(11)));
         }
-        conn.close();
         return machinesVMs;
     }
 }

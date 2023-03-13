@@ -1,19 +1,16 @@
 package sagalabsmanagerclient.controllers;
 
-import sagalabsmanagerclient.AzureLogin;
-import sagalabsmanagerclient.VPNAdmin;
-import sagalabsmanagerclient.View;
-import sagalabsmanagerclient.ViewSwitcher;
+import sagalabsmanagerclient.*;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class MenuController {
     public void logout(ActionEvent event) throws IOException {
         AzureLogin.loginStatus = false;
         AzureLogin.azure = null;
         AzureLogin.tokenCredentialKeyVault = null;
-        System.out.println("LOGGED OUT SUCCESSFULLY");
         ViewSwitcher.switchView(View.LOGIN);
     }
     public void home(ActionEvent event) throws IOException {
@@ -22,11 +19,13 @@ public class MenuController {
     public void switchToMachine(ActionEvent event) throws IOException {
         ViewSwitcher.switchView(View.MACHINES);
     }
-    public void switchToSQL(ActionEvent event) throws IOException {
+    public void switchToSQL(ActionEvent event) throws IOException, SQLException {
         ViewSwitcher.switchView(View.SQLSCENE);
+        Database.conn.close();
     }
-    public void switchToVPN(ActionEvent event) throws IOException {
+    public void switchToVPN(ActionEvent event) throws IOException, SQLException {
         ViewSwitcher.switchView(View.VPN);
         VPNAdmin.listUsers();
+        Database.conn.close();
     }
 }
