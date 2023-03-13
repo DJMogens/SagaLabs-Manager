@@ -23,7 +23,7 @@ public class DatabaseController extends MenuController{
             sqlstatus.setText("SQL connection: Failed");
             sqlstatus.setTextFill(Color.RED);
         }
-        Database.getMachines();
+        //Database.getMachines();
     }
 
 }
