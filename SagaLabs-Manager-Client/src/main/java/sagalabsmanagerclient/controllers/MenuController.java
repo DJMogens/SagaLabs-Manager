@@ -25,7 +25,6 @@ public class MenuController {
     }
     public void switchToVPN(ActionEvent event) throws IOException, SQLException {
         ViewSwitcher.switchView(View.VPN);
-        VPNAdmin.listUsers();
         Database.conn.close();
     }
 }
