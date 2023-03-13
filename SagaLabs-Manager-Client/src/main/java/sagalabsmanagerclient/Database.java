@@ -39,13 +39,6 @@ public class Database {
         ResultSet resultSet = statement.executeQuery(sql);
 
         ResultSetMetaData metaData = resultSet.getMetaData();
-        int columns = metaData.getColumnCount();
-        System.out.println(columns + " columns");
-        for(int i = 1; i < columns; i++) {
-            String columnName = metaData.getColumnName(i);
-            System.out.print(columnName+ "   ");
-        }
-        System.out.print("\n");
         while (resultSet.next()) {
             machinesVMs.add(new MachinesVM(
                     resultSet.getObject("id").toString(),
