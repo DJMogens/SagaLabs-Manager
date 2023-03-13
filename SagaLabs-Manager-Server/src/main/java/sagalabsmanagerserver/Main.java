@@ -23,6 +23,14 @@ public class Main {
                         Database.syncLabs();
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
+                    } catch (Exception e) {
+                        System.out.println("Error in syncLabs: " + e.getMessage());
+                        try {
+                            Thread.sleep(5000);
+                        } catch (InterruptedException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        continue; // restart the loop
                     }
                     System.out.println("Synced Labs table");
                     try {
@@ -35,8 +43,8 @@ public class Main {
         });
         thread.start();
     }
-    public static void startSyncVM() throws SQLException {
 
+    public static void startSyncVM() {
         Thread thread = new Thread(new Runnable() {
 
             @Override
@@ -46,6 +54,14 @@ public class Main {
                         Database.syncVM();
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
+                    } catch (Exception e) {
+                        System.out.println("Error in syncVM: " + e.getMessage());
+                        try {
+                            Thread.sleep(5000);
+                        } catch (InterruptedException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                        continue; // restart the loop
                     }
                     System.out.println("Synced vm table");
                     try {
@@ -58,4 +74,5 @@ public class Main {
         });
         thread.start();
     }
+
 }
