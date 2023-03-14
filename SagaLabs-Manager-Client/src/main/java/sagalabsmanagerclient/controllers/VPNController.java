@@ -65,7 +65,11 @@ public class VPNController extends MenuController {
             return new TableCell<JsonObject, String>() {
                 final Button revokeBtn = new Button("Revoke");
                 final Button downloadBtn = new Button("Download");
-                final HBox hbox = new HBox(10,revokeBtn, downloadBtn);
+                final Button deleteBtn = new Button("Delete");
+                final Button rotateBtn = new Button("Rotate");
+                final Button unrevokeBtn = new Button("Unrevoke");
+
+                final HBox hbox = new HBox(10);
 
                 {
                     revokeBtn.setOnAction(e -> {
@@ -75,12 +79,35 @@ public class VPNController extends MenuController {
                     downloadBtn.setOnAction(e -> {
                         // Handle download button action here
                     });
+
+                    deleteBtn.setOnAction(e -> {
+                        // Handle delete button action here
+                    });
+
+                    rotateBtn.setOnAction(e -> {
+                        // Handle rotate button action here
+                    });
+
+                    unrevokeBtn.setOnAction(e -> {
+                        // Handle unrevoke button action here
+                    });
                 }
 
-                @Override
                 public void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
+
                     if (!empty) {
+                        String status = getTableView().getItems().get(getIndex()).get("AccountStatus").getAsString();
+
+                        hbox.getChildren().clear();
+
+                        if (status.equalsIgnoreCase("Active")) {
+                            hbox.getChildren().addAll(revokeBtn, downloadBtn);
+                        } else if (status.equalsIgnoreCase("Revoked")) {
+                            hbox.getChildren().addAll(deleteBtn, rotateBtn, unrevokeBtn);
+                        } else {
+                            hbox.getChildren().addAll(new Button()); //empty cell
+                        }
                         setGraphic(hbox);
                     } else {
                         setGraphic(null);

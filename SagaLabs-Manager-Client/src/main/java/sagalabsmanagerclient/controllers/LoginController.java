@@ -33,7 +33,10 @@ public class LoginController {
             }
         });
         Thread switchView = new Thread(() -> {
-            ViewSwitcher.switchView(View.HOME);
+            Platform.runLater(() -> {
+                ViewSwitcher.switchView(View.HOME);
+            });
+
         });
         databaseThread.start();
         switchView.start();
