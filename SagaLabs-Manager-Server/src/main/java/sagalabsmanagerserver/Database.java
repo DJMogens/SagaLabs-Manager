@@ -29,7 +29,7 @@ public class Database {
         }
     }
 
-    public static void syncLabs() throws SQLException, IOException {
+    public static void syncLabs() throws SQLException {
         String tableName = "Labs";
 
         List<ResourceGroup> labs = AzureLogin.azure.resourceGroups().listByTag("lab", "true").stream().toList();
@@ -55,6 +55,7 @@ public class Database {
                         if (socket.isConnected()){
                             vpnRunning = true;
                         }
+                        socket.close();
                     }catch (Exception ignored){
 
                     }
