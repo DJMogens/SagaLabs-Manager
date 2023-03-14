@@ -8,9 +8,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import sagalabsmanagerclient.VPNServiceConnection;
 import sagalabsmanagerclient.View;
 import sagalabsmanagerclient.ViewSwitcher;
@@ -37,6 +40,12 @@ public class VPNController extends MenuController {
     @FXML
     private TableColumn<JsonObject, String> userVPNOnline;
 
+    @FXML
+    private TableColumn<JsonObject, String> userVPNButtons;
+
+
+
+
     public void initialize() {
         // Initialize the columns for the TableView
         userVPNName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()
@@ -50,7 +59,37 @@ public class VPNController extends MenuController {
         userVPNOnline.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()
                 .get("Connections")
                 .getAsString()));
+
+        // Create the CellFactory for the userVPNButtons column
+        userVPNButtons.setCellFactory(col -> {
+            return new TableCell<JsonObject, String>() {
+                final Button revokeBtn = new Button("Revoke");
+                final Button downloadBtn = new Button("Download");
+                final HBox hbox = new HBox(10,revokeBtn, downloadBtn);
+
+                {
+                    revokeBtn.setOnAction(e -> {
+                        // Handle revoke button action here
+                    });
+
+                    downloadBtn.setOnAction(e -> {
+                        // Handle download button action here
+                    });
+                }
+
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (!empty) {
+                        setGraphic(hbox);
+                    } else {
+                        setGraphic(null);
+                    }
+                }
+            };
+        });
     }
+
 
     public void listVpn(ActionEvent actionEvent) throws SQLException {
         VPNServiceConnection.getVPNUserInformation();
