@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
@@ -19,63 +26,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sagalabsmanagerclient.controllers.VPNController">
+<BorderPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sagalabsmanagerclient.controllers.VPNController">
    <center>
       <TabPane fx:id="tabPane" prefHeight="1080.0" prefWidth="1100.0" stylesheets="@Stylesheet.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
          <tabs>
-            <Tab fx:id="overviewTab" text="Overview">
+            <Tab fx:id="overviewTab" text="All">
                <content>
-                  <TableView fx:id="overviewTableView" prefHeight="450.0" prefWidth="397.0">
-                     <columns>
-                        <TableColumn fx:id="selectColumn" prefWidth="50">
-                           <cellValueFactory>
-                              <PropertyValueFactory property="select" />
-                           </cellValueFactory>
-                        </TableColumn>
-                        <TableColumn fx:id="idColumn" prefWidth="400.0" text="Name">
-                           <cellValueFactory>
-                              <PropertyValueFactory property="id" />
-                           </cellValueFactory>
-                        </TableColumn>
-                        <TableColumn fx:id="accountStatusColumn" prefWidth="450.0" text="Account Status">
-                           <cellValueFactory>
-                              <PropertyValueFactory property="vmName" />
-                           </cellValueFactory>
-                        </TableColumn>
-                        <TableColumn fx:id="connectionsColumn" prefWidth="195.2000732421875" text="Connections">
-                           <cellValueFactory>
-                              <PropertyValueFactory property="state" />
-                           </cellValueFactory>
-                        </TableColumn>
-                     </columns>
-                  </TableView>
-               </content>
-            </Tab>
-            <Tab fx:id="adminTab" text="Admin">
-               <content>
-                  <TableView fx:id="adminTableview" prefHeight="450.0" prefWidth="397.0">
-                     <columns>
-                        <TableColumn fx:id="selectColumn1" prefWidth="50">
-                           <cellValueFactory>
-                              <PropertyValueFactory property="select" />
-                           </cellValueFactory>
-                        </TableColumn>
-                        <TableColumn fx:id="idColumnAdmin" prefWidth="400.0" text="Name">
-                           <cellValueFactory>
-                              <PropertyValueFactory property="id" />
-                           </cellValueFactory>
-                        </TableColumn>
-                        <TableColumn fx:id="adminStateColumn1" prefWidth="100.0" text="State">
-                           <cellValueFactory>
-                              <PropertyValueFactory property="os" />
-                           </cellValueFactory>
-                        </TableColumn>
-                        <TableColumn fx:id="activateDeactivateColumn" prefWidth="546.3999633789062" text="Activate / Deactivate">
-                           <cellValueFactory>
-                              <PropertyValueFactory property="state" />
-                           </cellValueFactory>
-                        </TableColumn>
-                     </columns>
+                  <TableView fx:id="userVpnTableView" prefHeight="200.0" prefWidth="200.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="87.0" text="C2" />
+                    </columns>
                   </TableView>
                </content>
             </Tab>
@@ -134,6 +95,7 @@
             <HBox alignment="CENTER" prefHeight="123.0" prefWidth="384.0">
                <children>
                   <Region prefHeight="200.0" prefWidth="20.0" />
+                  <Button mnemonicParsing="false" onAction="#listVpn" text="(Debug) ListVPN" />
                </children>
             </HBox>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="322.0" prefWidth="538.0">
