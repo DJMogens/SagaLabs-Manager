@@ -34,25 +34,31 @@ public class Database {
 
         List<ResourceGroup> labs = AzureLogin.azure.resourceGroups().listByTag("lab", "true").stream().toList();
 
+        int port = 80; // port of the vpn service
+
         for (ResourceGroup lab : labs) {
             String labName = lab.name();
             String labID = lab.id();
-            boolean vpnRunning = false;
+
             int vmCount = AzureLogin.azure.virtualMachines().listByResourceGroup(labName).stream().toList().size();
             List<PublicIpAddress> publicIps = AzureLogin.azure.publicIpAddresses().listByResourceGroup(labName).stream().toList();
             //iterate over all public ip's in each lab, and find the ip that is contains VPN in the name
             String vpnPublicIp = "No public IP";
+            boolean vpnRunning = false;
             for (PublicIpAddress publicIp : publicIps) {
                 String publicIpName = publicIp.name();
                 if (publicIpName.contains("VPN")) {
                     vpnPublicIp = publicIp.ipAddress();
-                    int port = 80; // port of the vpn service
+                    try {
+                        Socket socket = new Socket();
+                        socket.connect(new InetSocketAddress(vpnPublicIp, port), 2000);
+                        if (socket.isConnected()){
+                            vpnRunning = true;
+                        }
+                    }catch (Exception ignored){
 
-                    Socket socket = new Socket();
-                    socket.connect(new InetSocketAddress(vpnPublicIp, port), 2000);
-                    if (socket.isConnected()){
-                        vpnRunning = true;
                     }
+
                     break;
                 }
             }
