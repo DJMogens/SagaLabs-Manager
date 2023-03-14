@@ -20,22 +20,29 @@ public class HomeController extends MenuController {
     private AnchorPane anchorHome;
 
     public void initialize() throws SQLException {
+        // Execute a SQL query to retrieve information about labs
         ResultSet labs = Database.executeSql("SELECT LabName, vpnRunning, VmCount FROM Labs");
 
+        // Create a VBox to hold all the lab information boxes
         VBox vbox = new VBox();
         vbox.setSpacing(10);
 
+        // Loop through the labs ResultSet and create an HBox for each lab
         while (labs.next()) {
+            // Retrieve lab information from the ResultSet
             String labName = labs.getString("LabName");
             boolean vpnRunning = labs.getBoolean("vpnRunning");
             int vmCount = labs.getInt("VmCount");
 
+            // Create an HBox to hold all the lab information elements
             HBox hbox = new HBox();
             hbox.setSpacing(10);
             hbox.setStyle("-fx-background-color: gray; -fx-border-color: #333333; -fx-border-width: 2px; -fx-border-style: solid;");
 
+            // Create a colored Rectangle to represent the VPN status
             Rectangle box = new Rectangle(100, 100, vpnRunning ? Color.GREEN : Color.BLUE);
 
+            // Create a VBox to hold all the lab labels
             VBox labelBox = new VBox();
             labelBox.setSpacing(5);
             Label nameLabel = new Label(labName);
@@ -47,31 +54,37 @@ public class HomeController extends MenuController {
 
             labelBox.getChildren().addAll(nameLabel, vmLabel, vpnStatusLabel);
 
+            // Create buttons to turn on/off all VMs for this lab
             Button turnOnButton = new Button("Turn On all machines");
-
             Button turnOffButton = new Button("Turn Off all machines");
 
+            // Create a label to display startup status
             Label statusLabel = new Label("Starting up...");
             statusLabel.setVisible(false);
 
+            // Set up the turn on button event handler
             turnOnButton.setOnAction(event -> {
+                // Display the startup status label and disable the turn on button
                 statusLabel.setVisible(true);
                 turnOnButton.setDisable(true);
 
-                // Code to start up the VMs
+                // Code to start up the VMs goes here
             });
 
+            // Set up the turn off button event handler
             turnOffButton.setOnAction(event -> {
-                // Code to turn off all the machines
+                // Code to turn off all the machines goes here
             });
 
+            // Add all the elements to the HBox
             hbox.getChildren().addAll(box, labelBox, turnOnButton, turnOffButton);
 
+            // Add the HBox to the VBox
             vbox.getChildren().add(hbox);
         }
 
+        // Add the VBox to the anchor pane in the scene
         anchorHome.getChildren().add(vbox);
     }
-
 
 }
