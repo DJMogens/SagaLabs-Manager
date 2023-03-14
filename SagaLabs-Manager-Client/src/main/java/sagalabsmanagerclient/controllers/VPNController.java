@@ -24,8 +24,33 @@ public class VPNController extends MenuController {
         ViewSwitcher.switchView(View.VPN);
     }
 
+
     @FXML
     private TableView<JsonObject> userVpnTableView;
+
+    @FXML
+    private TableColumn<JsonObject, String> userVPNName;
+
+    @FXML
+    private TableColumn<JsonObject, String> userVPNStatus;
+
+    @FXML
+    private TableColumn<JsonObject, String> userVPNOnline;
+
+    public void initialize() {
+        // Initialize the columns for the TableView
+        userVPNName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()
+                .get("Identity")
+                .getAsString()));
+
+        userVPNStatus.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()
+                .get("AccountStatus")
+                .getAsString()));
+
+        userVPNOnline.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()
+                .get("Connections")
+                .getAsString()));
+    }
 
     public void listVpn(ActionEvent actionEvent) throws SQLException {
         VPNServiceConnection.getVPNUserInformation();
@@ -37,42 +62,21 @@ public class VPNController extends MenuController {
         // Get the list of JSON arrays
         ArrayList<JsonObject> jsonArrayList = VPNServiceConnection.vpnUserJsonList;
 
-        // Create an ObservableList to hold the JSON objects
-        ObservableList<JsonObject> jsonObservableList = FXCollections.observableArrayList();
+        // Create an ObservableList to hold the VPN users
+        ObservableList<JsonObject> vpnUsers = FXCollections.observableArrayList();
 
-        // Add each JSON object to the ObservableList
-        jsonObservableList.addAll(jsonArrayList);
+        // Iterate over each JSON object
+        jsonArrayList.forEach(jsonObject -> {
+            // Get the jsonArray for vpnUsers
+            JsonArray vpnUsersArray = jsonObject.getAsJsonArray("vpnUsers");
+
+            // Iterate over each object in vpnUsers and add it to the ObservableList
+            vpnUsersArray.forEach(jsonElement -> {
+                vpnUsers.add(jsonElement.getAsJsonObject());
+            });
+        });
 
         // Set the items for the TableView
-        userVpnTableView.setItems(jsonObservableList);
-
-        // Define the columns for the TableView
-        TableColumn<JsonObject, String> nameColumn = new TableColumn<>("Name");
-        nameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()
-                .getAsJsonArray("vpnUsers")
-                .get(0)
-                .getAsJsonObject()
-                .get("Identity")
-                .getAsString()));
-
-        TableColumn<JsonObject, String> statusColumn = new TableColumn<>("Status");
-        statusColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()
-                .getAsJsonArray("vpnUsers")
-                .get(0)
-                .getAsJsonObject()
-                .get("AccountStatus")
-                .getAsString()));
-
-        TableColumn<JsonObject, String> onlineColumn = new TableColumn<>("online?");
-        statusColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()
-                .getAsJsonArray("vpnUsers")
-                .get(0)
-                .getAsJsonObject()
-                .get("Connections")
-                .getAsString()));
-
-        // Add the columns to the TableView
-        userVpnTableView.getColumns().addAll(nameColumn, statusColumn, onlineColumn);
+        userVpnTableView.setItems(vpnUsers);
     }
-
 }

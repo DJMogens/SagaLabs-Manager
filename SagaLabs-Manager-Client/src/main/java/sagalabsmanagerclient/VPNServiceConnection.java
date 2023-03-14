@@ -21,6 +21,9 @@ public class VPNServiceConnection {
     //method to retrieve VPN user data from multiple VPN servers
     public static void getVPNUserInformation() throws SQLException {
 
+
+        vpnUserJsonList = new ArrayList<>(); // create a new ArrayList to reset the list
+
         //execute SQL query to retrieve names and IP addresses of all running VPN servers
         ResultSet labsWithVPN = Database.executeSql("SELECT LabName, LabVPN FROM Labs WHERE vpnRunning = TRUE;");
 
