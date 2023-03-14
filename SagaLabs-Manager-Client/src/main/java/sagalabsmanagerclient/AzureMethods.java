@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.sql.*;
 
+import static sagalabsmanagerclient.AzureLogin.azure;
+
 public class AzureMethods {
 
     public static List<String[]> labResourceGroups = new ArrayList<>(); //string array with names and ids of the resource groups that are labs (base on tag in azure)
@@ -102,6 +104,19 @@ public class AzureMethods {
     }
 
 
+    public static void startVMsInLab(String resourceGroupName) { //starts all vm's in a lab
+        System.out.println("Starting virtual machines in resource group " + resourceGroupName + "...");
+        PagedIterable<VirtualMachine> vms = azure.virtualMachines().listByResourceGroup(resourceGroupName);
+        for (VirtualMachine vm : vms) {
+            System.out.println("Starting virtual machine " + vm.name() + "...");
+            vm.start();
+            System.out.println("Virtual machine " + vm.name() + " started.");
+        }
+        System.out.println("All virtual machines in resource group " + resourceGroupName + " started.");
+    }
+
+
+
     public void listVMProperties(AzureResourceManager azure) {
         System.out.println("choose resource group: ");
         Scanner input = new Scanner(System.in);
@@ -110,7 +125,7 @@ public class AzureMethods {
     }
 
     public static PagedIterable<VirtualMachine> getVMsInLab(ResourceGroup resourceGroup) {
-        PagedIterable<VirtualMachine> vms = AzureLogin.azure.virtualMachines().listByResourceGroup(String.valueOf(resourceGroup.name()));
+        PagedIterable<VirtualMachine> vms = azure.virtualMachines().listByResourceGroup(String.valueOf(resourceGroup.name()));
         return vms;
     }
 

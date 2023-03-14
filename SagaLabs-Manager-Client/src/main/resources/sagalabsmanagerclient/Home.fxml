@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -9,37 +14,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sagalabsmanagerclient.controllers.HomeController">
+<BorderPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sagalabsmanagerclient.controllers.HomeController">
    <center>
       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
-            <Region prefHeight="150.0" prefWidth="1448.0" />
-            <Label alignment="CENTER" text="Welcome to SagaLabs manager">
-               <font>
-                  <Font size="72.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" prefHeight="141.0" prefWidth="401.0" text="HOME" textAlignment="CENTER">
-               <font>
-                  <Font name="System Bold Italic" size="96.0" />
-               </font>
-            </Label>
-            <Region prefHeight="64.0" prefWidth="1448.0" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#getLabDetails" prefHeight="105.0" prefWidth="374.0" text="Get Lab Details">
-               <font>
-                  <Font name="System Bold" size="36.0" />
-               </font>
-               <styleClass>
-                  <String fx:value="button" />
-                  <String fx:value="button1" />
-               </styleClass>
-            </Button>
-            <Region prefHeight="68.0" prefWidth="1448.0" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#listResourceGroupsWithLabTag" prefHeight="108.0" prefWidth="349.0" styleClass="button1" text="List Labs (terminal)">
-               <font>
-                  <Font size="36.0" />
-               </font>
-            </Button>
+            <AnchorPane fx:id="anchorHome" prefHeight="878.0" prefWidth="1448.0" />
          </children>
       </VBox>
    </center>
