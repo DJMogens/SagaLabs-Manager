@@ -5,11 +5,13 @@ import com.azure.resourcemanager.compute.models.VirtualMachine;
 import com.azure.resourcemanager.network.models.PublicIpAddress;
 import com.azure.resourcemanager.resources.models.ResourceGroup;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+import java.net.*;
 
 public class Database {
 
@@ -27,7 +29,7 @@ public class Database {
         }
     }
 
-    public static void syncLabs() throws SQLException {
+    public static void syncLabs() throws SQLException, IOException {
         String tableName = "Labs";
 
         List<ResourceGroup> labs = AzureLogin.azure.resourceGroups().listByTag("lab", "true").stream().toList();
@@ -35,6 +37,7 @@ public class Database {
         for (ResourceGroup lab : labs) {
             String labName = lab.name();
             String labID = lab.id();
+            boolean vpnRunning = false;
             int vmCount = AzureLogin.azure.virtualMachines().listByResourceGroup(labName).stream().toList().size();
             List<PublicIpAddress> publicIps = AzureLogin.azure.publicIpAddresses().listByResourceGroup(labName).stream().toList();
             //iterate over all public ip's in each lab, and find the ip that is contains VPN in the name
@@ -43,17 +46,25 @@ public class Database {
                 String publicIpName = publicIp.name();
                 if (publicIpName.contains("VPN")) {
                     vpnPublicIp = publicIp.ipAddress();
+                    int port = 80; // port of the vpn service
+
+                    Socket socket = new Socket();
+                    socket.connect(new InetSocketAddress(vpnPublicIp, port), 2000);
+                    if (socket.isConnected()){
+                        vpnRunning = true;
+                    }
                     break;
                 }
             }
             //insert vars into database, or update if a key is duplicated
-            String sql = "INSERT INTO Labs (LabName,LabID,VmCount,LabVPN) VALUES (?,?,?,?)"+
-                    "ON DUPLICATE KEY UPDATE LabName=VALUES(LabName), LabVPN=VALUES(LabVPN), VmCount=VALUES(VmCount)";
+            String sql = "INSERT INTO Labs (LabName,LabID,VmCount,LabVPN,vpnRunning) VALUES (?,?,?,?,?)"+
+                    "ON DUPLICATE KEY UPDATE LabName=VALUES(LabName), LabVPN=VALUES(LabVPN), VmCount=VALUES(VmCount), vpnRunning=VALUES(vpnRunning)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, labName);
             stmt.setString(2, labID);
             stmt.setInt(3, vmCount);
             stmt.setString(4, vpnPublicIp);
+            stmt.setBoolean(5, vpnRunning);
             stmt.executeUpdate();
         }
         updateLastUpdate(tableName);
