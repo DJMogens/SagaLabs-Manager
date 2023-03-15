@@ -1,6 +1,5 @@
 package sagalabsmanagerclient;
 
-import com.azure.resourcemanager.compute.models.OperatingSystemTypes;
 import javafx.scene.control.CheckBox;
 
 public class MachinesVM {
@@ -9,13 +8,15 @@ public class MachinesVM {
     private String vmName;
     private String os;
     private String state;
+    private String resourceGroup;
 
-    public MachinesVM(String id, String vmName, String os, String state) {
+    public MachinesVM(String id, String vmName, String os, String state, String resourceGroup) {
         this.select = new CheckBox("");
         this.id = id;
         this.vmName = vmName;
-        this.os = os.toString();
+        this.os = os;
         this.state = state;
+        this.resourceGroup = resourceGroup;
     }
     public String getId() {
         return id;
@@ -29,5 +30,5 @@ public class MachinesVM {
     public String getState() {return state;}
     public CheckBox getSelect() { return select;}
     public boolean getSelected() { return select.isSelected();}
-
+    public String getResourceGroup() { return resourceGroup;}
 }

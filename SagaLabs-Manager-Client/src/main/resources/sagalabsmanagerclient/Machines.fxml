@@ -28,14 +28,19 @@
                                    <PropertyValueFactory property="select" />
                                </cellValueFactory>
                            </TableColumn>
-                           <TableColumn fx:id="idColumn" prefWidth="400.0" text="ID">
+                           <TableColumn fx:id="idColumn" prefWidth="20.0" text="ID">
                                <cellValueFactory>
                                    <PropertyValueFactory property="id" />
                                </cellValueFactory>
                            </TableColumn>
-                           <TableColumn fx:id="vmColumn" prefWidth="450.0" text="Machine Name">
+                           <TableColumn fx:id="vmColumn" prefWidth="200.0" text="Machine Name">
                                <cellValueFactory>
                                    <PropertyValueFactory property="vmName" />
+                               </cellValueFactory>
+                           </TableColumn>
+                           <TableColumn fx:id="rgColumn" prefWidth="200.0" text="Resource Group">
+                               <cellValueFactory>
+                                   <PropertyValueFactory property="resourceGroup" />
                                </cellValueFactory>
                            </TableColumn>
                            <TableColumn fx:id="osColumn" prefWidth="100.0" text="OS">

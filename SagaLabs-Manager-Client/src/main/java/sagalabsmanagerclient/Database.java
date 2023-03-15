@@ -50,7 +50,8 @@ public class Database {
                     resultSet.getObject("id").toString(),
                     resultSet.getObject("vm_name").toString(),
                     resultSet.getObject("ostype").toString(),
-                    resultSet.getObject("powerstate").toString().substring(11)));
+                    resultSet.getObject("powerstate").toString().substring(11),
+                    resultSet.getObject("resource_group").toString()));
         }
         return machinesVMs;
     }

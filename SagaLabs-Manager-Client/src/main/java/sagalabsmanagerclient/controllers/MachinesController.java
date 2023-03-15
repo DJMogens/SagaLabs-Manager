@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.logging.Filter;
 import java.util.stream.Stream;
 
 public class MachinesController extends MenuController {
@@ -77,11 +78,11 @@ public class MachinesController extends MenuController {
         selectColumn.setCellValueFactory(new PropertyValueFactory<>("select"));
 
         TableColumn<MachinesVM, String> idColumn = new TableColumn<MachinesVM, String>("ID");
-        idColumn.setPrefWidth(400.0);
+        idColumn.setPrefWidth(20.0);
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
 
         TableColumn<MachinesVM, String> vmColumn = new TableColumn<MachinesVM, String>("Machine Name");
-        vmColumn.setPrefWidth(450.0);
+        vmColumn.setPrefWidth(200.0);
         vmColumn.setCellValueFactory(new PropertyValueFactory<>("vmName"));
 
         TableColumn<MachinesVM, OSType> osColumn = new TableColumn<MachinesVM, OSType>("OS");
@@ -92,9 +93,14 @@ public class MachinesController extends MenuController {
         stateColumn.setPrefWidth(99.0);
         stateColumn.setCellValueFactory(new PropertyValueFactory<>("state"));
 
+        TableColumn<MachinesVM, String> rgColumn = new TableColumn<MachinesVM, String>("Resource Group");
+        rgColumn.setPrefWidth(200.0);
+        rgColumn.setCellValueFactory(new PropertyValueFactory<>("resourceGroup"));
+
         tableView.getColumns().add(selectColumn);
         tableView.getColumns().add(idColumn);
         tableView.getColumns().add(vmColumn);
+        tableView.getColumns().add(rgColumn);
         tableView.getColumns().add(osColumn);
         tableView.getColumns().add(stateColumn);
     }
@@ -109,8 +115,14 @@ public class MachinesController extends MenuController {
                         null);
                 machinesTab.getTableView().setItems(list);
             }
+            else {
+                FilteredList<MachinesVM> list = (FilteredList<MachinesVM>) machinesTabs.get(0).getTableView().getItems();
+                list.setPredicate(null);
+            }
         } else {
             FilteredList<MachinesVM> list = (FilteredList<MachinesVM>) machinesTabs.get(0).getTableView().getItems();
+            list.setPredicate(e -> e.getResourceGroup().equals(machinesTab.getResourceGroup()));
+            machinesTab.getTableView().setItems(list);
         }
     }
 
@@ -139,9 +151,7 @@ public class MachinesController extends MenuController {
     }
 
     public void applyFilter(ActionEvent actionEvent) throws SQLException {
-        System.out.println("applying filter");
         MachinesTab tab = getCurrentTab();
-        System.out.println("before filter " + tab.getTableView().getItems().size() + " in length");
 
         String osFilter = osFilterText.getText();
         String finalOsFilter = osFilter.replaceAll("\\s", "");
@@ -151,18 +161,17 @@ public class MachinesController extends MenuController {
         Predicate<MachinesVM> test = null;
         FilteredList<MachinesVM> VMs = null;
         if(!finalOsFilter.equals("")) {
-            System.out.println("osfilter "+ finalOsFilter);
             test = e -> e.getOs().equalsIgnoreCase(finalOsFilter);
         }
         VMs = new FilteredList<MachinesVM>(tab.getTableView().getItems(), test);
         tab.getTableView().setItems(VMs);
 
         if(!finalStateFilter.equals("")) {
-            System.out.println("statefilter "+ finalStateFilter);
             test = e -> e.getState().equalsIgnoreCase(finalStateFilter);
         }
         VMs = new FilteredList<MachinesVM>(tab.getTableView().getItems(), test);
         tab.getTableView().setItems(VMs);
+
         System.out.println("after filtering " + tab.getTableView().getItems().size());
     }
 
@@ -172,11 +181,12 @@ public class MachinesController extends MenuController {
         stateFilterText.setText("");
         osFilterText.setText("");
 
-        MachinesTab tab = getCurrentTab();
+        MachinesTab tab = machinesTabs.get(0);
 
         // Complicated way of emptying tableview. Will filter on empty OS -> delete all.
         ((FilteredList<MachinesVM>) tab.getTableView().getItems()).setPredicate(e -> e.getOs().isEmpty());
 
         selectTab(tab);
+        selectTab(getCurrentTab());
     }
 }
