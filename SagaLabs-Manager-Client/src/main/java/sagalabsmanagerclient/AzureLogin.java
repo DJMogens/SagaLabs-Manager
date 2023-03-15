@@ -78,7 +78,7 @@ public class AzureLogin {
         setLoginStatusTrue();
     }
 
-public static void setLoginStatusTrue (){
+    public static void setLoginStatusTrue (){
     loginStatus = true;
 }
 

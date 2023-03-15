@@ -26,8 +26,9 @@ public class MachinesController extends MenuController {
     @FXML protected TabPane tabPane;
     @FXML protected Tab allTab;
     @FXML protected TableView<MachinesVM> allTableView;
-    @FXML protected TextField osFilterText;
-    @FXML protected TextField stateFilterText;
+    @FXML public TextField osFilterText;
+    @FXML public TextField stateFilterText;
+    @FXML public TextField nameFilterText;
     @FXML protected Button filterButton;
 
     public static ArrayList<MachinesTab> machinesTabs = new ArrayList<MachinesTab>();
@@ -137,7 +138,7 @@ public class MachinesController extends MenuController {
         }
     }
 
-    private MachinesTab getCurrentTab() {
+    public static MachinesTab getCurrentTab() {
         MachinesTab machinesTab = new MachinesTab(null, null, null);
         for(MachinesTab tab: machinesTabs) {
             if(tab.getTab().isSelected()) {
@@ -164,40 +165,19 @@ public class MachinesController extends MenuController {
     public void applyFilter(ActionEvent actionEvent) throws SQLException {
         MachinesTab tab = getCurrentTab();
 
-        String osFilter = osFilterText.getText();
-        String finalOsFilter = osFilter.replaceAll("\\s", "");
-        String stateFilter = stateFilterText.getText();
-        String finalStateFilter = stateFilter.replaceAll("\\s", "");
-
-        Predicate<MachinesVM> test = null;
-        FilteredList<MachinesVM> VMs = null;
-        if(!finalOsFilter.equals("")) {
-            test = e -> e.getOs().equalsIgnoreCase(finalOsFilter);
-        }
-        VMs = new FilteredList<MachinesVM>(tab.getTableView().getItems(), test);
-        tab.getTableView().setItems(VMs);
-
-        if(!finalStateFilter.equals("")) {
-            test = e -> e.getState().equalsIgnoreCase(finalStateFilter);
-        }
-        VMs = new FilteredList<MachinesVM>(tab.getTableView().getItems(), test);
-        tab.getTableView().setItems(VMs);
-
-        System.out.println("after filtering " + tab.getTableView().getItems().size());
+        MachinesFilter filter = new MachinesFilter(
+          osFilterText.getText(),
+          stateFilterText.getText(),
+          nameFilterText.getText(),
+          tab
+        );
+        filter.setPredicates(tab);
     }
 
-    public void resetFilters(ActionEvent actionEvent) throws SQLException {
-        System.out.println("Resetting filters for tab");
-
+    public void resetFilters(ActionEvent e) throws SQLException {
         stateFilterText.setText("");
         osFilterText.setText("");
-
-        MachinesTab tab = machinesTabs.get(0);
-
-        // Complicated way of emptying tableview. Will filter on empty OS -> delete all.
-        ((FilteredList<MachinesVM>) tab.getTableView().getItems()).setPredicate(e -> e.getOs().isEmpty());
-
-        selectTab(tab);
-        selectTab(getCurrentTab());
+        nameFilterText.setText("");
+        applyFilter(e);
     }
 }

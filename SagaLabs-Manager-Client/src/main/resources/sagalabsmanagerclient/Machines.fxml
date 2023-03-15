@@ -121,8 +121,13 @@
                         <Font size="20.0" />
                      </font>
                   </TextField>
-                  <Region prefHeight="56.0" prefWidth="540.0" />
-                  <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                  <TextField fx:id="nameFilterText" prefHeight="20.0" prefWidth="369.0" promptText="Name Filter">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+                  <Region prefHeight="105.0" prefWidth="540.0" />
+                  <HBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="540.0">
                      <children>
                         <Button fx:id="filterButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#applyFilter" prefHeight="20.0" prefWidth="120.0" text="Apply">
                            <styleClass>
