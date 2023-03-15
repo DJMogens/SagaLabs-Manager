@@ -38,11 +38,6 @@
                                    <PropertyValueFactory property="vmName" />
                                </cellValueFactory>
                            </TableColumn>
-                           <TableColumn fx:id="rgColumn" prefWidth="200.0" text="Resource Group">
-                               <cellValueFactory>
-                                   <PropertyValueFactory property="resourceGroup" />
-                               </cellValueFactory>
-                           </TableColumn>
                            <TableColumn fx:id="osColumn" prefWidth="100.0" text="OS">
                                <cellValueFactory>
                                    <PropertyValueFactory property="os" />
@@ -51,6 +46,16 @@
                            <TableColumn fx:id="stateColumn" prefWidth="99.0" text="State">
                                <cellValueFactory>
                                    <PropertyValueFactory property="state" />
+                               </cellValueFactory>
+                           </TableColumn>
+                           <TableColumn fx:id="ipColumn" prefWidth="200.0" text="IP Address">
+                               <cellValueFactory>
+                                   <PropertyValueFactory property="ip" />
+                               </cellValueFactory>
+                           </TableColumn>
+                           <TableColumn fx:id="rgColumn" prefWidth="200.0" text="Resource Group">
+                               <cellValueFactory>
+                                   <PropertyValueFactory property="resourceGroup" />
                                </cellValueFactory>
                            </TableColumn>
                        </columns>
@@ -111,6 +116,11 @@
             <Region prefHeight="106.0" prefWidth="540.0" />
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="311.0">
                <children>
+                  <TextField fx:id="nameFilterText" prefHeight="20.0" prefWidth="369.0" promptText="Name Filter">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
                    <TextField fx:id="stateFilterText" prefHeight="46.0" prefWidth="359.0" promptText="State Filter">
                        <font>
                            <Font size="20.0" />
@@ -121,7 +131,7 @@
                         <Font size="20.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="nameFilterText" prefHeight="20.0" prefWidth="369.0" promptText="Name Filter">
+                  <TextField fx:id="ipFilterText" prefHeight="20.0" prefWidth="369.0" promptText="IP Filter">
                      <font>
                         <Font size="20.0" />
                      </font>

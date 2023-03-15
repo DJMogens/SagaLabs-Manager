@@ -29,6 +29,7 @@ public class MachinesController extends MenuController {
     @FXML public TextField osFilterText;
     @FXML public TextField stateFilterText;
     @FXML public TextField nameFilterText;
+    @FXML public TextField ipFilterText;
     @FXML protected Button filterButton;
 
     public static ArrayList<MachinesTab> machinesTabs = new ArrayList<MachinesTab>();
@@ -109,12 +110,17 @@ public class MachinesController extends MenuController {
         rgColumn.setPrefWidth(200.0);
         rgColumn.setCellValueFactory(new PropertyValueFactory<>("resourceGroup"));
 
+        TableColumn<MachinesVM, String> ipColumn = new TableColumn<MachinesVM, String>("IP Address");
+        ipColumn.setPrefWidth(200.0);
+        ipColumn.setCellValueFactory(new PropertyValueFactory<>("ip"));
+
         tableView.getColumns().add(selectColumn);
         tableView.getColumns().add(idColumn);
         tableView.getColumns().add(vmColumn);
-        tableView.getColumns().add(rgColumn);
         tableView.getColumns().add(osColumn);
         tableView.getColumns().add(stateColumn);
+        tableView.getColumns().add(ipColumn);
+        tableView.getColumns().add(rgColumn);
     }
 
     private void selectTab(MachinesTab machinesTab) throws SQLException {
@@ -169,6 +175,7 @@ public class MachinesController extends MenuController {
           osFilterText.getText(),
           stateFilterText.getText(),
           nameFilterText.getText(),
+          ipFilterText.getText(),
           tab
         );
         filter.setPredicates(tab);
@@ -178,6 +185,7 @@ public class MachinesController extends MenuController {
         stateFilterText.setText("");
         osFilterText.setText("");
         nameFilterText.setText("");
+        ipFilterText.setText("");
         applyFilter(e);
     }
 }

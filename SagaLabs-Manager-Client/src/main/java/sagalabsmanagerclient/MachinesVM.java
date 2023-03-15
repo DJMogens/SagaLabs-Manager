@@ -8,14 +8,16 @@ public class MachinesVM {
     private String vmName;
     private String os;
     private String state;
+    private String ip;
     private String resourceGroup;
 
-    public MachinesVM(String id, String vmName, String os, String state, String resourceGroup) {
+    public MachinesVM(String id, String vmName, String os, String state, String ip, String resourceGroup) {
         this.select = new CheckBox("");
         this.id = id;
         this.vmName = vmName;
         this.os = os;
         this.state = state;
+        this.ip = ip;
         this.resourceGroup = resourceGroup;
     }
     public String getId() {
@@ -30,5 +32,6 @@ public class MachinesVM {
     public String getState() {return state;}
     public CheckBox getSelect() { return select;}
     public boolean getSelected() { return select.isSelected();}
+    public String getIp() { return ip; }
     public String getResourceGroup() { return resourceGroup;}
 }
