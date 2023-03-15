@@ -33,7 +33,7 @@
                                    <PropertyValueFactory property="id" />
                                </cellValueFactory>
                            </TableColumn>
-                           <TableColumn fx:id="vmColumn" prefWidth="200.0" text="Machine Name">
+                           <TableColumn fx:id="vmColumn" prefWidth="250.0" text="Machine Name">
                                <cellValueFactory>
                                    <PropertyValueFactory property="vmName" />
                                </cellValueFactory>

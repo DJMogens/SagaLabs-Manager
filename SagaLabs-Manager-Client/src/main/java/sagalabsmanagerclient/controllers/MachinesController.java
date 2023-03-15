@@ -58,6 +58,17 @@ public class MachinesController extends MenuController {
             }
             setTabSelectionAction();
         }
+        else {
+            machinesTabs.set(0, new MachinesTab(allTab, allTableView));
+            selectTab(machinesTabs.get(0));
+            System.out.println(machinesTabs.get(0).getTableView().getItems());
+            for(MachinesTab tab: machinesTabs.subList(1, machinesTabs.size())) {
+                tab.getTab().setContent(tab.getTableView());
+                initializeColumns(tab.getTableView());
+                tabPane.getTabs().add(tab.getTab());
+                setTabSelectionAction();
+            }
+        }
     }
 
     private void setTabSelectionAction() {
@@ -82,7 +93,7 @@ public class MachinesController extends MenuController {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
 
         TableColumn<MachinesVM, String> vmColumn = new TableColumn<MachinesVM, String>("Machine Name");
-        vmColumn.setPrefWidth(200.0);
+        vmColumn.setPrefWidth(250.0);
         vmColumn.setCellValueFactory(new PropertyValueFactory<>("vmName"));
 
         TableColumn<MachinesVM, OSType> osColumn = new TableColumn<MachinesVM, OSType>("OS");
