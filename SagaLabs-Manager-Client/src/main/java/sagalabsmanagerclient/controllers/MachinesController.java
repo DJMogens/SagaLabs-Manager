@@ -3,6 +3,8 @@ package sagalabsmanagerclient.controllers;
 import com.azure.resourcemanager.compute.models.VirtualMachine;
 import com.azure.resourcemanager.containerservice.models.OSType;
 import com.azure.resourcemanager.resources.models.ResourceGroup;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import org.w3c.dom.Text;
@@ -24,8 +26,8 @@ public class MachinesController extends MenuController {
     @FXML protected Tab allTab;
     @FXML protected TableView<MachinesVM> allTableView;
     @FXML protected TextField osFilterText;
-    @FXML protected Button filterButton;
     @FXML protected TextField stateFilterText;
+    @FXML protected Button filterButton;
 
     public static ArrayList<MachinesTab> machinesTabs = new ArrayList<MachinesTab>();
 
@@ -35,25 +37,26 @@ public class MachinesController extends MenuController {
 
     private void initializeTabs() throws SQLException {
         // Creates tab for all
-        MachinesTab machinesAllTab = new MachinesTab(allTab, allTableView);
-        machinesTabs.add(machinesAllTab);
-        selectTab(machinesAllTab);
+        if(machinesTabs.isEmpty()) {
+            MachinesTab machinesAllTab = new MachinesTab(allTab, allTableView);
+            machinesTabs.add(machinesAllTab);
+            selectTab(machinesAllTab);
+            for(String resourceGroup: Database.getResourceGroups()) {
+                Tab tab = new Tab();
+                tab.setText(resourceGroup.substring(0, 10));
+                // Creates tableview under tab
+                TableView<MachinesVM> tableView = new TableView<MachinesVM>();
+                tab.setContent(tableView);
 
-        for(String resourceGroup: Database.getResourceGroups()) {
-            Tab tab = new Tab();
-            tab.setText(resourceGroup.substring(0, 10));
-            // Creates tableview under tab
-            TableView<MachinesVM> tableView = new TableView<MachinesVM>();
-            tab.setContent(tableView);
-
-            // Creates columns in tableview
-            initializeColumns(tableView);
-            // Adds tab to pane and tabs array
-            tabPane.getTabs().add(tab);
-            MachinesTab machinesTab = new MachinesTab(resourceGroup, tab, tableView);
-            machinesTabs.add(machinesTab);
+                // Creates columns in tableview
+                initializeColumns(tableView);
+                // Adds tab to pane and tabs array
+                tabPane.getTabs().add(tab);
+                MachinesTab machinesTab = new MachinesTab(resourceGroup, tab, tableView);
+                machinesTabs.add(machinesTab);
+            }
+            setTabSelectionAction();
         }
-        setTabSelectionAction();
     }
 
     private void setTabSelectionAction() {
@@ -97,13 +100,17 @@ public class MachinesController extends MenuController {
     }
 
     private void selectTab(MachinesTab machinesTab) throws SQLException {
-        if(machinesTab.getTableView().getItems().isEmpty()) {
-            String resourceGroupName;
-            resourceGroupName = machinesTab.resourceGroup;
-
-            for (MachinesVM machinesVM : Database.getMachines(resourceGroupName)) {
-                machinesTab.getTableView().getItems().add(machinesVM);
+        if(machinesTab.getTab().getText().equals("All")) {
+            if(machinesTab.getTableView().getItems().isEmpty()) {
+                String resourceGroupName;
+                resourceGroupName = machinesTab.resourceGroup;
+                FilteredList<MachinesVM> list = new FilteredList<MachinesVM>(
+                        FXCollections.observableArrayList(Database.getMachines(resourceGroupName)),
+                        null);
+                machinesTab.getTableView().setItems(list);
             }
+        } else {
+            FilteredList<MachinesVM> list = (FilteredList<MachinesVM>) machinesTabs.get(0).getTableView().getItems();
         }
     }
 
@@ -131,21 +138,45 @@ public class MachinesController extends MenuController {
         return machineList;
     }
 
-    public void applyFilter(ActionEvent actionEvent) {
+    public void applyFilter(ActionEvent actionEvent) throws SQLException {
         System.out.println("applying filter");
         MachinesTab tab = getCurrentTab();
+        System.out.println("before filter " + tab.getTableView().getItems().size() + " in length");
 
         String osFilter = osFilterText.getText();
         String finalOsFilter = osFilter.replaceAll("\\s", "");
-        Predicate<MachinesVM> test = e -> e.getOs().equalsIgnoreCase(finalOsFilter);
-        FilteredList<MachinesVM> VMs = new FilteredList<MachinesVM>(tab.getTableView().getItems(), test);
-
         String stateFilter = stateFilterText.getText();
         String finalStateFilter = stateFilter.replaceAll("\\s", "");
-        Predicate<MachinesVM> test2 = e -> e.getState().equalsIgnoreCase(finalStateFilter);
-        VMs = new FilteredList<MachinesVM>(VMs, test2);
 
-        System.out.println("filtered list made");
+        Predicate<MachinesVM> test = null;
+        FilteredList<MachinesVM> VMs = null;
+        if(!finalOsFilter.equals("")) {
+            System.out.println("osfilter "+ finalOsFilter);
+            test = e -> e.getOs().equalsIgnoreCase(finalOsFilter);
+        }
+        VMs = new FilteredList<MachinesVM>(tab.getTableView().getItems(), test);
         tab.getTableView().setItems(VMs);
+
+        if(!finalStateFilter.equals("")) {
+            System.out.println("statefilter "+ finalStateFilter);
+            test = e -> e.getState().equalsIgnoreCase(finalStateFilter);
+        }
+        VMs = new FilteredList<MachinesVM>(tab.getTableView().getItems(), test);
+        tab.getTableView().setItems(VMs);
+        System.out.println("after filtering " + tab.getTableView().getItems().size());
+    }
+
+    public void resetFilters(ActionEvent actionEvent) throws SQLException {
+        System.out.println("Resetting filters for tab");
+
+        stateFilterText.setText("");
+        osFilterText.setText("");
+
+        MachinesTab tab = getCurrentTab();
+
+        // Complicated way of emptying tableview. Will filter on empty OS -> delete all.
+        ((FilteredList<MachinesVM>) tab.getTableView().getItems()).setPredicate(e -> e.getOs().isEmpty());
+
+        selectTab(tab);
     }
 }
