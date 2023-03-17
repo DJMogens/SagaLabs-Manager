@@ -60,7 +60,7 @@ public class MachinesController extends MenuController {
             }
             setTabSelectionAction();
         }
-        else {
+        else { // If tabs already exist
             machinesTabs.set(0, new MachinesTab(allTab, allTableView));
             selectTab(machinesTabs.get(0));
             System.out.println(machinesTabs.get(0).getTableView().getItems());
@@ -124,35 +124,23 @@ public class MachinesController extends MenuController {
     }
 
     private void selectTab(MachinesTab machinesTab) throws SQLException {
-        if(machinesTab.getTab().getText().equals("All")) {
-            if(machinesTab.getTableView().getItems().isEmpty()) {
-                String resourceGroupName;
-                resourceGroupName = machinesTab.resourceGroup;
-                FilteredList<MachinesVM> list = new FilteredList<MachinesVM>(
-                        FXCollections.observableArrayList(Database.getMachines(resourceGroupName)),
-                        null);
-                machinesTab.getTableView().setItems(list);
-            }
-            else {
-                FilteredList<MachinesVM> list = (FilteredList<MachinesVM>) machinesTabs.get(0).getTableView().getItems();
-                list.setPredicate(null);
-            }
-        } else {
-            FilteredList<MachinesVM> list = (FilteredList<MachinesVM>) machinesTabs.get(0).getTableView().getItems();
-            list.setPredicate(e -> e.getResourceGroup().equals(machinesTab.getResourceGroup()));
+        // For tab "All"
+        if(machinesTab.getTab().getText().equals("All") && machinesTab.getTableView().getItems().isEmpty()) {
+            String resourceGroupName;
+            resourceGroupName = machinesTab.resourceGroup;
+            FilteredList<MachinesVM> list = new FilteredList<MachinesVM>(
+                    FXCollections.observableArrayList(Database.getMachines(resourceGroupName)),
+                    null);
             machinesTab.getTableView().setItems(list);
+        } else { // For any other tab (specific lab)
+            FilteredList<MachinesVM> newList = (FilteredList<MachinesVM>) machinesTabs.get(0).getTableView().getItems();
+            machinesTab.getTableView().setItems(newList);
         }
+        applyFilter(new ActionEvent());
     }
 
-    public static MachinesTab getCurrentTab() {
-        MachinesTab machinesTab = new MachinesTab(null, null, null);
-        for(MachinesTab tab: machinesTabs) {
-            if(tab.getTab().isSelected()) {
-                machinesTab = tab;
-                break;
-            }
-        }
-        return machinesTab;
+    public MachinesTab getCurrentTab() {
+        return machinesTabs.get(tabPane.getSelectionModel().getSelectedIndex());
     }
 
     // METHOD TO RETURN VMs WITH CHECKMARK. Currently returns MachinesVM objects.
@@ -171,14 +159,18 @@ public class MachinesController extends MenuController {
     public void applyFilter(ActionEvent actionEvent) throws SQLException {
         MachinesTab tab = getCurrentTab();
 
-        MachinesFilter filter = new MachinesFilter(
-          osFilterText.getText(),
-          stateFilterText.getText(),
-          nameFilterText.getText(),
-          ipFilterText.getText(),
-          tab
-        );
-        filter.setPredicates(tab);
+        String osFilter = osFilterText.getText().replaceAll("\\s", "");;
+        String stateFilter = stateFilterText.getText().replaceAll("\\s", "");;
+        String nameFilter = nameFilterText.getText().replaceAll("\\s", "");;
+        String ipFilter = ipFilterText.getText().replaceAll("\\s", "");;
+
+        Predicate<MachinesVM> osPredicate = vm -> (osFilter.isEmpty() || vm.getOs().equalsIgnoreCase(osFilter));
+        Predicate<MachinesVM> statePredicate = vm -> (stateFilter.isEmpty() || vm.getState().equalsIgnoreCase(stateFilter));
+        Predicate<MachinesVM> namePredicate = vm -> (nameFilter.isEmpty() || vm.getVmName().contains(nameFilter));
+        Predicate<MachinesVM> ipPredicate = vm -> (ipFilter.isEmpty() || vm.getIp().startsWith(ipFilter));
+        Predicate<MachinesVM> rgPredicate = vm -> (tab.getTab().getText().equals("All") || vm.getResourceGroup().equals(tab.getResourceGroup()));
+
+        ((FilteredList<MachinesVM>) tab.getTableView().getItems()).setPredicate(osPredicate.and(statePredicate).and(namePredicate).and(ipPredicate).and(rgPredicate));
     }
 
     public void resetFilters(ActionEvent e) throws SQLException {
