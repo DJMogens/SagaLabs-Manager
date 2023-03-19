@@ -1,6 +1,7 @@
 package sagalabsmanagerclient;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.resourcemanager.AzureResourceManager;
+import com.azure.resourcemanager.compute.models.PowerState;
 import com.azure.resourcemanager.compute.models.VirtualMachine;
 import com.azure.resourcemanager.resources.models.ResourceGroup;
 import com.azure.security.keyvault.secrets.SecretClient;
@@ -11,6 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.sql.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 import static sagalabsmanagerclient.AzureLogin.azure;
 
@@ -28,55 +33,7 @@ public class AzureMethods {
     }
     */
 
-    public static void listResourceGroupsWithLabTag(AzureResourceManager azure) {
-        System.out.println("Listing resource groups with the tag 'lab:true'...");
-        for (ResourceGroup resourceGroup : azure.resourceGroups().list()) {
-            if (resourceGroup.tags() != null && resourceGroup.tags().containsKey("lab") && resourceGroup.tags().get("lab").equalsIgnoreCase("true")) {
-                String[] labResourceGroup = new String[]{resourceGroup.name(), resourceGroup.id()};
-                labResourceGroups.add(labResourceGroup);
-                System.out.printf("Lab (resource group) name: %s, id: %s%n", resourceGroup.name(), resourceGroup.id());
-            }
-        }
-        insertLabResourceGroupsIntoMySQL();
-    }
 
-    public static ArrayList<ResourceGroup> getAllLabs(AzureResourceManager azure) {
-        ArrayList<ResourceGroup> resourceGroups = new ArrayList<ResourceGroup>();
-        System.out.println("Listing resource groups with the tag 'lab:true'...");
-        for (ResourceGroup resourceGroup : azure.resourceGroups().list()) {
-            if (resourceGroup.tags() != null && resourceGroup.tags().containsKey("lab") && resourceGroup.tags().get("lab").equalsIgnoreCase("true")) {
-                String[] labResourceGroup = new String[]{resourceGroup.name(), resourceGroup.id()};
-                labResourceGroups.add(labResourceGroup);
-                System.out.printf("Lab (resource group) name: %s, id: %s%n", resourceGroup.name(), resourceGroup.id());
-                resourceGroups.add(resourceGroup);
-            }
-        }
-        insertLabResourceGroupsIntoMySQL();
-        return resourceGroups;
-    }
-
-    private static void insertLabResourceGroupsIntoMySQL() {
-        // MySQL database connection details
-        String url = "jdbc:mysql://localhost:3306/lab";
-        String username = "root";
-        String password = "IOU!H¤9pijoqwe890u19!=)";// very insecure to store in plaintext
-
-        // SQL statement to insert data into the lab table
-        String sql = "INSERT INTO lab (lab_navn, id) VALUES (?, ?)";
-
-        try (Connection conn = DriverManager.getConnection(url, username, password);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            // Iterate through the lab resource groups list and insert each string and ID into the lab table
-            for (String[] labResourceGroup : labResourceGroups) {
-                pstmt.setString(1, labResourceGroup[0]);
-                pstmt.setString(2, labResourceGroup[1]);
-                pstmt.executeUpdate();
-            }
-            System.out.println("Lab resource groups inserted into MySQL database successfully!");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
 
     public void getLabDetails(AzureResourceManager azure) {
         System.out.println("choose resource group to get details: ");
@@ -129,4 +86,57 @@ public class AzureMethods {
         return vms;
     }
 
+    public static String turnOnInLab(String resourceGroup) {
+        try {
+            // Get all the virtual machines in the resource group
+            List<VirtualMachine> vms = azure.virtualMachines().listByResourceGroup(resourceGroup).stream().collect(Collectors.toList());
+
+            // Create a thread pool with one thread for each virtual machine
+            ExecutorService executorService = Executors.newFixedThreadPool(vms.size());
+
+            // Start all the virtual machines in parallel
+            List<CompletableFuture<Void>> futures = vms.stream()
+                    .filter(vm -> vm.powerState().equals(PowerState.DEALLOCATED))
+                    .map(vm -> CompletableFuture.runAsync(vm::start, executorService))
+                    .toList();
+            CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+
+            // Shutdown the thread pool
+            executorService.shutdown();
+
+            // Return success message
+            return "All virtual machines in resource group " + resourceGroup + " have been turned on.";
+
+        } catch (Exception e) {
+            // Return error message
+            return "An error occurred while turning on virtual machines in resource group " + resourceGroup + ": " + e.getMessage();
+        }
+    }
+
+    public static String turnOffVMsInLab(String resourceGroup) {
+        try {
+            // Get all the virtual machines in the resource group
+            List<VirtualMachine> vms = azure.virtualMachines().listByResourceGroup(resourceGroup).stream().collect(Collectors.toList());
+
+            // Create a thread pool with one thread for each virtual machine
+            ExecutorService executorService = Executors.newFixedThreadPool(vms.size());
+
+            // Deallocate all the virtual machines in parallel
+            List<CompletableFuture<Void>> futures = vms.stream()
+                    .filter(vm -> vm.powerState().equals(PowerState.RUNNING))
+                    .map(vm -> CompletableFuture.runAsync(vm::deallocate, executorService))
+                    .toList();
+            CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+
+            // Shutdown the thread pool
+            executorService.shutdown();
+
+            // Return success message
+            return "All virtual machines in resource group " + resourceGroup + " have been deallocated.";
+
+        } catch (Exception e) {
+            // Return error message
+            return "An error occurred while deallocating virtual machines in resource group " + resourceGroup + ": " + e.getMessage();
+        }
+    }
 }

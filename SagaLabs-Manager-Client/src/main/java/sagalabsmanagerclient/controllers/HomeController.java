@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import sagalabsmanagerclient.AzureMethods;
 import sagalabsmanagerclient.Database;
 
 import java.sql.ResultSet;
@@ -64,16 +65,13 @@ public class HomeController extends MenuController {
 
             // Set up the turn on button event handler
             turnOnButton.setOnAction(event -> {
-                // Display the startup status label and disable the turn on button
-                statusLabel.setVisible(true);
-                turnOnButton.setDisable(true);
 
-                // Code to start up the VMs goes here
+                AzureMethods.turnOnInLab(labName);
             });
 
             // Set up the turn off button event handler
             turnOffButton.setOnAction(event -> {
-                // Code to turn off all the machines goes here
+                AzureMethods.turnOffVMsInLab(labName);
             });
 
             // Add all the elements to the HBox
