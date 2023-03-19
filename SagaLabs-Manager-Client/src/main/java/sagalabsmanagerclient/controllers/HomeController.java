@@ -1,6 +1,7 @@
 package sagalabsmanagerclient.controllers;
 
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -65,13 +66,28 @@ public class HomeController extends MenuController {
 
             // Set up the turn on button event handler
             turnOnButton.setOnAction(event -> {
+                Runnable task = () -> {
+                    AzureMethods.turnOnInLab(labName);
+                    Platform.runLater(() -> {
+                        // Update UI with success message
+                    });
+                };
 
-                AzureMethods.turnOnInLab(labName);
+                Thread thread = new Thread(task);
+                thread.start();
             });
 
             // Set up the turn off button event handler
             turnOffButton.setOnAction(event -> {
-                AzureMethods.turnOffVMsInLab(labName);
+                Runnable task = () -> {
+                    AzureMethods.turnOffVMsInLab(labName);
+                    Platform.runLater(() -> {
+                        // Update UI with success message
+                    });
+                };
+
+                Thread thread = new Thread(task);
+                thread.start();
             });
 
             // Add all the elements to the HBox

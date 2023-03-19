@@ -61,17 +61,6 @@ public class AzureMethods {
     }
 
 
-    public static void startVMsInLab(String resourceGroupName) { //starts all vm's in a lab
-        System.out.println("Starting virtual machines in resource group " + resourceGroupName + "...");
-        PagedIterable<VirtualMachine> vms = azure.virtualMachines().listByResourceGroup(resourceGroupName);
-        for (VirtualMachine vm : vms) {
-            System.out.println("Starting virtual machine " + vm.name() + "...");
-            vm.start();
-            System.out.println("Virtual machine " + vm.name() + " started.");
-        }
-        System.out.println("All virtual machines in resource group " + resourceGroupName + " started.");
-    }
-
 
 
     public void listVMProperties(AzureResourceManager azure) {
@@ -89,7 +78,7 @@ public class AzureMethods {
     public static String turnOnInLab(String resourceGroup) {
         try {
             // Get all the virtual machines in the resource group
-            List<VirtualMachine> vms = azure.virtualMachines().listByResourceGroup(resourceGroup).stream().collect(Collectors.toList());
+            List<VirtualMachine> vms = azure.virtualMachines().listByResourceGroup(resourceGroup).stream().toList();
 
             // Create a thread pool with one thread for each virtual machine
             ExecutorService executorService = Executors.newFixedThreadPool(vms.size());
