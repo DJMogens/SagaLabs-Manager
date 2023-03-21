@@ -26,13 +26,13 @@
 .button4 {
     -fx-background-radius: 55 0 0 55;
     -fx-border-radius: 55 0 0 55;
-    -fx-border-color: #b500ff;
+    -fx-border-color: #FF00E7;
 }
 
 .button:hover{-fx-background-color: #737373;}
 .button:pressed{
     -fx-background-color: #b3b3b3;
-    -fx-border-color: #b500ff;
+    -fx-border-color: #FF00E7;
 }
 
 .label {
@@ -132,7 +132,7 @@
 }
 
 .tab-pane > .tab-header-area > .headers-region > .tab:selected {
-    -fx-background-color: transparent, #b500ff, #636363;
+    -fx-background-color: transparent, #FF00E7, #636363;
     -fx-background-radius: 30 30 0 0, 30 30 0 0, 30 30 0 0;
 }
 .tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
@@ -215,7 +215,7 @@
 /* Selected cells and rows */
 .table-view > .virtual-flow > .clipped-container > .sheet > .table-row-cell .table-cell:selected .text,
 .table-view > .virtual-flow > .clipped-container > .sheet > .table-row-cell:selected .table-cell .text {
-    -fx-fill: #FE00FF;
+    -fx-fill: #FF00E7;
 }
 
 /* - when focused (with cell selection mode) */
@@ -232,7 +232,7 @@
 
 .table-view:focused > .virtual-flow > .clipped-container > .sheet > .table-row-cell .table-cell:selected > .text,
 .table-view:focused > .virtual-flow > .clipped-container > .sheet > .table-row-cell:selected .table-cell > .text {
-    -fx-fill: #FE00FF;
+    -fx-fill: #FF00E7;
 }
 
 .table-view:focused > .virtual-flow > .clipped-container > .sheet > .table-row-cell .table-cell:selected:hover:pressed {
@@ -319,7 +319,7 @@
 }
 
 .check-box:selected > .box > .mark{
-    -fx-background-color: #FE00FF;
+    -fx-background-color: #FF00E7;
 }
 
 /* pressed */
@@ -328,3 +328,57 @@
     -fx-background-color: rgba(93, 28, 186, 0.27);
     -fx-border-color: #585858;
 }
+
+/*******************************************************************************
+ *                                                                             *
+ * TitledPane                                                                  *
+ *                                                                             *
+ ******************************************************************************/
+
+/* Text inside header area */
+.titled-pane > .title > .text {
+    -fx-fill: #919191;
+
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 20
+}
+
+/* Title header area */
+.titled-pane > .title {
+    -fx-background-color: border_color, title_background_color;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 0;
+}
+
+.titled-pane > .title:hover {
+    -fx-background-color: #585858;
+}
+
+.titled-pane > .title:hover > .arrow-button {
+    -fx-background-color: title_background_hover_color;
+}
+
+/* Arrow (for collapsing/expanding) */
+.titled-pane > .title > .arrow-button > .arrow {
+    -fx-shape: "M 4.21875 10.78125 L 2.78125 12.21875 L 15.28125 24.71875 L 16 25.40625 L 16.71875 24.71875 L 29.21875 12.21875 L 27.78125 10.78125 L 16 22.5625 Z";
+
+    -fx-background-color: #919191;
+
+    -fx-effect: null;
+}
+
+.titled-pane > .title > .arrow-button > .arrow ,
+.titled-pane:focused > .title > .arrow-button > .arrow {
+    -fx-background-insets: 0, 0;
+}
+
+/* Content */
+.titled-pane > .content {
+    -fx-border-color: border_color;
+    -fx-background-color: border_color, content_background_color;
+    -fx-background-insets: -1 0 0 0, 0 1 1 1;
+
+    -fx-padding: 0.166667em 0 0.166667em 0; /* 2 0 2 0 */
+}
+
+
