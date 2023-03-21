@@ -36,8 +36,9 @@
                     <columns>
                       <TableColumn fx:id="userVPNName" editable="false" prefWidth="182.0" text="Name" />
                       <TableColumn fx:id="userVPNStatus" prefWidth="174.0" text="Status" />
-                        <TableColumn fx:id="userVPNOnline" prefWidth="180.0" text="Connection" />
-                        <TableColumn fx:id="userVPNButtons" editable="false" prefWidth="422.0" sortable="false" />
+                        <TableColumn fx:id="userVPNLab" prefWidth="180.0" text="Lab" />
+                        <TableColumn fx:id="userVPNOnline" text="Conn" />
+                        <TableColumn fx:id="userVPNButtons" editable="false" prefWidth="516.0" sortable="false" />
                     </columns>
                   </TableView>
                </content>
@@ -101,12 +102,12 @@
             </HBox>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="322.0" prefWidth="538.0">
                <children>
-                  <TextField layoutX="9.0" layoutY="14.0" prefHeight="75.0" prefWidth="369.0" promptText="New User Name">
+                  <TextField fx:id="usernameInput" layoutX="9.0" layoutY="14.0" prefHeight="75.0" prefWidth="369.0" promptText="New User Name">
                      <font>
                         <Font size="28.0" />
                      </font>
                   </TextField>
-                  <Button layoutX="265.0" layoutY="199.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="120.0" text="Create">
+                  <Button fx:id="createUser" layoutX="265.0" layoutY="199.0" mnemonicParsing="false" onAction="#createNewUser" prefHeight="75.0" prefWidth="120.0" text="Create">
                      <styleClass>
                         <String fx:value="button" />
                         <String fx:value="button1" />
@@ -116,15 +117,6 @@
                      </font>
                   </Button>
                   <ChoiceBox fx:id="vpnServerChoiceBox" layoutX="84.0" layoutY="115.0" prefWidth="220.0">
-                     <items>
-                        <FXCollections fx:factory="observableArrayList">
-                           <String fx:value="Lab 1" />
-                           <String fx:value="Lab 2" />
-                           <String fx:value="Lab 3" />
-                           <String fx:value="Lab 4" />
-                           <String fx:value="Lab 5" />
-                        </FXCollections>
-                     </items>
                   </ChoiceBox>
                   <Label layoutX="25.0" layoutY="112.0" text="Lab">
                      <font>

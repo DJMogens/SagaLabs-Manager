@@ -66,6 +66,7 @@ public class VPNServiceConnection {
                 for (JsonElement vpnUserJsonElement : vpnUserJsonArray) {
                     JsonObject vpnUserJsonObject = vpnUserJsonElement.getAsJsonObject();
                     vpnUserJsonObject.addProperty("vpnIp", vpnIp);
+                    vpnUserJsonObject.addProperty("labName", labName);
                     vpnUserJsonArrayWithIp.add(vpnUserJsonObject);
                 }
                 labVpnUsers.add("vpnUsers", vpnUserJsonArrayWithIp);

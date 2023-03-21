@@ -10,18 +10,17 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
+import sagalabsmanagerclient.Database;
 import sagalabsmanagerclient.VPNServiceConnection;
 import sagalabsmanagerclient.View;
 import sagalabsmanagerclient.ViewSwitcher;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
@@ -30,6 +29,10 @@ import java.util.concurrent.TimeUnit;
 
 
 public class VPNController extends MenuController {
+    public TextField usernameInput;
+    public Button createUser;
+    public ChoiceBox vpnServerChoiceBox;
+
     @FXML
     public static void changeScene() {
         ViewSwitcher.switchView(View.VPN);
@@ -41,12 +44,16 @@ public class VPNController extends MenuController {
     @FXML
     private TableColumn<JsonObject, String> userVPNStatus;
     @FXML
+    private TableColumn<JsonObject, String> userVPNLab;
+    @FXML
     private TableColumn<JsonObject, String> userVPNOnline;
     @FXML
     private TableColumn<JsonObject, String> userVPNButtons;
     public void initialize() {
         // Initialize the columns for the TableView
         initializeColumns();
+        //Initialize the choice picker for create user functionality
+        initializeServerChoiceBox();
         // Create the CellFactory for the userVPNButtons column
         userVPNButtons.setCellFactory(new Callback<TableColumn<JsonObject, String>, TableCell<JsonObject, String>>() {
             @Override
@@ -79,7 +86,41 @@ public class VPNController extends MenuController {
         userVPNOnline.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()
                 .get("Connections")
                 .getAsString()));
+
+        // Set the cell value factory for the labName column
+        userVPNLab.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()
+                .get("labName")
+                .getAsString()));
     }
+
+    // A method to initialize the VPN server choice box with the available servers
+    private void initializeServerChoiceBox() {
+        try {
+            // Connect to the database and execute a query to retrieve the available servers
+            ResultSet rs = Database.executeSql("SELECT LabName FROM Labs WHERE vpnRunning = 1");
+            // Populate the choice box with the server names
+            while (rs.next()) {
+                vpnServerChoiceBox.getItems().add(rs.getString("LabName"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // A method to handle the action for the create user button
+    @FXML
+    public void createUser() {
+        String username = usernameInput.getText();
+        String vpnServer = vpnServerChoiceBox.getValue().toString();
+
+        try {
+            VPNServiceConnection.createUser(vpnServer, username);
+            listVpn();
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Creates a CellFactory for the userVPNButtons column.
      * @return A TableCell instance for the userVPNButtons column.
@@ -109,7 +150,11 @@ public class VPNController extends MenuController {
                 deleteBtn.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent e) {
-                        handleDeleteButton(getIndex());
+                        try {
+                            handleDeleteButton(getIndex());
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
                     }
                 });
                 rotateBtn.setOnAction(new EventHandler<ActionEvent>() {
@@ -181,20 +226,20 @@ public class VPNController extends MenuController {
      * Handles the action for the delete button.
      * @param index The index of the selected item in the TableView.
      */
-    private void handleDeleteButton(int index) {
+    private void handleDeleteButton(int index) throws SQLException {
         JsonObject vpnUser = userVpnTableView.getItems().get(index);
         System.out.println(userVpnTableView.getItems().get(index));
         String vpnIp = vpnUser.get("vpnIp").getAsString();
         String username = vpnUser.get("Identity").getAsString();
         try {
             VPNServiceConnection.deleteUser(vpnIp, username);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        finally {
             // Remove the deleted user from the ObservableList
             userVpnTableView.getItems().remove(index);
-
             listVpn();
-
-        } catch (IOException | SQLException ex) {
-            ex.printStackTrace();
         }
     }
     /**
@@ -260,4 +305,22 @@ public class VPNController extends MenuController {
             userVpnTableView.getItems().addAll(vpnUsers);
         });
     }
+
+    public void createNewUser(ActionEvent actionEvent) throws SQLException, IOException {
+        String labChoice = vpnServerChoiceBox.getValue().toString();
+        System.out.println(labChoice);
+        ResultSet chosenVPNIpResultSet = Database.executeSql("SELECT LabVPN FROM Labs where LabName = '" + labChoice + "'");
+
+        // We need to skip to next when handling resultsets, but what if there wasn't any? Therefore we initialize to null
+        String chosenVPNIpString = null;
+        if (chosenVPNIpResultSet.next()) {//Need to use next on resultSet
+            chosenVPNIpString = chosenVPNIpResultSet.getString("LabVPN");
+        }
+
+        VPNServiceConnection.createUser(chosenVPNIpString, usernameInput.getText());
+
+        //Update the table with listVpn
+        listVpn();
+    }
+
 }
