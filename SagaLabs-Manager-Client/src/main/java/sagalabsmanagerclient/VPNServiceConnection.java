@@ -1,7 +1,6 @@
 package sagalabsmanagerclient;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -76,6 +75,69 @@ public class VPNServiceConnection {
                 //if there was an error, print the stack trace
                 e.printStackTrace();
             }
+        }
+    }
+    public static void createUser(String vpnIp, String username) throws IOException {
+        String apiUrl = "http://" + vpnIp + "/api/user/create";
+        sendPostRequestWithUsername(apiUrl, username);
+    }
+
+    public static void downloadConfig(String vpnIp, String username) throws IOException {
+        String apiUrl = "http://" + vpnIp + "/api/user/config/show";
+        String configFileContent = sendPostRequestWithUsername(apiUrl, username);
+        saveConfigFile(username, configFileContent);
+    }
+
+    public static void revokeCertificate(String vpnIp, String username) throws IOException {
+        String apiUrl = "http://" + vpnIp + "/api/user/revoke";
+        sendPostRequestWithUsername(apiUrl, username);
+    }
+
+    public static void unrevokeCertificate(String vpnIp, String username) throws IOException {
+        String apiUrl = "http://" + vpnIp + "/api/user/unrevoke";
+        sendPostRequestWithUsername(apiUrl, username);
+    }
+
+    private static String sendPostRequestWithUsername(String apiUrl, String username) throws IOException, IOException {
+        // Retrieve and encode the API credentials
+        String apiCredentials = "sagavpn-api:" + AzureMethods.getKeyVaultSecret("sagavpn-api-key");
+        String base64ApiCredentials = Base64.getEncoder().encodeToString(apiCredentials.getBytes(StandardCharsets.UTF_8));
+
+        // Create an HTTP connection to the specified API URL
+        URL url = new URL(apiUrl);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("Accept", "application/json");
+        connection.setRequestProperty("Authorization", "Basic " + base64ApiCredentials);
+        connection.setDoOutput(true);
+
+        // Send the username as the request body
+        String requestBody = "username=" + username;
+        OutputStream os = connection.getOutputStream();
+        os.write(requestBody.getBytes(StandardCharsets.UTF_8));
+        os.flush();
+        os.close();
+
+        // Check the HTTP response code
+        if (connection.getResponseCode() != 200) {
+            throw new RuntimeException("Failed : HTTP error code : " + connection.getResponseCode());
+        }
+
+        // Read the response from the HTTP connection
+        BufferedReader responseReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        StringBuilder responseBuilder = new StringBuilder();
+        String responseLine;
+        while ((responseLine = responseReader.readLine()) != null) {
+            responseBuilder.append(responseLine);
+        }
+        connection.disconnect();
+
+        return responseBuilder.toString();
+    }
+    private static void saveConfigFile(String username, String configFileContent) throws IOException {
+        File outputFile = new File(username + ".ovpn");
+        try (FileOutputStream fos = new FileOutputStream(outputFile)) {
+            fos.write(configFileContent.getBytes(StandardCharsets.UTF_8));
         }
     }
 }
