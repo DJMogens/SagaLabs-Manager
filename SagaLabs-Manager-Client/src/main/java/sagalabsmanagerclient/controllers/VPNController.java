@@ -182,14 +182,36 @@ public class VPNController extends MenuController {
      * @param index The index of the selected item in the TableView.
      */
     private void handleDeleteButton(int index) {
-        // Handle delete button action here
+        JsonObject vpnUser = userVpnTableView.getItems().get(index);
+        System.out.println(userVpnTableView.getItems().get(index));
+        String vpnIp = vpnUser.get("vpnIp").getAsString();
+        String username = vpnUser.get("Identity").getAsString();
+        try {
+            VPNServiceConnection.deleteUser(vpnIp, username);
+            // Remove the deleted user from the ObservableList
+            userVpnTableView.getItems().remove(index);
+
+            listVpn();
+
+        } catch (IOException | SQLException ex) {
+            ex.printStackTrace();
+        }
     }
     /**
      * Handles the action for the rotate button.
      * @param index The index of the selected item in the TableView.
      */
     private void handleRotateButton(int index) {
-        // Handle rotate button action here
+        JsonObject vpnUser = userVpnTableView.getItems().get(index);
+        System.out.println(userVpnTableView.getItems().get(index));
+        String vpnIp = vpnUser.get("vpnIp").getAsString();
+        String username = vpnUser.get("Identity").getAsString();
+        try {
+            VPNServiceConnection.rotateCertificate(vpnIp, username);
+            listVpn();
+        } catch (IOException | SQLException ex) {
+            ex.printStackTrace();
+        }
     }
     /**
      * Handles the action for the unrevoke button.
@@ -197,6 +219,7 @@ public class VPNController extends MenuController {
      */
     private void handleUnrevokeButton(int index) {
         JsonObject vpnUser = userVpnTableView.getItems().get(index);
+        System.out.println(userVpnTableView.getItems().get(index));
         String vpnIp = vpnUser.get("vpnIp").getAsString();
         String username = vpnUser.get("Identity").getAsString();
         try {
@@ -216,18 +239,16 @@ public class VPNController extends MenuController {
     }
     @FXML
     public void listVpn() throws SQLException {
+
         VPNServiceConnection.getVPNUserInformation();
         // Get the list of JSON arrays
         ArrayList<JsonObject> jsonArrayList = VPNServiceConnection.vpnUserJsonList;
-
         // Create an ObservableList to hold the VPN users
         ObservableList<JsonObject> vpnUsers = FXCollections.observableArrayList();
-
         // Iterate over each JSON object
         jsonArrayList.forEach(jsonObject -> {
             // Get the jsonArray for vpnUsers
             JsonArray vpnUsersArray = jsonObject.getAsJsonArray("vpnUsers");
-
             // Iterate over each object in vpnUsers and add it to the ObservableList
             vpnUsersArray.forEach(jsonElement -> {
                 vpnUsers.add(jsonElement.getAsJsonObject());

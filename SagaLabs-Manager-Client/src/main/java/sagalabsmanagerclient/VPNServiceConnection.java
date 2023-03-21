@@ -8,10 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Base64;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 
 public class VPNServiceConnection {
     //static variable to hold VPN user data for all the VPN servers
@@ -19,7 +16,6 @@ public class VPNServiceConnection {
 
     //method to retrieve VPN user data from multiple VPN servers
     public static void getVPNUserInformation() throws SQLException {
-
 
         vpnUserJsonList = new ArrayList<>(); // create a new ArrayList to reset the list
 
@@ -63,13 +59,21 @@ public class VPNServiceConnection {
                 JsonParser jsonParser = new JsonParser();
                 JsonArray vpnUserJsonArray = jsonParser.parse(vpnUserJson).getAsJsonArray();
 
-                //add the lab name and the VPN user data to a JSON object
+                //add the lab name and the VPN user data array to a JSON object
                 JsonObject labVpnUsers = new JsonObject();
                 labVpnUsers.addProperty("labName", labName);
-                labVpnUsers.add("vpnUsers", vpnUserJsonArray);
+                JsonArray vpnUserJsonArrayWithIp = new JsonArray();
+                for (JsonElement vpnUserJsonElement : vpnUserJsonArray) {
+                    JsonObject vpnUserJsonObject = vpnUserJsonElement.getAsJsonObject();
+                    vpnUserJsonObject.addProperty("vpnIp", vpnIp);
+                    vpnUserJsonArrayWithIp.add(vpnUserJsonObject);
+                }
+                labVpnUsers.add("vpnUsers", vpnUserJsonArrayWithIp);
 
                 //add the JSON object to the list of VPN user data for all the VPN servers
-                vpnUserJsonList.add(labVpnUsers.getAsJsonObject());
+                vpnUserJsonList.add(labVpnUsers);
+
+
 
             } catch (Exception e) {
                 //if there was an error, print the stack trace
@@ -79,7 +83,7 @@ public class VPNServiceConnection {
     }
     public static void createUser(String vpnIp, String username) throws IOException {
         String apiUrl = "http://" + vpnIp + "/api/user/create";
-        sendPostRequestWithUsername(apiUrl, username);
+        System.out.println(sendPostRequestWithUsername(apiUrl, username));
     }
 
     public static void downloadConfig(String vpnIp, String username) throws IOException {
@@ -91,14 +95,28 @@ public class VPNServiceConnection {
     public static void revokeCertificate(String vpnIp, String username) throws IOException {
         String apiUrl = "http://" + vpnIp + "/api/user/revoke";
         sendPostRequestWithUsername(apiUrl, username);
+        System.out.println(sendPostRequestWithUsername(apiUrl, username));
+    }
+
+    public static void deleteUser(String vpnIp, String username) throws IOException {
+        String apiUrl = "http://" + vpnIp + "/api/user/delete";
+        sendPostRequestWithUsername(apiUrl, username);
+        System.out.println(sendPostRequestWithUsername(apiUrl, username));
+    }
+
+    public static void rotateCertificate(String vpnIp, String username) throws IOException {
+        String apiUrl = "http://" + vpnIp + "/api/user/rotate";
+        sendPostRequestWithUsername(apiUrl, username);
+        System.out.println(sendPostRequestWithUsername(apiUrl, username));
     }
 
     public static void unrevokeCertificate(String vpnIp, String username) throws IOException {
         String apiUrl = "http://" + vpnIp + "/api/user/unrevoke";
         sendPostRequestWithUsername(apiUrl, username);
+        System.out.println(sendPostRequestWithUsername(apiUrl, username));
     }
 
-    private static String sendPostRequestWithUsername(String apiUrl, String username) throws IOException, IOException {
+    private static String sendPostRequestWithUsername(String apiUrl, String username) throws IOException {
         // Retrieve and encode the API credentials
         String apiCredentials = "sagavpn-api:" + AzureMethods.getKeyVaultSecret("sagavpn-api-key");
         String base64ApiCredentials = Base64.getEncoder().encodeToString(apiCredentials.getBytes(StandardCharsets.UTF_8));
@@ -124,20 +142,23 @@ public class VPNServiceConnection {
         }
 
         // Read the response from the HTTP connection
-        BufferedReader responseReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        StringBuilder responseBuilder = new StringBuilder();
-        String responseLine;
-        while ((responseLine = responseReader.readLine()) != null) {
-            responseBuilder.append(responseLine);
+        ByteArrayOutputStream responseStream = new ByteArrayOutputStream();
+        InputStream is = connection.getInputStream();
+        byte[] buffer = new byte[4096];
+        int bytesRead;
+        while ((bytesRead = is.read(buffer)) != -1) {
+            responseStream.write(buffer, 0, bytesRead);
         }
+        is.close();
         connection.disconnect();
 
-        return responseBuilder.toString();
+        return responseStream.toString(StandardCharsets.UTF_8);
     }
+
     private static void saveConfigFile(String username, String configFileContent) throws IOException {
         File outputFile = new File(username + ".ovpn");
-        try (FileOutputStream fos = new FileOutputStream(outputFile)) {
-            fos.write(configFileContent.getBytes(StandardCharsets.UTF_8));
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
+            writer.write(configFileContent);
         }
     }
 }
