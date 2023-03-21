@@ -23,6 +23,8 @@ import java.util.logging.Filter;
 import java.util.stream.Stream;
 
 public class MachinesController extends MenuController {
+    public Button machinesTurnOn;
+    public Button machinesTurnOff;
     @FXML protected TabPane tabPane;
     @FXML protected Tab allTab;
     @FXML protected TableView<MachinesVM> allTableView;
@@ -148,8 +150,9 @@ public class MachinesController extends MenuController {
         MachinesTab machinesTab = machinesTabs.get(0); // By default all tab
         ArrayList<MachinesVM> machineList = new ArrayList<MachinesVM>();
         machinesTab = getCurrentTab();
-        for (MachinesVM vm :machinesTab.getTableView().getItems()) {
-            if(vm.getSelected()) {
+        for (MachinesVM vm : machinesTab.getTableView().getItems()) {
+            if (vm.getSelected()) {
+                System.out.println("Selected VM ID: " + vm.getId() + ", State: " + vm.getState());
                 machineList.add(vm);
             }
         }
@@ -179,5 +182,22 @@ public class MachinesController extends MenuController {
         nameFilterText.setText("");
         ipFilterText.setText("");
         applyFilter(e);
+    }
+
+    @FXML
+    public void handleTurnOn(ActionEvent event) {
+        ArrayList<MachinesVM> selectedVMs = getSelectedVMs();
+        // Call the method to turn on the selected VMs
+        AzureMethods.turnOnVMs(selectedVMs);
+        System.out.println("Selected VMs: " + selectedVMs);
+    }
+
+    @FXML
+    public void handleTurnOff(ActionEvent event) {
+        ArrayList<MachinesVM> selectedVMs = getSelectedVMs();
+        // Call the method to turn off the selected VMs
+        AzureMethods.deallocateVMs(selectedVMs);
+        System.out.println("Selected VMs: " + selectedVMs);
+
     }
 }

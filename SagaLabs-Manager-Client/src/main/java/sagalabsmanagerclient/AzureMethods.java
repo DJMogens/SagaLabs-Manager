@@ -11,7 +11,6 @@ import com.azure.security.keyvault.secrets.models.KeyVaultSecret;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.sql.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -34,7 +33,6 @@ public class AzureMethods {
     */
 
 
-
     public void getLabDetails(AzureResourceManager azure) {
         System.out.println("choose resource group to get details: ");
         Scanner input = new Scanner(System.in);
@@ -48,7 +46,7 @@ public class AzureMethods {
         System.out.println("Region:  " + resourceGroup.regionName());
     }
 
-    public static String getKeyVaultSecret(String secretName){
+    public static String getKeyVaultSecret(String secretName) {
         // Get the password from Azure Key Vault Secret
         String keyVaultName = "sagalabskeyvault";
         String keyVaultUrl = "https://" + keyVaultName + ".vault.azure.net";
@@ -59,8 +57,6 @@ public class AzureMethods {
         KeyVaultSecret secret = secretClient.getSecret(secretName);
         return secret.getValue();
     }
-
-
 
 
     public void listVMProperties(AzureResourceManager azure) {
@@ -128,4 +124,45 @@ public class AzureMethods {
             return "An error occurred while deallocating virtual machines in resource group " + resourceGroup + ": " + e.getMessage();
         }
     }
+
+    public static void turnOnVMs(ArrayList<MachinesVM> vms) {
+        try {
+            // Create a thread pool with one thread for each virtual machine
+            ExecutorService executorService = Executors.newFixedThreadPool(vms.size());
+
+            // Start all the virtual machines in parallel
+            List<CompletableFuture<Void>> futures = vms.stream()
+                    .filter(vm -> vm.getState().equals("Stopped"))
+                    .map(vm -> CompletableFuture.runAsync(() -> AzureLogin.azure.virtualMachines().getByResourceGroup(vm.getResourceGroup(), vm.getVmName()).start(), executorService))
+                    .toList();
+            CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+            System.out.println("Turning on ");
+            // Shutdown the thread pool
+            executorService.shutdown();
+        } catch (Exception e) {
+            throw new RuntimeException("An error occurred while turning on virtual machines: " + e.getMessage());
+        }
+    }
+
+    public static void deallocateVMs(ArrayList<MachinesVM> vms) {
+        try {
+            // Create a thread pool with one thread for each virtual machine
+            ExecutorService executorService = Executors.newFixedThreadPool(vms.size());
+
+            // Deallocate all the virtual machines in parallel
+            List<CompletableFuture<Void>> futures = vms.stream()
+                    .filter(vm -> vm.getState().equals("Running"))
+                    .map(vm -> CompletableFuture.runAsync(() -> AzureLogin.azure.virtualMachines().getByResourceGroup(vm.getResourceGroup(), vm.getVmName()).deallocate(), executorService))
+                    .toList();
+            CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+            System.out.println("Deallocating ");
+
+            // Shutdown the thread pool
+            executorService.shutdown();
+        } catch (Exception e) {
+            throw new RuntimeException("An error occurred while deallocating virtual machines: " + e.getMessage());
+        }
+    }
+
 }
+

@@ -116,7 +116,6 @@
             <HBox alignment="CENTER" prefHeight="123.0" prefWidth="384.0">
                <children>
                   <Region prefHeight="200.0" prefWidth="20.0" />
-                  <Button mnemonicParsing="false" onAction="#listVpn" text="(Debug) ListVPN" />
                </children>
             </HBox>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="322.0" prefWidth="538.0">
