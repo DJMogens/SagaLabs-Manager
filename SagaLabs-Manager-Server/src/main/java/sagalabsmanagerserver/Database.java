@@ -85,8 +85,8 @@ public class Database {
             // Get all virtual machines in the resource group
             for (VirtualMachine vm : AzureLogin.azure.virtualMachines().listByResourceGroup(rg.name())) {
                 //insert vars into database, or update if a key is duplicated
-                String sql = "INSERT INTO vm (vm_name, powerstate, internal_ip, ostype, resource_group) VALUES (?,?,?,?,?) " +
-                        "ON DUPLICATE KEY UPDATE powerstate=VALUES(powerstate), internal_ip=VALUES(internal_ip), ostype=VALUES(ostype), resource_group=VALUES(resource_group)";
+                String sql = "INSERT INTO vm (vm_name, powerstate, internal_ip, ostype, resource_group, azureID) VALUES (?,?,?,?,?,?) " +
+                        "ON DUPLICATE KEY UPDATE powerstate=VALUES(powerstate), internal_ip=VALUES(internal_ip), ostype=VALUES(ostype), resource_group=VALUES(resource_group),azureID=VALUES(azureID)";
 
                 PreparedStatement stmt = conn.prepareStatement(sql);
                 stmt.setString(1, vm.name());
@@ -100,6 +100,7 @@ public class Database {
                 stmt.setString(3, vm.getPrimaryNetworkInterface().primaryPrivateIP());
                 stmt.setString(4, vm.osType().toString());
                 stmt.setString(5, vm.resourceGroupName());
+                stmt.setString(6, vm.id());
                 stmt.executeUpdate();
             }
             updateLastUpdate(tableName);
