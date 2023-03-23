@@ -8,12 +8,11 @@ import com.azure.security.keyvault.secrets.SecretClient;
 import com.azure.security.keyvault.secrets.SecretClientBuilder;
 import com.azure.security.keyvault.secrets.models.KeyVaultSecret;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 import static sagalabsmanagerclient.AzureLogin.azure;
@@ -125,44 +124,29 @@ public class AzureMethods {
         }
     }
 
-    public static void turnOnVMs(ArrayList<MachinesVM> vms) {
-        try {
-            // Create a thread pool with one thread for each virtual machine
-            ExecutorService executorService = Executors.newFixedThreadPool(vms.size());
 
-            // Start all the virtual machines in parallel
-            List<CompletableFuture<Void>> futures = vms.stream()
-                    .filter(vm -> vm.getState().equals("Stopped"))
-                    .map(vm -> CompletableFuture.runAsync(() -> AzureLogin.azure.virtualMachines().getByResourceGroup(vm.getResourceGroup(), vm.getVmName()).start(), executorService))
-                    .toList();
-            CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
-            System.out.println("Turning on ");
-            // Shutdown the thread pool
-            executorService.shutdown();
-        } catch (Exception e) {
-            throw new RuntimeException("An error occurred while turning on virtual machines: " + e.getMessage());
-        }
+    public static void turnOnVMs(ArrayList<MachinesVM> vms) {
+        ExecutorService executor = Executors.newFixedThreadPool(vms.size());
+        vms.stream()
+                .filter(vm -> vm.getState().equals("deallocated"))
+                .forEach(vm -> executor.submit(() -> {
+                    VirtualMachine virtualMachine = azure.virtualMachines().getById(vm.azureId);
+                    virtualMachine.start();
+                }));
+        executor.shutdown();
     }
 
     public static void deallocateVMs(ArrayList<MachinesVM> vms) {
-        try {
-            // Create a thread pool with one thread for each virtual machine
-            ExecutorService executorService = Executors.newFixedThreadPool(vms.size());
-
-            // Deallocate all the virtual machines in parallel
-            List<CompletableFuture<Void>> futures = vms.stream()
-                    .filter(vm -> vm.getState().equals("Running"))
-                    .map(vm -> CompletableFuture.runAsync(() -> AzureLogin.azure.virtualMachines().getByResourceGroup(vm.getResourceGroup(), vm.getVmName()).deallocate(), executorService))
-                    .toList();
-            CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
-            System.out.println("Deallocating ");
-
-            // Shutdown the thread pool
-            executorService.shutdown();
-        } catch (Exception e) {
-            throw new RuntimeException("An error occurred while deallocating virtual machines: " + e.getMessage());
-        }
+        ExecutorService executor = Executors.newFixedThreadPool(vms.size());
+        vms.stream()
+                .filter(vm -> vm.getState().equals("running"))
+                .forEach(vm -> executor.submit(() -> {
+                    VirtualMachine virtualMachine = azure.virtualMachines().getById(vm.azureId);
+                    virtualMachine.deallocate();
+                }));
+        executor.shutdown();
     }
+
 
 }
 

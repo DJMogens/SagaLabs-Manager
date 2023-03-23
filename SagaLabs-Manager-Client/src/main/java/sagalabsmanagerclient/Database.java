@@ -52,7 +52,8 @@ public class Database {
                     resultSet.getObject("ostype").toString(),
                     resultSet.getObject("powerstate").toString().substring(11),
                     resultSet.getObject("internal_ip").toString(),
-                    resultSet.getObject("resource_group").toString()));
+                    resultSet.getObject("resource_group").toString(),
+                    resultSet.getObject("azureID").toString()));
         }
         return machinesVMs;
     }
