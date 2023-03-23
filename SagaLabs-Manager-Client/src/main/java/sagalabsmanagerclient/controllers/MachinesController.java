@@ -185,19 +185,21 @@ public class MachinesController extends MenuController {
     }
 
     @FXML
-    public void handleTurnOn(ActionEvent event) {
+    public void handleTurnOn(ActionEvent e) {
         ArrayList<MachinesVM> selectedVMs = getSelectedVMs();
         // Call the method to turn on the selected VMs
-        AzureMethods.turnOnVMs(selectedVMs);
+        Runnable turnOnTask = () -> AzureMethods.turnOnVMs(selectedVMs);
+        new Thread(turnOnTask).start();
+
         System.out.println("Selected VMs: " + selectedVMs);
     }
 
     @FXML
-    public void handleTurnOff(ActionEvent event) {
+    public void handleTurnOff(ActionEvent e) {
         ArrayList<MachinesVM> selectedVMs = getSelectedVMs();
         // Call the method to turn off the selected VMs
-        AzureMethods.deallocateVMs(selectedVMs);
+        Runnable turnOffTask = () -> AzureMethods.deallocateVMs(selectedVMs);
+        new Thread(turnOffTask).start();
         System.out.println("Selected VMs: " + selectedVMs);
-
     }
 }
