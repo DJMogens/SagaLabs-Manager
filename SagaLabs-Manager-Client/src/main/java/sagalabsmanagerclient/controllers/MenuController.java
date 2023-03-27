@@ -6,11 +6,11 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class MenuController {
+public abstract class MenuController {
     public void logout(ActionEvent event) throws IOException, SQLException {
-        AzureLogin.loginStatus = false;
-        AzureLogin.azure = null;
-        AzureLogin.tokenCredentialKeyVault = null;
+        AzureLogin.setLoginStatus(false);
+        AzureLogin.setAzure(null);
+        AzureLogin.setTokenCredentialKeyVault(null);
         Database.conn.close();
         ViewSwitcher.switchView(View.LOGIN);
     }

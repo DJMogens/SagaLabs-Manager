@@ -23,18 +23,15 @@ import java.util.logging.Filter;
 import java.util.stream.Stream;
 
 public class MachinesController extends MenuController {
-    public Button machinesTurnOn;
-    public Button machinesTurnOff;
     @FXML protected TabPane tabPane;
     @FXML protected Tab allTab;
     @FXML protected TableView<MachinesVM> allTableView;
-    @FXML public TextField osFilterText;
-    @FXML public TextField stateFilterText;
-    @FXML public TextField nameFilterText;
-    @FXML public TextField ipFilterText;
-    @FXML protected Button filterButton;
+    @FXML private TextField osFilterText;
+    @FXML private TextField stateFilterText;
+    @FXML private TextField nameFilterText;
+    @FXML private TextField ipFilterText;
 
-    public static ArrayList<MachinesTab> machinesTabs = new ArrayList<MachinesTab>();
+    private static ArrayList<MachinesTab> machinesTabs = new ArrayList<MachinesTab>();
 
     public void initialize() throws SQLException {
         initializeTabs();
@@ -74,8 +71,7 @@ public class MachinesController extends MenuController {
     }
 
     private void selectTab(MachinesTab machinesTab) throws SQLException {
-        String resourceGroupName;
-        resourceGroupName = machinesTab.getResourceGroup();
+        String resourceGroupName = machinesTab.getResourceGroup();
         FilteredList<MachinesVM> list = new FilteredList<MachinesVM>(
                 FXCollections.observableArrayList(Database.getMachines(resourceGroupName)),
                 null);
@@ -114,9 +110,8 @@ public class MachinesController extends MenuController {
         Predicate<MachinesVM> ipPredicate = vm -> (ipFilter.isEmpty() || vm.getIp().startsWith(ipFilter));
         Predicate<MachinesVM> rgPredicate = vm -> (tab.getTab().getText().equals("All") || vm.getResourceGroup().equals(tab.getResourceGroup()));
 
-        ((FilteredList<MachinesVM>) tab.getTableView().getItems()).setPredicate(osPredicate.and(statePredicate).and(namePredicate).and(ipPredicate).and(rgPredicate));
-        //FilteredList<MachinesVM> list = new FilteredList<MachinesVM>(FXCollections.observableArrayList(tab.getTableView().getItems()), osPredicate.and(statePredicate).and(namePredicate).and(ipPredicate).and(rgPredicate));
-        //tab.getTableView().setItems(list);
+        FilteredList<MachinesVM> list = new FilteredList<MachinesVM>(FXCollections.observableArrayList(tab.getTableView().getItems()), osPredicate.and(statePredicate).and(namePredicate).and(ipPredicate).and(rgPredicate));
+        tab.getTableView().setItems(list);
 
     }
 

@@ -15,7 +15,6 @@ import java.util.Scanner;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
-import static sagalabsmanagerclient.AzureLogin.azure;
 
 public class AzureMethods {
 
@@ -51,7 +50,7 @@ public class AzureMethods {
         String keyVaultUrl = "https://" + keyVaultName + ".vault.azure.net";
         SecretClient secretClient = new SecretClientBuilder()
                 .vaultUrl(keyVaultUrl)
-                .credential(AzureLogin.tokenCredentialKeyVault)
+                .credential(AzureLogin.getTokenCredentialKeyVault())
                 .buildClient();
         KeyVaultSecret secret = secretClient.getSecret(secretName);
         return secret.getValue();
@@ -66,14 +65,14 @@ public class AzureMethods {
     }
 
     public static PagedIterable<VirtualMachine> getVMsInLab(ResourceGroup resourceGroup) {
-        PagedIterable<VirtualMachine> vms = azure.virtualMachines().listByResourceGroup(String.valueOf(resourceGroup.name()));
+        PagedIterable<VirtualMachine> vms = AzureLogin.getAzure().virtualMachines().listByResourceGroup(String.valueOf(resourceGroup.name()));
         return vms;
     }
 
     public static String turnOnInLab(String resourceGroup) {
         try {
             // Get all the virtual machines in the resource group
-            List<VirtualMachine> vms = azure.virtualMachines().listByResourceGroup(resourceGroup).stream().toList();
+            List<VirtualMachine> vms = AzureLogin.getAzure().virtualMachines().listByResourceGroup(resourceGroup).stream().toList();
 
             // Create a thread pool with one thread for each virtual machine
             ExecutorService executorService = Executors.newFixedThreadPool(vms.size());
@@ -100,7 +99,7 @@ public class AzureMethods {
     public static String turnOffVMsInLab(String resourceGroup) {
         try {
             // Get all the virtual machines in the resource group
-            List<VirtualMachine> vms = azure.virtualMachines().listByResourceGroup(resourceGroup).stream().collect(Collectors.toList());
+            List<VirtualMachine> vms = AzureLogin.getAzure().virtualMachines().listByResourceGroup(resourceGroup).stream().collect(Collectors.toList());
 
             // Create a thread pool with one thread for each virtual machine
             ExecutorService executorService = Executors.newFixedThreadPool(vms.size());
@@ -130,7 +129,7 @@ public class AzureMethods {
         vms.stream()
                 .filter(vm -> vm.getState().equals("deallocated"))
                 .forEach(vm -> executor.submit(() -> {
-                    VirtualMachine virtualMachine = azure.virtualMachines().getById(vm.azureId);
+                    VirtualMachine virtualMachine = AzureLogin.getAzure().virtualMachines().getById(vm.azureId);
                     virtualMachine.start();
                 }));
         executor.shutdown();
@@ -141,7 +140,7 @@ public class AzureMethods {
         vms.stream()
                 .filter(vm -> vm.getState().equals("running"))
                 .forEach(vm -> executor.submit(() -> {
-                    VirtualMachine virtualMachine = azure.virtualMachines().getById(vm.azureId);
+                    VirtualMachine virtualMachine = AzureLogin.getAzure().virtualMachines().getById(vm.azureId);
                     virtualMachine.deallocate();
                 }));
         executor.shutdown();

@@ -20,15 +20,15 @@ import java.util.Collections;
 import java.util.Objects;
 
 public class AzureLogin {
-    public static AzureProfile profile;
-    public static TokenCredential tokenCredential;
-    public static TokenCredential tokenCredentialKeyVault;
-    final public static String tenantId = "43f3cd6e-9092-45ae-b8c1-990bd8b3cdca";
-    final public static String clientId = "4ca9b980-3658-4847-9e7c-33d75a4ea510";
-    final public static String subscriptionId = "06d0a3df-f3c0-4336-927d-db8891937870";
-    public static boolean loginStatus = false;
+    private static AzureProfile profile;
+    private static TokenCredential tokenCredential;
+    private static TokenCredential tokenCredentialKeyVault;
+    final private static String tenantId = "43f3cd6e-9092-45ae-b8c1-990bd8b3cdca";
+    final private static String clientId = "4ca9b980-3658-4847-9e7c-33d75a4ea510";
+    final private static String subscriptionId = "06d0a3df-f3c0-4336-927d-db8891937870";
+    private static boolean loginStatus = false;
 
-    public static AzureResourceManager azure;
+    private static AzureResourceManager azure;
 
 
     public static void buildCredentialsKeyVault() {
@@ -142,5 +142,20 @@ public class AzureLogin {
             LoginController.changeButtonTryAgain();
         }
     }
+    public static void setLoginStatus(boolean bool) {
+        loginStatus = bool;
+    }
 
+    public static TokenCredential getTokenCredentialKeyVault() {
+        return tokenCredentialKeyVault;
+    }
+    public static void setTokenCredentialKeyVault(TokenCredential keyVault) {
+        tokenCredentialKeyVault = keyVault;
+    }
+    public static AzureResourceManager getAzure() {
+        return azure;
+    }
+    public static void setAzure(AzureResourceManager azure) {
+        AzureLogin.azure = azure;
+    }
 }

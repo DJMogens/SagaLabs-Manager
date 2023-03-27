@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class DatabaseController extends MenuController{
 
     @FXML
-    public Label sqlstatus;
+    private Label sqlstatus;
 
     public void ConnectToDatabase(ActionEvent event) throws IOException, SQLException {
         if (Database.login()){
