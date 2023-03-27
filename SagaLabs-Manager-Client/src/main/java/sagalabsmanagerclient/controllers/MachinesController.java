@@ -42,37 +42,23 @@ public class MachinesController extends MenuController {
 
     private void initializeTabs() throws SQLException {
         // Creates tab for all
-        if(machinesTabs.isEmpty()) {
-            MachinesTab machinesAllTab = new MachinesTab(allTab, allTableView);
-            machinesTabs.add(machinesAllTab);
-            selectTab(machinesAllTab);
-            for(String resourceGroup: Database.getResourceGroups()) {
-                Tab tab = new Tab();
-                tab.setText(resourceGroup.substring(0, 10));
-                // Creates tableview under tab
-                TableView<MachinesVM> tableView = new TableView<MachinesVM>();
-                tab.setContent(tableView);
-
-                // Creates columns in tableview
-                initializeColumns(tableView);
-                // Adds tab to pane and tabs array
-                tabPane.getTabs().add(tab);
-                MachinesTab machinesTab = new MachinesTab(resourceGroup, tab, tableView);
-                machinesTabs.add(machinesTab);
-            }
-            setTabSelectionAction();
+        MachinesTab machinesAllTab = new MachinesTab(allTab, allTableView);
+        machinesTabs.add(machinesAllTab);
+        selectTab(machinesAllTab);
+        for(String resourceGroup: Database.getResourceGroups()) {
+            Tab tab = new Tab();
+            tab.setText(resourceGroup.substring(0, 10));
+            // Creates tableview under tab
+            TableView<MachinesVM> tableView = new TableView<MachinesVM>();
+            tab.setContent(tableView);
+            // Creates columns in tableview
+            // Adds tab to pane and tabs array
+            tabPane.getTabs().add(tab);
+            MachinesTab machinesTab = new MachinesTab(resourceGroup, tab, tableView);
+            machinesTab.initializeColumns();
+            machinesTabs.add(machinesTab);
         }
-        else { // If tabs already exist
-            machinesTabs.set(0, new MachinesTab(allTab, allTableView));
-            selectTab(machinesTabs.get(0));
-            System.out.println(machinesTabs.get(0).getTableView().getItems());
-            for(MachinesTab tab: machinesTabs.subList(1, machinesTabs.size())) {
-                tab.getTab().setContent(tab.getTableView());
-                initializeColumns(tab.getTableView());
-                tabPane.getTabs().add(tab.getTab());
-                setTabSelectionAction();
-            }
-        }
+        setTabSelectionAction();
     }
 
     private void setTabSelectionAction() {
@@ -87,57 +73,13 @@ public class MachinesController extends MenuController {
         }
     }
 
-    private void initializeColumns(TableView<MachinesVM> tableView) {
-        TableColumn<MachinesVM, CheckBox> selectColumn = new TableColumn<MachinesVM, CheckBox>();
-        selectColumn.setPrefWidth(50.0);
-        selectColumn.setCellValueFactory(new PropertyValueFactory<>("select"));
-
-        TableColumn<MachinesVM, String> idColumn = new TableColumn<MachinesVM, String>("ID");
-        idColumn.setPrefWidth(20.0);
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-
-        TableColumn<MachinesVM, String> vmColumn = new TableColumn<MachinesVM, String>("Machine Name");
-        vmColumn.setPrefWidth(250.0);
-        vmColumn.setCellValueFactory(new PropertyValueFactory<>("vmName"));
-
-        TableColumn<MachinesVM, OSType> osColumn = new TableColumn<MachinesVM, OSType>("OS");
-        osColumn.setPrefWidth(100.0);
-        osColumn.setCellValueFactory(new PropertyValueFactory<>("os"));
-
-        TableColumn<MachinesVM, String> stateColumn = new TableColumn<MachinesVM, String>("State");
-        stateColumn.setPrefWidth(99.0);
-        stateColumn.setCellValueFactory(new PropertyValueFactory<>("state"));
-
-        TableColumn<MachinesVM, String> rgColumn = new TableColumn<MachinesVM, String>("Resource Group");
-        rgColumn.setPrefWidth(200.0);
-        rgColumn.setCellValueFactory(new PropertyValueFactory<>("resourceGroup"));
-
-        TableColumn<MachinesVM, String> ipColumn = new TableColumn<MachinesVM, String>("IP Address");
-        ipColumn.setPrefWidth(200.0);
-        ipColumn.setCellValueFactory(new PropertyValueFactory<>("ip"));
-
-        tableView.getColumns().add(selectColumn);
-        tableView.getColumns().add(idColumn);
-        tableView.getColumns().add(vmColumn);
-        tableView.getColumns().add(osColumn);
-        tableView.getColumns().add(stateColumn);
-        tableView.getColumns().add(ipColumn);
-        tableView.getColumns().add(rgColumn);
-    }
-
     private void selectTab(MachinesTab machinesTab) throws SQLException {
-        // For tab "All"
-        if(machinesTab.getTab().getText().equals("All") && machinesTab.getTableView().getItems().isEmpty()) {
-            String resourceGroupName;
-            resourceGroupName = machinesTab.resourceGroup;
-            FilteredList<MachinesVM> list = new FilteredList<MachinesVM>(
-                    FXCollections.observableArrayList(Database.getMachines(resourceGroupName)),
-                    null);
-            machinesTab.getTableView().setItems(list);
-        } else { // For any other tab (specific lab)
-            FilteredList<MachinesVM> newList = (FilteredList<MachinesVM>) machinesTabs.get(0).getTableView().getItems();
-            machinesTab.getTableView().setItems(newList);
-        }
+        String resourceGroupName;
+        resourceGroupName = machinesTab.getResourceGroup();
+        FilteredList<MachinesVM> list = new FilteredList<MachinesVM>(
+                FXCollections.observableArrayList(Database.getMachines(resourceGroupName)),
+                null);
+        machinesTab.getTableView().setItems(list);
         applyFilter(new ActionEvent());
     }
 
@@ -147,9 +89,8 @@ public class MachinesController extends MenuController {
 
     // METHOD TO RETURN VMs WITH CHECKMARK. Currently returns MachinesVM objects.
     private ArrayList<MachinesVM> getSelectedVMs() {
-        MachinesTab machinesTab = machinesTabs.get(0); // By default all tab
         ArrayList<MachinesVM> machineList = new ArrayList<MachinesVM>();
-        machinesTab = getCurrentTab();
+        MachinesTab machinesTab = getCurrentTab();
         for (MachinesVM vm : machinesTab.getTableView().getItems()) {
             if (vm.getSelected()) {
                 System.out.println("Selected VM ID: " + vm.getId() + ", State: " + vm.getState());
@@ -174,6 +115,9 @@ public class MachinesController extends MenuController {
         Predicate<MachinesVM> rgPredicate = vm -> (tab.getTab().getText().equals("All") || vm.getResourceGroup().equals(tab.getResourceGroup()));
 
         ((FilteredList<MachinesVM>) tab.getTableView().getItems()).setPredicate(osPredicate.and(statePredicate).and(namePredicate).and(ipPredicate).and(rgPredicate));
+        //FilteredList<MachinesVM> list = new FilteredList<MachinesVM>(FXCollections.observableArrayList(tab.getTableView().getItems()), osPredicate.and(statePredicate).and(namePredicate).and(ipPredicate).and(rgPredicate));
+        //tab.getTableView().setItems(list);
+
     }
 
     public void resetFilters(ActionEvent e) throws SQLException {

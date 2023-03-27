@@ -36,4 +36,7 @@ public class MachinesVM {
     public boolean getSelected() { return select.isSelected();}
     public String getIp() { return ip; }
     public String getResourceGroup() { return resourceGroup;}
+    public void setId(String id) {
+        this.id = id;
+    }
 }
