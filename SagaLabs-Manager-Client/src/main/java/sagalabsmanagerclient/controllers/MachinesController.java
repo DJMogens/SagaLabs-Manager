@@ -23,6 +23,8 @@ import java.util.logging.Filter;
 import java.util.stream.Stream;
 
 public class MachinesController extends MenuController {
+    public Button runScriptButton;
+    public TextArea scriptField;
     @FXML protected TabPane tabPane;
     @FXML protected Tab allTab;
     @FXML protected TableView<MachinesVM> allTableView;

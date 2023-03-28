@@ -207,13 +207,13 @@
                   <content>
                         <VBox alignment="CENTER" prefHeight="749.0" prefWidth="538.0">
                            <children>
-                              <TextArea prefHeight="156.0" prefWidth="520.0" promptText="Type command to run on selected machines:" style="-fx-background-color: 55;" styleClass="text-area" stylesheets="@Stylesheet.css">
+                              <TextArea fx:id="scriptField" prefHeight="156.0" prefWidth="520.0" promptText="Type command to run on selected machines:" style="-fx-background-color: 55;" styleClass="text-area" stylesheets="@Stylesheet.css">
                                  <font>
                                     <Font size="28.0" />
                                  </font>
                               </TextArea>
                               <Region prefHeight="15.0" prefWidth="518.0" />
-                              <Button mnemonicParsing="false" prefHeight="65.0" prefWidth="134.0" styleClass="button1" text="Run">
+                              <Button fx:id="runScriptButton" mnemonicParsing="false" prefHeight="65.0" prefWidth="134.0" styleClass="button1" text="Run">
                                  <font>
                                     <Font size="30.0" />
                                  </font>
