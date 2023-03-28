@@ -26,6 +26,7 @@ public class Database {
     }
 
     public static boolean login() throws SQLException {
+            conn.close();
             // Open a connection
             System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL, dbUsername, dbPassword);
@@ -35,6 +36,7 @@ public class Database {
             return false;
     }
     public static ArrayList<MachinesVM> getMachines(String resourceGroup) throws SQLException {
+        login();
         ArrayList<MachinesVM> machinesVMs = new ArrayList<MachinesVM>();
         String sql;
         if(resourceGroup == null) {
@@ -59,6 +61,7 @@ public class Database {
     }
 
     public static ArrayList<String> getResourceGroups() throws SQLException {
+        login();
         ArrayList<String> resourceGroups = new ArrayList<String>();
         ResultSet resultSet = executeSql("select distinct resource_group from vm");
         while(resultSet.next()) {
@@ -67,6 +70,7 @@ public class Database {
         return resourceGroups;
     }
     public static ResultSet executeSql(String sql) throws SQLException {
+        login();
         Statement statement = conn.createStatement();
         return statement.executeQuery(sql);
     }
