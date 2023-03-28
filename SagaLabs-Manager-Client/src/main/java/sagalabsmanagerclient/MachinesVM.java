@@ -10,7 +10,8 @@ public class MachinesVM {
     private String state;
     private String ip;
     private String resourceGroup;
-    public String azureId; //the azure specific ID
+    private String azureId; //the azure specific ID
+    private String lastScriptOutput; //the azure specific ID
 
     public MachinesVM(String id, String vmName, String os, String state, String ip, String resourceGroup, String azureId) {
         this.select = new CheckBox("");
@@ -36,7 +37,12 @@ public class MachinesVM {
     public boolean getSelected() { return select.isSelected();}
     public String getIp() { return ip; }
     public String getResourceGroup() { return resourceGroup;}
+    public String getAzureId() { return azureId;}
+    public String getLastScriptOutput() { return lastScriptOutput;}
     public void setId(String id) {
         this.id = id;
+    }
+    public void setLastScriptOutput(String lastScriptOutput) {
+        this.id = lastScriptOutput;
     }
 }

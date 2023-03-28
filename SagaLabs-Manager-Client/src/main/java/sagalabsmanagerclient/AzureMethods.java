@@ -129,7 +129,7 @@ public class AzureMethods {
         vms.stream()
                 .filter(vm -> vm.getState().equals("deallocated"))
                 .forEach(vm -> executor.submit(() -> {
-                    VirtualMachine virtualMachine = AzureLogin.getAzure().virtualMachines().getById(vm.azureId);
+                    VirtualMachine virtualMachine = AzureLogin.getAzure().virtualMachines().getById(vm.getAzureId());
                     virtualMachine.start();
                 }));
         executor.shutdown();
@@ -140,7 +140,7 @@ public class AzureMethods {
         vms.stream()
                 .filter(vm -> vm.getState().equals("running"))
                 .forEach(vm -> executor.submit(() -> {
-                    VirtualMachine virtualMachine = AzureLogin.getAzure().virtualMachines().getById(vm.azureId);
+                    VirtualMachine virtualMachine = AzureLogin.getAzure().virtualMachines().getById(vm.getAzureId());
                     virtualMachine.deallocate();
                 }));
         executor.shutdown();
