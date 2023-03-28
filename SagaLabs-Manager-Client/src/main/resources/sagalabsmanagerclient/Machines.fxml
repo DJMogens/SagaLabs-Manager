@@ -179,7 +179,7 @@
                   </VBox>
                </children>
             </HBox>
-            <Accordion maxHeight="300.0" maxWidth="540.0" prefHeight="300.0" prefWidth="540.0" scaleShape="false">
+            <Accordion maxHeight="584.0" maxWidth="540.0" prefHeight="584.0" prefWidth="540.0" scaleShape="false">
               <panes>
                 <TitledPane animated="false" maxHeight="300.0" maxWidth="540.0" prefHeight="300.0" prefWidth="540.0" text="Power Controls">
                   <content>
@@ -203,21 +203,21 @@
                         <Font size="20.0" />
                      </font>
                 </TitledPane>
-                <TitledPane animated="false" maxHeight="100.0" maxWidth="540.0" prefHeight="300.0" prefWidth="540.0" scaleShape="false" text="Run Commands">
+                <TitledPane animated="false" maxHeight="420.0" maxWidth="540.0" prefHeight="420.0" prefWidth="540.0" scaleShape="false" text="Run Commands">
                   <content>
-                        <VBox alignment="CENTER" prefHeight="749.0" prefWidth="538.0">
+                        <VBox alignment="CENTER" prefHeight="393.0" prefWidth="540.0">
                            <children>
-                              <TextArea fx:id="scriptField" prefHeight="156.0" prefWidth="520.0" promptText="Type command to run on selected machines:" style="-fx-background-color: 55;" styleClass="text-area" stylesheets="@Stylesheet.css">
+                              <TextArea fx:id="scriptField" prefHeight="156.0" prefWidth="520.0" promptText="Paste a script to run on selected machines:" style="-fx-background-color: 55;" styleClass="text-area" stylesheets="@Stylesheet.css">
                                  <font>
-                                    <Font size="28.0" />
+                                    <Font size="14.0" />
                                  </font>
                               </TextArea>
-                              <Region prefHeight="15.0" prefWidth="518.0" />
                               <Button fx:id="runScriptButton" mnemonicParsing="false" onAction="#handleRunScript" prefHeight="65.0" prefWidth="134.0" styleClass="button1" text="Run">
                                  <font>
                                     <Font size="30.0" />
                                  </font>
                               </Button>
+                              <TextArea fx:id="scriptOutputField" prefHeight="105.0" prefWidth="520.0" promptText="Output will be displayed here" style="-fx-background-color: 55;" styleClass="text-area" stylesheets="@Stylesheet.css" />
                            </children>
                         </VBox>
                   </content>
@@ -227,7 +227,6 @@
                 </TitledPane>
               </panes>
             </Accordion>
-            <Region prefHeight="282.0" prefWidth="540.0" />
          </children>
       </VBox>
    </right>

@@ -23,8 +23,9 @@ import java.util.logging.Filter;
 import java.util.stream.Stream;
 
 public class MachinesController extends MenuController {
-    public Button runScriptButton;
-    public TextArea scriptField;
+    @FXML protected Button runScriptButton;
+    @FXML protected TextArea scriptField;
+    @FXML protected TextArea scriptOutputField;
     @FXML protected TabPane tabPane;
     @FXML protected Tab allTab;
     @FXML protected TableView<MachinesVM> allTableView;
@@ -50,7 +51,7 @@ public class MachinesController extends MenuController {
             // Creates tableview under tab
             TableView<MachinesVM> tableView = new TableView<MachinesVM>();
             tab.setContent(tableView);
-            // Creates columns in tableview
+            // Creates columns in tableviewS
             // Adds tab to pane and tabs array
             tabPane.getTabs().add(tab);
             MachinesTab machinesTab = new MachinesTab(resourceGroup, tab, tableView);
@@ -148,10 +149,16 @@ public class MachinesController extends MenuController {
     public void handleRunScript(ActionEvent e) {
         ArrayList<MachinesVM> selectedVMs = getSelectedVMs();
         ArrayList<String> outputOfRunScript = RunCommand.runScriptOnVms(selectedVMs, scriptField.getText());
+
+        StringBuilder outputStringBuilder = new StringBuilder();
         assert outputOfRunScript != null;
         for (String output : outputOfRunScript) {
-            System.out.println(output);
+            outputStringBuilder.append(output).append(System.lineSeparator());
         }
+        String outputString = outputStringBuilder.toString();
+        System.out.println(outputString);
+        scriptOutputField.setText("");
+        scriptOutputField.appendText(outputString);
     }
 
 
