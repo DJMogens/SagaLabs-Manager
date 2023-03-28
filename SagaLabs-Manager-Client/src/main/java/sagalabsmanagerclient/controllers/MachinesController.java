@@ -143,4 +143,12 @@ public class MachinesController extends MenuController {
         new Thread(turnOffTask).start();
         System.out.println("Selected VMs: " + selectedVMs);
     }
+
+    @FXML
+    public void handleRunScript(ActionEvent e) {
+
+        ArrayList<MachinesVM> selectedVMs = getSelectedVMs();
+        String runScript = RunCommand.runCommandOnVM(selectedVMs.get(0),scriptField.getText());
+    }
+
 }
