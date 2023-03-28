@@ -146,9 +146,13 @@ public class MachinesController extends MenuController {
 
     @FXML
     public void handleRunScript(ActionEvent e) {
-
         ArrayList<MachinesVM> selectedVMs = getSelectedVMs();
-        String runScript = RunCommand.runCommandOnVM(selectedVMs.get(0),scriptField.getText());
+        ArrayList<String> outputOfRunScript = RunCommand.runScriptOnVms(selectedVMs, scriptField.getText());
+        assert outputOfRunScript != null;
+        for (String output : outputOfRunScript) {
+            System.out.println(output);
+        }
     }
+
 
 }
