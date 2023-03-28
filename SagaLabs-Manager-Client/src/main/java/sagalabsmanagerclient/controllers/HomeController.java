@@ -27,7 +27,7 @@ public class HomeController extends MenuController {
 
     private VBox createLabsVBox() throws SQLException {
         // Execute a SQL query to retrieve information about labs
-        ResultSet labs = Database.executeSql("SELECT LabName, vpnRunning, VmCount FROM Labs");
+        ResultSet labs = Database.executeSql("SELECT LabName, vpnRunning, VmCount, LabVPN FROM Labs");
         // Create a VBox to hold all the lab information boxes
         VBox vbox = new VBox();
         vbox.setSpacing(10);
@@ -46,6 +46,7 @@ public class HomeController extends MenuController {
     private HBox createLabHBox(ResultSet labs) throws SQLException {
         // Retrieve lab information from the ResultSet
         String labName = labs.getString("LabName");
+        String vpnIp = labs.getString("LabVPN");
         boolean vpnRunning = labs.getBoolean("vpnRunning");
         int vmCount = labs.getInt("VmCount");
         // Create an HBox to hold all the lab information elements
@@ -55,7 +56,7 @@ public class HomeController extends MenuController {
         // Create a colored Rectangle to represent the VPN status
         Rectangle box = createVpnStatusRectangle(vpnRunning);
         // Create a VBox to hold all the lab labels
-        VBox labelBox = createLabelsVBox(labName, vpnRunning, vmCount);
+        VBox labelBox = createLabelsVBox(labName, vpnIp, vpnRunning, vmCount);
         // Create buttons to turn on/off all VMs for this lab
         Button turnOnButton = createTurnOnButton(labName);
         Button turnOffButton = createTurnOffButton(labName);
@@ -70,21 +71,24 @@ public class HomeController extends MenuController {
         return new Rectangle(100, 100, vpnRunning ? Color.GREEN : Color.BLUE);
     }
 
-    private VBox createLabelsVBox(String labName, boolean vpnRunning, int vmCount) {
+    private VBox createLabelsVBox(String labName, String vpnIp, boolean vpnRunning, int vmCount) {
         // Create a VBox to hold all the lab labels
         VBox labelBox = new VBox();
         labelBox.setSpacing(5);
         // Create a label for the lab name and set its style
         Label nameLabel = new Label(labName);
         nameLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+        // Create a label for the lab name and set its style
+        Label vpnIpLabel = new Label("IP: " + vpnIp);
+        nameLabel.setStyle("-fx-font-size: 13px; -fx-font-weight: bold;");
         // Create a label for the number of VMs and set its style
         Label vmLabel = new Label("VM's: " + vmCount);
-        vmLabel.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
+        vmLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
         // Create a label for the VPN status and set its color
         Label vpnStatusLabel = new Label(vpnRunning ? "VPN: Running" : "VPN: Down");
         vpnStatusLabel.setTextFill(vpnRunning ? Color.GREEN : Color.RED);
         // Add all the labels to the VBox
-        labelBox.getChildren().addAll(nameLabel, vmLabel, vpnStatusLabel);
+        labelBox.getChildren().addAll(nameLabel,vpnIpLabel, vpnStatusLabel, vmLabel);
         // Return the created VBox containing lab labels
         return labelBox;
     }
