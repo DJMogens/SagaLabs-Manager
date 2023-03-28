@@ -108,7 +108,7 @@ public class MachinesController extends MenuController {
 
         Predicate<MachinesVM> osPredicate = vm -> (osFilter.isEmpty() || vm.getOs().equalsIgnoreCase(osFilter));
         Predicate<MachinesVM> statePredicate = vm -> (stateFilter.isEmpty() || vm.getState().equalsIgnoreCase(stateFilter));
-        Predicate<MachinesVM> namePredicate = vm -> (nameFilter.isEmpty() || vm.getVmName().contains(nameFilter));
+        Predicate<MachinesVM> namePredicate = vm -> (nameFilter.isEmpty() || vm.getVmName().toLowerCase().contains(nameFilter.toLowerCase())); //set both to lowercase to ignore the casing
         Predicate<MachinesVM> ipPredicate = vm -> (ipFilter.isEmpty() || vm.getIp().startsWith(ipFilter));
         Predicate<MachinesVM> rgPredicate = vm -> (tab.getTab().getText().equals("All") || vm.getResourceGroup().equals(tab.getResourceGroup()));
 
