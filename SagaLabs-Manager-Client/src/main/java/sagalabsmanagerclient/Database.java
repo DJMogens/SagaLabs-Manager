@@ -14,7 +14,8 @@ public class Database {
     // Database credentials
     private static final String DB_URL = "jdbc:mysql://sagadb.sagalabs.dk:42069/sagadb";
     private static final String dbUsername = "sagalabs-manager";
-    static String dbPassword = AzureMethods.getKeyVaultSecret("sagalabs-manager-SQL-pw");
+    private static AzureMethods azureMethods = new AzureMethods();
+    static String dbPassword = azureMethods.getKeyVaultSecret("sagalabs-manager-SQL-pw");
     public static Connection conn;
 
     static {

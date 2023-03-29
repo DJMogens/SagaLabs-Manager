@@ -19,6 +19,7 @@ public class HomeController extends MenuController {
 
     @FXML
     private AnchorPane anchorHome;
+    private final AzureMethods azureMethods = new AzureMethods();
 
     public void initialize() throws SQLException {
         VBox vbox = createLabsVBox();
@@ -101,7 +102,7 @@ public class HomeController extends MenuController {
         turnOnButton.setOnAction(event -> {
             // Create a Runnable task to turn on all VMs in the specified lab
             Runnable task = () -> {
-                AzureMethods.turnOnInLab(labName);
+                azureMethods.turnOnInLab(labName);
             };
             // Start a new thread to execute the task
             Thread thread = new Thread(task);
@@ -118,7 +119,7 @@ public class HomeController extends MenuController {
         turnOffButton.setOnAction(event -> {
             // Create a Runnable task to turn off all VMs in the specified lab
             Runnable task = () -> {
-                AzureMethods.turnOffVMsInLab(labName);
+                azureMethods.turnOffVMsInLab(labName);
             };
             // Start a new thread to execute the task
             Thread thread = new Thread(task);

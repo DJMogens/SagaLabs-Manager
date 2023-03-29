@@ -34,7 +34,7 @@ public class MachinesController extends MenuController {
     @FXML private TextField stateFilterText;
     @FXML private TextField nameFilterText;
     @FXML private TextField ipFilterText;
-
+    private final AzureMethods azureMethods = new AzureMethods();
     private static ArrayList<MachinesTab> machinesTabs = new ArrayList<MachinesTab>();
 
     public void initialize() throws SQLException {
@@ -178,7 +178,7 @@ public class MachinesController extends MenuController {
     public void handleTurnOn(ActionEvent e) {
         ArrayList<MachinesVM> selectedVMs = getSelectedVMs();
         // Call the method to turn on the selected VMs
-        Runnable turnOnTask = () -> AzureMethods.turnOnVMs(selectedVMs);
+        Runnable turnOnTask = () -> azureMethods.turnOnVMs(selectedVMs);
         new Thread(turnOnTask).start();
 
         System.out.println("Selected VMs: " + selectedVMs);
@@ -188,14 +188,13 @@ public class MachinesController extends MenuController {
     public void handleTurnOff(ActionEvent e) {
         ArrayList<MachinesVM> selectedVMs = getSelectedVMs();
         // Call the method to turn off the selected VMs
-        Runnable turnOffTask = () -> AzureMethods.deallocateVMs(selectedVMs);
+        Runnable turnOffTask = () -> azureMethods.deallocateVMs(selectedVMs);
         new Thread(turnOffTask).start();
         System.out.println("Selected VMs: " + selectedVMs);
     }
 
     @FXML
     public void handleRunScript(ActionEvent e) {
-        AzureMethods azureMethods = new AzureMethods();
         String output = azureMethods.runScript(getSelectedVMs(), scriptField.getText());
         scriptOutputField.setText("");
         scriptOutputField.appendText(output);

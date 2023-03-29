@@ -18,20 +18,7 @@ import java.util.stream.Collectors;
 
 public class AzureMethods {
 
-    public static List<String[]> labResourceGroups = new ArrayList<>(); //string array with names and ids of the resource groups that are labs (base on tag in azure)
-
-    /*DEPRECATED, new is listResourceGroupsWithLabTag
-    public void listAllResourceGroups(AzureResourceManager azure) {
-        System.out.println("Listing resource groups...");
-        for (com.azure.resourcemanager.resources.models.ResourceGroup resourceGroup : azure.resourceGroups().list()) {//printer alle resource groups
-            System.out.printf("Resource group name: %s, location: %s%n",
-                    resourceGroup.name(), resourceGroup.regionName());
-        }
-    }
-    */
-
-
-    public void getLabDetails(AzureResourceManager azure) {
+    private void getLabDetails(AzureResourceManager azure) {
         System.out.println("choose resource group to get details: ");
         Scanner input = new Scanner(System.in);
         String rgName = input.next();
@@ -44,7 +31,7 @@ public class AzureMethods {
         System.out.println("Region:  " + resourceGroup.regionName());
     }
 
-    public static String getKeyVaultSecret(String secretName) {
+    public String getKeyVaultSecret(String secretName) {
         // Get the password from Azure Key Vault Secret
         String keyVaultName = "sagalabskeyvault";
         String keyVaultUrl = "https://" + keyVaultName + ".vault.azure.net";
@@ -64,12 +51,12 @@ public class AzureMethods {
 
     }
 
-    public static PagedIterable<VirtualMachine> getVMsInLab(ResourceGroup resourceGroup) {
+    public PagedIterable<VirtualMachine> getVMsInLab(ResourceGroup resourceGroup) {
         PagedIterable<VirtualMachine> vms = AzureLogin.getAzure().virtualMachines().listByResourceGroup(String.valueOf(resourceGroup.name()));
         return vms;
     }
 
-    public static String turnOnInLab(String resourceGroup) {
+    public String turnOnInLab(String resourceGroup) {
         try {
             // Get all the virtual machines in the resource group
             List<VirtualMachine> vms = AzureLogin.getAzure().virtualMachines().listByResourceGroup(resourceGroup).stream().toList();
@@ -96,7 +83,7 @@ public class AzureMethods {
         }
     }
 
-    public static String turnOffVMsInLab(String resourceGroup) {
+    public String turnOffVMsInLab(String resourceGroup) {
         try {
             // Get all the virtual machines in the resource group
             List<VirtualMachine> vms = AzureLogin.getAzure().virtualMachines().listByResourceGroup(resourceGroup).stream().collect(Collectors.toList());
@@ -124,7 +111,7 @@ public class AzureMethods {
     }
 
 
-    public static void turnOnVMs(ArrayList<MachinesVM> vms) {
+    public void turnOnVMs(ArrayList<MachinesVM> vms) {
         ExecutorService executor = Executors.newFixedThreadPool(vms.size());
         vms.stream()
                 .filter(vm -> vm.getState().equals("deallocated"))
@@ -135,7 +122,7 @@ public class AzureMethods {
         executor.shutdown();
     }
 
-    public static void deallocateVMs(ArrayList<MachinesVM> vms) {
+    public void deallocateVMs(ArrayList<MachinesVM> vms) {
         ExecutorService executor = Executors.newFixedThreadPool(vms.size());
         vms.stream()
                 .filter(vm -> vm.getState().equals("running"))
@@ -155,8 +142,7 @@ public class AzureMethods {
         for (String output : outputOfRunScript) {
         outputStringBuilder.append(output).append(System.lineSeparator());
     }
-    String outputString = outputStringBuilder.toString();
-        return outputString;
+        return outputStringBuilder.toString();
     }
 }
 

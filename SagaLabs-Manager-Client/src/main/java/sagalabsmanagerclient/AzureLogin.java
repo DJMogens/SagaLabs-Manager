@@ -27,6 +27,7 @@ public class AzureLogin {
     final private static String clientId = "4ca9b980-3658-4847-9e7c-33d75a4ea510";
     final private static String subscriptionId = "06d0a3df-f3c0-4336-927d-db8891937870";
     private static boolean loginStatus = false;
+    private static AzureMethods azureMethods = new AzureMethods();
 
     private static AzureResourceManager azure;
 
@@ -60,7 +61,7 @@ public class AzureLogin {
         ClientSecretCredential credential = new ClientSecretCredentialBuilder()
                 .tenantId(tenantId)
                 .clientId(clientId)
-                .clientSecret(AzureMethods.getKeyVaultSecret("sagalabs-manager-client-secret"))
+                .clientSecret(azureMethods.getKeyVaultSecret("sagalabs-manager-client-secret"))
                 .build();
 
         // Set the scopes for which the access token is requested
@@ -83,7 +84,7 @@ public class AzureLogin {
 }
 
     public static void login() {
-        Thread azureLoginThread = new Thread(AzureLogin::startLogin);
+        Thread azureLoginThread = new Thread(() -> startLogin());
         //
         //tilføj kode der omskriver login til try again knap
         //
