@@ -1,14 +1,41 @@
 package sagalabsmanagerclient.controllers;
 
+import javafx.application.Platform;
 import sagalabsmanagerclient.*;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public abstract class MenuController implements Refreshable {
-
+    public Thread refreshing;
     public boolean pageIsSelected = false;
+    public void addRefreshThread() {
+        refreshing = new Thread(() -> {
+            while(pageIsSelected) {
+                try {
+                    Thread.sleep(10000);
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                    LocalDateTime now = LocalDateTime.now();
+                    System.out.println("REFRESHING " + this + " at " + dtf.format(now));
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                refresh();
+                            } catch (SQLException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    });
+                } catch (InterruptedException ignored) {}
+            }
+        });
+        refreshing.start();
+    }
+
     public void logout(ActionEvent event) throws IOException, SQLException {
         AzureLogin.setLoginStatus(false);
         AzureLogin.setAzure(null);
@@ -16,20 +43,27 @@ public abstract class MenuController implements Refreshable {
         Database.conn.close();
         ViewSwitcher.switchView(View.LOGIN);
     }
-    public void home(ActionEvent event) throws IOException {
-        pageIsSelected = false;
+    public void switchToHome(ActionEvent event) throws IOException {
+        stopRefreshing();
         ViewSwitcher.switchView(View.HOME);
     }
     public void switchToMachine(ActionEvent event) throws IOException {
-        pageIsSelected = false;
+        stopRefreshing();
         ViewSwitcher.switchView(View.MACHINES);
     }
     public void switchToSQL(ActionEvent event) throws IOException {
-        pageIsSelected = false;
+        stopRefreshing();
         ViewSwitcher.switchView(View.SQLSCENE);
     }
     public void switchToVPN(ActionEvent event) throws IOException {
-        pageIsSelected = false;
+        stopRefreshing();
         ViewSwitcher.switchView(View.VPN);
+    }
+    public void stopRefreshing() {
+        pageIsSelected = false;
+        try {
+            refreshing.interrupt();
+        }
+        catch(NullPointerException ignored) {}
     }
 }

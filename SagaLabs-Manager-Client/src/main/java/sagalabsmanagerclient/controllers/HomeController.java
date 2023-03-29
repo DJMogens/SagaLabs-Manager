@@ -2,6 +2,7 @@ package sagalabsmanagerclient.controllers;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -14,6 +15,7 @@ import sagalabsmanagerclient.Database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class HomeController extends MenuController {
 
@@ -22,8 +24,15 @@ public class HomeController extends MenuController {
     private final AzureMethods azureMethods = new AzureMethods();
 
     public void initialize() throws SQLException {
+        pageIsSelected = true;
         VBox vbox = createLabsVBox();
         anchorHome.getChildren().add(vbox);
+        addRefreshThread();
+    }
+
+    public void refresh() throws SQLException {
+        anchorHome.getChildren().clear();
+        anchorHome.getChildren().add(createLabsVBox());
     }
 
     private VBox createLabsVBox() throws SQLException {
@@ -128,8 +137,6 @@ public class HomeController extends MenuController {
         // Return the created button with the event handler
         return turnOffButton;
     }
-    public void refresh() {
 
-    }
 
 }

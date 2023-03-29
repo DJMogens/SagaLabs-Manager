@@ -27,7 +27,7 @@ public class AzureLogin {
     final private static String clientId = "4ca9b980-3658-4847-9e7c-33d75a4ea510";
     final private static String subscriptionId = "06d0a3df-f3c0-4336-927d-db8891937870";
     private static boolean loginStatus = false;
-    private static AzureMethods azureMethods = new AzureMethods();
+    private final static AzureMethods azureMethods = new AzureMethods();
 
     private static AzureResourceManager azure;
 

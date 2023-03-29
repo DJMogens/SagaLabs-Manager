@@ -78,7 +78,7 @@
       <VBox alignment="TOP_RIGHT" prefHeight="1080.0" prefWidth="280.0" styleClass="root2" BorderPane.alignment="CENTER">
          <children>
             <Region prefHeight="100.0" prefWidth="280.0" />
-                <Button mnemonicParsing="false" onAction="#home" prefHeight="100.0" prefWidth="240.0" styleClass="button3" text="Home">
+                <Button mnemonicParsing="false" onAction="#switchToHome" prefHeight="100.0" prefWidth="240.0" styleClass="button3" text="Home">
                <font>
                   <Font size="33.0" />
                </font>

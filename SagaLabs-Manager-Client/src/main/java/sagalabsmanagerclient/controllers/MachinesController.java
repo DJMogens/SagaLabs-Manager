@@ -40,27 +40,7 @@ public class MachinesController extends MenuController {
     public void initialize() throws SQLException {
         pageIsSelected = true;
         initializeTabs();
-        Thread refreshing = new Thread( () -> {
-           while(pageIsSelected) {
-               try {
-                   Thread.sleep(10000);
-                   System.out.println("REFRESHING NOW");
-                   Platform.runLater(new Runnable() {
-                       @Override
-                       public void run() {
-                           try {
-                               refresh();
-                           } catch (SQLException e) {
-                               throw new RuntimeException(e);
-                           }
-                       }
-                   });
-               } catch (InterruptedException e) {
-                   throw new RuntimeException(e);
-               }
-           }
-        });
-        refreshing.start();
+        addRefreshThread();
     }
     public void refresh() throws SQLException {
         selectTab(getCurrentTab());
