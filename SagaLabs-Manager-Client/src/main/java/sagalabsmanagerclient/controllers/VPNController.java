@@ -322,5 +322,7 @@ public class VPNController extends MenuController {
         //Update the table with listVpn
         listVpn();
     }
+    public void refresh() {
 
+    }
 }

@@ -3,6 +3,7 @@ package sagalabsmanagerclient.controllers;
 import com.azure.resourcemanager.compute.models.VirtualMachine;
 import com.azure.resourcemanager.containerservice.models.OSType;
 import com.azure.resourcemanager.resources.models.ResourceGroup;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -37,7 +38,33 @@ public class MachinesController extends MenuController {
     private static ArrayList<MachinesTab> machinesTabs = new ArrayList<MachinesTab>();
 
     public void initialize() throws SQLException {
+        pageIsSelected = true;
         initializeTabs();
+        Thread refreshing = new Thread( () -> {
+           while(pageIsSelected) {
+               try {
+                   Thread.sleep(10000);
+                   System.out.println("REFRESHING NOW");
+                   Platform.runLater(new Runnable() {
+                       @Override
+                       public void run() {
+                           try {
+                               refresh();
+                           } catch (SQLException e) {
+                               throw new RuntimeException(e);
+                           }
+                       }
+                   });
+               } catch (InterruptedException e) {
+                   throw new RuntimeException(e);
+               }
+           }
+        });
+        refreshing.start();
+    }
+    public void refresh() throws SQLException {
+        selectTab(getCurrentTab());
+        addNewLabs();
     }
 
     private void initializeTabs() throws SQLException {
@@ -46,19 +73,38 @@ public class MachinesController extends MenuController {
         machinesTabs.add(machinesAllTab);
         selectTab(machinesAllTab);
         for(String resourceGroup: Database.getResourceGroups()) {
-            Tab tab = new Tab();
-            tab.setText(resourceGroup.substring(0, 10));
-            // Creates tableview under tab
-            TableView<MachinesVM> tableView = new TableView<MachinesVM>();
-            tab.setContent(tableView);
-            // Creates columns in tableviewS
-            // Adds tab to pane and tabs array
-            tabPane.getTabs().add(tab);
-            MachinesTab machinesTab = new MachinesTab(resourceGroup, tab, tableView);
-            machinesTab.initializeColumns();
-            machinesTabs.add(machinesTab);
+            createTabForLab(resourceGroup);
         }
         setTabSelectionAction();
+    }
+    private void createTabForLab(String resourceGroup) {
+        Tab tab = new Tab();
+        tab.setText(resourceGroup.substring(0, 10));
+        // Creates tableview under tab
+        TableView<MachinesVM> tableView = new TableView<MachinesVM>();
+        tab.setContent(tableView);
+        // Adds tab to pane and tabs array
+        tabPane.getTabs().add(tab);
+        MachinesTab machinesTab = new MachinesTab(resourceGroup, tab, tableView);
+        machinesTab.initializeColumns();
+        machinesTabs.add(machinesTab);
+    }
+    private void addNewLabs() throws SQLException {
+        labLoop:
+        for(String resourceGroup: Database.getResourceGroups()) {
+            tabLoop:
+            for(MachinesTab tab: machinesTabs) {
+                try {
+                    if (tab.getResourceGroup().equals(resourceGroup)) {
+                        continue labLoop;
+                    }
+                }
+                catch(NullPointerException e) {
+                    continue tabLoop;
+                }
+            }
+            createTabForLab(resourceGroup);
+        }
     }
 
     private void setTabSelectionAction() {
@@ -68,6 +114,8 @@ public class MachinesController extends MenuController {
                     selectTab(tab);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
+                } catch (IndexOutOfBoundsException ex) {
+                    throw new IndexOutOfBoundsException();
                 }
             });
         }

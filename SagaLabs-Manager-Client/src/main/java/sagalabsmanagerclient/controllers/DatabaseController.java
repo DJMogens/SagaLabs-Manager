@@ -25,5 +25,7 @@ public class DatabaseController extends MenuController{
         }
         //Database.getMachines();
     }
+    public void refresh() {
 
+    }
 }

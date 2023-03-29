@@ -127,5 +127,8 @@ public class HomeController extends MenuController {
         // Return the created button with the event handler
         return turnOffButton;
     }
+    public void refresh() {
+
+    }
 
 }
