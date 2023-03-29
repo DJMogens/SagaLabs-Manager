@@ -195,18 +195,10 @@ public class MachinesController extends MenuController {
 
     @FXML
     public void handleRunScript(ActionEvent e) {
-        ArrayList<MachinesVM> selectedVMs = getSelectedVMs();
-        ArrayList<String> outputOfRunScript = RunCommand.runScriptOnVms(selectedVMs, scriptField.getText());
-
-        StringBuilder outputStringBuilder = new StringBuilder();
-        assert outputOfRunScript != null;
-        for (String output : outputOfRunScript) {
-            outputStringBuilder.append(output).append(System.lineSeparator());
-        }
-        String outputString = outputStringBuilder.toString();
-        System.out.println(outputString);
+        AzureMethods azureMethods = new AzureMethods();
+        String output = azureMethods.runScript(getSelectedVMs(), scriptField.getText());
         scriptOutputField.setText("");
-        scriptOutputField.appendText(outputString);
+        scriptOutputField.appendText(output);
     }
 
 

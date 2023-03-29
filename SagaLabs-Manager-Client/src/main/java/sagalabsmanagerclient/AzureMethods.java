@@ -146,6 +146,17 @@ public class AzureMethods {
         executor.shutdown();
     }
 
+    public String runScript(ArrayList<MachinesVM> selectedVMs, String script) {
 
+    ArrayList<String> outputOfRunScript = RunCommand.runScriptOnVms(selectedVMs, script);
+
+    StringBuilder outputStringBuilder = new StringBuilder();
+        assert outputOfRunScript != null;
+        for (String output : outputOfRunScript) {
+        outputStringBuilder.append(output).append(System.lineSeparator());
+    }
+    String outputString = outputStringBuilder.toString();
+        return outputString;
+    }
 }
 
