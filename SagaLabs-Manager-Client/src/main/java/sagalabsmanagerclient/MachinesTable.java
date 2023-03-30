@@ -13,7 +13,8 @@ import java.util.function.Predicate;
 
 public class MachinesTable {
     private TabPane tabPane;
-    private static ArrayList<MachinesTab> machinesTabs = new ArrayList<MachinesTab>();
+    private ArrayList<MachinesTab> machinesTabs = new ArrayList<MachinesTab>();
+    private ArrayList<MachinesVM> previousMachines = new ArrayList<>();
 
     public MachinesTable(TabPane tabPane) {
         this.tabPane = tabPane;
@@ -77,6 +78,7 @@ public class MachinesTable {
         ArrayList<MachinesVM> machineList = new ArrayList<MachinesVM>();
         MachinesTab machinesTab = getCurrentTab();
         for (MachinesVM vm : machinesTab.getTableView().getItems()) {
+            System.out.println("Checking for machine " + vm.getVmName() + vm.getSelected());
             if (vm.getSelected()) {
                 System.out.println("Selected VM ID: " + vm.getId() + ", State: " + vm.getState());
                 machineList.add(vm);
@@ -96,6 +98,17 @@ public class MachinesTable {
         FilteredList<MachinesVM> list = new FilteredList<MachinesVM>(FXCollections.observableArrayList(tab.getTableView().getItems()), osPredicate.and(statePredicate).and(namePredicate).and(ipPredicate).and(rgPredicate));
         tab.getTableView().setItems(list);
     }
-
-
+    public void setPreviousMachines() {
+        previousMachines.addAll(getCurrentTab().getTableView().getItems());
+    }
+    public void setSelectedMachines() {
+        for(MachinesVM newVM: getCurrentTab().getTableView().getItems()) {
+            for(MachinesVM previousVM: previousMachines) {
+                if(newVM.getVmName().equals(previousVM.getVmName())) {
+                    newVM.getSelect().setSelected(previousVM.getSelected());
+                }
+            }
+        }
+        previousMachines.clear();
+    }
 }

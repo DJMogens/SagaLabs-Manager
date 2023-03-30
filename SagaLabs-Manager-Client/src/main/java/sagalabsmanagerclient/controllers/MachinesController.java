@@ -43,8 +43,14 @@ public class MachinesController extends MenuController {
         addRefreshThread();
     }
     public void refresh() throws SQLException {
+        // Makes copy of current machines to set checkmarks again
+        machinesTable.setPreviousMachines();
+        // Refreshes machines
         machinesTable.selectTab(machinesTable.getCurrentTab());
         applyFilter(new ActionEvent());
+        // Resets checkmarks on "new" machines
+        machinesTable.setSelectedMachines();
+        // Checks if new labs exist and adds to tableview
         machinesTable.addNewLabs();
     }
     public void setTabSelectionAction() {
