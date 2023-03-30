@@ -1,4 +1,4 @@
-package sagalabsmanagerclient.controllers;
+package sagalabsmanagerclient;
 
 import javafx.beans.value.ObservableValue;
 
