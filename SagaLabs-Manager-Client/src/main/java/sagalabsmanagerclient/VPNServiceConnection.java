@@ -12,11 +12,11 @@ import com.google.gson.*;
 
 public class VPNServiceConnection {
     //static variable to hold VPN user data for all the VPN servers
-    public static ArrayList<JsonObject> vpnUserJsonList = new ArrayList<>();
-    private static AzureMethods azureMethods = new AzureMethods();
+    private ArrayList<JsonObject> vpnUserJsonList = new ArrayList<>();
+    private AzureMethods azureMethods = new AzureMethods();
 
     //method to retrieve VPN user data from multiple VPN servers
-    public static void getVPNUserInformation() throws SQLException {
+    public void getVPNUserInformation() throws SQLException {
 
         vpnUserJsonList = new ArrayList<>(); // create a new ArrayList to reset the list
 
@@ -83,42 +83,42 @@ public class VPNServiceConnection {
             }
         }
     }
-    public static void createUser(String vpnIp, String username) throws IOException {
+    public void createUser(String vpnIp, String username) throws IOException {
         String apiUrl = "http://" + vpnIp + "/api/user/create";
         System.out.println(sendPostRequestWithUsername(apiUrl, username));
     }
 
-    public static void downloadConfig(String vpnIp, String username) throws IOException {
+    public void downloadConfig(String vpnIp, String username) throws IOException {
         String apiUrl = "http://" + vpnIp + "/api/user/config/show";
         String configFileContent = sendPostRequestWithUsername(apiUrl, username);
         saveConfigFile(username, configFileContent);
     }
 
-    public static void revokeCertificate(String vpnIp, String username) throws IOException {
+    public void revokeCertificate(String vpnIp, String username) throws IOException {
         String apiUrl = "http://" + vpnIp + "/api/user/revoke";
         sendPostRequestWithUsername(apiUrl, username);
         System.out.println(sendPostRequestWithUsername(apiUrl, username));
     }
 
-    public static void deleteUser(String vpnIp, String username) throws IOException {
+    public void deleteUser(String vpnIp, String username) throws IOException {
         String apiUrl = "http://" + vpnIp + "/api/user/delete";
         sendPostRequestWithUsername(apiUrl, username);
         System.out.println(sendPostRequestWithUsername(apiUrl, username));
     }
 
-    public static void rotateCertificate(String vpnIp, String username) throws IOException {
+    public void rotateCertificate(String vpnIp, String username) throws IOException {
         String apiUrl = "http://" + vpnIp + "/api/user/rotate";
         sendPostRequestWithUsername(apiUrl, username);
         System.out.println(sendPostRequestWithUsername(apiUrl, username));
     }
 
-    public static void unrevokeCertificate(String vpnIp, String username) throws IOException {
+    public void unrevokeCertificate(String vpnIp, String username) throws IOException {
         String apiUrl = "http://" + vpnIp + "/api/user/unrevoke";
         sendPostRequestWithUsername(apiUrl, username);
         System.out.println(sendPostRequestWithUsername(apiUrl, username));
     }
 
-    private static String sendPostRequestWithUsername(String apiUrl, String username) throws IOException {
+    private String sendPostRequestWithUsername(String apiUrl, String username) throws IOException {
         // Retrieve and encode the API credentials
         String apiCredentials = "sagavpn-api:" + azureMethods.getKeyVaultSecret("sagavpn-api-key");
         String base64ApiCredentials = Base64.getEncoder().encodeToString(apiCredentials.getBytes(StandardCharsets.UTF_8));
@@ -157,10 +157,13 @@ public class VPNServiceConnection {
         return responseStream.toString(StandardCharsets.UTF_8);
     }
 
-    private static void saveConfigFile(String username, String configFileContent) throws IOException {
+    private void saveConfigFile(String username, String configFileContent) throws IOException {
         File outputFile = new File(username + ".ovpn");
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
             writer.write(configFileContent);
         }
+    }
+    public ArrayList<JsonObject> getVpnUserJsonList() {
+        return vpnUserJsonList;
     }
 }

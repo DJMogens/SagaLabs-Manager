@@ -49,6 +49,7 @@ public class VPNController extends MenuController {
     private TableColumn<JsonObject, String> userVPNOnline;
     @FXML
     private TableColumn<JsonObject, String> userVPNButtons;
+    private VPNServiceConnection vpnServiceConnection = new VPNServiceConnection();
     public void initialize() {
         // Initialize the columns for the TableView
         initializeColumns();
@@ -114,7 +115,7 @@ public class VPNController extends MenuController {
         String vpnServer = vpnServerChoiceBox.getValue().toString();
 
         try {
-            VPNServiceConnection.createUser(vpnServer, username);
+            vpnServiceConnection.createUser(vpnServer, username);
             listVpn();
         } catch (IOException | SQLException e) {
             e.printStackTrace();
@@ -202,7 +203,7 @@ public class VPNController extends MenuController {
         String vpnIp = vpnUser.get("vpnIp").getAsString();
         String username = vpnUser.get("Identity").getAsString();
         try {
-            VPNServiceConnection.revokeCertificate(vpnIp, username);
+            vpnServiceConnection.revokeCertificate(vpnIp, username);
             listVpn();
         } catch (IOException | SQLException ex) {
             ex.printStackTrace();
@@ -217,7 +218,7 @@ public class VPNController extends MenuController {
         String vpnIp = vpnUser.get("vpnIp").getAsString();
         String username = vpnUser.get("Identity").getAsString();
         try {
-            VPNServiceConnection.downloadConfig(vpnIp, username);
+            vpnServiceConnection.downloadConfig(vpnIp, username);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -232,7 +233,7 @@ public class VPNController extends MenuController {
         String vpnIp = vpnUser.get("vpnIp").getAsString();
         String username = vpnUser.get("Identity").getAsString();
         try {
-            VPNServiceConnection.deleteUser(vpnIp, username);
+            vpnServiceConnection.deleteUser(vpnIp, username);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -252,7 +253,7 @@ public class VPNController extends MenuController {
         String vpnIp = vpnUser.get("vpnIp").getAsString();
         String username = vpnUser.get("Identity").getAsString();
         try {
-            VPNServiceConnection.rotateCertificate(vpnIp, username);
+            vpnServiceConnection.rotateCertificate(vpnIp, username);
             listVpn();
         } catch (IOException | SQLException ex) {
             ex.printStackTrace();
@@ -268,7 +269,7 @@ public class VPNController extends MenuController {
         String vpnIp = vpnUser.get("vpnIp").getAsString();
         String username = vpnUser.get("Identity").getAsString();
         try {
-            VPNServiceConnection.unrevokeCertificate(vpnIp, username);
+            vpnServiceConnection.unrevokeCertificate(vpnIp, username);
             listVpn();
         } catch (IOException | SQLException ex) {
             ex.printStackTrace();
@@ -285,9 +286,9 @@ public class VPNController extends MenuController {
     @FXML
     public void listVpn() throws SQLException {
 
-        VPNServiceConnection.getVPNUserInformation();
+        vpnServiceConnection.getVPNUserInformation();
         // Get the list of JSON arrays
-        ArrayList<JsonObject> jsonArrayList = VPNServiceConnection.vpnUserJsonList;
+        ArrayList<JsonObject> jsonArrayList = vpnServiceConnection.getVpnUserJsonList();
         // Create an ObservableList to hold the VPN users
         ObservableList<JsonObject> vpnUsers = FXCollections.observableArrayList();
         // Iterate over each JSON object
@@ -317,7 +318,7 @@ public class VPNController extends MenuController {
             chosenVPNIpString = chosenVPNIpResultSet.getString("LabVPN");
         }
 
-        VPNServiceConnection.createUser(chosenVPNIpString, usernameInput.getText());
+        vpnServiceConnection.createUser(chosenVPNIpString, usernameInput.getText());
 
         //Update the table with listVpn
         listVpn();
