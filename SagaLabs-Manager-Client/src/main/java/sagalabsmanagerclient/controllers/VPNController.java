@@ -51,6 +51,7 @@ public class VPNController extends MenuController {
     private TableColumn<JsonObject, String> userVPNButtons;
     private VPNServiceConnection vpnServiceConnection = new VPNServiceConnection();
     public void initialize() {
+        pageIsSelected = true;
         // Initialize the columns for the TableView
         initializeColumns();
         //Initialize the choice picker for create user functionality
@@ -67,6 +68,7 @@ public class VPNController extends MenuController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        addRefreshThread();
     }
 
     /**
@@ -323,7 +325,7 @@ public class VPNController extends MenuController {
         //Update the table with listVpn
         listVpn();
     }
-    public void refresh() {
-
+    public void refresh() throws SQLException {
+        listVpn();
     }
 }
