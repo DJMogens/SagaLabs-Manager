@@ -99,6 +99,7 @@ public class VPNController extends MenuController {
     // A method to initialize the VPN server choice box with the available servers
     private void initializeServerChoiceBox() {
         try {
+            vpnServerChoiceBox.getItems().clear();
             // Connect to the database and execute a query to retrieve the available servers
             ResultSet rs = Database.executeSql("SELECT LabName FROM Labs WHERE vpnRunning = 1");
             // Populate the choice box with the server names
@@ -327,5 +328,6 @@ public class VPNController extends MenuController {
     }
     public void refresh() throws SQLException {
         listVpn();
+        initializeServerChoiceBox();
     }
 }

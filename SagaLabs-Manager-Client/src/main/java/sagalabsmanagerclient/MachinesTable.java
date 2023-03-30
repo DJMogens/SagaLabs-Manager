@@ -78,7 +78,6 @@ public class MachinesTable {
         ArrayList<MachinesVM> machineList = new ArrayList<MachinesVM>();
         MachinesTab machinesTab = getCurrentTab();
         for (MachinesVM vm : machinesTab.getTableView().getItems()) {
-            System.out.println("Checking for machine " + vm.getVmName() + vm.getSelected());
             if (vm.getSelected()) {
                 System.out.println("Selected VM ID: " + vm.getId() + ", State: " + vm.getState());
                 machineList.add(vm);
