@@ -10,13 +10,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public abstract class MenuController implements Refreshable {
-    public Thread refreshing;
-    public boolean pageIsSelected = false;
+    private Thread refreshing;
+    private boolean pageIsSelected = false;
+
+    public void initialize() throws SQLException {
+        pageIsSelected = true;
+        addRefreshThread();
+    }
     public void addRefreshThread() {
         refreshing = new Thread(() -> {
             while(pageIsSelected) {
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(milliSecondsBetweenRefresh);
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                     LocalDateTime now = LocalDateTime.now();
                     System.out.println("REFRESHING " + this + " at " + dtf.format(now));

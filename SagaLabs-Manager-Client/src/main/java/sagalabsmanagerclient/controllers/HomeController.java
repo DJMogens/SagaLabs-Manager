@@ -24,10 +24,10 @@ public class HomeController extends MenuController {
     private final AzureMethods azureMethods = new AzureMethods();
 
     public void initialize() throws SQLException {
-        pageIsSelected = true;
         VBox vbox = createLabsVBox();
         anchorHome.getChildren().add(vbox);
-        addRefreshThread();
+
+        super.initialize();
     }
 
     public void refresh() throws SQLException {

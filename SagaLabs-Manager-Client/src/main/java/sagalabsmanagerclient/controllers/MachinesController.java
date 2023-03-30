@@ -36,11 +36,11 @@ public class MachinesController extends MenuController {
 
     public void initialize() throws SQLException {
         machinesTable = new MachinesTable(tabPane);
-        pageIsSelected = true;
         machinesTable.initializeTabs(allTab, allTableView);
         applyFilter(new ActionEvent());
         setTabSelectionAction();
-        addRefreshThread();
+
+        super.initialize();
     }
     public void refresh() throws SQLException {
         // Makes copy of current machines to set checkmarks again

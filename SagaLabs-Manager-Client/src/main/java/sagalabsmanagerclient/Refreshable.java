@@ -5,7 +5,9 @@ import javafx.beans.value.ObservableValue;
 import java.sql.SQLException;
 
 public interface Refreshable {
-    public void addRefreshThread();
-    public void refresh() throws SQLException;
-    public void stopRefreshing();
+    int milliSecondsBetweenRefresh = 10000;
+    void initialize() throws SQLException;
+    void addRefreshThread();
+    void refresh() throws SQLException;
+    void stopRefreshing();
 }

@@ -50,8 +50,7 @@ public class VPNController extends MenuController {
     @FXML
     private TableColumn<JsonObject, String> userVPNButtons;
     private VPNServiceConnection vpnServiceConnection = new VPNServiceConnection();
-    public void initialize() {
-        pageIsSelected = true;
+    public void initialize() throws SQLException {
         // Initialize the columns for the TableView
         initializeColumns();
         //Initialize the choice picker for create user functionality
@@ -68,7 +67,7 @@ public class VPNController extends MenuController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        addRefreshThread();
+        super.initialize();
     }
 
     /**
