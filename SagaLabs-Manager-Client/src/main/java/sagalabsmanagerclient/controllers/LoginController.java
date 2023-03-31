@@ -25,25 +25,6 @@ public class LoginController extends Controller {
             setView(View.HOME);
         }
     }
-    @FXML
-    public void changeScene() throws SQLException {
-        System.out.println("CHANGING SCENE");
-        Thread databaseThread = new Thread(() -> {
-            try {
-                Database.login();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        });
-        Thread switchView = new Thread(() -> {
-            Platform.runLater(() -> {
-                this.setView(View.HOME);
-            });
-
-        });
-        databaseThread.start();
-        switchView.start();
-    }
 
     public static void changeButtonTryAgain() {
         Platform.runLater(new Runnable() {

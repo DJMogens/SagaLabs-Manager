@@ -85,9 +85,7 @@ public class AzureLogin {
 
     public static boolean login() {
         Thread azureLoginThread = new Thread(() -> startLogin());
-        //
-        //tilføj kode der omskriver login til try again knap
-        //
+
         //Kontroller om login er opnået på 120 sekunder
         Thread checkLoginThread = new Thread(() -> {
             try {
@@ -100,6 +98,7 @@ public class AzureLogin {
 
         azureLoginThread.start();
         checkLoginThread.start();
+
         while(checkLoginThread.isAlive());
         if(loginStatus) {
             return true;
@@ -118,8 +117,6 @@ public class AzureLogin {
                 .withLogLevel(HttpLogDetailLevel.BASIC)
                 .authenticate(tokenCredential, profile)
                 .withSubscription(subscriptionId);
-
-
     }
 
     private static boolean checkLogin(Thread azureLoginThread) throws SQLException {
