@@ -3,7 +3,6 @@ package sagalabsmanagerclient.controllers;
 import sagalabsmanagerclient.AzureLogin;
 import sagalabsmanagerclient.Database;
 import sagalabsmanagerclient.View;
-import sagalabsmanagerclient.ViewSwitcher;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,19 +11,23 @@ import javafx.scene.control.Label;
 import java.sql.SQLException;
 
 
-public class LoginController {
+public class LoginController extends Controller {
     @FXML
     private static Button LoginButton;
     @FXML
     private Label welcomeText;
 
     @FXML
-    protected void loginClick() {
+    protected void loginClick() throws SQLException {
         welcomeText.setText("You are being redirected to Azure for Login");
-        AzureLogin.login();
+        System.out.println();
+        if(AzureLogin.login()) {
+            setView(View.HOME);
+        }
     }
     @FXML
-    public static void changeScene() throws SQLException {
+    public void changeScene() throws SQLException {
+        System.out.println("CHANGING SCENE");
         Thread databaseThread = new Thread(() -> {
             try {
                 Database.login();
@@ -34,7 +37,7 @@ public class LoginController {
         });
         Thread switchView = new Thread(() -> {
             Platform.runLater(() -> {
-                ViewSwitcher.switchView(View.HOME);
+                this.setView(View.HOME);
             });
 
         });

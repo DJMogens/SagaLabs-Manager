@@ -183,7 +183,7 @@
                         <configuration>
                             <archive>
                                 <manifest>
-                                    <mainClass>sagalabsmanagerclient.Application</mainClass>
+                                    <mainClass>sagalabsmanagerclient.Main</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>
@@ -200,7 +200,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>sagalabsmanagerclient.Application</mainClass>
+                            <mainClass>sagalabsmanagerclient.Main</mainClass>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>libs/</classpathPrefix>
                         </manifest>
@@ -217,7 +217,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.sagalabsmanager/sagalabsmanagerclient.Application
+                            <mainClass>com.example.sagalabsmanager/sagalabsmanagerclient.Main
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

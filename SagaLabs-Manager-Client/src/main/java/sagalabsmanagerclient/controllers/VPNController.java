@@ -34,10 +34,6 @@ public class VPNController extends MenuController {
     public ChoiceBox vpnServerChoiceBox;
 
     @FXML
-    public static void changeScene() {
-        ViewSwitcher.switchView(View.VPN);
-    }
-    @FXML
     private TableView<JsonObject> userVpnTableView;
     @FXML
     private TableColumn<JsonObject, String> userVPNName;

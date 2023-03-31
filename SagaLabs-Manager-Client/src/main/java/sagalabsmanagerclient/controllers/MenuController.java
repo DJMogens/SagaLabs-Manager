@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public abstract class MenuController implements Refreshable {
+public abstract class MenuController extends Controller implements Refreshable {
     private Thread refreshing;
     private boolean pageIsSelected = false;
 
@@ -41,28 +41,24 @@ public abstract class MenuController implements Refreshable {
         refreshing.start();
     }
 
-    public void logout(ActionEvent event) throws IOException, SQLException {
+    public View logout(ActionEvent event) throws IOException, SQLException {
         AzureLogin.setLoginStatus(false);
         AzureLogin.setAzure(null);
         AzureLogin.setTokenCredentialKeyVault(null);
         Database.conn.close();
-        ViewSwitcher.switchView(View.LOGIN);
+        return View.LOGIN;
     }
     public void switchToHome(ActionEvent event) throws IOException {
-        stopRefreshing();
-        ViewSwitcher.switchView(View.HOME);
+        setView(View.HOME);
     }
     public void switchToMachine(ActionEvent event) throws IOException {
-        stopRefreshing();
-        ViewSwitcher.switchView(View.MACHINES);
+        setView(View.MACHINES);
     }
     public void switchToSQL(ActionEvent event) throws IOException {
-        stopRefreshing();
-        ViewSwitcher.switchView(View.SQLSCENE);
+        setView(View.SQLSCENE);
     }
     public void switchToVPN(ActionEvent event) throws IOException {
-        stopRefreshing();
-        ViewSwitcher.switchView(View.VPN);
+        setView(View.VPN);
     }
     public void stopRefreshing() {
         pageIsSelected = false;

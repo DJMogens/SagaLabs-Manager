@@ -83,7 +83,7 @@ public class AzureLogin {
     loginStatus = true;
 }
 
-    public static void login() {
+    public static boolean login() {
         Thread azureLoginThread = new Thread(() -> startLogin());
         //
         //tilføj kode der omskriver login til try again knap
@@ -92,14 +92,19 @@ public class AzureLogin {
         Thread checkLoginThread = new Thread(() -> {
             try {
                 checkLogin(azureLoginThread);
+
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         });
 
         azureLoginThread.start();
-        System.out.println("Starting check login thread");
         checkLoginThread.start();
+        while(checkLoginThread.isAlive());
+        if(loginStatus) {
+            return true;
+        }
+        return false;
     }
 
     private static void startLogin() {
@@ -117,7 +122,7 @@ public class AzureLogin {
 
     }
 
-    private static void checkLogin(Thread azureLoginThread) throws SQLException {
+    private static boolean checkLogin(Thread azureLoginThread) throws SQLException {
         long startTime = System.currentTimeMillis();
         long duration = 0;
         while (duration < 120_000 && azureLoginThread.isAlive()) {
@@ -135,12 +140,13 @@ public class AzureLogin {
         if (loginStatus) {
             //skal printes til bruger i vindue
             System.out.println("Login successful");
-            LoginController.changeScene();
+            return true;
         }
         else {
             //skal printes til bruger i vindue
             System.out.println("Login not succeded. Try again");
             LoginController.changeButtonTryAgain();
+            return false;
         }
     }
     public static void setLoginStatus(boolean bool) {
