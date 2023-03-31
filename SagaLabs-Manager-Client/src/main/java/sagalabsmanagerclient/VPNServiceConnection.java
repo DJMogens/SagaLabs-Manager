@@ -13,7 +13,7 @@ import com.google.gson.*;
 public class VPNServiceConnection {
     //static variable to hold VPN user data for all the VPN servers
     private ArrayList<JsonObject> vpnUserJsonList = new ArrayList<>();
-    private AzureMethods azureMethods = new AzureMethods();
+    private final AzureMethods azureMethods = new AzureMethods();
 
     //method to retrieve VPN user data from multiple VPN servers
     public void getVPNUserInformation() throws SQLException {

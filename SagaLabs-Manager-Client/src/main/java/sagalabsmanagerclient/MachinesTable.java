@@ -2,7 +2,6 @@ package sagalabsmanagerclient;
 
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
@@ -12,9 +11,9 @@ import java.util.ArrayList;
 import java.util.function.Predicate;
 
 public class MachinesTable {
-    private TabPane tabPane;
-    private ArrayList<MachinesTab> machinesTabs = new ArrayList<MachinesTab>();
-    private ArrayList<MachinesVM> previousMachines = new ArrayList<>();
+    private final TabPane tabPane;
+    private final ArrayList<MachinesTab> machinesTabs = new ArrayList<>();
+    private final ArrayList<MachinesVM> previousMachines = new ArrayList<>();
 
     public MachinesTable(TabPane tabPane) {
         this.tabPane = tabPane;
@@ -27,7 +26,7 @@ public class MachinesTable {
         Tab tab = new Tab();
         tab.setText(resourceGroup.substring(0, 10));
         // Creates tableview under tab
-        TableView<MachinesVM> tableView = new TableView<MachinesVM>();
+        TableView<MachinesVM> tableView = new TableView<>();
         tab.setContent(tableView);
         // Adds tab to pane and tabs array
         tabPane.getTabs().add(tab);
@@ -57,7 +56,6 @@ public class MachinesTable {
                     }
                 }
                 catch(NullPointerException e) {
-                    continue tabLoop;
                 }
             }
             createTab(resourceGroup);
@@ -65,7 +63,7 @@ public class MachinesTable {
     }
     public void selectTab(MachinesTab machinesTab) throws SQLException {
         String resourceGroupName = machinesTab.getResourceGroup();
-        FilteredList<MachinesVM> list = new FilteredList<MachinesVM>(
+        FilteredList<MachinesVM> list = new FilteredList<>(
                 FXCollections.observableArrayList(Database.getMachines(resourceGroupName)),
                 null);
         machinesTab.getTableView().setItems(list);
@@ -75,7 +73,7 @@ public class MachinesTable {
     }
 
     public ArrayList<MachinesVM> getSelectedVMs() {
-        ArrayList<MachinesVM> machineList = new ArrayList<MachinesVM>();
+        ArrayList<MachinesVM> machineList = new ArrayList<>();
         MachinesTab machinesTab = getCurrentTab();
         for (MachinesVM vm : machinesTab.getTableView().getItems()) {
             if (vm.getSelected()) {
@@ -85,7 +83,7 @@ public class MachinesTable {
         }
         return machineList;
     }
-    public void applyFilter(String osFilter, String stateFilter, String nameFilter, String ipFilter) throws SQLException {
+    public void applyFilter(String osFilter, String stateFilter, String nameFilter, String ipFilter) {
         MachinesTab tab = getCurrentTab();
 
         Predicate<MachinesVM> osPredicate = vm -> (osFilter.isEmpty() || vm.getOs().equalsIgnoreCase(osFilter));
@@ -94,7 +92,7 @@ public class MachinesTable {
         Predicate<MachinesVM> ipPredicate = vm -> (ipFilter.isEmpty() || vm.getIp().startsWith(ipFilter));
         Predicate<MachinesVM> rgPredicate = vm -> (tab.getTab().getText().equals("All") || vm.getResourceGroup().equals(tab.getResourceGroup()));
 
-        FilteredList<MachinesVM> list = new FilteredList<MachinesVM>(FXCollections.observableArrayList(tab.getTableView().getItems()), osPredicate.and(statePredicate).and(namePredicate).and(ipPredicate).and(rgPredicate));
+        FilteredList<MachinesVM> list = new FilteredList<>(FXCollections.observableArrayList(tab.getTableView().getItems()), osPredicate.and(statePredicate).and(namePredicate).and(ipPredicate).and(rgPredicate));
         tab.getTableView().setItems(list);
     }
     public void setPreviousMachines() {

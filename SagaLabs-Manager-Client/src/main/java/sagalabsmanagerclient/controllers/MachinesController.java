@@ -1,28 +1,12 @@
 package sagalabsmanagerclient.controllers;
 
-import com.azure.resourcemanager.compute.models.VirtualMachine;
-import com.azure.resourcemanager.containerservice.models.OSType;
-import com.azure.resourcemanager.resources.models.ResourceGroup;
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
-import org.w3c.dom.Text;
 import sagalabsmanagerclient.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 
-import javax.swing.*;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Objects;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
-import java.util.logging.Filter;
-import java.util.stream.Stream;
 
 public class MachinesController extends MenuController {
     @FXML protected Button runScriptButton;
@@ -66,10 +50,10 @@ public class MachinesController extends MenuController {
         }
     }
     public void applyFilter(ActionEvent e) throws SQLException {
-        String osFilter = osFilterText.getText().replaceAll("\\s", "");;
-        String stateFilter = stateFilterText.getText().replaceAll("\\s", "");;
-        String nameFilter = nameFilterText.getText().replaceAll("\\s", "");;
-        String ipFilter = ipFilterText.getText().replaceAll("\\s", "");;
+        String osFilter = osFilterText.getText().replaceAll("\\s", "");
+        String stateFilter = stateFilterText.getText().replaceAll("\\s", "");
+        String nameFilter = nameFilterText.getText().replaceAll("\\s", "");
+        String ipFilter = ipFilterText.getText().replaceAll("\\s", "");
         machinesTable.applyFilter(osFilter, stateFilter, nameFilter, ipFilter);
     }
     public void resetFilters(ActionEvent e) throws SQLException {
@@ -81,7 +65,7 @@ public class MachinesController extends MenuController {
     }
 
     @FXML
-    public void handleTurnOn(ActionEvent e) {
+    public void handleTurnOn() {
         ArrayList<MachinesVM> selectedVMs = machinesTable.getSelectedVMs();
         // Call the method to turn on the selected VMs
         Runnable turnOnTask = () -> azureMethods.turnOnVMs(selectedVMs);
@@ -91,7 +75,7 @@ public class MachinesController extends MenuController {
     }
 
     @FXML
-    public void handleTurnOff(ActionEvent e) {
+    public void handleTurnOff() {
         ArrayList<MachinesVM> selectedVMs = machinesTable.getSelectedVMs();
         // Call the method to turn off the selected VMs
         Runnable turnOffTask = () -> azureMethods.deallocateVMs(selectedVMs);
@@ -100,7 +84,7 @@ public class MachinesController extends MenuController {
     }
 
     @FXML
-    public void handleRunScript(ActionEvent e) {
+    public void handleRunScript() {
         String output = azureMethods.runScript(machinesTable.getSelectedVMs(), scriptField.getText());
         scriptOutputField.setText("");
         scriptOutputField.appendText(output);

@@ -1,7 +1,6 @@
 package sagalabsmanagerclient.controllers;
 
 import sagalabsmanagerclient.AzureLogin;
-import sagalabsmanagerclient.Database;
 import sagalabsmanagerclient.View;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -18,7 +17,7 @@ public class LoginController extends Controller {
     private Label welcomeText;
 
     @FXML
-    protected void loginClick() throws SQLException {
+    protected void loginClick() {
         welcomeText.setText("You are being redirected to Azure for Login");
         System.out.println();
         if(AzureLogin.login()) {
@@ -27,10 +26,6 @@ public class LoginController extends Controller {
     }
 
     public static void changeButtonTryAgain() {
-        Platform.runLater(new Runnable() {
-            public void run() {
-                LoginButton.setText("Try again");
-            }
-        });
+        Platform.runLater(() -> LoginButton.setText("Try again"));
     }
 }

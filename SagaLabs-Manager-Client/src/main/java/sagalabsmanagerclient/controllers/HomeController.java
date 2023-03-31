@@ -1,8 +1,6 @@
 package sagalabsmanagerclient.controllers;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -15,7 +13,6 @@ import sagalabsmanagerclient.Database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class HomeController extends MenuController {
 
@@ -110,9 +107,7 @@ public class HomeController extends MenuController {
         // Set up the event handler for the button
         turnOnButton.setOnAction(event -> {
             // Create a Runnable task to turn on all VMs in the specified lab
-            Runnable task = () -> {
-                azureMethods.turnOnInLab(labName);
-            };
+            Runnable task = () -> azureMethods.turnOnInLab(labName);
             // Start a new thread to execute the task
             Thread thread = new Thread(task);
             thread.start();
@@ -127,9 +122,7 @@ public class HomeController extends MenuController {
         // Set up the event handler for the button
         turnOffButton.setOnAction(event -> {
             // Create a Runnable task to turn off all VMs in the specified lab
-            Runnable task = () -> {
-                azureMethods.turnOffVMsInLab(labName);
-            };
+            Runnable task = () -> azureMethods.turnOffVMsInLab(labName);
             // Start a new thread to execute the task
             Thread thread = new Thread(task);
             thread.start();

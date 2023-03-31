@@ -1,21 +1,15 @@
 package sagalabsmanagerclient;
 
-import com.azure.resourcemanager.compute.models.VirtualMachine;
-import com.azure.resourcemanager.network.models.PublicIpAddress;
-import com.azure.resourcemanager.resources.models.ResourceGroup;
-
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Database {
 
     // Database credentials
     private static final String DB_URL = "jdbc:mysql://sagadb.sagalabs.dk:42069/sagadb";
     private static final String dbUsername = "sagalabs-manager";
-    private static AzureMethods azureMethods = new AzureMethods();
-    static String dbPassword = azureMethods.getKeyVaultSecret("sagalabs-manager-SQL-pw");
+    private final static AzureMethods azureMethods = new AzureMethods();
+    static final String dbPassword = azureMethods.getKeyVaultSecret("sagalabs-manager-SQL-pw");
     public static Connection conn;
 
     static {
@@ -31,14 +25,11 @@ public class Database {
             // Open a connection
             System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL, dbUsername, dbPassword);
-            if (conn != null) {
-                return true;
-            }
-            return false;
+        return conn != null;
     }
     public static ArrayList<MachinesVM> getMachines(String resourceGroup) throws SQLException {
         login();
-        ArrayList<MachinesVM> machinesVMs = new ArrayList<MachinesVM>();
+        ArrayList<MachinesVM> machinesVMs = new ArrayList<>();
         String sql;
         if(resourceGroup == null) {
             sql = "SELECT * FROM sagadb.vm";
@@ -63,7 +54,7 @@ public class Database {
 
     public static ArrayList<String> getResourceGroups() throws SQLException {
         login();
-        ArrayList<String> resourceGroups = new ArrayList<String>();
+        ArrayList<String> resourceGroups = new ArrayList<>();
         ResultSet resultSet = executeSql("select distinct resource_group from vm");
         while(resultSet.next()) {
             resourceGroups.add(resultSet.getObject("resource_group").toString());

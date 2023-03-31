@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import sagalabsmanagerclient.controllers.Controller;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class ViewSwitcher {
 
@@ -24,7 +25,7 @@ public class ViewSwitcher {
         setScene(scene);
         switchView(View.LOGIN);
 
-        Image icon = new Image(getClass().getResource("Images/FDCA_icon.png").openStream());
+        Image icon = new Image(Objects.requireNonNull(getClass().getResource("Images/FDCA_icon.png")).openStream());
         stage.getIcons().add(icon);
         stage.setMaximized(true);
         stage.setScene(scene);
@@ -43,12 +44,7 @@ public class ViewSwitcher {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(view.getFileName()));
             Parent root = loader.load();
             controller = loader.getController();
-            controller.getViewSimpleObjectProperty().addListener(new ChangeListener<View>() {
-                @Override
-                public void changed(ObservableValue<? extends View> observable, View oldValue, View newValue) {
-                    switchView(newValue);
-                }
-            });
+            controller.getViewSimpleObjectProperty().addListener((observable, oldValue, newValue) -> switchView(newValue));
             scene.setRoot(root);
         } catch (IOException e) {
             throw new RuntimeException(e);

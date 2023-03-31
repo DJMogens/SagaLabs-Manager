@@ -14,7 +14,7 @@ public class DatabaseController extends MenuController{
     @FXML
     private Label sqlstatus;
 
-    public void ConnectToDatabase(ActionEvent event) throws IOException, SQLException {
+    public void ConnectToDatabase() throws SQLException {
         if (Database.login()){
             sqlstatus.setText("SQL connection: Working");
             sqlstatus.setTextFill(Color.GREEN);

@@ -25,14 +25,11 @@ public abstract class MenuController extends Controller implements Refreshable {
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                     LocalDateTime now = LocalDateTime.now();
                     System.out.println("REFRESHING " + this + " at " + dtf.format(now));
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                refresh();
-                            } catch (SQLException e) {
-                                throw new RuntimeException(e);
-                            }
+                    Platform.runLater(() -> {
+                        try {
+                            refresh();
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
                         }
                     });
                 } catch (InterruptedException ignored) {}
@@ -41,23 +38,23 @@ public abstract class MenuController extends Controller implements Refreshable {
         refreshing.start();
     }
 
-    public View logout(ActionEvent event) throws IOException, SQLException {
+    public void logout() throws SQLException {
         AzureLogin.setLoginStatus(false);
         AzureLogin.setAzure(null);
         AzureLogin.setTokenCredentialKeyVault(null);
         Database.conn.close();
-        return View.LOGIN;
+        setView(View.LOGIN);
     }
-    public void switchToHome(ActionEvent event) throws IOException {
+    public void switchToHome() {
         setView(View.HOME);
     }
-    public void switchToMachine(ActionEvent event) throws IOException {
+    public void switchToMachine() {
         setView(View.MACHINES);
     }
-    public void switchToSQL(ActionEvent event) throws IOException {
+    public void switchToSQL() {
         setView(View.SQLSCENE);
     }
-    public void switchToVPN(ActionEvent event) throws IOException {
+    public void switchToVPN() {
         setView(View.VPN);
     }
     public void stopRefreshing() {

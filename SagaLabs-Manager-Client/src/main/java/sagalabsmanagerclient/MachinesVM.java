@@ -3,14 +3,14 @@ package sagalabsmanagerclient;
 import javafx.scene.control.CheckBox;
 
 public class MachinesVM {
-    private CheckBox select;
+    private final CheckBox select;
     private String id; //local id for view and identifying.
-    private String vmName;
-    private String os;
-    private String state;
-    private String ip;
-    private String resourceGroup;
-    private String azureId; //the azure specific ID
+    private final String vmName;
+    private final String os;
+    private final String state;
+    private final String ip;
+    private final String resourceGroup;
+    private final String azureId; //the azure specific ID
     private String lastScriptOutput; //the azure specific ID
 
     public MachinesVM(String id, String vmName, String os, String state, String ip, String resourceGroup, String azureId) {
@@ -39,9 +39,6 @@ public class MachinesVM {
     public String getResourceGroup() { return resourceGroup;}
     public String getAzureId() { return azureId;}
     public String getLastScriptOutput() { return lastScriptOutput;}
-    public void setId(String id) {
-        this.id = id;
-    }
     public void setLastScriptOutput(String lastScriptOutput) {
         this.id = lastScriptOutput;
     }

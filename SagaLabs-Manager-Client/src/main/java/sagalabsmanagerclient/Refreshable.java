@@ -1,7 +1,5 @@
 package sagalabsmanagerclient;
 
-import javafx.beans.value.ObservableValue;
-
 import java.sql.SQLException;
 
 public interface Refreshable {

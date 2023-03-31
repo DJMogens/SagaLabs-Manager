@@ -9,7 +9,7 @@ public enum View {
     MACHINES("Machines.fxml");
 
 
-    private String fileName;
+    final private String fileName;
 
     View(String fileName) {
         this.fileName = fileName;

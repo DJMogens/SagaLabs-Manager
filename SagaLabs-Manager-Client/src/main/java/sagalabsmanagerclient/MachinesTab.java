@@ -1,7 +1,6 @@
 package sagalabsmanagerclient;
 
 import com.azure.resourcemanager.containerservice.models.OSType;
-import com.azure.resourcemanager.resources.models.ResourceGroup;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
@@ -10,9 +9,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class MachinesTab {
 
-    private String resourceGroup;
-    private Tab tab;
-    private TableView<MachinesVM> tableView;
+    private final String resourceGroup;
+    private final Tab tab;
+    private final TableView<MachinesVM> tableView;
 
     public Tab getTab() {
         return this.tab;
@@ -32,31 +31,31 @@ public class MachinesTab {
         this(null, tab, tableView);
     }
     public void initializeColumns() {
-        TableColumn<MachinesVM, CheckBox> selectColumn = new TableColumn<MachinesVM, CheckBox>();
+        TableColumn<MachinesVM, CheckBox> selectColumn = new TableColumn<>();
         selectColumn.setPrefWidth(50.0);
         selectColumn.setCellValueFactory(new PropertyValueFactory<>("select"));
 
-        TableColumn<MachinesVM, String> idColumn = new TableColumn<MachinesVM, String>("ID");
+        TableColumn<MachinesVM, String> idColumn = new TableColumn<>("ID");
         idColumn.setPrefWidth(20.0);
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
 
-        TableColumn<MachinesVM, String> vmColumn = new TableColumn<MachinesVM, String>("Machine Name");
+        TableColumn<MachinesVM, String> vmColumn = new TableColumn<>("Machine Name");
         vmColumn.setPrefWidth(250.0);
         vmColumn.setCellValueFactory(new PropertyValueFactory<>("vmName"));
 
-        TableColumn<MachinesVM, OSType> osColumn = new TableColumn<MachinesVM, OSType>("OS");
+        TableColumn<MachinesVM, OSType> osColumn = new TableColumn<>("OS");
         osColumn.setPrefWidth(100.0);
         osColumn.setCellValueFactory(new PropertyValueFactory<>("os"));
 
-        TableColumn<MachinesVM, String> stateColumn = new TableColumn<MachinesVM, String>("State");
+        TableColumn<MachinesVM, String> stateColumn = new TableColumn<>("State");
         stateColumn.setPrefWidth(99.0);
         stateColumn.setCellValueFactory(new PropertyValueFactory<>("state"));
 
-        TableColumn<MachinesVM, String> rgColumn = new TableColumn<MachinesVM, String>("Resource Group");
+        TableColumn<MachinesVM, String> rgColumn = new TableColumn<>("Resource Group");
         rgColumn.setPrefWidth(200.0);
         rgColumn.setCellValueFactory(new PropertyValueFactory<>("resourceGroup"));
 
-        TableColumn<MachinesVM, String> ipColumn = new TableColumn<MachinesVM, String>("IP Address");
+        TableColumn<MachinesVM, String> ipColumn = new TableColumn<>("IP Address");
         ipColumn.setPrefWidth(200.0);
         ipColumn.setCellValueFactory(new PropertyValueFactory<>("ip"));
 

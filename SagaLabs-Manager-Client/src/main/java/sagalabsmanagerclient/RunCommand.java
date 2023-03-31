@@ -24,7 +24,7 @@ public class RunCommand extends AzureMethods {
 
 
 
-    //The users shouldnt run code meant for bash on both linux and windows machines.
+    //The users shouldn't run code meant for bash on both linux and windows machines.
         public static boolean checkOSIsTheSame(ArrayList<MachinesVM> vms) {
             if (vms.size() > 0) {
                 VirtualMachine firstVM = AzureLogin.getAzure().virtualMachines().getById(vms.get(0).getAzureId());
@@ -41,20 +41,17 @@ public class RunCommand extends AzureMethods {
         }
 
     public static ArrayList<String> runScriptOnVms(ArrayList<MachinesVM> vms, String script) {
-        ArrayList<String> scriptOutputs = new ArrayList<String>();
-        ArrayList<Thread> threads = new ArrayList<Thread>();
+        ArrayList<String> scriptOutputs = new ArrayList<>();
+        ArrayList<Thread> threads = new ArrayList<>();
         if (!checkOSIsTheSame(vms)) {
             // Return an error or throw an exception, as the VMs have different OSes.
             return null;
         }
         for (MachinesVM vm : vms) {
-            Runnable runnable = new Runnable() {
-                @Override
-                public void run() {
-                    String output = runCommandOnVM(vm, script);
-                    synchronized (scriptOutputs) {
-                        scriptOutputs.add("output from: " + vm.getVmName() + "\n" + output);
-                    }
+            Runnable runnable = () -> {
+                String output = runCommandOnVM(vm, script);
+                synchronized (scriptOutputs) {
+                    scriptOutputs.add("output from: " + vm.getVmName() + "\n" + output);
                 }
             };
             Thread thread = new Thread(runnable);

@@ -4,8 +4,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import sagalabsmanagerclient.View;
 
 public abstract class Controller {
-    private View view = null;
-    private SimpleObjectProperty<View> viewSimpleObjectProperty = new SimpleObjectProperty<>(null);
+    private final SimpleObjectProperty<View> viewSimpleObjectProperty = new SimpleObjectProperty<>(null);
 
     public void setView(View view) {
         this.viewSimpleObjectProperty.set(view);

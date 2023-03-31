@@ -1,7 +1,6 @@
 package sagalabsmanagerclient.controllers;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
@@ -11,27 +10,21 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import sagalabsmanagerclient.Database;
 import sagalabsmanagerclient.VPNServiceConnection;
-import sagalabsmanagerclient.View;
-import sagalabsmanagerclient.ViewSwitcher;
 
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 
 public class VPNController extends MenuController {
     public TextField usernameInput;
     public Button createUser;
-    public ChoiceBox vpnServerChoiceBox;
+    public ChoiceBox vpnServerChoiceBox = new ChoiceBox<>();
 
     @FXML
     private TableView<JsonObject> userVpnTableView;
@@ -45,19 +38,14 @@ public class VPNController extends MenuController {
     private TableColumn<JsonObject, String> userVPNOnline;
     @FXML
     private TableColumn<JsonObject, String> userVPNButtons;
-    private VPNServiceConnection vpnServiceConnection = new VPNServiceConnection();
+    private final VPNServiceConnection vpnServiceConnection = new VPNServiceConnection();
     public void initialize() throws SQLException {
         // Initialize the columns for the TableView
         initializeColumns();
         //Initialize the choice picker for create user functionality
         initializeServerChoiceBox();
         // Create the CellFactory for the userVPNButtons column
-        userVPNButtons.setCellFactory(new Callback<TableColumn<JsonObject, String>, TableCell<JsonObject, String>>() {
-            @Override
-            public TableCell<JsonObject, String> call(TableColumn<JsonObject, String> param) {
-                return createButtonCellFactory();
-            }
-        });
+        userVPNButtons.setCellFactory(param -> createButtonCellFactory());
         try {
             listVpn();
         } catch (SQLException e) {
@@ -125,50 +113,29 @@ public class VPNController extends MenuController {
      * @return A TableCell instance for the userVPNButtons column.
      */
     private TableCell<JsonObject, String> createButtonCellFactory() {
-        return new TableCell<JsonObject, String>() {
+        return new TableCell<>() {
             final Button revokeBtn = new Button("Revoke");
             final Button downloadBtn = new Button("Download");
             final Button deleteBtn = new Button("Delete");
             final Button rotateBtn = new Button("Rotate");
             final Button unrevokeBtn = new Button("Unrevoke");
             final HBox hbox = new HBox(10);
+
             {
                 // Set the action handlers for each button
-                revokeBtn.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent e) {
-                        handleRevokeButton(getIndex());
+                revokeBtn.setOnAction(e -> handleRevokeButton(getIndex()));
+                downloadBtn.setOnAction(e -> handleDownloadButton(getIndex()));
+                deleteBtn.setOnAction(e -> {
+                    try {
+                        handleDeleteButton(getIndex());
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
                     }
                 });
-                downloadBtn.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent e) {
-                        handleDownloadButton(getIndex());
-                    }
-                });
-                deleteBtn.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent e) {
-                        try {
-                            handleDeleteButton(getIndex());
-                        } catch (SQLException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                    }
-                });
-                rotateBtn.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent e) {
-                        handleRotateButton(getIndex());
-                    }
-                });
-                unrevokeBtn.setOnAction(new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(ActionEvent e) {
-                        handleUnrevokeButton(getIndex());
-                    }
-                });
+                rotateBtn.setOnAction(e -> handleRotateButton(getIndex()));
+                unrevokeBtn.setOnAction(e -> handleUnrevokeButton(getIndex()));
             }
+
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
@@ -294,9 +261,7 @@ public class VPNController extends MenuController {
             // Get the jsonArray for vpnUsers
             JsonArray vpnUsersArray = jsonObject.getAsJsonArray("vpnUsers");
             // Iterate over each object in vpnUsers and add it to the ObservableList
-            vpnUsersArray.forEach(jsonElement -> {
-                vpnUsers.add(jsonElement.getAsJsonObject());
-            });
+            vpnUsersArray.forEach(jsonElement -> vpnUsers.add(jsonElement.getAsJsonObject()));
         });
         // Update the TableView on the JavaFX Application thread
         Platform.runLater(() -> {
@@ -305,7 +270,7 @@ public class VPNController extends MenuController {
         });
     }
 
-    public void createNewUser(ActionEvent actionEvent) throws SQLException, IOException {
+    public void createNewUser() throws SQLException, IOException {
         String labChoice = vpnServerChoiceBox.getValue().toString();
         System.out.println(labChoice);
         ResultSet chosenVPNIpResultSet = Database.executeSql("SELECT LabVPN FROM Labs where LabName = '" + labChoice + "'");

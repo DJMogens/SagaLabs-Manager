@@ -52,8 +52,7 @@ public class AzureMethods {
     }
 
     public PagedIterable<VirtualMachine> getVMsInLab(ResourceGroup resourceGroup) {
-        PagedIterable<VirtualMachine> vms = AzureLogin.getAzure().virtualMachines().listByResourceGroup(String.valueOf(resourceGroup.name()));
-        return vms;
+        return AzureLogin.getAzure().virtualMachines().listByResourceGroup(String.valueOf(resourceGroup.name()));
     }
 
     public String turnOnInLab(String resourceGroup) {
@@ -86,7 +85,7 @@ public class AzureMethods {
     public String turnOffVMsInLab(String resourceGroup) {
         try {
             // Get all the virtual machines in the resource group
-            List<VirtualMachine> vms = AzureLogin.getAzure().virtualMachines().listByResourceGroup(resourceGroup).stream().collect(Collectors.toList());
+            List<VirtualMachine> vms = AzureLogin.getAzure().virtualMachines().listByResourceGroup(resourceGroup).stream().toList();
 
             // Create a thread pool with one thread for each virtual machine
             ExecutorService executorService = Executors.newFixedThreadPool(vms.size());
