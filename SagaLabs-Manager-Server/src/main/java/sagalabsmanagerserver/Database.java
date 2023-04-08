@@ -6,10 +6,8 @@ import com.azure.resourcemanager.network.models.PublicIpAddress;
 import com.azure.resourcemanager.resources.models.ResourceGroup;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.net.*;
 
@@ -33,6 +31,9 @@ public class Database {
         String tableName = "Labs";
 
         List<ResourceGroup> labs = AzureLogin.azure.resourceGroups().listByTag("lab", "true").stream().toList();
+
+        // Get all labs in the database
+        List<String> dbLabs = getAllResourceIds(tableName);
 
         int port = 80; // port of the vpn service
 
@@ -74,11 +75,28 @@ public class Database {
             stmt.setBoolean(5, vpnRunning);
             stmt.executeUpdate();
         }
+
+        // Remove labs that are still in Azure from the list of labs in the database
+        for (ResourceGroup lab : labs) {
+            dbLabs.remove(lab.id());
+        }
+
+        // Delete labs from the database that are no longer in Azure
+        for (String labId : dbLabs) {
+            String sql = "DELETE FROM " + tableName + " WHERE azureID = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, labId);
+            stmt.executeUpdate();
+        }
         updateLastUpdate(tableName);
     }
 
     public static void syncVM() throws SQLException {
         String tableName = "vm"; // replace with the actual table name
+
+        // Get all VMs in the database
+        List<String> dbVMs = getAllResourceIds(tableName);
+
         //for each resourcegroup that it a lab; for each virtual machine
         for (ResourceGroup rg : AzureLogin.azure.resourceGroups().listByTag("lab", "true")) {
 
@@ -103,9 +121,23 @@ public class Database {
                 stmt.setString(6, vm.id());
                 stmt.executeUpdate();
             }
-            updateLastUpdate(tableName);
+        }
+        // Remove VMs that are still in Azure from the list of VMs in the database
+        for (ResourceGroup rg : AzureLogin.azure.resourceGroups().listByTag("lab", "true")) {
+            for (VirtualMachine vm : AzureLogin.azure.virtualMachines().listByResourceGroup(rg.name())) {
+                dbVMs.remove(vm.id());
+            }
         }
 
+        // Delete VMs from the database that are no longer in Azure
+        for (String vmId : dbVMs) {
+            String sql = "DELETE FROM " + tableName + " WHERE azureID = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, vmId);
+            stmt.executeUpdate();
+        }
+
+        updateLastUpdate(tableName);
     }
     public static void updateLastUpdate(String tableName) throws SQLException {
         String sql = "INSERT INTO last_updated (table_name, last_update) VALUES (?, NOW()) " +
@@ -113,6 +145,18 @@ public class Database {
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, tableName);
         stmt.executeUpdate();
+    }
+
+    public static List<String> getAllResourceIds(String tableName) throws SQLException {
+        List<String> resourceIds = new ArrayList<>();
+        String sql = "SELECT azureID FROM " + tableName;
+        Statement stmt = conn.createStatement();
+        ResultSet resultSet = stmt.executeQuery(sql);
+
+        while (resultSet.next()) {
+            resourceIds.add(resultSet.getString("azureID"));
+        }
+        return resourceIds;
     }
 
 
