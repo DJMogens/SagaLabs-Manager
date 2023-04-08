@@ -65,14 +65,15 @@ public class Database {
                 }
             }
             //insert vars into database, or update if a key is duplicated
-            String sql = "INSERT INTO Labs (LabName,LabID,VmCount,LabVPN,vpnRunning) VALUES (?,?,?,?,?)"+
-                    "ON DUPLICATE KEY UPDATE LabName=VALUES(LabName), LabVPN=VALUES(LabVPN), VmCount=VALUES(VmCount), vpnRunning=VALUES(vpnRunning)";
+            String sql = "INSERT INTO Labs (LabName, LabID, VmCount, LabVPN, vpnRunning, azureID) VALUES (?, ?, ?, ?, ?, ?)"+
+                    "ON DUPLICATE KEY UPDATE LabName=VALUES(LabName), LabID=VALUES(LabID), VmCount=VALUES(VmCount), LabVPN=VALUES(LabVPN), vpnRunning=VALUES(vpnRunning), azureID=VALUES(azureID)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, labName);
             stmt.setString(2, labID);
             stmt.setInt(3, vmCount);
             stmt.setString(4, vpnPublicIp);
             stmt.setBoolean(5, vpnRunning);
+            stmt.setString(6, labID); // Add azureID to the PreparedStatement
             stmt.executeUpdate();
         }
 
@@ -88,6 +89,7 @@ public class Database {
             stmt.setString(1, labId);
             stmt.executeUpdate();
         }
+
         updateLastUpdate(tableName);
     }
 
