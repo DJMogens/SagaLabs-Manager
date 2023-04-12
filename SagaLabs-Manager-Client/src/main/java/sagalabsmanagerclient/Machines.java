@@ -34,9 +34,7 @@ public class Machines {
         }
         try {
             machines.addAll(Database.getMachines());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        } catch (SQLException ignored) {}
     }
     public static ArrayList<MachinesVM> getMachines() {
         return machines;
