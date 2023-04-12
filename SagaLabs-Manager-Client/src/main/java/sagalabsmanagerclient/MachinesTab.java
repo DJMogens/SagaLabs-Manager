@@ -35,10 +35,6 @@ public class MachinesTab {
         selectColumn.setPrefWidth(50.0);
         selectColumn.setCellValueFactory(new PropertyValueFactory<>("select"));
 
-        TableColumn<MachinesVM, String> idColumn = new TableColumn<>("ID");
-        idColumn.setPrefWidth(20.0);
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-
         TableColumn<MachinesVM, String> vmColumn = new TableColumn<>("Machine Name");
         vmColumn.setPrefWidth(250.0);
         vmColumn.setCellValueFactory(new PropertyValueFactory<>("vmName"));
@@ -60,7 +56,6 @@ public class MachinesTab {
         ipColumn.setCellValueFactory(new PropertyValueFactory<>("ip"));
 
         tableView.getColumns().add(selectColumn);
-        tableView.getColumns().add(idColumn);
         tableView.getColumns().add(vmColumn);
         tableView.getColumns().add(osColumn);
         tableView.getColumns().add(stateColumn);

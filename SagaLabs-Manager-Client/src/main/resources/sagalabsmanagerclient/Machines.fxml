@@ -40,11 +40,6 @@
                                       <PropertyValueFactory property="select" />
                                   </cellValueFactory>
                               </TableColumn>
-                              <TableColumn fx:id="idColumn" prefWidth="20.0" text="ID">
-                                  <cellValueFactory>
-                                      <PropertyValueFactory property="id" />
-                                  </cellValueFactory>
-                              </TableColumn>
                               <TableColumn fx:id="vmColumn" prefWidth="250.0" text="Machine Name">
                                   <cellValueFactory>
                                       <PropertyValueFactory property="vmName" />
