@@ -94,42 +94,43 @@ public class Database {
     }
 
     public static void syncVM() throws SQLException {
-        String tableName = "vm"; // replace with the actual table name
+        String tableName = "vm";
 
         // Get all VMs in the database
         List<String> dbVMs = getAllResourceIds(tableName);
 
-        //for each resourcegroup that it a lab; for each virtual machine
-        for (ResourceGroup rg : AzureLogin.azure.resourceGroups().listByTag("lab", "true")) {
+        // Get all labs in Azure
+        List<ResourceGroup> labs = AzureLogin.azure.resourceGroups().listByTag("lab", "true").stream().toList();
 
+        // Process virtual machines in parallel
+        labs.parallelStream().forEach(rg -> {
             // Get all virtual machines in the resource group
-            for (VirtualMachine vm : AzureLogin.azure.virtualMachines().listByResourceGroup(rg.name())) {
-                //insert vars into database, or update if a key is duplicated
-                String sql = "INSERT INTO vm (vm_name, powerstate, internal_ip, ostype, resource_group, azureID) VALUES (?,?,?,?,?,?) " +
-                        "ON DUPLICATE KEY UPDATE powerstate=VALUES(powerstate), internal_ip=VALUES(internal_ip), ostype=VALUES(ostype), resource_group=VALUES(resource_group),azureID=VALUES(azureID)";
+            List<VirtualMachine> virtualMachines = AzureLogin.azure.virtualMachines().listByResourceGroup(rg.name()).stream().toList();
 
-                PreparedStatement stmt = conn.prepareStatement(sql);
-                stmt.setString(1, vm.name());
-                PowerState powerState = vm.powerState();
-                if (powerState != null) {
-                    stmt.setString(2, powerState.toString());
-                } else {
-                    stmt.setString(2, "");
+            // Prepare batch update
+            String sql = "INSERT INTO vm (vm_name, powerstate, internal_ip, ostype, resource_group, azureID) VALUES (?,?,?,?,?,?) " +
+                    "ON DUPLICATE KEY UPDATE powerstate=VALUES(powerstate), internal_ip=VALUES(internal_ip), ostype=VALUES(ostype), resource_group=VALUES(resource_group),azureID=VALUES(azureID)";
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                for (VirtualMachine vm : virtualMachines) {
+                    stmt.setString(1, vm.name());
+                    PowerState powerState = vm.powerState();
+                    if (powerState != null) {
+                        stmt.setString(2, powerState.toString());
+                    } else {
+                        stmt.setString(2, "");
+                    }
+                    stmt.setString(3, vm.getPrimaryNetworkInterface().primaryPrivateIP());
+                    stmt.setString(4, vm.osType().toString());
+                    stmt.setString(5, vm.resourceGroupName());
+                    stmt.setString(6, vm.id());
+                    stmt.addBatch();
+                    dbVMs.remove(vm.id());
                 }
-                stmt.setString(2, vm.powerState().toString());
-                stmt.setString(3, vm.getPrimaryNetworkInterface().primaryPrivateIP());
-                stmt.setString(4, vm.osType().toString());
-                stmt.setString(5, vm.resourceGroupName());
-                stmt.setString(6, vm.id());
-                stmt.executeUpdate();
+                stmt.executeBatch();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
-        }
-        // Remove VMs that are still in Azure from the list of VMs in the database
-        for (ResourceGroup rg : AzureLogin.azure.resourceGroups().listByTag("lab", "true")) {
-            for (VirtualMachine vm : AzureLogin.azure.virtualMachines().listByResourceGroup(rg.name())) {
-                dbVMs.remove(vm.id());
-            }
-        }
+        });
 
         // Delete VMs from the database that are no longer in Azure
         for (String vmId : dbVMs) {
@@ -141,6 +142,7 @@ public class Database {
 
         updateLastUpdate(tableName);
     }
+
     public static void updateLastUpdate(String tableName) throws SQLException {
         String sql = "INSERT INTO last_updated (table_name, last_update) VALUES (?, NOW()) " +
                 "ON DUPLICATE KEY UPDATE last_update=NOW()";
