@@ -8,7 +8,7 @@
  ******************************************************************************/
 
 .button {
-    -fx-text-fill: #c7c7c7;
+    -fx-text-fill: white;
     -fx-background-color: #383838;
 }
 .button1 {
@@ -36,7 +36,7 @@
 }
 
 .label {
-    -fx-text-fill: #b3b3b3;
+    -fx-text-fill: white;
 }
 
 /*******************************************************************************
@@ -52,9 +52,9 @@
     -fx-background-insets: 0, 2;
     -fx-prompt-text-fill: #909090;
 
-    -fx-highlight-fill: #f5f5f5;
+    -fx-highlight-fill: white;
     -fx-highlight-text-fill: #383838;
-    -fx-text-fill: #d3d3d3;
+    -fx-text-fill: white;
 
 }
 
@@ -65,7 +65,7 @@
 
 .text-input:focused {
     -fx-border-color: white;
-    -fx-text-fill: #f9f9f9;
+    -fx-text-fill: white;
 }
 
 .text-area .content {
@@ -144,7 +144,7 @@
 }
 
 .tab-pane > .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {
-    -fx-text-fill:  #c7c7c7;
+    -fx-text-fill:  white;
     -fx-font-size: 36;
 }
 .tab-pane {
@@ -164,7 +164,7 @@
     -fx-padding: 0;
 }
 .table-view .column-header .label{;
-    -fx-text-fill: #c7c7c7;
+    -fx-text-fill: white;
     -fx-font-size: 28;
 }
 .table-view .column-header-background {
@@ -200,11 +200,11 @@
 }
 
 .table-cell .text {
-    -fx-fill: #919191;
+    -fx-fill: white;
 }
 
 .table-cell:hover .text {
-    -fx-fill: #c7c7c7;
+    -fx-fill: white;
 }
 
 /* hover row (row selection mode) */
@@ -296,7 +296,7 @@
 
 /* unselected */
 .check-box > .box {
-    -fx-background-color: box_background_color;
+    -fx-background-color: #1c1c1c;
     -fx-background-insets: 0;
     -fx-background-radius: 7 7 7 7;
 
@@ -337,7 +337,7 @@
 
 /* Text inside header area */
 .titled-pane > .title > .text {
-    -fx-fill: #919191;
+    -fx-fill: white;
 
     -fx-font-family: "Segoe UI";
     -fx-font-size: 20
@@ -345,7 +345,7 @@
 
 /* Title header area */
 .titled-pane > .title {
-    -fx-background-color: border_color, title_background_color;
+    -fx-background-color: #1c1c1c;
     -fx-background-insets: 0, 1;
     -fx-background-radius: 0;
 }
@@ -355,7 +355,7 @@
 }
 
 .titled-pane > .title:hover > .arrow-button {
-    -fx-background-color: title_background_hover_color;
+    -fx-background-color: #616161;
 }
 
 /* Arrow (for collapsing/expanding) */
@@ -374,11 +374,64 @@
 
 /* Content */
 .titled-pane > .content {
-    -fx-border-color: border_color;
-    -fx-background-color: border_color, content_background_color;
+    -fx-border-color: #616161;
+    -fx-background-color: #1c1c1c;
     -fx-background-insets: -1 0 0 0, 0 1 1 1;
 
     -fx-padding: 0.166667em 0 0.166667em 0; /* 2 0 2 0 */
 }
 
+/*******************************************************************************
+ *                                                                             *
+ * Choice Box                                                                  *
+ *                                                                             *
+ ******************************************************************************/
 
+.choice-box  {
+    -fx-background-color: #1c1c1c;
+    -fx-border-color: #616161;
+    -fx-background-radius: 20, 20, 20, 20;
+    -fx-border-radius: 20, 20, 20, 20;
+    -fx-padding: 0.166667em 0.166667em 0.166667em 0.166667em; /* 2 2 2 2*/
+
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 1em; /* 12 */
+}
+
+.choice-box > .open-button {
+    -fx-background-color: transparent;
+}
+
+.choice-box > .label {
+    -fx-text-fill: white;
+}
+
+.choice-box:hover {
+    -fx-background-color: #737373;
+}
+
+.choice-box:focused {
+    -fx-background-color: transparent, border_focused_color, transparent, choice_box_background_color;
+    -fx-background-insets: -1.4, 0, 1, 2;
+
+    -fx-background-radius: 20, 20, 20, 20;
+}
+
+.choice-box:focused:hover {
+    -fx-background-color: #737373;
+    -fx-border-color: #FF00E7;
+}
+
+.choice-box:disabled {
+    -fx-opacity: .4;
+}
+
+/* ARROW */
+.choice-box > .open-button > .arrow {
+    -fx-background-insets: 0 0 0 0, 0;
+}
+
+   .choice-box .context-menu { -fx-background-color: #1c1c1c; }
+   .choice-box .menu-item:hover { -fx-background-color: #737373; }
+   .choice-box .menu-item:focused { -fx-background-color: #737373; }
+   .choice-box .menu-item > .label { -fx-text-fill: white; }

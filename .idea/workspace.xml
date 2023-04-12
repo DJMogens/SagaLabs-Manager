@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84f66384-4295-4a51-8bf3-97a943c2f250" name="Changes" comment="Copy from client to server database and AzureMethods">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Machines.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Machines.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Stylesheet.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,6 +192,8 @@
       <workItem from="1678450525057" duration="13197000" />
       <workItem from="1679390198634" duration="4309000" />
       <workItem from="1679394740880" duration="772000" />
+      <workItem from="1681296427682" duration="3298000" />
+      <workItem from="1681313678646" duration="1729000" />
     </task>
     <task id="LOCAL-00001" summary="Refactor code">
       <created>1678197258021</created>

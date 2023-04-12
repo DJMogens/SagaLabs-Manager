@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.control.cell.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
@@ -20,14 +14,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sagalabsmanagerclient.controllers.MachinesController">
+<BorderPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sagalabsmanagerclient.controllers.MachinesController">
    <center>
        <TabPane fx:id="tabPane" prefHeight="1080.0" prefWidth="1100.0" stylesheets="@Stylesheet.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
           <tabs>
@@ -126,29 +119,39 @@
                            </font>
                         </TextField>
                         <Region prefHeight="10.0" prefWidth="362.0" />
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                              <Label layoutX="8.0" layoutY="11.0" text="State">
-                                 <font>
-                                    <Font size="22.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="8.0" layoutY="62.0" text="OS">
-                                 <font>
-                                    <Font size="22.0" />
-                                 </font>
-                              </Label>
-                              <ChoiceBox fx:id="stateFilterChoice" layoutX="84.0" layoutY="14.0" prefWidth="220.0" />
-                              <ChoiceBox fx:id="osFilterChoice" layoutX="84.0" layoutY="65.0" prefWidth="220.0" />
-                           </children>
-                        </AnchorPane>
-                        <Region prefHeight="10.0" prefWidth="362.0" />
-                        <Region prefHeight="10.0" prefWidth="362.0" />
                         <TextField fx:id="ipFilterText" prefHeight="20.0" prefWidth="369.0" promptText="IP">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </TextField>
+                        <Region prefHeight="10.0" prefWidth="362.0" />
+                        <VBox>
+                           <children>
+                              <HBox>
+                                 <children>
+                                    <Label text="State">
+                                       <font>
+                                          <Font size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <Region prefHeight="32.0" prefWidth="38.0" />
+                                    <ChoiceBox fx:id="stateFilterChoice" prefWidth="220.0" />
+                                 </children>
+                              </HBox>
+                              <Region prefHeight="10.0" prefWidth="362.0" />
+                              <HBox>
+                                 <children>
+                                    <Label text="OS">
+                                       <font>
+                                          <Font size="22.0" />
+                                       </font>
+                                    </Label>
+                                    <Region prefHeight="32.0" prefWidth="59.0" />
+                                    <ChoiceBox fx:id="osFilterChoice" prefWidth="220.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
                      </children>
                   </VBox>
                   <Region prefHeight="254.0" prefWidth="54.0" />
