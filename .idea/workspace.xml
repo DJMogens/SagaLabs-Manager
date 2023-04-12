@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84f66384-4295-4a51-8bf3-97a943c2f250" name="Changes" comment="Dropdown menu i VPN tab, hvor man kan vælge lab">
+    <list default="true" id="84f66384-4295-4a51-8bf3-97a943c2f250" name="Changes" comment="Copy from client to server database and AzureMethods">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Machines.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Machines.fxml" afterDir="false" />
     </list>
@@ -35,11 +36,6 @@
       <MavenGeneralSettings>
         <option name="useMavenConfig" value="true" />
       </MavenGeneralSettings>
-    </option>
-    <option name="importingSettings">
-      <MavenImportingSettings>
-        <option name="workspaceImportEnabled" value="true" />
-      </MavenImportingSettings>
     </option>
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
@@ -85,18 +81,19 @@
       <recent name="sagalabsmanagerserver" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.sagalabsmanagerclient.Application">
+  <component name="RunManager" selected="Application.sagalabsmanagerclient.Main">
     <configuration default="true" type="AZURE_FUNCTION_SUPPORT" factoryName="Run Functions">
       <option name="appName" />
       <option name="appServicePlanName" />
       <option name="appServicePlanResourceGroup" />
       <option name="appSettingsKey" value="0dda8fb1-cb31-48bf-93ac-fa4064df5e74" />
       <option name="artifact" />
+      <option name="autoPort" value="true" />
       <option name="debugOptions" />
       <option name="deployment" />
       <option name="deploymentStagingDirectoryPath" />
       <option name="funcPath" />
-      <option name="functionHostArguments" />
+      <option name="funcPort" value="0" />
       <option name="hostJsonPath" />
       <option name="insightsName" />
       <option name="instrumentationKey" />
@@ -112,19 +109,6 @@
       <option name="resourceGroup" />
       <option name="stagingFolder" />
       <option name="subscription" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.sagalabsmanager.Application" />
-      <module name="SagaLabs-Manager-Client" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.example.sagalabsmanager.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -158,6 +142,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="sagalabsmanagerclient.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="sagalabsmanagerclient.Main" />
+      <module name="SagaLabs-Manager-Client" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sagalabsmanagerclient.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SagaLabs-Manager-Server-0.1-jar-with-dependencies.jar" type="JarApplication" temporary="true">
       <option name="JAR_PATH" value="$PROJECT_DIR$/SagaLabs-Manager-Server/target/SagaLabs-Manager-Server-0.1-jar-with-dependencies.jar" />
       <method v="2" />
@@ -167,19 +164,19 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Application.sagalabsmanagerclient.Main" />
       <item itemvalue="Application.sagalabsmanagerclient.Application" />
-      <item itemvalue="Application.Application" />
       <item itemvalue="Application.Main" />
       <item itemvalue="JAR Application.SagaLabs-Manager-Server-0.1-jar-with-dependencies.jar" />
       <item itemvalue="JAR Application.SagaLabs-Manager-Server-0.1.jar" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.sagalabsmanagerclient.Main" />
         <item itemvalue="Application.sagalabsmanagerclient.Application" />
         <item itemvalue="JAR Application.SagaLabs-Manager-Server-0.1-jar-with-dependencies.jar" />
         <item itemvalue="JAR Application.SagaLabs-Manager-Server-0.1.jar" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Application" />
       </list>
     </recent_temporary>
   </component>
