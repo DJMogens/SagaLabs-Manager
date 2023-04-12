@@ -37,7 +37,7 @@ public class HomeController extends MenuController {
 
     private VBox createLabsVBox() throws SQLException {
         // Execute a SQL query to retrieve information about labs
-        ResultSet labs = Database.executeSql("SELECT LabName, vpnRunning, VmCount, LabVPN FROM Labs");
+        ResultSet labs = Database.executeSql("SELECT LabName, vpnRunning, VmCount, LabVPN, (SELECT COUNT(*) FROM vm WHERE resource_group = LabName AND powerstate LIKE '%running%') AS RunningVMs FROM Labs");
         // Create a VBox to hold all the lab information boxes
         VBox vbox = new VBox();
         vbox.setSpacing(10);
@@ -59,6 +59,7 @@ public class HomeController extends MenuController {
         String vpnIp = labs.getString("LabVPN");
         boolean vpnRunning = labs.getBoolean("vpnRunning");
         int vmCount = labs.getInt("VmCount");
+        int runningVMs = labs.getInt("RunningVMs");
         // Create an HBox to hold all the lab information elements
         HBox hbox = new HBox();
         hbox.setSpacing(10);
@@ -66,7 +67,7 @@ public class HomeController extends MenuController {
         // Create a colored Rectangle to represent the VPN status
         Rectangle box = createVpnStatusRectangle(vpnRunning);
         // Create a VBox to hold all the lab labels
-        VBox labelBox = createLabelsVBox(labName, vpnIp, vpnRunning, vmCount);
+        VBox labelBox = createLabelsVBox(labName, vpnIp, vpnRunning, vmCount, runningVMs);
         // Create buttons to turn on/off all VMs for this lab
         Button turnOnButton = createTurnOnButton(labName);
         Button turnOffButton = createTurnOffButton(labName);
@@ -81,7 +82,7 @@ public class HomeController extends MenuController {
         return new Rectangle(100, 100, vpnRunning ? Color.GREEN : Color.RED);
     }
 
-    private VBox createLabelsVBox(String labName, String vpnIp, boolean vpnRunning, int vmCount) {
+    private VBox createLabelsVBox(String labName, String vpnIp, boolean vpnRunning, int vmCount, int runningVMs) {
         // Create a VBox to hold all the lab labels
         VBox labelBox = new VBox();
         labelBox.setSpacing(5);
@@ -97,8 +98,11 @@ public class HomeController extends MenuController {
         // Create a label for the VPN status and set its color
         Label vpnStatusLabel = new Label(vpnRunning ? "VPN: Running" : "VPN: Down");
         vpnStatusLabel.setTextFill(vpnRunning ? Color.GREEN : Color.RED);
+        // Create a label for the number of running VMs and set its style
+        Label runningVMLabel = new Label("Running VM's: " + runningVMs + "/" + vmCount);
+        runningVMLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
         // Add all the labels to the VBox
-        labelBox.getChildren().addAll(nameLabel,vpnIpLabel, vpnStatusLabel, vmLabel);
+        labelBox.getChildren().addAll(nameLabel,vpnIpLabel, vpnStatusLabel, runningVMLabel);
         // Return the created VBox containing lab labels
         return labelBox;
     }
