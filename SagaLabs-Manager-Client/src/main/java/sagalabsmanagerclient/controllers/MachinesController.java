@@ -1,6 +1,8 @@
 package sagalabsmanagerclient.controllers;
 
 import javafx.event.ActionEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import sagalabsmanagerclient.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -83,9 +85,37 @@ public class MachinesController extends MenuController {
         System.out.println("Selected VMs: " + selectedVMs);
     }
 
+    // Add this method to check if all selected machines have the same operating system
+    private boolean validateOperatingSystems(ArrayList<MachinesVM> selectedVMs) {
+        if (selectedVMs.isEmpty()) {
+            return false;
+        }
+
+        String firstOS = selectedVMs.get(0).getOs();
+        for (MachinesVM vm : selectedVMs) {
+            if (!firstOS.equalsIgnoreCase(vm.getOs())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @FXML
     public void handleRunScript() {
-        String output = azureMethods.runScript(machinesTable.getSelectedVMs(), scriptField.getText());
+        ArrayList<MachinesVM> selectedVMs = machinesTable.getSelectedVMs();
+
+        if (!validateOperatingSystems(selectedVMs)) {
+            scriptOutputField.clear();
+            Text errorText = new Text("Error: All highlighted machines must have the same operating system (Windows or Linux).");
+            errorText.setFill(Color.RED);
+
+            scriptOutputField.setStyle("-fx-text-fill: red;"); // Set the text color to red
+            scriptOutputField.setText(errorText.getText());
+            return;
+        }
+
+        scriptOutputField.setStyle("-fx-text-fill: black;"); // Set the text color back to default
+        String output = azureMethods.runScript(selectedVMs, scriptField.getText());
         scriptOutputField.setText("");
         scriptOutputField.appendText(output);
     }
