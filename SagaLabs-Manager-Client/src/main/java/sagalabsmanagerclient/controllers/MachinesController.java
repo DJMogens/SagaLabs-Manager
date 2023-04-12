@@ -1,12 +1,15 @@
 package sagalabsmanagerclient.controllers;
 
+import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import sagalabsmanagerclient.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -19,6 +22,8 @@ public class MachinesController extends MenuController {
     @FXML protected TextField osFilterText, stateFilterText, nameFilterText, ipFilterText;
     private final AzureMethods azureMethods = new AzureMethods();
     private MachinesTable machinesTable;
+    private final BooleanProperty isLoading = new SimpleBooleanProperty(false);
+
 
     public void initialize() throws SQLException {
         machinesTable = new MachinesTable(tabPane);
@@ -127,9 +132,51 @@ public class MachinesController extends MenuController {
         }
 
         scriptOutputField.setStyle("-fx-text-fill: white;"); // Set the text color back to default
-        String output = azureMethods.runScript(selectedVMs, scriptField.getText());
-        scriptOutputField.setText("");
-        scriptOutputField.appendText(output);
+
+        isLoading.set(true);
+        startLoadingAnimation();
+
+        Runnable runScriptRunnable = () -> {
+            String output = azureMethods.runScript(selectedVMs, scriptField.getText());
+            Platform.runLater(() -> {
+                isLoading.set(false);
+                scriptOutputField.setText("");
+                scriptOutputField.appendText(output);
+            });
+        };
+        new Thread(runScriptRunnable).start();
+    }
+
+    private void startLoadingAnimation() {
+        Task<Void> loadingTask = new Task<Void>() {
+            @Override
+            protected Void call() {
+                int dotCount = 0;
+                while (isLoading.get()) {
+                    final int currentDotCount = dotCount;
+                    Platform.runLater(() -> {
+                        StringBuilder loadingText = new StringBuilder("Loading");
+                        for (int i = 0; i < currentDotCount; i++) {
+                            loadingText.append(".");
+                        }
+                        scriptOutputField.setText(loadingText.toString());
+                    });
+
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        if (isCancelled()) {
+                            break;
+                        }
+                    }
+                    dotCount = (dotCount + 1) % 4;
+                }
+                return null;
+            }
+        };
+
+        isLoading.set(true);
+        new Thread(loadingTask).start();
     }
 
 
