@@ -85,7 +85,6 @@ public class MachinesController extends MenuController {
         System.out.println("Selected VMs: " + selectedVMs);
     }
 
-    // Add this method to check if all selected machines have the same operating system
     private boolean validateOperatingSystems(ArrayList<MachinesVM> selectedVMs) {
         if (selectedVMs.isEmpty()) {
             return false;
@@ -100,21 +99,34 @@ public class MachinesController extends MenuController {
         return true;
     }
 
+    private boolean validateMachineStates(ArrayList<MachinesVM> selectedVMs) {
+        for (MachinesVM vm : selectedVMs) {
+            if (!"running".equalsIgnoreCase(vm.getState())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @FXML
     public void handleRunScript() {
         ArrayList<MachinesVM> selectedVMs = machinesTable.getSelectedVMs();
 
         if (!validateOperatingSystems(selectedVMs)) {
             scriptOutputField.clear();
-            Text errorText = new Text("Error: All highlighted machines must have the same operating system (Windows or Linux).");
-            errorText.setFill(Color.RED);
-
             scriptOutputField.setStyle("-fx-text-fill: red;"); // Set the text color to red
-            scriptOutputField.setText(errorText.getText());
+            scriptOutputField.setText("Error: All highlighted machines must have the same operating system (Windows or Linux).");
             return;
         }
 
-        scriptOutputField.setStyle("-fx-text-fill: black;"); // Set the text color back to default
+        if (!validateMachineStates(selectedVMs)) {
+            scriptOutputField.clear();
+            scriptOutputField.setStyle("-fx-text-fill: red;"); // Set the text color to red
+            scriptOutputField.setText("Error: All highlighted machines must be in the 'running' state.");
+            return;
+        }
+
+        scriptOutputField.setStyle("-fx-text-fill: white;"); // Set the text color back to default
         String output = azureMethods.runScript(selectedVMs, scriptField.getText());
         scriptOutputField.setText("");
         scriptOutputField.appendText(output);

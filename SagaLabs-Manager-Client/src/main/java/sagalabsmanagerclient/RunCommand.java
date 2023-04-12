@@ -12,19 +12,28 @@ import java.util.Arrays;
 public class RunCommand extends AzureMethods {
     public static String runCommandOnVM(MachinesVM vm, String script) {
         VirtualMachine virtualMachine = AzureLogin.getAzure().virtualMachines().getById(vm.getAzureId());
-        RunCommandInput runCommandInput = new RunCommandInput().withCommandId("RunShellScript").withScript(Arrays.asList(script));
+        String osType = virtualMachine.osType().toString();
+
+        RunCommandInput runCommandInput;
+        //check if it is windows or linux
+        if ("Windows".equalsIgnoreCase(osType)) {
+            runCommandInput = new RunCommandInput().withCommandId("RunPowerShellScript").withScript(Arrays.asList(script));
+        } else {
+            runCommandInput = new RunCommandInput().withCommandId("RunShellScript").withScript(Arrays.asList(script));
+        }
+
         RunCommandResult runCommandResult = virtualMachine.runCommand(runCommandInput);
 
         System.out.println(runCommandResult.value().get(0).message());
 
-        //set output into vm object
+        // Set output into the vm object
         vm.setLastScriptOutput(runCommandResult.value().get(0).message());
         return runCommandResult.value().get(0).message();
     }
 
 
 
-    //The users shouldn't run code meant for bash on both linux and windows machines.
+        //The users shouldn't run code meant for bash on both linux and windows machines, and the other way around
         public static boolean checkOSIsTheSame(ArrayList<MachinesVM> vms) {
             if (vms.size() > 0) {
                 VirtualMachine firstVM = AzureLogin.getAzure().virtualMachines().getById(vms.get(0).getAzureId());
