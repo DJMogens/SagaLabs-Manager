@@ -40,14 +40,14 @@ public class MachinesTable {
         MachinesTab machinesAllTab = new MachinesTab(allTab, allTableView);
         machinesTabs.add(machinesAllTab);
         selectTab(machinesAllTab);
-        for(String resourceGroup: Database.getResourceGroups()) {
+        for(String resourceGroup: Machines.getResourceGroups()) {
             createTab(resourceGroup);
         }
     }
 
     public void addNewLabs() throws SQLException {
         labLoop:
-        for(String resourceGroup: Database.getResourceGroups()) {
+        for(String resourceGroup: Machines.getResourceGroups()) {
             tabLoop:
             for(MachinesTab tab: machinesTabs) {
                 try {
@@ -64,7 +64,7 @@ public class MachinesTable {
     public void selectTab(MachinesTab machinesTab) throws SQLException {
         String resourceGroupName = machinesTab.getResourceGroup();
         FilteredList<MachinesVM> list = new FilteredList<>(
-                FXCollections.observableArrayList(Database.getMachines(resourceGroupName)),
+                FXCollections.observableArrayList(Machines.getMachines()),
                 null);
         machinesTab.getTableView().setItems(list);
     }

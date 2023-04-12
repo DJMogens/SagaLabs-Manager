@@ -27,16 +27,13 @@ public class Database {
             conn = DriverManager.getConnection(DB_URL, dbUsername, dbPassword);
         return conn != null;
     }
-    public static ArrayList<MachinesVM> getMachines(String resourceGroup) throws SQLException {
-        login();
+    public static ArrayList<MachinesVM> getMachines() throws SQLException {
+        if(conn.isClosed()) {
+            login();
+        }
         ArrayList<MachinesVM> machinesVMs = new ArrayList<>();
         String sql;
-        if(resourceGroup == null) {
-            sql = "SELECT * FROM sagadb.vm";
-        }
-        else {
-            sql = "SELECT * FROM sagadb.vm WHERE resource_group = '"+ resourceGroup + "'";
-        }
+        sql = "SELECT * FROM sagadb.vm";
         ResultSet resultSet = executeSql(sql);
 
         while (resultSet.next()) {
@@ -53,7 +50,9 @@ public class Database {
     }
 
     public static ArrayList<String> getResourceGroups() throws SQLException {
-        login();
+        if(conn.isClosed()) {
+            login();
+        }
         ArrayList<String> resourceGroups = new ArrayList<>();
         ResultSet resultSet = executeSql("select distinct resource_group from vm");
         while(resultSet.next()) {
@@ -62,7 +61,9 @@ public class Database {
         return resourceGroups;
     }
     public static ResultSet executeSql(String sql) throws SQLException {
-        login();
+        if(conn.isClosed()) {
+            login();
+        }
         Statement statement = conn.createStatement();
         return statement.executeQuery(sql);
     }

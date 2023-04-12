@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import sagalabsmanagerclient.AzureMethods;
 import sagalabsmanagerclient.Database;
+import sagalabsmanagerclient.Machines;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,6 +24,8 @@ public class HomeController extends MenuController {
     public void initialize() throws SQLException {
         VBox vbox = createLabsVBox();
         anchorHome.getChildren().add(vbox);
+        Database.login();
+        Machines.InitMachines();
 
         super.initialize();
     }
