@@ -14,9 +14,10 @@ public class Main extends javafx.application.Application {
 
     public static void main(String[] args) {
         launch();
+        Machines.stopRefreshing();
+        viewSwitcher.closeThreads();
         try {
             Database.conn.close();
-            viewSwitcher.closeThreads();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

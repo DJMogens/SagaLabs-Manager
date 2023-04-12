@@ -2,16 +2,21 @@ package sagalabsmanagerclient;
 
 import java.sql.Array;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Machines {
     public static ArrayList<MachinesVM> machines = new ArrayList<>();
     public static Thread refreshing = new Thread(() -> {
         while(true) {
-            System.out.println("Retrieving machines from database");
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            System.out.println("Retrieving machines from database at " + dtf.format(now));
+
             setMachines();
             try {
-                Thread.sleep(5000);
+                Thread.sleep(3000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -43,5 +48,11 @@ public class Machines {
             }
         }
         return resourceGroups;
+    }
+    public static void stopRefreshing() {
+        try {
+            refreshing.interrupt();
+        }
+        catch(NullPointerException ignored) {}
     }
 }
