@@ -75,7 +75,7 @@ public class HomeController extends MenuController {
 
 
     private Rectangle createVpnStatusRectangle(boolean vpnRunning) {
-        return new Rectangle(100, 100, vpnRunning ? Color.GREEN : Color.BLUE);
+        return new Rectangle(100, 100, vpnRunning ? Color.GREEN : Color.RED);
     }
 
     private VBox createLabelsVBox(String labName, String vpnIp, boolean vpnRunning, int vmCount) {
