@@ -3,6 +3,7 @@ package sagalabsmanagerclient.controllers;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.scene.paint.Color;
@@ -12,6 +13,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MachinesController extends MenuController {
     @FXML protected Button runScriptButton;
@@ -19,7 +22,11 @@ public class MachinesController extends MenuController {
     @FXML protected TabPane tabPane;
     @FXML protected Tab allTab;
     @FXML protected TableView<MachinesVM> allTableView;
-    @FXML protected TextField osFilterText, stateFilterText, nameFilterText, ipFilterText;
+    @FXML
+    private TableColumn<MachinesVM, String> stateColumn;
+
+    @FXML protected TextField nameFilterText, ipFilterText;
+    @FXML protected ChoiceBox<String> osFilterChoice, stateFilterChoice;
     private final AzureMethods azureMethods = new AzureMethods();
     private MachinesTable machinesTable;
     private final BooleanProperty isLoading = new SimpleBooleanProperty(false);
@@ -30,6 +37,23 @@ public class MachinesController extends MenuController {
         machinesTable.initializeTabs(allTab, allTableView);
         //applyFilter(new ActionEvent());
         setTabSelectionAction();
+
+        // Add the values to the OS filter ChoiceBox
+        osFilterChoice.getItems().addAll("", "Windows", "Linux");
+
+        // State filter initialization
+        Set<String> uniquePowerStates = new HashSet<>();
+
+        // Get the items from the TableView
+        ObservableList<MachinesVM> machinesVMList = allTableView.getItems();
+
+        for (MachinesVM machinesVM : machinesVMList) {
+            String state = stateColumn.getCellObservableValue(machinesVM).getValue();
+            uniquePowerStates.add(state);
+        }
+
+        stateFilterChoice.getItems().addAll(uniquePowerStates);
+        stateFilterChoice.getItems().add("");
 
         super.initialize();
     }
@@ -57,19 +81,21 @@ public class MachinesController extends MenuController {
         }
     }
     public void applyFilter(ActionEvent e) throws SQLException {
-        String osFilter = osFilterText.getText().replaceAll("\\s", "");
-        String stateFilter = stateFilterText.getText().replaceAll("\\s", "");
+        String osFilter = osFilterChoice.getValue() != null ? osFilterChoice.getValue().toString().replaceAll("\\s", "") : "";
+        String stateFilter = stateFilterChoice.getValue() != null ? stateFilterChoice.getValue().toString().replaceAll("\\s", "") : "";
         String nameFilter = nameFilterText.getText().replaceAll("\\s", "");
         String ipFilter = ipFilterText.getText().replaceAll("\\s", "");
         machinesTable.applyFilter(osFilter, stateFilter, nameFilter, ipFilter);
     }
+
     public void resetFilters(ActionEvent e) throws SQLException {
-        stateFilterText.setText("");
-        osFilterText.setText("");
+        stateFilterChoice.setValue("");
+        osFilterChoice.setValue("");
         nameFilterText.setText("");
         ipFilterText.setText("");
         applyFilter(e);
     }
+
 
     @FXML
     public void handleTurnOn() {
