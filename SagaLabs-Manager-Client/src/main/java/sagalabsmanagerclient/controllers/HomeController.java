@@ -1,5 +1,6 @@
 package sagalabsmanagerclient.controllers;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,8 +23,15 @@ public class HomeController extends MenuController {
     private final AzureMethods azureMethods = new AzureMethods();
 
     public void initialize() throws SQLException {
-        VBox vbox = createLabsVBox();
-        anchorHome.getChildren().add(vbox);
+        Platform.runLater(() -> {
+            try {
+                VBox vbox = createLabsVBox();
+                anchorHome.getChildren().add(vbox);
+            } catch (SQLException e) {
+                // Handle the SQLException
+                e.printStackTrace();
+            }
+        });
         Database.login();
         Machines.InitMachines();
 
@@ -71,6 +79,19 @@ public class HomeController extends MenuController {
         // Create buttons to turn on/off all VMs for this lab
         Button turnOnButton = createTurnOnButton(labName);
         Button turnOffButton = createTurnOffButton(labName);
+
+        // If runningVMs is 0, make the turnOffButton faded and unclickable
+        if (runningVMs == 0) {
+            turnOffButton.setDisable(true);
+            turnOffButton.setOpacity(0.5);
+        }
+
+        // If runningVMs is equal to vmCount, make sure the turnOnButton is faded and unclickable
+        if (runningVMs == vmCount) {
+            turnOnButton.setDisable(true);
+            turnOnButton.setOpacity(0.5);
+        }
+
         // Add all the elements to the HBox
         hbox.getChildren().addAll(box, labelBox, turnOnButton, turnOffButton);
         // Return the created HBox containing lab information and controls
