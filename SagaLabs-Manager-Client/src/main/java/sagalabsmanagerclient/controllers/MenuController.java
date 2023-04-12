@@ -51,9 +51,6 @@ public abstract class MenuController extends Controller implements Refreshable {
     public void switchToMachine() {
         setView(View.MACHINES);
     }
-    public void switchToSQL() {
-        setView(View.SQLSCENE);
-    }
     public void switchToVPN() {
         setView(View.VPN);
     }

@@ -93,12 +93,6 @@
                   <String fx:value="button4" />
                </styleClass>
             </Button>
-            <Region prefHeight="50.0" prefWidth="280.0" />
-                <Button mnemonicParsing="false" onAction="#switchToSQL" prefHeight="100.0" prefWidth="240.0" styleClass="button3" text="SQL Connect">
-               <font>
-                  <Font size="33.0" />
-               </font>
-            </Button>
             <Region layoutX="10.0" layoutY="360.0" prefHeight="50.0" prefWidth="280.0" />
             <Button layoutX="50.0" layoutY="411.0" mnemonicParsing="false" onAction="#switchToVPN" prefHeight="100.0" prefWidth="240.0" styleClass="button3" text="VPN">
                <font>

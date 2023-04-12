@@ -46,16 +46,6 @@
                </font>
             </Button>
             <Region minHeight="0.0" prefHeight="50.0" prefWidth="280.0" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#switchToSQL" prefHeight="100.0" prefWidth="240.0" text="SQL Connect">
-               <styleClass>
-                  <String fx:value="button" />
-                  <String fx:value="button3" />
-               </styleClass>
-               <font>
-                  <Font size="33.0" />
-               </font>
-            </Button>
-            <Region layoutX="10.0" layoutY="360.0" minHeight="0.0" prefHeight="50.0" prefWidth="280.0" />
             <Button alignment="CENTER" layoutX="50.0" layoutY="411.0" mnemonicParsing="false" onAction="#switchToVPN" prefHeight="100.0" prefWidth="240.0" text="VPN">
                <styleClass>
                   <String fx:value="button" />
