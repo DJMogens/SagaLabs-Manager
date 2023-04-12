@@ -28,7 +28,7 @@ public class MachinesController extends MenuController {
     public void initialize() throws SQLException {
         machinesTable = new MachinesTable(tabPane);
         machinesTable.initializeTabs(allTab, allTableView);
-        applyFilter(new ActionEvent());
+        //applyFilter(new ActionEvent());
         setTabSelectionAction();
 
         super.initialize();
