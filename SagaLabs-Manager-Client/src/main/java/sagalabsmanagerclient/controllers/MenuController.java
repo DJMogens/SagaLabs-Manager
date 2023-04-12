@@ -42,6 +42,7 @@ public abstract class MenuController extends Controller implements Refreshable {
         AzureLogin.setLoginStatus(false);
         AzureLogin.setAzure(null);
         AzureLogin.setTokenCredentialKeyVault(null);
+        Machines.stopRefreshing();
         Database.conn.close();
         setView(View.LOGIN);
     }

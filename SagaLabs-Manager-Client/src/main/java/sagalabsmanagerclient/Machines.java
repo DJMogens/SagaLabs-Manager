@@ -17,14 +17,15 @@ public class Machines {
             setMachines();
             try {
                 Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            } catch (InterruptedException ignored) {}
         }
     });
     public static void InitMachines() {
         if(!refreshing.isAlive()) {
-            refreshing.start();
+            try {
+                refreshing.start();
+            }
+            catch (RuntimeException ignored) {}
         }
     }
     public static void setMachines() {
