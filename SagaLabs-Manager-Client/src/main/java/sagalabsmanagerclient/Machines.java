@@ -8,24 +8,25 @@ import java.util.ArrayList;
 
 public class Machines {
     public static ArrayList<MachinesVM> machines = new ArrayList<>();
-    public static Thread refreshing = new Thread(() -> {
-        while(true) {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-            LocalDateTime now = LocalDateTime.now();
-            System.out.println("Retrieving machines from database at " + dtf.format(now));
+    public static Thread refreshing;
+    public static void setRefreshing() {
+        refreshing = new Thread(() -> {
+            while(true) {
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                LocalDateTime now = LocalDateTime.now();
+                System.out.println("Retrieving machines from database at " + dtf.format(now));
 
-            setMachines();
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException ignored) {}
-        }
-    });
-    public static void InitMachines() {
-        if(!refreshing.isAlive()) {
-            try {
-                refreshing.start();
+                setMachines();
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException ignored) {}
             }
-            catch (RuntimeException ignored) {}
+        });
+    }
+    public static void InitMachines() {
+        if(refreshing == null || !refreshing.isAlive()) {
+            setRefreshing();
+            refreshing.start();
         }
     }
     public static void setMachines() {
@@ -49,9 +50,7 @@ public class Machines {
         return resourceGroups;
     }
     public static void stopRefreshing() {
-        try {
-            refreshing.interrupt();
-        }
-        catch(NullPointerException ignored) {}
+        System.out.println("Interrupting machines refresh thread");
+        refreshing.interrupt();
     }
 }
