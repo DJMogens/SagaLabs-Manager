@@ -1,13 +1,19 @@
 package sagalabsmanagerclient.controllers;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import sagalabsmanagerclient.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -55,8 +61,11 @@ public class MachinesController extends MenuController {
         stateFilterChoice.getItems().addAll(uniquePowerStates);
         stateFilterChoice.getItems().add("");
 
+        handleRightClickCopy(allTableView);
+
         super.initialize();
     }
+
     public void refresh() throws SQLException {
         // Makes copy of current machines to set checkmarks again
         machinesTable.setPreviousMachines();
@@ -204,6 +213,26 @@ public class MachinesController extends MenuController {
         isLoading.set(true);
         new Thread(loadingTask).start();
     }
+
+    private void handleRightClickCopy(TableView<MachinesVM> tableView) {
+        tableView.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            if (event.getButton() == MouseButton.SECONDARY) {
+                MachinesVM selectedItem = tableView.getSelectionModel().getSelectedItem();
+                if (selectedItem != null) {
+                    TableColumn<MachinesVM, ?> selectedColumn = tableView.getFocusModel().getFocusedCell().getTableColumn();
+                    Object value = selectedColumn.getCellObservableValue(selectedItem).getValue();
+                    String stringValue = value == null ? "" : value.toString();
+
+                    final Clipboard clipboard = Clipboard.getSystemClipboard();
+                    final ClipboardContent content = new ClipboardContent();
+                    content.putString(stringValue);
+                    clipboard.setContent(content);
+                }
+            }
+        });
+    }
+
+
 
 
 }
