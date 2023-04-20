@@ -30,9 +30,12 @@ import java.util.ArrayList;
 
 
 public class VPNController extends MenuController {
-    public static TextField usernameInput;
+    public TextField usernameInput;
     public Button createUser;
-    public static ChoiceBox vpnServerChoiceBox = new ChoiceBox<>();
+    public ChoiceBox vpnServerChoiceBox = new ChoiceBox<>();
+
+    private static String storedUsername = "";
+    private static String storedVpnServerChoice = "";
 
     @FXML
     private TableView<JsonObject> userVpnTableView;
@@ -60,6 +63,7 @@ public class VPNController extends MenuController {
             throw new RuntimeException(e);
         }
         TableUtils.handleRightClickCopy(userVpnTableView);
+        loadState();
 
         super.initialize();
     }
@@ -93,17 +97,29 @@ public class VPNController extends MenuController {
     // A method to initialize the VPN server choice box with the available servers
     private void initializeServerChoiceBox() {
         try {
+            // Store the currently selected value before clearing the items
+            String selectedValue = vpnServerChoiceBox.getValue() == null ? null : vpnServerChoiceBox.getValue().toString();
+
             vpnServerChoiceBox.getItems().clear();
+
             // Connect to the database and execute a query to retrieve the available servers
             ResultSet rs = Database.executeSql("SELECT LabName FROM Labs WHERE vpnRunning = 1");
+
             // Populate the choice box with the server names
             while (rs.next()) {
                 vpnServerChoiceBox.getItems().add(rs.getString("LabName"));
             }
+
+            // Restore the previously selected value after repopulating the choice box
+            if (selectedValue != null && vpnServerChoiceBox.getItems().contains(selectedValue)) {
+                vpnServerChoiceBox.setValue(selectedValue);
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     // A method to handle the action for the create user button
     @FXML
@@ -304,10 +320,25 @@ public class VPNController extends MenuController {
         //Update the table with listVpn
         listVpn();
     }
+
+    private void saveState() {
+        storedVpnServerChoice = vpnServerChoiceBox.getValue() == null ? "" : vpnServerChoiceBox.getValue().toString();
+        storedUsername = usernameInput.getText();
+    }
+
+    private void loadState() {
+        if (!storedVpnServerChoice.isEmpty()) {
+            vpnServerChoiceBox.setValue(storedVpnServerChoice);
+        }
+        usernameInput.setText(storedUsername);
+    }
+
     public void refresh() throws SQLException {
+        saveState();
         listVpn();
         initializeServerChoiceBox();
     }
+
 
 
 
