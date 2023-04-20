@@ -27,7 +27,7 @@ public class MachinesTab {
         this.resourceGroup = resourceGroup;
         this.tab = tab;
         this.tableView = tableView;
-        handleRightClickCopy(tableView);
+        TableUtils.handleRightClickCopy(tableView);
     }
     public MachinesTab(Tab tab, TableView<MachinesVM> tableView) {
         this(null, tab, tableView);
@@ -64,22 +64,6 @@ public class MachinesTab {
         tableView.getColumns().add(ipColumn);
         tableView.getColumns().add(rgColumn);
     }
-    private void handleRightClickCopy(TableView<MachinesVM> tableView) {
-        tableView.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
-            if (event.getButton() == MouseButton.SECONDARY) {
-                MachinesVM selectedItem = tableView.getSelectionModel().getSelectedItem();
-                if (selectedItem != null) {
-                    TableColumn<MachinesVM, ?> selectedColumn = tableView.getFocusModel().getFocusedCell().getTableColumn();
-                    Object value = selectedColumn.getCellData(selectedItem);
-                    String stringValue = value == null ? "" : value.toString();
 
-                    final Clipboard clipboard = Clipboard.getSystemClipboard();
-                    final ClipboardContent content = new ClipboardContent();
-                    content.putString(stringValue);
-                    clipboard.setContent(content);
-                }
-            }
-        });
-    }
 
 }
