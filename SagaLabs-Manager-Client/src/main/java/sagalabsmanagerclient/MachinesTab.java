@@ -1,11 +1,12 @@
 package sagalabsmanagerclient;
 
 import com.azure.resourcemanager.containerservice.models.OSType;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 
 public class MachinesTab {
 
@@ -26,6 +27,7 @@ public class MachinesTab {
         this.resourceGroup = resourceGroup;
         this.tab = tab;
         this.tableView = tableView;
+        handleRightClickCopy(tableView);
     }
     public MachinesTab(Tab tab, TableView<MachinesVM> tableView) {
         this(null, tab, tableView);
@@ -61,6 +63,23 @@ public class MachinesTab {
         tableView.getColumns().add(stateColumn);
         tableView.getColumns().add(ipColumn);
         tableView.getColumns().add(rgColumn);
+    }
+    private void handleRightClickCopy(TableView<MachinesVM> tableView) {
+        tableView.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            if (event.getButton() == MouseButton.SECONDARY) {
+                MachinesVM selectedItem = tableView.getSelectionModel().getSelectedItem();
+                if (selectedItem != null) {
+                    TableColumn<MachinesVM, ?> selectedColumn = tableView.getFocusModel().getFocusedCell().getTableColumn();
+                    Object value = selectedColumn.getCellData(selectedItem);
+                    String stringValue = value == null ? "" : value.toString();
+
+                    final Clipboard clipboard = Clipboard.getSystemClipboard();
+                    final ClipboardContent content = new ClipboardContent();
+                    content.putString(stringValue);
+                    clipboard.setContent(content);
+                }
+            }
+        });
     }
 
 }
