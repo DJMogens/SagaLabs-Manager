@@ -17,8 +17,8 @@
                       <TableColumn fx:id="userVPNName" editable="false" prefWidth="182.0" text="Name" />
                       <TableColumn fx:id="userVPNStatus" prefWidth="174.0" text="Status" />
                         <TableColumn fx:id="userVPNLab" prefWidth="180.0" text="Lab" />
-                        <TableColumn fx:id="userVPNOnline" editable="false" prefWidth="170.0" text="Connection" />
-                        <TableColumn fx:id="userVPNButtons" prefWidth="5000.0" resizable="false" sortable="false" />
+                        <TableColumn fx:id="userVPNOnline" editable="false" prefWidth="41.0" />
+                        <TableColumn fx:id="userVPNButtons" maxWidth="5129.0" prefWidth="5129.0" resizable="false" sortable="false" />
                     </columns>
                   </TableView>
                </content>

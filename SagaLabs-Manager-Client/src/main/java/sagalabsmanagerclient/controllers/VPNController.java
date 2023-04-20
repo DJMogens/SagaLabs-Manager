@@ -6,6 +6,7 @@ import java.io.File;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -46,7 +47,8 @@ public class VPNController extends MenuController {
     @FXML
     private TableColumn<JsonObject, String> userVPNLab;
     @FXML
-    private TableColumn<JsonObject, String> userVPNOnline;
+    private TableColumn<JsonObject, JsonObject> userVPNOnline;
+
     @FXML
     private TableColumn<JsonObject, String> userVPNButtons;
     private final VPNServiceConnection vpnServiceConnection = new VPNServiceConnection();
@@ -83,11 +85,30 @@ public class VPNController extends MenuController {
                 .get("AccountStatus")
                 .getAsString()));
 
-        // Set the cell value factory for the userVPNOnline column
-        userVPNOnline.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()
-                .get("Connections")
-                .getAsString()));
+        // Set the cell factory for the userVPNOnline column
+        userVPNOnline.setCellFactory(param -> new TableCell<JsonObject, JsonObject>() {
+            @Override
+            protected void updateItem(JsonObject item, boolean empty) {
+                super.updateItem(item, empty);
 
+                if (empty || item == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    int onlineStatus = item.get("Connections").getAsInt();
+                    if (onlineStatus == 1) {
+                        // Set the cell background color to green
+                        setStyle("-fx-background-color: #7CFC00");
+                    } else {
+                        // Set the cell background color to red
+                        setStyle("-fx-background-color: #FF4500");
+                    }
+                }
+            }
+        });
+
+        // Set the cell value factory for the userVPNOnline column
+        userVPNOnline.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue()));
         // Set the cell value factory for the labName column
         userVPNLab.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()
                 .get("labName")
