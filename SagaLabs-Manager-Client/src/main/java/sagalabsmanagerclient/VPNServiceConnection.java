@@ -107,12 +107,6 @@ public class VPNServiceConnection {
         System.out.println(sendPostRequestWithUsername(apiUrl, username));
     }
 
-    public void rotateCertificate(String vpnIp, String username) throws IOException {
-        String apiUrl = "http://" + vpnIp + "/api/user/rotate";
-        sendPostRequestWithUsername(apiUrl, username);
-        System.out.println(sendPostRequestWithUsername(apiUrl, username));
-    }
-
     public void unrevokeCertificate(String vpnIp, String username) throws IOException {
         String apiUrl = "http://" + vpnIp + "/api/user/unrevoke";
         sendPostRequestWithUsername(apiUrl, username);

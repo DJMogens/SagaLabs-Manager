@@ -30,9 +30,9 @@ import java.util.ArrayList;
 
 
 public class VPNController extends MenuController {
-    public TextField usernameInput;
+    public static TextField usernameInput;
     public Button createUser;
-    public ChoiceBox vpnServerChoiceBox = new ChoiceBox<>();
+    public static ChoiceBox vpnServerChoiceBox = new ChoiceBox<>();
 
     @FXML
     private TableView<JsonObject> userVpnTableView;
@@ -128,7 +128,6 @@ public class VPNController extends MenuController {
             final Button revokeBtn = new Button("Revoke");
             final Button downloadBtn = new Button("Download");
             final Button deleteBtn = new Button("Delete");
-            final Button rotateBtn = new Button("Rotate");
             final Button unrevokeBtn = new Button("Unrevoke");
             final HBox hbox = new HBox(10);
 
@@ -164,7 +163,6 @@ public class VPNController extends MenuController {
                         throw new RuntimeException(ex);
                     }
                 });
-                rotateBtn.setOnAction(e -> handleRotateButton(getIndex()));
                 unrevokeBtn.setOnAction(e -> handleUnrevokeButton(getIndex()));
             }
 
@@ -180,7 +178,7 @@ public class VPNController extends MenuController {
                     if (status.equalsIgnoreCase("Active")) {
                         hbox.getChildren().addAll(revokeBtn, downloadBtn);
                     } else if (status.equalsIgnoreCase("Revoked")) {
-                        hbox.getChildren().addAll(deleteBtn, rotateBtn, unrevokeBtn);
+                        hbox.getChildren().addAll(deleteBtn, unrevokeBtn);
                     } else {
                         hbox.getChildren().addAll(new Button()); //empty cell
                     }
@@ -247,22 +245,7 @@ public class VPNController extends MenuController {
      * Handles the action for the rotate button.
      * @param index The index of the selected item in the TableView.
      */
-    private void handleRotateButton(int index) {
-        JsonObject vpnUser = userVpnTableView.getItems().get(index);
-        System.out.println(userVpnTableView.getItems().get(index));
-        String vpnIp = vpnUser.get("vpnIp").getAsString();
-        String username = vpnUser.get("Identity").getAsString();
-        try {
-            vpnServiceConnection.rotateCertificate(vpnIp, username);
-            listVpn();
-        } catch (IOException | SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-    /**
-     * Handles the action for the unrevoke button.
-     * @param index The index of the selected item in the TableView.
-     */
+
     private void handleUnrevokeButton(int index) {
         JsonObject vpnUser = userVpnTableView.getItems().get(index);
         System.out.println(userVpnTableView.getItems().get(index));
