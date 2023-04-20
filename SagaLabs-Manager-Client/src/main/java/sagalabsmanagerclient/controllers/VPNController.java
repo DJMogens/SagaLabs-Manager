@@ -13,6 +13,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import sagalabsmanagerclient.Database;
@@ -54,8 +58,10 @@ public class VPNController extends MenuController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        handleRightClickCopy(userVpnTableView);
         super.initialize();
     }
+
 
     /**
      * Initializes the cell value factories for the TableView columns.
@@ -317,4 +323,23 @@ public class VPNController extends MenuController {
         listVpn();
         initializeServerChoiceBox();
     }
+
+    private void handleRightClickCopy(TableView<JsonObject> tableView) {
+        tableView.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> {
+            if (event.getButton() == MouseButton.SECONDARY) {
+                JsonObject selectedItem = tableView.getSelectionModel().getSelectedItem();
+                if (selectedItem != null) {
+                    TableColumn<JsonObject, ?> selectedColumn = tableView.getFocusModel().getFocusedCell().getTableColumn();
+                    Object value = selectedColumn.getCellData(selectedItem);
+                    String stringValue = value == null ? "" : value.toString();
+
+                    final Clipboard clipboard = Clipboard.getSystemClipboard();
+                    final ClipboardContent content = new ClipboardContent();
+                    content.putString(stringValue);
+                    clipboard.setContent(content);
+                }
+            }
+        });
+    }
+
 }
