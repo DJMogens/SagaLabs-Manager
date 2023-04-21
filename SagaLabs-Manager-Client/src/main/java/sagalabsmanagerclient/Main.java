@@ -13,8 +13,8 @@ public class Main extends javafx.application.Application {
     }
 
     public static void main(String[] args) {
-        Output out = new Output();
-        out.sendOutputToLog();
+        new Output("./log.txt");
+
         launch();
         Machines.stopRefreshing();
         viewSwitcher.closeThreads();

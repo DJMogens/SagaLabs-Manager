@@ -11,8 +11,8 @@ public class Output {
     private File file;
     private PrintStream stream;
 
-    public Output() {
-        this.file = new File(".\\log.txt");
+    public Output(String fileName) {
+        this.file = new File(fileName);
         try {
             this.stream = new PrintStream(file);
         } catch (FileNotFoundException e) {
@@ -23,13 +23,14 @@ public class Output {
                 throw new RuntimeException(ex);
             }
         }
+        sendOutputToLog();
     }
     public void sendOutputToLog() {
+        System.setErr(stream);
         System.setOut(stream);
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-
         System.out.println("Program started at " + dtf.format(now));
     }
 }
