@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sagalabsmanagerclient.controllers.CaptureLabController">
+    <center>
+        <AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+           <children>
+               <TabPane fx:id="tabPane" layoutX="20" layoutY="20" prefHeight="650.0" prefWidth="1252.0">
+            </TabPane>
+            <VBox alignment="CENTER" layoutX="1280.0" layoutY="159.0" prefWidth="365.0">
+               <children>
+                  <TextField fx:id="nameFilterText" prefHeight="20.0" prefWidth="278.0" promptText="Name">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+                  <Region prefHeight="10.0" prefWidth="362.0" />
+                  <TextField fx:id="ipFilterText" prefHeight="20.0" prefWidth="369.0" promptText="IP">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+                  <Region prefHeight="10.0" prefWidth="362.0" />
+                  <VBox>
+                     <children>
+                        <HBox>
+                           <children>
+                              <Label text="State">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Region prefHeight="32.0" prefWidth="38.0" />
+                              <ChoiceBox fx:id="stateFilterChoice" prefWidth="220.0" />
+                           </children>
+                        </HBox>
+                        <Region prefHeight="10.0" prefWidth="362.0" />
+                        <HBox>
+                           <children>
+                              <Label text="OS">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                              <Region prefHeight="32.0" prefWidth="59.0" />
+                              <ChoiceBox fx:id="osFilterChoice" prefWidth="220.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="1706.0" layoutY="203.0">
+               <children>
+                  <Button fx:id="filterButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="44.0" prefWidth="159.0" text="Apply Filter">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="button" />
+                        <String fx:value="button1" />
+                     </styleClass>
+                  </Button>
+                  <Region prefHeight="10.0" prefWidth="156.0" />
+                  <Button fx:id="resetFilterButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="43.0" prefWidth="158.0" text="Reset filters">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="button" />
+                        <String fx:value="button1" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </VBox>
+           </children>
+        </AnchorPane>
+
+    </center>
+</BorderPane>

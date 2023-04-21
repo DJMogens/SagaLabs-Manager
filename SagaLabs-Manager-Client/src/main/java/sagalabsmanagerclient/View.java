@@ -5,9 +5,8 @@ public enum View {
     LOGIN("Login.fxml"),
     HOME("Home.fxml"),
     VPN("Vpn.fxml"),
-    MACHINES("Machines.fxml");
-
-
+    MACHINES("Machines.fxml"),
+    CAPTURE_LAB_WINDOW("CaptureLab.fxml");
     final private String fileName;
 
     View(String fileName) {

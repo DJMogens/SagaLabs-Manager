@@ -2,6 +2,7 @@ package sagalabsmanagerclient.controllers;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -9,10 +10,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import sagalabsmanagerclient.AzureMethods;
-import sagalabsmanagerclient.Database;
-import sagalabsmanagerclient.Machines;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import sagalabsmanagerclient.*;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -92,8 +97,14 @@ public class HomeController extends MenuController {
             turnOnButton.setOpacity(0.5);
         }
 
-        // Add all the elements to the HBox
-        hbox.getChildren().addAll(box, labelBox, turnOnButton, turnOffButton);
+        Button captureLabButton = new Button("Capture Lab");
+        captureLabButton.setOnAction(event -> openCaptureLabWindow(labName));
+
+
+        // Add the captureLabButton to the HBox
+        hbox.getChildren().addAll(box, labelBox, turnOnButton, turnOffButton, captureLabButton);
+
+
         // Return the created HBox containing lab information and controls
         return hbox;
     }
@@ -159,5 +170,9 @@ public class HomeController extends MenuController {
         return turnOffButton;
     }
 
+
+    public void openCaptureLabWindow(String labName) {
+        ViewSwitcher.openCaptureLabWindow(labName);
+    }
 
 }
