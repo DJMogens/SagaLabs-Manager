@@ -118,12 +118,14 @@ public class MachinesController extends MenuController {
 
     private boolean validateOperatingSystems(ArrayList<MachinesVM> selectedVMs) {
         if (selectedVMs.isEmpty()) {
+            setOutputError("Error: You must select at least one machine in order to run code.");
             return false;
         }
 
         String firstOS = selectedVMs.get(0).getOs();
         for (MachinesVM vm : selectedVMs) {
             if (!firstOS.equalsIgnoreCase(vm.getOs())) {
+                setOutputError("Error: All highlighted machines must have the same operating system (Windows or Linux).");
                 return false;
             }
         }
@@ -133,29 +135,34 @@ public class MachinesController extends MenuController {
     private boolean validateMachineStates(ArrayList<MachinesVM> selectedVMs) {
         for (MachinesVM vm : selectedVMs) {
             if (!"running".equalsIgnoreCase(vm.getState())) {
+                setOutputError("Error: All highlighted machines must be in the 'running' state.");
                 return false;
             }
         }
         return true;
+    }
+    private boolean validateNotPfSense(ArrayList<MachinesVM> selectedVMs) {
+        for(MachinesVM vm: selectedVMs) {
+            if(vm.getVmName().toLowerCase().contains("pfsense")) {
+                setOutputError("Error: Cannot run command on pfSense, since it is not Linux or Windows.");
+                return false;
+            }
+        }
+        return true;
+    }
+    private void setOutputError(String text) {
+        scriptOutputField.clear();
+        scriptOutputField.setStyle("-fx-text-fill: red;"); // Set the text color to red
+        scriptOutputField.setText(text);
     }
 
     @FXML
     public void handleRunScript() {
         ArrayList<MachinesVM> selectedVMs = machinesTable.getSelectedVMs();
 
-        if (!validateOperatingSystems(selectedVMs)) {
-            scriptOutputField.clear();
-            scriptOutputField.setStyle("-fx-text-fill: red;"); // Set the text color to red
-            scriptOutputField.setText("Error: All highlighted machines must have the same operating system (Windows or Linux).");
-            return;
-        }
-
-        if (!validateMachineStates(selectedVMs)) {
-            scriptOutputField.clear();
-            scriptOutputField.setStyle("-fx-text-fill: red;"); // Set the text color to red
-            scriptOutputField.setText("Error: All highlighted machines must be in the 'running' state.");
-            return;
-        }
+        if (!validateOperatingSystems(selectedVMs)) {return;}
+        if (!validateNotPfSense(selectedVMs)) {return;}
+        if (!validateMachineStates(selectedVMs)) {return;}
 
         scriptOutputField.setStyle("-fx-text-fill: white;"); // Set the text color back to default
 
