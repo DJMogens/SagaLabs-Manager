@@ -13,7 +13,7 @@ public class Main extends javafx.application.Application {
     }
 
     public static void main(String[] args) {
-        Output out =new Output();
+        Output out = new Output();
         out.sendOutputToLog();
         launch();
         Machines.stopRefreshing();

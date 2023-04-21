@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class RunCommand extends AzureMethods {
+public class RunCommand extends AzureUtils {
     public static String runCommandOnVM(MachinesVM vm, String script) {
         VirtualMachine virtualMachine = AzureLogin.getAzure().virtualMachines().getById(vm.getAzureId());
         String osType = virtualMachine.osType().toString();

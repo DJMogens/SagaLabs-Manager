@@ -13,7 +13,6 @@ import com.google.gson.*;
 public class VPNServiceConnection {
     //static variable to hold VPN user data for all the VPN servers
     private ArrayList<JsonObject> vpnUserJsonList = new ArrayList<>();
-    private final AzureMethods azureMethods = new AzureMethods();
 
     //method to retrieve VPN user data from multiple VPN servers
     public void getVPNUserInformation() throws SQLException {
@@ -30,7 +29,7 @@ public class VPNServiceConnection {
             String vpnIp = labsWithVPN.getString("LabVPN");
 
             //retrieve the API credentials from Azure Key Vault and encode them in base64
-            String apiCredentials = "sagavpn-api:" + azureMethods.getKeyVaultSecret("sagavpn-api-key");
+            String apiCredentials = "sagavpn-api:" + AzureUtils.getKeyVaultSecret("sagavpn-api-key");
             String base64ApiCredentials = Base64.getEncoder().encodeToString(apiCredentials.getBytes(StandardCharsets.UTF_8));
 
             try {
@@ -115,7 +114,7 @@ public class VPNServiceConnection {
 
     private String sendPostRequestWithUsername(String apiUrl, String username) throws IOException {
         // Retrieve and encode the API credentials
-        String apiCredentials = "sagavpn-api:" + azureMethods.getKeyVaultSecret("sagavpn-api-key");
+        String apiCredentials = "sagavpn-api:" + AzureUtils.getKeyVaultSecret("sagavpn-api-key");
         String base64ApiCredentials = Base64.getEncoder().encodeToString(apiCredentials.getBytes(StandardCharsets.UTF_8));
 
         // Create an HTTP connection to the specified API URL

@@ -13,10 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.*;
-import java.util.stream.Collectors;
 
 
-public class AzureMethods {
+public class AzureUtils {
 
     private void getLabDetails(AzureResourceManager azure) {
         System.out.println("choose resource group to get details: ");
@@ -31,7 +30,7 @@ public class AzureMethods {
         System.out.println("Region:  " + resourceGroup.regionName());
     }
 
-    public String getKeyVaultSecret(String secretName) {
+    public static String getKeyVaultSecret(String secretName) {
         // Get the password from Azure Key Vault Secret
         String keyVaultName = "sagalabskeyvault";
         String keyVaultUrl = "https://" + keyVaultName + ".vault.azure.net";
@@ -44,18 +43,18 @@ public class AzureMethods {
     }
 
 
-    public void listVMProperties(AzureResourceManager azure) {
+    public static void listVMProperties(AzureResourceManager azure) {
         System.out.println("choose resource group: ");
         Scanner input = new Scanner(System.in);
         String rgName = input.next();
 
     }
 
-    public PagedIterable<VirtualMachine> getVMsInLab(ResourceGroup resourceGroup) {
+    public static PagedIterable<VirtualMachine> getVMsInLab(ResourceGroup resourceGroup) {
         return AzureLogin.getAzure().virtualMachines().listByResourceGroup(String.valueOf(resourceGroup.name()));
     }
 
-    public String turnOnInLab(String resourceGroup) {
+    public static String turnOnInLab(String resourceGroup) {
         try {
             // Get all the virtual machines in the resource group
             List<VirtualMachine> vms = AzureLogin.getAzure().virtualMachines().listByResourceGroup(resourceGroup).stream().toList();
@@ -82,7 +81,7 @@ public class AzureMethods {
         }
     }
 
-    public String turnOffVMsInLab(String resourceGroup) {
+    public static String turnOffVMsInLab(String resourceGroup) {
         try {
             // Get all the virtual machines in the resource group
             List<VirtualMachine> vms = AzureLogin.getAzure().virtualMachines().listByResourceGroup(resourceGroup).stream().toList();
@@ -110,7 +109,7 @@ public class AzureMethods {
     }
 
 
-    public void turnOnVMs(ArrayList<MachinesVM> vms) {
+    public static void turnOnVMs(ArrayList<MachinesVM> vms) {
         ExecutorService executor = Executors.newFixedThreadPool(vms.size());
         vms.stream()
                 .filter(vm -> vm.getState().equals("deallocated"))
@@ -121,7 +120,7 @@ public class AzureMethods {
         executor.shutdown();
     }
 
-    public void deallocateVMs(ArrayList<MachinesVM> vms) {
+    public static void deallocateVMs(ArrayList<MachinesVM> vms) {
         ExecutorService executor = Executors.newFixedThreadPool(vms.size());
         vms.stream()
                 .filter(vm -> vm.getState().equals("running"))
@@ -132,7 +131,7 @@ public class AzureMethods {
         executor.shutdown();
     }
 
-    public String runScript(ArrayList<MachinesVM> selectedVMs, String script) {
+    public static String runScript(ArrayList<MachinesVM> selectedVMs, String script) {
 
     ArrayList<String> outputOfRunScript = RunCommand.runScriptOnVms(selectedVMs, script);
 
