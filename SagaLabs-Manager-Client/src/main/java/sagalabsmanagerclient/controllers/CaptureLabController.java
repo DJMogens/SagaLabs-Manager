@@ -3,10 +3,13 @@ package sagalabsmanagerclient.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import sagalabsmanagerclient.MachinesTab;
 import sagalabsmanagerclient.MachinesTable;
 import sagalabsmanagerclient.MachinesVM;
+import sagalabsmanagerclient.VMSnapshot;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class CaptureLabController {
     public Button Capture_Confirm;
@@ -27,8 +30,6 @@ public class CaptureLabController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
 
     private void selectAllCheckboxes() {
@@ -73,4 +74,31 @@ public class CaptureLabController {
         ipFilterText.setText("");
         applyFilter(e);
     }
+
+    public void captureCheckedVMImages(ActionEvent event) {
+        String galleryName = TextFieldVmGalleryNew.getText().trim();
+        VMSnapshot.takeSnapshots(getSelectedVMs(), "1.0.0", galleryName);
+    }
+
+    public ArrayList<MachinesVM> getSelectedVMs() {
+        ArrayList<MachinesVM> machineList = new ArrayList<>();
+        MachinesTab machinesTab = machinesTable.getCurrentTab();
+        for (MachinesVM vm : machinesTab.getTableView().getItems()) {
+            if (vm.getSelect().isSelected()) {
+                machineList.add(vm);
+            }
+        }
+        return machineList;
+    }
+
+
+    public MachinesTable getMachinesTable() {
+        return machinesTable;
+    }
+
+    public String getLabName() {
+        return labName;
+    }
+
+
 }

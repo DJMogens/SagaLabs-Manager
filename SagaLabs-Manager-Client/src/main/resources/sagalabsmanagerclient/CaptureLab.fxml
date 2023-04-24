@@ -15,9 +15,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="1080.0" prefWidth="1920.0" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sagalabsmanagerclient.controllers.CaptureLabController">
+<BorderPane prefHeight="845.0" prefWidth="1718.0" stylesheets="@Stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sagalabsmanagerclient.controllers.CaptureLabController">
     <center>
-        <AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+        <AnchorPane prefHeight="998.0" prefWidth="1687.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
            <children>
                <TabPane fx:id="tabPane" layoutX="20" layoutY="20" prefHeight="650.0" prefWidth="1252.0">
             </TabPane>
@@ -87,7 +87,7 @@
                   </Button>
                </children>
             </VBox>
-            <Button fx:id="Capture_Confirm" alignment="CENTER" contentDisplay="RIGHT" layoutX="899.0" layoutY="841.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="232.0" text="Capture the lab!!!">
+            <Button fx:id="Capture_Confirm" alignment="CENTER" contentDisplay="RIGHT" layoutX="899.0" layoutY="841.0" mnemonicParsing="false" onAction="#captureCheckedVMImages" prefHeight="44.0" prefWidth="232.0" text="Capture the lab!!!">
                <font>
                   <Font size="20.0" />
                </font>
@@ -96,9 +96,9 @@
                   <String fx:value="button1" />
                </styleClass>
             </Button>
-            <TextField fx:id="TextFieldVmGalleryNew" layoutX="76.0" layoutY="915.0" />
-            <Text fill="WHITE" layoutX="70.0" layoutY="824.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gallery name:" wrappingWidth="81.13671875" />
-            <Text fill="WHITE" layoutX="76.0" layoutY="911.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New name:" wrappingWidth="81.13671875" />
+            <TextField fx:id="TextFieldVmGalleryNew" layoutX="92.0" layoutY="735.0" />
+            <Text fill="WHITE" layoutX="92.0" layoutY="696.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gallery name:" wrappingWidth="81.13671875" />
+            <Text fill="WHITE" layoutX="51.0" layoutY="803.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New name:" wrappingWidth="81.13671875" />
             <ChoiceBox fx:id="choiceBoxVmGallery" layoutX="51.0" layoutY="834.0" prefWidth="220.0" />
            </children>
         </AnchorPane>
