@@ -16,7 +16,7 @@ import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 
-public class AzureMethods {
+public class AzureUtils {
 
     private void getLabDetails(AzureResourceManager azure) {
         System.out.println("choose resource group to get details: ");
@@ -31,7 +31,7 @@ public class AzureMethods {
         System.out.println("Region:  " + resourceGroup.regionName());
     }
 
-    public String getKeyVaultSecret(String secretName) {
+    public static String getKeyVaultSecret(String secretName) {
         // Get the password from Azure Key Vault Secret
         String keyVaultName = "sagalabskeyvault";
         String keyVaultUrl = "https://" + keyVaultName + ".vault.azure.net";
@@ -55,17 +55,28 @@ public class AzureMethods {
         return AzureLogin.getAzure().virtualMachines().listByResourceGroup(String.valueOf(resourceGroup.name()));
     }
 
-    public String turnOnInLab(String resourceGroup) {
+    public static String turnOnInLab(String resourceGroup) {
         try {
             // Get all the virtual machines in the resource group
             List<VirtualMachine> vms = AzureLogin.getAzure().virtualMachines().listByResourceGroup(resourceGroup).stream().toList();
 
-            // Create a thread pool with one thread for each virtual machine
-            ExecutorService executorService = Executors.newFixedThreadPool(vms.size());
+            // Identify the domain controller
+            VirtualMachine domainController = vms.stream()
+                    .filter(vm -> vm.name().contains("DC"))
+                    .findFirst()
+                    .orElseThrow(() -> new IllegalStateException("Domain controller not found."));
 
-            // Start all the virtual machines in parallel
+            // Turn on the domain controller if it's deallocated
+            if (domainController.powerState().equals(PowerState.DEALLOCATED)) {
+                domainController.start();
+            }
+
+            // Create a thread pool with one thread for each virtual machine excluding the domain controller
+            ExecutorService executorService = Executors.newFixedThreadPool(vms.size() - 1);
+
+            // Start all other virtual machines in parallel
             List<CompletableFuture<Void>> futures = vms.stream()
-                    .filter(vm -> vm.powerState().equals(PowerState.DEALLOCATED))
+                    .filter(vm -> !vm.name().contains("DC") && vm.powerState().equals(PowerState.DEALLOCATED))
                     .map(vm -> CompletableFuture.runAsync(vm::start, executorService))
                     .toList();
             CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
@@ -82,23 +93,35 @@ public class AzureMethods {
         }
     }
 
-    public String turnOffVMsInLab(String resourceGroup) {
+
+    public static String turnOffVMsInLab(String resourceGroup) {
         try {
             // Get all the virtual machines in the resource group
             List<VirtualMachine> vms = AzureLogin.getAzure().virtualMachines().listByResourceGroup(resourceGroup).stream().toList();
 
-            // Create a thread pool with one thread for each virtual machine
-            ExecutorService executorService = Executors.newFixedThreadPool(vms.size());
+            // Identify the domain controller
+            VirtualMachine domainController = vms.stream()
+                    .filter(vm -> vm.name().contains("DC"))
+                    .findFirst()
+                    .orElseThrow(() -> new IllegalStateException("Domain controller not found."));
 
-            // Deallocate all the virtual machines in parallel
+            // Create a thread pool with one thread for each virtual machine excluding the domain controller
+            ExecutorService executorService = Executors.newFixedThreadPool(vms.size() - 1);
+
+            // Deallocate all other virtual machines in parallel
             List<CompletableFuture<Void>> futures = vms.stream()
-                    .filter(vm -> vm.powerState().equals(PowerState.RUNNING))
+                    .filter(vm -> !vm.name().contains("DC") && vm.powerState().equals(PowerState.RUNNING))
                     .map(vm -> CompletableFuture.runAsync(vm::deallocate, executorService))
                     .toList();
             CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
 
             // Shutdown the thread pool
             executorService.shutdown();
+
+            // Deallocate the domain controller if it's running
+            if (domainController.powerState().equals(PowerState.RUNNING)) {
+                domainController.deallocate();
+            }
 
             // Return success message
             return "All virtual machines in resource group " + resourceGroup + " have been deallocated.";
@@ -110,7 +133,8 @@ public class AzureMethods {
     }
 
 
-    public void turnOnVMs(ArrayList<MachinesVM> vms) {
+
+    public static void turnOnVMs(ArrayList<MachinesVM> vms) {
         ExecutorService executor = Executors.newFixedThreadPool(vms.size());
         vms.stream()
                 .filter(vm -> vm.getState().equals("deallocated"))
@@ -121,7 +145,7 @@ public class AzureMethods {
         executor.shutdown();
     }
 
-    public void deallocateVMs(ArrayList<MachinesVM> vms) {
+    public static void deallocateVMs(ArrayList<MachinesVM> vms) {
         ExecutorService executor = Executors.newFixedThreadPool(vms.size());
         vms.stream()
                 .filter(vm -> vm.getState().equals("running"))
@@ -132,7 +156,7 @@ public class AzureMethods {
         executor.shutdown();
     }
 
-    public String runScript(ArrayList<MachinesVM> selectedVMs, String script) {
+    public static String runScript(ArrayList<MachinesVM> selectedVMs, String script) {
 
     ArrayList<String> outputOfRunScript = RunCommand.runScriptOnVms(selectedVMs, script);
 

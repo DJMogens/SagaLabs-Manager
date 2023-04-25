@@ -6,6 +6,7 @@ import java.io.File;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,9 +14,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import sagalabsmanagerclient.Database;
+import sagalabsmanagerclient.TableUtils;
 import sagalabsmanagerclient.VPNServiceConnection;
 
 import java.io.IOException;
@@ -29,6 +35,9 @@ public class VPNController extends MenuController {
     public Button createUser;
     public ChoiceBox vpnServerChoiceBox = new ChoiceBox<>();
 
+    private static String storedUsername = "";
+    private static String storedVpnServerChoice = "";
+
     @FXML
     private TableView<JsonObject> userVpnTableView;
     @FXML
@@ -38,7 +47,8 @@ public class VPNController extends MenuController {
     @FXML
     private TableColumn<JsonObject, String> userVPNLab;
     @FXML
-    private TableColumn<JsonObject, String> userVPNOnline;
+    private TableColumn<JsonObject, JsonObject> userVPNOnline;
+
     @FXML
     private TableColumn<JsonObject, String> userVPNButtons;
     private final VPNServiceConnection vpnServiceConnection = new VPNServiceConnection();
@@ -54,8 +64,12 @@ public class VPNController extends MenuController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        TableUtils.handleRightClickCopy(userVpnTableView);
+        loadState();
+
         super.initialize();
     }
+
 
     /**
      * Initializes the cell value factories for the TableView columns.
@@ -71,11 +85,30 @@ public class VPNController extends MenuController {
                 .get("AccountStatus")
                 .getAsString()));
 
-        // Set the cell value factory for the userVPNOnline column
-        userVPNOnline.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()
-                .get("Connections")
-                .getAsString()));
+        // Set the cell factory for the userVPNOnline column
+        userVPNOnline.setCellFactory(param -> new TableCell<JsonObject, JsonObject>() {
+            @Override
+            protected void updateItem(JsonObject item, boolean empty) {
+                super.updateItem(item, empty);
 
+                if (empty || item == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    int onlineStatus = item.get("Connections").getAsInt();
+                    if (onlineStatus == 1) {
+                        // Set the cell background color to green
+                        setStyle("-fx-background-color: #7CFC00");
+                    } else {
+                        // Set the cell background color to red
+                        setStyle("-fx-background-color: #FF4500");
+                    }
+                }
+            }
+        });
+
+        // Set the cell value factory for the userVPNOnline column
+        userVPNOnline.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue()));
         // Set the cell value factory for the labName column
         userVPNLab.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()
                 .get("labName")
@@ -85,17 +118,29 @@ public class VPNController extends MenuController {
     // A method to initialize the VPN server choice box with the available servers
     private void initializeServerChoiceBox() {
         try {
+            // Store the currently selected value before clearing the items
+            String selectedValue = vpnServerChoiceBox.getValue() == null ? null : vpnServerChoiceBox.getValue().toString();
+
             vpnServerChoiceBox.getItems().clear();
+
             // Connect to the database and execute a query to retrieve the available servers
             ResultSet rs = Database.executeSql("SELECT LabName FROM Labs WHERE vpnRunning = 1");
+
             // Populate the choice box with the server names
             while (rs.next()) {
                 vpnServerChoiceBox.getItems().add(rs.getString("LabName"));
             }
+
+            // Restore the previously selected value after repopulating the choice box
+            if (selectedValue != null && vpnServerChoiceBox.getItems().contains(selectedValue)) {
+                vpnServerChoiceBox.setValue(selectedValue);
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     // A method to handle the action for the create user button
     @FXML
@@ -120,7 +165,6 @@ public class VPNController extends MenuController {
             final Button revokeBtn = new Button("Revoke");
             final Button downloadBtn = new Button("Download");
             final Button deleteBtn = new Button("Delete");
-            final Button rotateBtn = new Button("Rotate");
             final Button unrevokeBtn = new Button("Unrevoke");
             final HBox hbox = new HBox(10);
 
@@ -156,7 +200,6 @@ public class VPNController extends MenuController {
                         throw new RuntimeException(ex);
                     }
                 });
-                rotateBtn.setOnAction(e -> handleRotateButton(getIndex()));
                 unrevokeBtn.setOnAction(e -> handleUnrevokeButton(getIndex()));
             }
 
@@ -172,7 +215,7 @@ public class VPNController extends MenuController {
                     if (status.equalsIgnoreCase("Active")) {
                         hbox.getChildren().addAll(revokeBtn, downloadBtn);
                     } else if (status.equalsIgnoreCase("Revoked")) {
-                        hbox.getChildren().addAll(deleteBtn, rotateBtn, unrevokeBtn);
+                        hbox.getChildren().addAll(deleteBtn, unrevokeBtn);
                     } else {
                         hbox.getChildren().addAll(new Button()); //empty cell
                     }
@@ -239,22 +282,7 @@ public class VPNController extends MenuController {
      * Handles the action for the rotate button.
      * @param index The index of the selected item in the TableView.
      */
-    private void handleRotateButton(int index) {
-        JsonObject vpnUser = userVpnTableView.getItems().get(index);
-        System.out.println(userVpnTableView.getItems().get(index));
-        String vpnIp = vpnUser.get("vpnIp").getAsString();
-        String username = vpnUser.get("Identity").getAsString();
-        try {
-            vpnServiceConnection.rotateCertificate(vpnIp, username);
-            listVpn();
-        } catch (IOException | SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-    /**
-     * Handles the action for the unrevoke button.
-     * @param index The index of the selected item in the TableView.
-     */
+
     private void handleUnrevokeButton(int index) {
         JsonObject vpnUser = userVpnTableView.getItems().get(index);
         System.out.println(userVpnTableView.getItems().get(index));
@@ -313,8 +341,26 @@ public class VPNController extends MenuController {
         //Update the table with listVpn
         listVpn();
     }
+
+    private void saveState() {
+        storedVpnServerChoice = vpnServerChoiceBox.getValue() == null ? "" : vpnServerChoiceBox.getValue().toString();
+        storedUsername = usernameInput.getText();
+    }
+
+    private void loadState() {
+        if (!storedVpnServerChoice.isEmpty()) {
+            vpnServerChoiceBox.setValue(storedVpnServerChoice);
+        }
+        usernameInput.setText(storedUsername);
+    }
+
     public void refresh() throws SQLException {
+        saveState();
         listVpn();
         initializeServerChoiceBox();
     }
+
+
+
+
 }

@@ -6,8 +6,6 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import sagalabsmanagerclient.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -27,7 +25,6 @@ public class MachinesController extends MenuController {
 
     @FXML protected TextField nameFilterText, ipFilterText;
     @FXML protected ChoiceBox<String> osFilterChoice, stateFilterChoice;
-    private final AzureMethods azureMethods = new AzureMethods();
     private MachinesTable machinesTable;
     private final BooleanProperty isLoading = new SimpleBooleanProperty(false);
 
@@ -55,8 +52,11 @@ public class MachinesController extends MenuController {
         stateFilterChoice.getItems().addAll(uniquePowerStates);
         stateFilterChoice.getItems().add("");
 
+        TableUtils.handleRightClickCopy(allTableView);
+
         super.initialize();
     }
+
     public void refresh() throws SQLException {
         // Makes copy of current machines to set checkmarks again
         machinesTable.setPreviousMachines();
@@ -101,7 +101,7 @@ public class MachinesController extends MenuController {
     public void handleTurnOn() {
         ArrayList<MachinesVM> selectedVMs = machinesTable.getSelectedVMs();
         // Call the method to turn on the selected VMs
-        Runnable turnOnTask = () -> azureMethods.turnOnVMs(selectedVMs);
+        Runnable turnOnTask = () -> AzureUtils.turnOnVMs(selectedVMs);
         new Thread(turnOnTask).start();
 
         System.out.println("Selected VMs: " + selectedVMs);
@@ -111,19 +111,21 @@ public class MachinesController extends MenuController {
     public void handleTurnOff() {
         ArrayList<MachinesVM> selectedVMs = machinesTable.getSelectedVMs();
         // Call the method to turn off the selected VMs
-        Runnable turnOffTask = () -> azureMethods.deallocateVMs(selectedVMs);
+        Runnable turnOffTask = () -> AzureUtils.deallocateVMs(selectedVMs);
         new Thread(turnOffTask).start();
         System.out.println("Selected VMs: " + selectedVMs);
     }
 
     private boolean validateOperatingSystems(ArrayList<MachinesVM> selectedVMs) {
         if (selectedVMs.isEmpty()) {
+            setOutputError("Error: You must select at least one machine in order to run code.");
             return false;
         }
 
         String firstOS = selectedVMs.get(0).getOs();
         for (MachinesVM vm : selectedVMs) {
             if (!firstOS.equalsIgnoreCase(vm.getOs())) {
+                setOutputError("Error: All highlighted machines must have the same operating system (Windows or Linux).");
                 return false;
             }
         }
@@ -133,29 +135,34 @@ public class MachinesController extends MenuController {
     private boolean validateMachineStates(ArrayList<MachinesVM> selectedVMs) {
         for (MachinesVM vm : selectedVMs) {
             if (!"running".equalsIgnoreCase(vm.getState())) {
+                setOutputError("Error: All highlighted machines must be in the 'running' state.");
                 return false;
             }
         }
         return true;
+    }
+    private boolean validateNotPfSense(ArrayList<MachinesVM> selectedVMs) {
+        for(MachinesVM vm: selectedVMs) {
+            if(vm.getVmName().toLowerCase().contains("pfsense")) {
+                setOutputError("Error: Cannot run command on pfSense, since it is not Linux or Windows.");
+                return false;
+            }
+        }
+        return true;
+    }
+    private void setOutputError(String text) {
+        scriptOutputField.clear();
+        scriptOutputField.setStyle("-fx-text-fill: red;"); // Set the text color to red
+        scriptOutputField.setText(text);
     }
 
     @FXML
     public void handleRunScript() {
         ArrayList<MachinesVM> selectedVMs = machinesTable.getSelectedVMs();
 
-        if (!validateOperatingSystems(selectedVMs)) {
-            scriptOutputField.clear();
-            scriptOutputField.setStyle("-fx-text-fill: red;"); // Set the text color to red
-            scriptOutputField.setText("Error: All highlighted machines must have the same operating system (Windows or Linux).");
-            return;
-        }
-
-        if (!validateMachineStates(selectedVMs)) {
-            scriptOutputField.clear();
-            scriptOutputField.setStyle("-fx-text-fill: red;"); // Set the text color to red
-            scriptOutputField.setText("Error: All highlighted machines must be in the 'running' state.");
-            return;
-        }
+        if (!validateOperatingSystems(selectedVMs)) {return;}
+        if (!validateNotPfSense(selectedVMs)) {return;}
+        if (!validateMachineStates(selectedVMs)) {return;}
 
         scriptOutputField.setStyle("-fx-text-fill: white;"); // Set the text color back to default
 
@@ -163,7 +170,7 @@ public class MachinesController extends MenuController {
         startLoadingAnimation();
 
         Runnable runScriptRunnable = () -> {
-            String output = azureMethods.runScript(selectedVMs, scriptField.getText());
+            String output = AzureUtils.runScript(selectedVMs, scriptField.getText());
             Platform.runLater(() -> {
                 isLoading.set(false);
                 scriptOutputField.setText("");
@@ -204,6 +211,8 @@ public class MachinesController extends MenuController {
         isLoading.set(true);
         new Thread(loadingTask).start();
     }
+
+
 
 
 }

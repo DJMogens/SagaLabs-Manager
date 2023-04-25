@@ -2,7 +2,6 @@ package sagalabsmanagerclient.controllers;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -10,14 +9,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import sagalabsmanagerclient.*;
+import sagalabsmanagerclient.AzureUtils;
+import sagalabsmanagerclient.Database;
+import sagalabsmanagerclient.Machines;
 
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -25,7 +20,6 @@ public class HomeController extends MenuController {
 
     @FXML
     private AnchorPane anchorHome;
-    private final AzureMethods azureMethods = new AzureMethods();
 
     public void initialize() throws SQLException {
         Platform.runLater(() -> {
@@ -146,7 +140,7 @@ public class HomeController extends MenuController {
         // Set up the event handler for the button
         turnOnButton.setOnAction(event -> {
             // Create a Runnable task to turn on all VMs in the specified lab
-            Runnable task = () -> azureMethods.turnOnInLab(labName);
+            Runnable task = () -> AzureUtils.turnOnInLab(labName);
             // Start a new thread to execute the task
             Thread thread = new Thread(task);
             thread.start();
@@ -161,7 +155,7 @@ public class HomeController extends MenuController {
         // Set up the event handler for the button
         turnOffButton.setOnAction(event -> {
             // Create a Runnable task to turn off all VMs in the specified lab
-            Runnable task = () -> azureMethods.turnOffVMsInLab(labName);
+            Runnable task = () -> AzureUtils.turnOffVMsInLab(labName);
             // Start a new thread to execute the task
             Thread thread = new Thread(task);
             thread.start();

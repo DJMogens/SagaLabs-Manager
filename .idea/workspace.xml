@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84f66384-4295-4a51-8bf3-97a943c2f250" name="Changes" comment="Copy from client to server database and AzureMethods">
+    <list default="true" id="84f66384-4295-4a51-8bf3-97a943c2f250" name="Changes" comment="SAMA-67: Delete rotate button from vpn table, as the vpn server does not support it externally, or somthn">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Machines.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Machines.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/resources/sagalabsmanagerclient/Stylesheet.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/VPNController.java" beforeDir="false" afterPath="$PROJECT_DIR$/SagaLabs-Manager-Client/src/main/java/sagalabsmanagerclient/controllers/VPNController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

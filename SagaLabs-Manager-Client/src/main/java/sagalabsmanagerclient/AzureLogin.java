@@ -14,7 +14,6 @@ import com.azure.resourcemanager.AzureResourceManager;
 import sagalabsmanagerclient.controllers.LoginController;
 import reactor.core.publisher.Mono;
 
-import java.sql.SQLException;
 import java.time.OffsetDateTime;
 import java.util.Collections;
 import java.util.Objects;
@@ -27,7 +26,6 @@ public class AzureLogin {
     final private static String clientId = "4ca9b980-3658-4847-9e7c-33d75a4ea510";
     final private static String subscriptionId = "06d0a3df-f3c0-4336-927d-db8891937870";
     private static boolean loginStatus = false;
-    private final static AzureMethods azureMethods = new AzureMethods();
 
     private static AzureResourceManager azure;
 
@@ -61,7 +59,7 @@ public class AzureLogin {
         ClientSecretCredential credential = new ClientSecretCredentialBuilder()
                 .tenantId(tenantId)
                 .clientId(clientId)
-                .clientSecret(azureMethods.getKeyVaultSecret("sagalabs-manager-client-secret"))
+                .clientSecret(AzureUtils.getKeyVaultSecret("sagalabs-manager-client-secret"))
                 .build();
 
         // Set the scopes for which the access token is requested
