@@ -16,7 +16,7 @@ import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 
-public class AzureMethods {
+public class AzureUtils {
 
     private void getLabDetails(AzureResourceManager azure) {
         System.out.println("choose resource group to get details: ");
