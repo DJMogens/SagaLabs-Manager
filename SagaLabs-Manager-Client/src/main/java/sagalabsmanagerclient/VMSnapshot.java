@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class VMSnapshot extends AzureMethods {
+public class VMSnapshot extends AzureUtils {
     // Get the gallery resource ID from the Azure Key Vault secret
     static String vmImageGalleryResourceGroup = "SL-vmImages";
     static String vmImageGalleryNameDefault = "SagalabsVM";

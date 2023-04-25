@@ -12,6 +12,7 @@ import javafx.scene.shape.Rectangle;
 import sagalabsmanagerclient.AzureUtils;
 import sagalabsmanagerclient.Database;
 import sagalabsmanagerclient.Machines;
+import sagalabsmanagerclient.ViewSwitcher;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
