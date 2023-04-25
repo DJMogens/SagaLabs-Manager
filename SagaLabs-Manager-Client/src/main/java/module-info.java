@@ -26,6 +26,7 @@ module com.example.sagalabsmanager {
     requires com.azure.resourcemanager;
     requires java.sql;
     requires com.google.gson;
+    requires org.apache.commons.io;
 
     opens sagalabsmanagerclient to javafx.fxml;
     exports sagalabsmanagerclient;

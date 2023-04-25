@@ -11,23 +11,28 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit.version>5.9.1</junit.version>
+        <junit.version>5.9.2</junit.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>19</version>
+            <version>19.0.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.11.0</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>19</version>
+            <version>19.0.2.1</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-web</artifactId>
-            <version>19</version>
+            <version>19.0.2.1</version>
         </dependency>
         <dependency>
             <groupId>org.controlsfx</groupId>
@@ -97,7 +102,7 @@
         <dependency>
             <groupId>com.azure</groupId>
             <artifactId>azure-identity</artifactId>
-            <version>1.8.0</version>
+            <version>1.8.1</version>
         </dependency>
         <dependency>
             <groupId>commons-net</groupId>
@@ -140,7 +145,7 @@
         <dependency>
             <groupId>com.microsoft.azure</groupId>
             <artifactId>msal4j</artifactId>
-            <version>1.13.4</version>
+            <version>1.13.5</version>
         </dependency>
         <dependency>
             <groupId>com.azure.resourcemanager</groupId>
@@ -155,7 +160,7 @@
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>23.1.0</version>
+            <version>24.0.1</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
@@ -172,7 +177,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.4.2</version>
+                <version>3.5.0</version>
                 <executions>
                     <execution>
                         <id>create-executable-jar</id>
