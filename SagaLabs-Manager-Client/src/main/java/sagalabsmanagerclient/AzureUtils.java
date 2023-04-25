@@ -55,7 +55,7 @@ public class AzureUtils {
         return AzureLogin.getAzure().virtualMachines().listByResourceGroup(String.valueOf(resourceGroup.name()));
     }
 
-    public String turnOnInLab(String resourceGroup) {
+    public static String turnOnInLab(String resourceGroup) {
         try {
             // Get all the virtual machines in the resource group
             List<VirtualMachine> vms = AzureLogin.getAzure().virtualMachines().listByResourceGroup(resourceGroup).stream().toList();
@@ -94,7 +94,7 @@ public class AzureUtils {
     }
 
 
-    public String turnOffVMsInLab(String resourceGroup) {
+    public static String turnOffVMsInLab(String resourceGroup) {
         try {
             // Get all the virtual machines in the resource group
             List<VirtualMachine> vms = AzureLogin.getAzure().virtualMachines().listByResourceGroup(resourceGroup).stream().toList();
