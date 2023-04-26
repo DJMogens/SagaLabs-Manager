@@ -2,12 +2,14 @@ package sagalabsmanagerclient;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
+import sagalabsmanagerclient.controllers.CaptureLabController;
 import sagalabsmanagerclient.controllers.Controller;
 
 import java.io.IOException;
@@ -53,4 +55,27 @@ public class ViewSwitcher {
     public void closeThreads() {
         controller.closeRefreshingThreads();
     }
+
+    public static Stage openCaptureLabWindow(String labName) {
+        try {
+            FXMLLoader loader = new FXMLLoader(ViewSwitcher.class.getResource(View.CAPTURE_LAB_WINDOW.getFileName()));
+            Parent root = loader.load();
+
+            // Pass the lab data to the CaptureLabController
+            CaptureLabController captureLabController = loader.getController();
+            captureLabController.setLabData(labName);
+
+            Stage newStage = new Stage();
+            newStage.initModality(Modality.APPLICATION_MODAL);
+            newStage.setTitle("Capture: " + labName);
+            newStage.setScene(new Scene(root));
+            newStage.show();
+
+            return newStage;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }
