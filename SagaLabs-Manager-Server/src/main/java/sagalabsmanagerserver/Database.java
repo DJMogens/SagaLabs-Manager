@@ -28,6 +28,8 @@ public class Database {
     }
 
     public static void syncLabs() throws SQLException {
+        System.out.println("Starting syncLabs...");
+
         String tableName = "Labs";
 
         List<ResourceGroup> labs = AzureLogin.azure.resourceGroups().listByTag("lab", "true").stream().toList();
@@ -37,63 +39,69 @@ public class Database {
 
         int port = 80; // port of the vpn service
 
-        for (ResourceGroup lab : labs) {
-            String labName = lab.name();
-            String labID = lab.id();
+        // Prepare batch update
+        String sql = "INSERT INTO Labs (LabName, LabID, VmCount, LabVPN, vpnRunning, azureID) VALUES (?, ?, ?, ?, ?, ?) " +
+                "ON DUPLICATE KEY UPDATE LabName=VALUES(LabName), LabID=VALUES(LabID), VmCount=VALUES(VmCount), LabVPN=VALUES(LabVPN), vpnRunning=VALUES(vpnRunning), azureID=VALUES(azureID)";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            for (ResourceGroup lab : labs) {
+                String labName = lab.name();
+                String labID = lab.id();
 
-            int vmCount = AzureLogin.azure.virtualMachines().listByResourceGroup(labName).stream().toList().size();
-            List<PublicIpAddress> publicIps = AzureLogin.azure.publicIpAddresses().listByResourceGroup(labName).stream().toList();
-            //iterate over all public ip's in each lab, and find the ip that is contains VPN in the name
-            String vpnPublicIp = "No public IP";
-            boolean vpnRunning = false;
-            for (PublicIpAddress publicIp : publicIps) {
-                String publicIpName = publicIp.name();
-                if (publicIpName.contains("VPN")) {
-                    vpnPublicIp = publicIp.ipAddress();
-                    try {
-                        Socket socket = new Socket();
-                        socket.connect(new InetSocketAddress(vpnPublicIp, port), 2000);
-                        if (socket.isConnected()){
-                            vpnRunning = true;
+                int vmCount = AzureLogin.azure.virtualMachines().listByResourceGroup(labName).stream().toList().size();
+                List<PublicIpAddress> publicIps = AzureLogin.azure.publicIpAddresses().listByResourceGroup(labName).stream().toList();
+                //iterate over all public ip's in each lab, and find the ip that is contains VPN in the name
+                String vpnPublicIp = "No public IP";
+                boolean vpnRunning = false;
+                for (PublicIpAddress publicIp : publicIps) {
+                    String publicIpName = publicIp.name();
+                    if (publicIpName.contains("VPN")) {
+                        vpnPublicIp = publicIp.ipAddress();
+                        try {
+                            Socket socket = new Socket();
+                            socket.connect(new InetSocketAddress(vpnPublicIp, port), 2000);
+                            if (socket.isConnected()){
+                                vpnRunning = true;
+                            }
+                            socket.close();
+                        }catch (Exception ignored){
+
                         }
-                        socket.close();
-                    }catch (Exception ignored){
 
+                        break;
                     }
-
-                    break;
                 }
-            }
-            //insert vars into database, or update if a key is duplicated
-            String sql = "INSERT INTO Labs (LabName, LabID, VmCount, LabVPN, vpnRunning, azureID) VALUES (?, ?, ?, ?, ?, ?)"+
-                    "ON DUPLICATE KEY UPDATE LabName=VALUES(LabName), LabID=VALUES(LabID), VmCount=VALUES(VmCount), LabVPN=VALUES(LabVPN), vpnRunning=VALUES(vpnRunning), azureID=VALUES(azureID)";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, labName);
-            stmt.setString(2, labID);
-            stmt.setInt(3, vmCount);
-            stmt.setString(4, vpnPublicIp);
-            stmt.setBoolean(5, vpnRunning);
-            stmt.setString(6, labID); // Add azureID to the PreparedStatement
-            stmt.executeUpdate();
-        }
+                stmt.setString(1, labName);
+                stmt.setString(2, labID);
+                stmt.setInt(3, vmCount);
+                stmt.setString(4, vpnPublicIp);
+                stmt.setBoolean(5, vpnRunning);
+                stmt.setString(6, labID);
+                stmt.addBatch();
 
-        // Remove labs that are still in Azure from the list of labs in the database
-        for (ResourceGroup lab : labs) {
-            dbLabs.remove(lab.id());
+                dbLabs.remove(labID);
+                System.out.println("Lab synced: " + labName);
+            }
+            stmt.executeBatch();
         }
 
         // Delete labs from the database that are no longer in Azure
-        for (String labId : dbLabs) {
-            String sql = "DELETE FROM " + tableName + " WHERE azureID = ?";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, labId);
-            stmt.executeUpdate();
+        String deleteSql = "DELETE FROM " + tableName + " WHERE azureID = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(deleteSql)) {
+            for (String labId : dbLabs) {
+                System.out.println("Deleting lab from database: " + labId);
+                stmt.setString(1, labId);
+                stmt.addBatch();
+            }
+            stmt.executeBatch();
         }
 
         updateLastUpdate(tableName);
+        System.out.println("syncLabs complete.");
     }
 
+
     public static void syncVM() throws SQLException {
+        System.out.println("Starting syncVM...");
         String tableName = "vm";
 
         // Get all VMs in the database
@@ -106,6 +114,8 @@ public class Database {
         labs.parallelStream().forEach(rg -> {
             // Get all virtual machines in the resource group
             List<VirtualMachine> virtualMachines = AzureLogin.azure.virtualMachines().listByResourceGroup(rg.name()).stream().toList();
+
+            System.out.println("Processing resource group: " + rg.name());
 
             // Prepare batch update
             String sql = "INSERT INTO vm (vm_name, powerstate, internal_ip, ostype, resource_group, azureID) VALUES (?,?,?,?,?,?) " +
@@ -125,6 +135,7 @@ public class Database {
                     stmt.setString(6, vm.id());
                     stmt.addBatch();
                     dbVMs.remove(vm.id());
+                    System.out.println("VM synced: " + vm.name());
                 }
                 stmt.executeBatch();
             } catch (SQLException e) {
@@ -137,11 +148,16 @@ public class Database {
             String sql = "DELETE FROM " + tableName + " WHERE azureID = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, vmId);
+            System.out.println("Deleting VM from database: " + vmId);
+
             stmt.executeUpdate();
         }
 
         updateLastUpdate(tableName);
+        System.out.println("syncVM complete.");
     }
+
+
 
     public static void updateLastUpdate(String tableName) throws SQLException {
         String sql = "INSERT INTO last_updated (table_name, last_update) VALUES (?, NOW()) " +

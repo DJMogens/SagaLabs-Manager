@@ -1,6 +1,9 @@
 package sagalabsmanagerserver;
 
 import java.sql.SQLException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import static sagalabsmanagerserver.Database.syncLabs;
 
@@ -14,65 +17,26 @@ public class Main {
     }
 
     public static void startSyncLabs() {
-        Thread thread = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                while(true) {
-                    try {
-                        Database.syncLabs();
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    } catch (Exception e) {
-                        System.out.println("Error in syncLabs: " + e.getMessage());
-                        try {
-                            Thread.sleep(5000);
-                        } catch (InterruptedException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                        continue; // restart the loop
-                    }
-                    System.out.println("Synced Labs table");
-                    try {
-                        Thread.sleep(5000);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        executor.scheduleAtFixedRate(() -> {
+            try {
+                Database.syncLabs();
+                System.out.println("Synced Labs table");
+            } catch (Exception e) {
+                System.out.println("Error in syncLabs: " + e.getMessage());
             }
-        });
-        thread.start();
+        }, 0, 5, TimeUnit.SECONDS);
     }
 
     public static void startSyncVM() {
-        Thread thread = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                while(true) {
-                    try {
-                        Database.syncVM();
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    } catch (Exception e) {
-                        System.out.println("Error in syncVM: " + e.getMessage());
-                        try {
-                            Thread.sleep(5000);
-                        } catch (InterruptedException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                        continue; // restart the loop
-                    }
-                    System.out.println("Synced vm table");
-                    try {
-                        Thread.sleep(5000);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        executor.scheduleAtFixedRate(() -> {
+            try {
+                Database.syncVM();
+                System.out.println("Synced vm table");
+            } catch (Exception e) {
+                System.out.println("Error in syncVM: " + e.getMessage());
             }
-        });
-        thread.start();
+        }, 0, 5, TimeUnit.SECONDS);
     }
-
 }
