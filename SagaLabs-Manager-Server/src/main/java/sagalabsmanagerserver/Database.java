@@ -29,6 +29,7 @@ public class Database {
 
     public static void syncLabs() throws SQLException {
         System.out.println("Starting syncLabs...");
+        long startTime = System.currentTimeMillis();
 
         String tableName = "Labs";
 
@@ -44,8 +45,8 @@ public class Database {
                 "ON DUPLICATE KEY UPDATE LabName=VALUES(LabName), LabID=VALUES(LabID), VmCount=VALUES(VmCount), LabVPN=VALUES(LabVPN), vpnRunning=VALUES(vpnRunning), azureID=VALUES(azureID)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             for (ResourceGroup lab : labs) {
-                String labName = lab.name();
-                String labID = lab.id();
+                String labName = lab.name() != null ? lab.name() : "";
+                String labID = lab.id() != null ? lab.id() : "";
 
                 int vmCount = AzureLogin.azure.virtualMachines().listByResourceGroup(labName).stream().toList().size();
                 List<PublicIpAddress> publicIps = AzureLogin.azure.publicIpAddresses().listByResourceGroup(labName).stream().toList();
@@ -54,17 +55,16 @@ public class Database {
                 boolean vpnRunning = false;
                 for (PublicIpAddress publicIp : publicIps) {
                     String publicIpName = publicIp.name();
-                    if (publicIpName.contains("VPN")) {
-                        vpnPublicIp = publicIp.ipAddress();
+                    if (publicIpName != null && publicIpName.contains("VPN")) {
+                        vpnPublicIp = publicIp.ipAddress() != null ? publicIp.ipAddress() : "No public IP";
                         try {
                             Socket socket = new Socket();
                             socket.connect(new InetSocketAddress(vpnPublicIp, port), 2000);
-                            if (socket.isConnected()){
+                            if (socket.isConnected()) {
                                 vpnRunning = true;
                             }
                             socket.close();
-                        }catch (Exception ignored){
-
+                        } catch (Exception ignored) {
                         }
 
                         break;
@@ -96,12 +96,21 @@ public class Database {
         }
 
         updateLastUpdate(tableName);
+
+        long elapsedTime = System.currentTimeMillis() - startTime;
+        if (elapsedTime > 30_000) {
+            System.out.printf("syncLabs took longer than 30 seconds to execute: %d ms%n", elapsedTime);
+        }
+
         System.out.println("syncLabs complete.");
     }
 
 
     public static void syncVM() throws SQLException {
         System.out.println("Starting syncVM...");
+
+        long startTime = System.currentTimeMillis();
+
         String tableName = "vm";
 
         // Get all VMs in the database
@@ -122,20 +131,28 @@ public class Database {
                     "ON DUPLICATE KEY UPDATE powerstate=VALUES(powerstate), internal_ip=VALUES(internal_ip), ostype=VALUES(ostype), resource_group=VALUES(resource_group),azureID=VALUES(azureID)";
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 for (VirtualMachine vm : virtualMachines) {
-                    stmt.setString(1, vm.name());
-                    PowerState powerState = vm.powerState();
-                    if (powerState != null) {
-                        stmt.setString(2, powerState.toString());
-                    } else {
-                        stmt.setString(2, "");
+                    try {
+                        stmt.setString(1, vm.name());
+                        PowerState powerState = vm.powerState();
+                        if (powerState != null) {
+                            stmt.setString(2, powerState.toString());
+                        } else {
+                            stmt.setString(2, "");
+                        }
+                        if (vm.getPrimaryNetworkInterface() != null) {
+                            stmt.setString(3, vm.getPrimaryNetworkInterface().primaryPrivateIP());
+                        } else {
+                            stmt.setString(3, "");
+                        }
+                        stmt.setString(4, vm.osType().toString());
+                        stmt.setString(5, vm.resourceGroupName());
+                        stmt.setString(6, vm.id());
+                        stmt.addBatch();
+                        dbVMs.remove(vm.id());
+                        System.out.println("VM synced: " + vm.name());
+                    } catch (Exception e) {
+                        System.out.println("Error syncing VM: " + vm.name() + " | " + e.getMessage());
                     }
-                    stmt.setString(3, vm.getPrimaryNetworkInterface().primaryPrivateIP());
-                    stmt.setString(4, vm.osType().toString());
-                    stmt.setString(5, vm.resourceGroupName());
-                    stmt.setString(6, vm.id());
-                    stmt.addBatch();
-                    dbVMs.remove(vm.id());
-                    System.out.println("VM synced: " + vm.name());
                 }
                 stmt.executeBatch();
             } catch (SQLException e) {
@@ -154,6 +171,12 @@ public class Database {
         }
 
         updateLastUpdate(tableName);
+
+        long elapsedTime = System.currentTimeMillis() - startTime;
+        if (elapsedTime > 30_000) {
+            System.out.printf("syncLabs took longer than 30 seconds to execute: %d ms%n", elapsedTime);
+        }
+
         System.out.println("syncVM complete.");
     }
 
