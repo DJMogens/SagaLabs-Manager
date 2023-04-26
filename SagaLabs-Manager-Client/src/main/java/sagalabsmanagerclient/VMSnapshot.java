@@ -30,7 +30,8 @@ public class VMSnapshot extends AzureUtils {
         AzureResourceManager azure = AzureLogin.getAzure();
 
         // Create a thread pool with a fixed number of threads
-        int numThreads = Math.min(10, vms.size()); // Limit the number of threads to a reasonable value
+        int numThreads = Math.min(10, vms.size()
+        ); // Limit the number of threads to a reasonable value
         ExecutorService executorService = Executors.newFixedThreadPool(numThreads);
 
         // Loop over all VMs in the list
@@ -41,7 +42,8 @@ public class VMSnapshot extends AzureUtils {
         for (MachinesVM vm : vms) {
             // Submit a task for each VM to be processed concurrently
             Future<Void> future = executorService.submit(() -> {
-                VirtualMachine azureVm = azure.virtualMachines().getById(vm.getAzureId());
+                VirtualMachine azureVm = azure.virtualMachines().getById(vm.getAzureId()
+                );
 
                 // Retrieve the VM instance view
                 if (azureVm != null) {
@@ -69,7 +71,8 @@ public class VMSnapshot extends AzureUtils {
                     onStartCallbackTriggered = true;
                 }
             } catch (InterruptedException | ExecutionException e) {
-                System.out.println("Error processing VM: " + e.getMessage());
+                System.out.println("Error processing VM: " + e.getMessage()
+                );
             }
         }
 
@@ -86,9 +89,12 @@ public class VMSnapshot extends AzureUtils {
         Matcher matcher = pattern.matcher(version);
 
         if (matcher.matches()) {
-            int major = Integer.parseInt(matcher.group(1));
-            int minor = Integer.parseInt(matcher.group(2));
-            int patch = Integer.parseInt(matcher.group(3));
+            int major = Integer.parseInt(matcher.group(1)
+            );
+            int minor = Integer.parseInt(matcher.group(2)
+            );
+            int patch = Integer.parseInt(matcher.group(3)
+            );
 
             patch++;
 
@@ -125,31 +131,56 @@ public class VMSnapshot extends AzureUtils {
             return false;
         }
 
-        // Create a new gallery image version using the VM as the source
-        GalleryImageVersionInner newImageVersion = azure.virtualMachines().manager().serviceClient().getGalleryImageVersions()
-                .createOrUpdate(
-                        galleryResourceGroup,
-                        galleryName,
-                        vmName,
-                        version,
-                        new GalleryImageVersionInner()
-                                .withLocation(vm.region().toString())
-                                .withStorageProfile(
-                                        new GalleryImageVersionStorageProfile()
-                                                .withSource(
-                                                        new GalleryArtifactVersionFullSource()
-                                                                .withId(vm.id())))
-                                .withPublishingProfile(
-                                        new GalleryImageVersionPublishingProfile()
-                                                .withTargetRegions(Collections.singletonList(
-                                                        new TargetRegion()
-                                                                .withName(vm.region().toString())
-                                                                .withRegionalReplicaCount(1)
-                                                                .withExcludeFromLatest(false)))), Context.NONE);
+        GalleryImageVersionInner newImageVersion = createNewGalleryImageVersion(azure, galleryResourceGroup, galleryName, vmName, version, vm);
 
-        System.out.println("Image version created: " + vmName + " - " + newImageVersion.name());
+
+        System.out.println("Image version created: " + vmName + " - " + newImageVersion.name()
+        );
         return true;
     }
+
+    private static GalleryImageVersionInner createNewGalleryImageVersion(
+            AzureResourceManager azure,
+            String galleryResourceGroup,
+            String galleryName,
+            String vmName,
+            String version,
+            VirtualMachine vm) {
+
+        GalleryImageVersionInner newImageVersion =
+                azure.virtualMachines().manager().serviceClient().getGalleryImageVersions()
+                        .createOrUpdate(
+                                galleryResourceGroup,
+                                galleryName,
+                                vmName,
+                                version,
+                                new GalleryImageVersionInner()
+                                        .withLocation(vm.region().toString()
+                                        )
+                                        .withStorageProfile(
+                                                new GalleryImageVersionStorageProfile()
+                                                        .withSource(
+                                                                new GalleryArtifactVersionFullSource()
+                                                                        .withId(vm.id()
+                                                                        )
+                                                        )
+                                        )
+                                        .withPublishingProfile(
+                                                new GalleryImageVersionPublishingProfile()
+                                                        .withTargetRegions(Collections.singletonList(
+                                                                new TargetRegion()
+                                                                        .withName(vm.region().toString()
+                                                                        )
+                                                                        .withRegionalReplicaCount(1)
+                                                                        .withExcludeFromLatest(false)
+                                                                )
+                                                        )
+                                        ),
+                                                Context.NONE);
+
+        return newImageVersion;
+    }
+
 
 
 
@@ -158,16 +189,18 @@ public class VMSnapshot extends AzureUtils {
         try {
             gallery = azure.galleries().getByResourceGroup(galleryResourceGroup, galleryName);
         } catch (Exception e) {
-            System.out.println("Error while trying to get image gallery: " + e.getMessage());
+            System.out.println("Error while trying to get image gallery: " + e.getMessage()
+            );
         }
         if (gallery == null) {
             try {
                 gallery = azure.galleries().define(galleryName)
-                        .withRegion(Region.EUROPE_WEST) // Replace with the desired region
+                        .withRegion(Region.EUROPE_WEST)
                         .withExistingResourceGroup(galleryResourceGroup)
                         .create();
             } catch (Exception e) {
-                System.out.println("Error while trying to create image gallery: " + e.getMessage());
+                System.out.println("Error while trying to create image gallery: " + e.getMessage()
+                );
             }
         }
         return gallery;
@@ -189,19 +222,25 @@ public class VMSnapshot extends AzureUtils {
                                 .withLocation(location)
                                 .withOsType(osType)
                                 .withOsState(osState)
-                                .withHyperVGeneration(HyperVGeneration.fromString(hyperVGeneration))
+                                .withHyperVGeneration(HyperVGeneration.fromString(hyperVGeneration)
+                                )
                                 .withPurchasePlan(
                                         vm.plan() != null ? // Check if the plan is null
                                                 new ImagePurchasePlan()
-                                                        .withName(vm.plan().name())
-                                                        .withProduct(vm.plan().product())
-                                                        .withPublisher(vm.plan().publisher())
+                                                        .withName(vm.plan().name()
+                                                        )
+                                                        .withProduct(vm.plan().product()
+                                                        )
+                                                        .withPublisher(vm.plan().publisher()
+                                                        )
                                                 : null) // If the plan is null, set the value to null
                                 .withIdentifier(
                                         new GalleryImageIdentifier()
-                                                .withPublisher("SagaLabs") // Replace with your publisher name
-                                                .withOffer("SagaLabs") // Replace with your offer name
-                                                .withSku("SagaLabs-" + vm.name())), // Replace with your SKU name
+                                                .withPublisher("SagaLabs")
+                                                .withOffer("SagaLabs")
+                                                .withSku("SagaLabs-" + vm.name()
+                                                )
+                                ),
                         Context.NONE);
 
         return galleryImageInner;
