@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class CaptureLabController{
     public Button Capture_Confirm;
     public TextField TextFieldVmGalleryNew;
-    public ChoiceBox choiceBoxVmGallery;
     public Button filterButton;
     public Button resetFilterButton;
     public TextField TextFieldVmImageVersion;

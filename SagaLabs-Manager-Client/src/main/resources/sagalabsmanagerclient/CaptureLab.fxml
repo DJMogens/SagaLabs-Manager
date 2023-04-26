@@ -87,7 +87,7 @@
                   </Button>
                </children>
             </VBox>
-            <Button fx:id="Capture_Confirm" alignment="CENTER" contentDisplay="RIGHT" layoutX="899.0" layoutY="841.0" mnemonicParsing="false" onAction="#captureCheckedVMImages" prefHeight="44.0" prefWidth="232.0" text="Capture the lab!!!">
+            <Button fx:id="Capture_Confirm" alignment="CENTER" contentDisplay="RIGHT" layoutX="892.0" layoutY="767.0" mnemonicParsing="false" onAction="#captureCheckedVMImages" prefHeight="44.0" prefWidth="232.0" text="Capture the lab!!!">
                <font>
                   <Font size="20.0" />
                </font>
@@ -96,10 +96,11 @@
                   <String fx:value="button1" />
                </styleClass>
             </Button>
-            <TextField fx:id="TextFieldVmGalleryNew" layoutX="92.0" layoutY="735.0" />
-            <Text fill="WHITE" layoutX="92.0" layoutY="696.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gallery name:" wrappingWidth="81.13671875" />
-            <Text fill="WHITE" layoutX="51.0" layoutY="803.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New name:" wrappingWidth="81.13671875" />
-            <ChoiceBox fx:id="choiceBoxVmGallery" layoutX="51.0" layoutY="834.0" prefWidth="220.0" />
+            <TextField fx:id="TextFieldVmGalleryNew" layoutX="92.0" layoutY="735.0" promptText="SagalabsVM" />
+            <Text fill="WHITE" layoutX="91.0" layoutY="723.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gallery name:" wrappingWidth="81.13671875" />
+            <Text fill="WHITE" layoutX="91.0" layoutY="802.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Version" wrappingWidth="81.13671875" />
+            <TextField fx:id="TextFieldVmImageVersion" layoutX="92.0" layoutY="812.0" prefHeight="27.0" prefWidth="113.0" promptText="major.minor.patch" />
+            <ProgressIndicator fx:id="progressIndicator" layoutX="1235.0" layoutY="769.0" visible="false" />
            </children>
         </AnchorPane>
 
