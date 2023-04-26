@@ -11,7 +11,8 @@ public class Machines {
     public static Thread refreshing;
     public static void setRefreshing() {
         refreshing = new Thread(() -> {
-            while(true) {
+            boolean running = true;
+            while(running) {
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 LocalDateTime now = LocalDateTime.now();
                 System.out.println("Retrieving machines from database at " + dtf.format(now));
@@ -19,7 +20,9 @@ public class Machines {
                 setMachines();
                 try {
                     Thread.sleep(3000);
-                } catch (InterruptedException ignored) {}
+                } catch (InterruptedException e) {
+                    running = false;
+                }
             }
         });
     }
