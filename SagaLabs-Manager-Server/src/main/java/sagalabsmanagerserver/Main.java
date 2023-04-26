@@ -28,7 +28,7 @@ public class Main {
         executor.scheduleWithFixedDelay(() -> {
             Future<?> future = executor.submit(syncLabsTask);
             try {
-                future.get(15, TimeUnit.SECONDS);
+                future.get(60, TimeUnit.SECONDS);
             } catch (InterruptedException | ExecutionException | TimeoutException e) {
                 future.cancel(true);
                 System.out.println("SyncLabs task timed out. Restarting...");
@@ -50,7 +50,7 @@ public class Main {
         executor.scheduleWithFixedDelay(() -> {
             Future<?> future = executor.submit(syncVMTask);
             try {
-                future.get(15, TimeUnit.SECONDS);
+                future.get(60, TimeUnit.SECONDS);
             } catch (InterruptedException | ExecutionException | TimeoutException e) {
                 future.cancel(true);
                 System.out.println("SyncVM task timed out. Restarting...");
