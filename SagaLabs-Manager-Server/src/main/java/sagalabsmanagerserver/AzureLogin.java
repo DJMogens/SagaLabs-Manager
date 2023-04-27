@@ -3,14 +3,9 @@ package sagalabsmanagerserver;
 import com.azure.core.credential.AccessToken;
 import com.azure.core.credential.TokenCredential;
 import com.azure.core.credential.TokenRequestContext;
-import com.azure.core.http.HttpClient;
-import com.azure.core.http.HttpClientProvider;
-import com.azure.core.http.netty.NettyAsyncHttpClientBuilder;
-import com.azure.core.http.netty.NettyAsyncHttpClientProvider;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.management.AzureEnvironment;
 import com.azure.core.management.profile.AzureProfile;
-import com.azure.core.util.HttpClientOptions;
 import com.azure.identity.*;
 import com.azure.resourcemanager.resources.ResourceManager;
 import io.github.cdimascio.dotenv.Dotenv;
@@ -19,8 +14,6 @@ import com.azure.identity.InteractiveBrowserCredential;
 import com.azure.identity.InteractiveBrowserCredentialBuilder;
 import com.azure.resourcemanager.AzureResourceManager;
 import reactor.core.publisher.Mono;
-import com.azure.core.http.policy.TimeoutPolicy;
-import java.time.Duration;
 
 import java.time.OffsetDateTime;
 import java.util.Collections;
@@ -43,8 +36,6 @@ public class AzureLogin {
             System.setProperty("AZURE_TENANT_ID", tenantId);
             String azureClientSecret = System.getenv("AZURE_CLIENT_SECRET");
 
-
-
             if (azureClientSecret == null) {
                 System.err.println("ERROR: AZURE_CLIENT_SECRET environment variable is not set.\n Retreive it with: az keyvault secret show --name sagalabs-manager-client-secret --vault-name sagalabskeyvault\n");
                 System.exit(1);
@@ -60,17 +51,13 @@ public class AzureLogin {
         }
 
 
-    static void startLogin() {
-        System.out.println("Getting token credential and profile...");
-        buildCredentialsFromEnvironment();
-
-        // Set the timeout duration
-        Duration timeoutDuration = Duration.ofSeconds(10);
-
-        azure = AzureResourceManager.configure()
-                .withLogLevel(HttpLogDetailLevel.BASIC)
-                .withPolicy(new TimeoutPolicy(timeoutDuration)) // Add this line to set the timeout
-                .authenticate(tokenCredential, profile)
-                .withSubscription(subscriptionId);
-    }
+        static void startLogin() {
+            System.out.println("Getting token credential and profile...");
+            buildCredentialsFromEnvironment();//husk at logge ind
+            //after this we should build Credentials for resourcemanagement
+            azure = AzureResourceManager.configure() //få denne class til at authenticate med token credential og profile fra AzureLogin classen
+                    .withLogLevel(HttpLogDetailLevel.BASIC)
+                    .authenticate(tokenCredential, profile)
+                    .withSubscription(subscriptionId);
+        }
 }

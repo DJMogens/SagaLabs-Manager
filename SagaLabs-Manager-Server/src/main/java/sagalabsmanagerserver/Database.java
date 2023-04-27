@@ -69,7 +69,16 @@ public class Database {
                     String publicIpName = publicIp.name();
                     if (publicIpName != null && publicIpName.contains("VPN")) {
                         vpnPublicIp = publicIp.ipAddress() != null ? publicIp.ipAddress() : "No public IP";
-                        vpnRunning = isVpnRunning(vpnPublicIp, port, 2000, 3); // 3 retries with 2000ms timeout
+                        try {
+                            Socket socket = new Socket();
+                            socket.connect(new InetSocketAddress(vpnPublicIp, port), 2000);
+                            if (socket.isConnected()) {
+                                vpnRunning = true;
+                            }
+                            socket.close();
+                        } catch (Exception ignored) {
+                        }
+
                         break;
                     }
                 }
@@ -201,22 +210,6 @@ public class Database {
         }
         return resourceIds;
     }
-
-    public static boolean isVpnRunning(String vpnPublicIp, int port, int timeout, int retries) {
-        for (int i = 0; i < retries; i++) {
-            try {
-                Socket socket = new Socket();
-                socket.connect(new InetSocketAddress(vpnPublicIp, port), timeout);
-                if (socket.isConnected()) {
-                    socket.close();
-                    return true;
-                }
-            } catch (Exception ignored) {
-            }
-        }
-        return false;
-    }
-
 
 
 }
