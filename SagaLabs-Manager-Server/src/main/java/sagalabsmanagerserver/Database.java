@@ -16,6 +16,8 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Database {
 
@@ -25,6 +27,8 @@ public class Database {
     private static final String dbUsername = "sagalabs-manager";
     static String dbPassword = AzureMethods.getKeyVaultSecret("sagalabs-manager-SQL-pw");
     static HikariDataSource dataSource; // used for connection pooling
+    private static final Logger LOGGER = Logger.getLogger(Database.class.getName());
+
 
     static {
         HikariConfig config = new HikariConfig();
@@ -38,14 +42,16 @@ public class Database {
 
 
     public static void syncLabs() throws SQLException {
-        System.out.println("Starting syncLabs...");
+        LOGGER.info("Starting syncLabs...");
         long startTime = System.currentTimeMillis();
 
         String tableName = "Labs";
         List<ResourceGroup> labs = AzureLogin.azure.resourceGroups().listByTag("lab", "true").stream().toList();
 
-        // Get all labs in the database
+        // Add a timestamp before getting all labs in the database
+        long startDbLabs = System.currentTimeMillis();
         List<String> dbLabs = getAllResourceIds(tableName);
+        LOGGER.info(String.format("getAllResourceIds time: %d ms", System.currentTimeMillis() - startDbLabs));
 
         int port = 80; // port of the vpn service
 
@@ -61,15 +67,21 @@ public class Database {
                 String labName = lab.name() != null ? lab.name() : "";
                 String labID = lab.id() != null ? lab.id() : "";
 
+                // Add a timestamp before getting VM count
+                long startVmCount = System.currentTimeMillis();
                 int vmCount = 0;
                 if (!labName.isEmpty()) {
                     vmCount = AzureLogin.azure.virtualMachines().listByResourceGroup(labName).stream().toList().size();
                 }
+                LOGGER.info(String.format("VM count time for %s: %d ms", labName, System.currentTimeMillis() - startVmCount));
 
+                // Add a timestamp before getting public IPs
+                long startPublicIps = System.currentTimeMillis();
                 List<PublicIpAddress> publicIps = new ArrayList<>();
                 if (!labName.isEmpty()) {
                     publicIps = AzureLogin.azure.publicIpAddresses().listByResourceGroup(labName).stream().toList();
                 }
+                LOGGER.info(String.format("Public IPs time for %s: %d ms", labName, System.currentTimeMillis() - startPublicIps));
 
                 // Iterate over all public IPs in each lab and find the IP that contains VPN in the name
                 String vpnPublicIp = "No public IP";
@@ -81,6 +93,7 @@ public class Database {
                     String publicIpName = publicIp.name();
                     if (publicIpName != null && publicIpName.contains("VPN")) {
                         vpnPublicIp = publicIp.ipAddress() != null ? publicIp.ipAddress() : "No public IP";
+                        long startPortScan = System.currentTimeMillis();
                         try {
                             Socket socket = new Socket();
                             socket.connect(new InetSocketAddress(vpnPublicIp, port), 2000);
@@ -88,6 +101,7 @@ public class Database {
                             socket.close();
                         } catch (Exception ignored) {
                         }
+                        LOGGER.info(String.format("Port scan time for %s: %d ms", vpnPublicIp, System.currentTimeMillis() - startPortScan));
 
                         break;
                     }
@@ -104,7 +118,7 @@ public class Database {
                     if (!labID.isEmpty()) {
                         dbLabs.remove(labID);
                     }
-                    System.out.println("Lab synced: " + labName);
+                    LOGGER.info("Lab synced: " + labName);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -113,13 +127,18 @@ public class Database {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        long elapsedTime = System.currentTimeMillis() - startTime;
+        LOGGER.info(String.format("syncLabs complete. Total time: %d ms", elapsedTime));
     }
 
 
 
 
+
+
     public static void syncVM() throws SQLException {
-        System.out.println("Starting syncVM...");
+        LOGGER.info("Starting syncVM...");
 
         long startTime = System.currentTimeMillis();
 
@@ -140,7 +159,7 @@ public class Database {
                 // Get all virtual machines in the resource group
                 List<VirtualMachine> virtualMachines = AzureLogin.azure.virtualMachines().listByResourceGroup(rg.name()).stream().toList();
 
-                System.out.println("Processing resource group: " + rg.name());
+                LOGGER.info("Processing resource group: " + rg.name());
 
                 // Prepare batch update
                 String sql = "INSERT INTO vm (vm_name, powerstate, internal_ip, ostype, resource_group, azureID) VALUES (?,?,?,?,?,?) " +
@@ -171,9 +190,9 @@ public class Database {
                             if (vm.id() != null && !vm.id().isEmpty()) {
                                 dbVMs.remove(vm.id());
                             }
-                            System.out.println("VM synced: " + vm.name());
+                            LOGGER.info("VM synced: " + vm.name());
                         } catch (Exception e) {
-                            System.out.println("Error syncing VM: " + vm.name() + " | " + e.getMessage());
+                            LOGGER.warning("Error syncing VM: " + vm.name() + " | " + e.getMessage());
                         }
                     }
                     stmt.executeBatch();
@@ -187,7 +206,7 @@ public class Database {
             try {
                 future.get();
             } catch (InterruptedException | ExecutionException e) {
-                e.printStackTrace();
+                LOGGER.log(Level.SEVERE, "Error in futures.get()", e);
             }
         });
 
@@ -198,7 +217,7 @@ public class Database {
             String sql = "DELETE FROM " + tableName + " WHERE azureID = ?";
             try (Connection conn = dataSource.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setString(1, vmId);
-                System.out.println("Deleting VM from database: " + vmId);
+                LOGGER.info("Deleting VM from database: " + vmId);
 
                 stmt.executeUpdate();
             }
@@ -207,12 +226,14 @@ public class Database {
         updateLastUpdate(tableName);
 
         long elapsedTime = System.currentTimeMillis() - startTime;
+
         if (elapsedTime > 30_000) {
-            System.out.printf("syncVM took longer than 30 seconds to execute: %d ms%n", elapsedTime);
+            LOGGER.warning(String.format("syncVM took longer than 30 seconds to execute: %d ms", elapsedTime));
         }
 
-        System.out.println("syncVM complete.");
+        LOGGER.info("syncVM complete.");
     }
+
 
 
 
@@ -225,6 +246,7 @@ public class Database {
             stmt.setString(1, tableName);
             stmt.executeUpdate();
         }
+        LOGGER.info(String.format("Last update timestamp for table '%s' has been updated.", tableName));
     }
 
     public static List<String> getAllResourceIds(String tableName) throws SQLException {
@@ -237,7 +259,9 @@ public class Database {
                 resourceIds.add(resultSet.getString("azureID"));
             }
         }
+        LOGGER.info(String.format("Retrieved %d resource IDs from table '%s'.", resourceIds.size(), tableName));
         return resourceIds;
     }
+
 
 }
