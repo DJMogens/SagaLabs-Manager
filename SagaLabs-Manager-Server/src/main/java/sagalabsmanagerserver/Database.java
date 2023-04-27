@@ -44,16 +44,28 @@ public class Database {
         String sql = "INSERT INTO Labs (LabName, LabID, VmCount, LabVPN, vpnRunning, azureID) VALUES (?, ?, ?, ?, ?, ?) " +
                 "ON DUPLICATE KEY UPDATE LabName=VALUES(LabName), LabID=VALUES(LabID), VmCount=VALUES(VmCount), LabVPN=VALUES(LabVPN), vpnRunning=VALUES(vpnRunning), azureID=VALUES(azureID)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            for (ResourceGroup lab : labs) {
+            labs.parallelStream().forEach(lab -> {
+                if (lab == null) {
+                    return;
+                }
                 String labName = lab.name() != null ? lab.name() : "";
                 String labID = lab.id() != null ? lab.id() : "";
 
-                int vmCount = AzureLogin.azure.virtualMachines().listByResourceGroup(labName).stream().toList().size();
-                List<PublicIpAddress> publicIps = AzureLogin.azure.publicIpAddresses().listByResourceGroup(labName).stream().toList();
+                int vmCount = 0;
+                if (labName != null && !labName.isEmpty()) {
+                    vmCount = AzureLogin.azure.virtualMachines().listByResourceGroup(labName).stream().toList().size();
+                }
+                List<PublicIpAddress> publicIps = new ArrayList<>();
+                if (labName != null && !labName.isEmpty()) {
+                    publicIps = AzureLogin.azure.publicIpAddresses().listByResourceGroup(labName).stream().toList();
+                }
                 //iterate over all public ip's in each lab, and find the ip that is contains VPN in the name
                 String vpnPublicIp = "No public IP";
                 boolean vpnRunning = false;
                 for (PublicIpAddress publicIp : publicIps) {
+                    if (publicIp == null) {
+                        continue;
+                    }
                     String publicIpName = publicIp.name();
                     if (publicIpName != null && publicIpName.contains("VPN")) {
                         vpnPublicIp = publicIp.ipAddress() != null ? publicIp.ipAddress() : "No public IP";
@@ -61,40 +73,30 @@ public class Database {
                         break;
                     }
                 }
-                stmt.setString(1, labName);
-                stmt.setString(2, labID);
-                stmt.setInt(3, vmCount);
-                stmt.setString(4, vpnPublicIp);
-                stmt.setBoolean(5, vpnRunning);
-                stmt.setString(6, labID);
-                stmt.addBatch();
+                try {
+                    stmt.setString(1, labName);
+                    stmt.setString(2, labID);
+                    stmt.setInt(3, vmCount);
+                    stmt.setString(4, vpnPublicIp);
+                    stmt.setBoolean(5, vpnRunning);
+                    stmt.setString(6, labID);
+                    stmt.addBatch();
 
-                dbLabs.remove(labID);
-                System.out.println("Lab synced: " + labName);
-            }
+                    if (labID != null && !labID.isEmpty()) {
+                        dbLabs.remove(labID);
+                    }
+                    System.out.println("Lab synced: " + labName);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            });
             stmt.executeBatch();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-
-        // Delete labs from the database that are no longer in Azure
-        String deleteSql = "DELETE FROM " + tableName + " WHERE azureID = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(deleteSql)) {
-            for (String labId : dbLabs) {
-                System.out.println("Deleting lab from database: " + labId);
-                stmt.setString(1, labId);
-                stmt.addBatch();
-            }
-            stmt.executeBatch();
-        }
-
-        updateLastUpdate(tableName);
-
-        long elapsedTime = System.currentTimeMillis() - startTime;
-        if (elapsedTime > 30_000) {
-            System.out.printf("syncLabs took longer than 30 seconds to execute: %d ms%n", elapsedTime);
-        }
-
-        System.out.println("syncLabs complete.");
     }
+
+
 
 
     public static void syncVM() throws SQLException {
@@ -123,6 +125,9 @@ public class Database {
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 for (VirtualMachine vm : virtualMachines) {
                     try {
+                        if (vm == null) {
+                            continue;
+                        }
                         stmt.setString(1, vm.name());
                         PowerState powerState = vm.powerState();
                         if (powerState != null) {
@@ -131,15 +136,18 @@ public class Database {
                             stmt.setString(2, "");
                         }
                         if (vm.getPrimaryNetworkInterface() != null) {
-                            stmt.setString(3, vm.getPrimaryNetworkInterface().primaryPrivateIP());
+                            String internalIp = vm.getPrimaryNetworkInterface().primaryPrivateIP();
+                            stmt.setString(3, internalIp != null ? internalIp : "");
                         } else {
                             stmt.setString(3, "");
                         }
-                        stmt.setString(4, vm.osType().toString());
-                        stmt.setString(5, vm.resourceGroupName());
-                        stmt.setString(6, vm.id());
+                        stmt.setString(4, vm.osType() != null ? vm.osType().toString() : "");
+                        stmt.setString(5, vm.resourceGroupName() != null ? vm.resourceGroupName() : "");
+                        stmt.setString(6, vm.id() != null ? vm.id() : "");
                         stmt.addBatch();
-                        dbVMs.remove(vm.id());
+                        if (vm.id() != null && !vm.id().isEmpty()) {
+                            dbVMs.remove(vm.id());
+                        }
                         System.out.println("VM synced: " + vm.name());
                     } catch (Exception e) {
                         System.out.println("Error syncing VM: " + vm.name() + " | " + e.getMessage());
@@ -170,6 +178,7 @@ public class Database {
 
         System.out.println("syncVM complete.");
     }
+
 
 
 

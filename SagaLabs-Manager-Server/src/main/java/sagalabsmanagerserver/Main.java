@@ -12,16 +12,11 @@ public class Main {
 
         AzureLogin.startLogin();
 
-        int numberOfThreads = 10;
-
-        for (int i = 0; i < numberOfThreads; i++) {
-            int delay = 20 * i;
-            startSyncLabs(delay);
-            startSyncVM(delay);
-        }
+        startSyncLabs();
+        startSyncVM();
     }
 
-    public static void startSyncLabs(int delay) {
+    public static void startSyncLabs() {
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
         executor.scheduleAtFixedRate(() -> {
             try {
@@ -30,10 +25,10 @@ public class Main {
             } catch (Exception e) {
                 System.out.println("Error in syncLabs: " + e.getMessage());
             }
-        }, delay, 5, TimeUnit.SECONDS);
+        }, 0, 5, TimeUnit.SECONDS);
     }
 
-    public static void startSyncVM(int delay) {
+    public static void startSyncVM() {
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
         executor.scheduleAtFixedRate(() -> {
             try {
@@ -42,6 +37,6 @@ public class Main {
             } catch (Exception e) {
                 System.out.println("Error in syncVM: " + e.getMessage());
             }
-        }, delay, 5, TimeUnit.SECONDS);
+        }, 0, 5, TimeUnit.SECONDS);
     }
 }
