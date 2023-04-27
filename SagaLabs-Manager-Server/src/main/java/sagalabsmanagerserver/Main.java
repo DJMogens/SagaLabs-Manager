@@ -25,7 +25,7 @@ public class Main {
             } catch (Exception e) {
                 System.out.println("Error in syncLabs: " + e.getMessage());
             }
-        }, 0, 5, TimeUnit.SECONDS);
+        }, 0, 20, TimeUnit.SECONDS);
     }
 
     public static void startSyncVM() {
@@ -37,6 +37,6 @@ public class Main {
             } catch (Exception e) {
                 System.out.println("Error in syncVM: " + e.getMessage());
             }
-        }, 0, 5, TimeUnit.SECONDS);
+        }, 0, 20, TimeUnit.SECONDS);
     }
 }
