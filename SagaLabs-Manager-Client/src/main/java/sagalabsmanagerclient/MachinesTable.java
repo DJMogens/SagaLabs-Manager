@@ -24,7 +24,11 @@ public class MachinesTable {
     }
     public void createTab(String resourceGroup) {
         Tab tab = new Tab();
-        tab.setText(resourceGroup.substring(0, 10));
+        try {
+            tab.setText(resourceGroup.substring(0, 10));
+        } catch (StringIndexOutOfBoundsException e) {
+            tab.setText(resourceGroup);
+        }
         // Creates tableview under tab
         TableView<MachinesVM> tableView = new TableView<>();
         tab.setContent(tableView);
